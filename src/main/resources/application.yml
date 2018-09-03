@@ -9,7 +9,7 @@ spring:
       force: true
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test_db?useSSL=true&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/car_tenancy?useSSL=true&characterEncoding=utf8
     username: dev
     password: dev
     initialSize: 5
