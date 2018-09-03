@@ -14,7 +14,7 @@ h1, h2, h3, h4, h4, h5 {
 body {
     background-color:#FFFFFF;
     color:#666666;
-    font-family:Arial,"Microsoft yahei",Helvetica,Verdana,SimHei,sans-serif;;
+    font:12px/1.5 Arial,"Microsoft yahei",Helvetica,Verdana,SimHei,sans-serif !important;
     font-size:12px;
     padding:0 0px;
     text-align:left;
