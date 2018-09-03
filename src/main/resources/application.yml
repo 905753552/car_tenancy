@@ -7,6 +7,10 @@ spring:
       charset: utf-8
       enabled: true
       force: true
+  mvc:
+    view:
+      prefix: classpath:/templates/
+      suffix: .html
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/car_tenancy?useSSL=true&characterEncoding=utf8
