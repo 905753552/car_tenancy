@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dev.main.shiro.dao.SysRolePermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.dev.main.shiro.domain.SysRolePermission" >
+    <result column="rid" property="rid" jdbcType="BIGINT" />
+    <result column="pid" property="pid" jdbcType="BIGINT" />
+    <result column="time_stamp" property="timeStamp" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.dev.main.shiro.domain.SysRolePermission" >
+    insert into sys_role_permission (rid, pid, time_stamp
+      )
+    values (#{rid,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT}, #{timeStamp,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dev.main.shiro.domain.SysRolePermission" >
+    insert into sys_role_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        rid,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="timeStamp != null" >
+        time_stamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        #{rid,jdbcType=BIGINT},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="timeStamp != null" >
+        #{timeStamp,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

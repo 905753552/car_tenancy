@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<button onclick="doGet()">GET</button>
+<button onclick="doPost()">POST</button>
+<button onclick="doPUT()">PUT</button>
+<button onclick="doDelete()">DELETE</button>
+<button onclick="doCrossDomain()">CrossDomain</button>
+<button onclick="doJsonp()">Jsonp</button>
+
+<script src="js/jquery-3.3.1.js"></script>
+<script>
+
+    function doGet() {
+        let id = 43;
+        $.ajax({
+            url: 'http://127.0.0.2:8080/api/restful/' + id,
+            type: 'get',
+            success: (data) => {
+                console.log(data);
+            }
+        });
+    }
+    function doPost() {
+        $.ajax({
+            url: 'http://127.0.0.2:8080/api/restful',
+            type: 'post',
+            contentType: "application/json",
+            accept: "application/json",
+            data: JSON.stringify({
+                param1: 'value1',
+                param2: 'value2',
+                param3: {
+                    k1: 'v1',
+                    k2: 'v2',
+                    k3: 'v3'
+                },
+            }),
+            success: (data) => {
+                console.log(data);
+            }
+        });
+    }
+    function doPUT() {
+        $.ajax({
+            url: 'http://127.0.0.2:8080/api/restful',
+            type: 'PUT',
+            dataType: "json",
+            accept: "application/json",
+            contentType: "application/json",
+            data: JSON.stringify({
+                param1: 'value1',
+                param2: 'value2',
+                param3: {
+                    k1: 'v1',
+                    k2: 'v2',
+                    k3: 'v3'
+                },
+            }),
+            success: (data) => {
+                console.log(data);
+            }
+        });
+    }
+    function doDelete() {
+        let id = 43;
+        $.ajax({
+            url: 'http://127.0.0.2:8080/api/restful/' + id,
+            type: 'delete',
+            success: (data) => {
+                console.log(data);
+            }
+        });
+    }
+    function doCrossDomain() {
+        $.ajax({
+            url: 'http://127.0.0.2:8080/api/restful',
+            type: 'POST',
+            //accept: "application/json",
+            contentType: "application/json",
+            xhrFields: {withCredentials: true},
+            crossDomain: true,
+            cache: false,
+            data: JSON.stringify({
+                param1: 'value1',
+                param2: 'value2',
+                param3: {
+                    k1: 'v1',
+                    k2: 'v2',
+                    k3: 'v3'
+                },
+            }),
+            success: (data) => {
+                console.log(data);
+            }
+        });
+    }
+    function showData(data){
+        console.log(data);
+    }
+    function doJsonp() {
+        $.ajax({
+            url: 'http://127.0.0.2:8080/api/jsonp',
+            type: 'get',
+            dataType: "jsonp",
+            /**accept: "application/json",
+            contentType: "application/json",*/
+            cache: false,
+            //jsonp: 'callback',
+            jsonpCallback: 'showData',
+            data: {
+                data: JSON.stringify({
+                    param1: 'value1',
+                    param2: 'value2',
+                    param3: {
+                        k1: 'v1',
+                        k2: 'v2',
+                        k3: 'v3'
+                    }
+                })
+            },
+            success: (data) => {
+              console.log(data);
+            }
+        });
+    }
+</script>
+</body>
+</html>
