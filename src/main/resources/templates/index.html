@@ -10,27 +10,52 @@
     <link rel="stylesheet" href="/css/header.css">
 </head>
 <body>
-    <div class="container-fluid tnc_container">
-        <div class="tnc_head_bg">
-            <nav class="navbar navbar-expand-lg navbar-dark tnc_head_bd">
-                <a class="tnc_head_brand tnc_logo" href="#"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarrnalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse tnc_collapse" id="navbarrnalContent">
-                    <ul class="navbar-nav mr-auto tnc_head_menu">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">首页 <span class="sr-only">(current)</span></a>
+    <div class="container-fluid tnc_container tnc_header">
+        <div class="row tnc_head">
+            <div class="tnc_head_bd">
+                <div><a class="tnc_head_brand tnc_logo" href="/"></a></div>
+                <div class="tnc_head_menu" >
+                    <ul class="">
+                        <li class="tnc_head_menu_item">
+                            <a class="tnc_head_menu_active" href="/">首页 <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">选车</a>
+                        <li class="tnc_head_menu_item">
+                            <a class="" href="#">选车</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">门店</a>
+                        <li class="tnc_head_menu_item">
+                            <a class="" href="#">门店</a>
                         </li>
                     </ul>
                 </div>
-            </nav>
+                <div class="tnc_head_right">
+                    <div class="tnc_head_login tnc_header_active" style="display: none">
+                        <a href="#" class="">登录</a> / <a href="#" class="">注册</a>
+                    </div>
+                    <div class="tnc_head_login" >
+                        <h1 class="tnc_head_welcome">您好，梁***</h1>
+                        <div id="tnc_toggle_area" class="tnc_head_dropdown">
+                            <a id="tnc_toggle_area_btn" href="#">个人中心&nbsp;<i class="fa fa-caret-down"></i></a>
+                            <div id="tnc_toggle_menu" style="display: none">
+                                <div class="triangle_border_up"></div>
+                                <div class="tnc_collapse_list" >
+                                    <a href="#" class="bhpr reddot">我的订单</a>
+                                    <a href="#">我的资产</a>
+                                    <a href="#">我的账户</a>
+                                    <a href="#">退出登录</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tnc_head_tel">
+                        <div class="">
+                            <span class="">
+                                <i class="fa fa-phone"></i>
+                                <span>408-666-666</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -61,19 +86,19 @@
             </div>
         </div>
         <div class="row">
-            <div class="col col-12 col-md-2 offset-md-2 col-sm-6" style="padding-top:24px;text-align: center;height: 100px;font-size: 16px;border-left: 1px solid #e9ebee;">
+            <div class="col col-6 col-md-2 offset-md-2 col-sm-6" style="padding-top:24px;text-align: center;height: 100px;font-size: 16px;border-left: 1px solid #e9ebee;">
                 <i class="fa fa-car" style="font-size: 32px;color: var(--tnc_green);"></i>
                 <p>100+车型</p>
             </div>
-            <div class="col col-12 col-md-2 col-sm-6"  style="padding-top:24px;text-align: center;height: 100px;font-size: 16px;border-left: 1px solid #e9ebee;">
+            <div class="col col-6 col-md-2 col-sm-6"  style="padding-top:24px;text-align: center;height: 100px;font-size: 16px;border-left: 1px solid #e9ebee;">
                 <i class="fa fa-map-marker" style="font-size: 32px;color: var(--tnc_green);"></i>
                 <p>1000+网点</p>
             </div>
-            <div class="col col-12 col-md-2 col-sm-6"  style="padding-top:24px;text-align: center;height: 100px;font-size: 16px;border-left: 1px solid #e9ebee;">
+            <div class="col col-6 col-md-2 col-sm-6"  style="padding-top:24px;text-align: center;height: 100px;font-size: 16px;border-left: 1px solid #e9ebee;">
                 <i class="fa fa-wrench" style="font-size: 32px;color: var(--tnc_green);"></i>
                 <p>100%车检</p>
             </div>
-            <div class="col col-12 col-md-2 col-sm-6"  style="padding-top:24px;text-align: center;height: 100px;font-size: 16px;border-left: 1px solid #e9ebee;border-right: 1px solid #e9ebee;">
+            <div class="col col-6 col-md-2 col-sm-6"  style="padding-top:24px;text-align: center;height: 100px;font-size: 16px;border-left: 1px solid #e9ebee;border-right: 1px solid #e9ebee;">
                 <i class="fa fa-tachometer" style="font-size: 32px;color: var(--tnc_green);"></i>
                 <p>无限里程</p>
             </div>
@@ -88,5 +113,6 @@
 <script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 <script src="/vue-2.5.17/vue.min.js"></script>
 <script src="/js/common/common.js"></script>
+<script src="/js/tenancy/header.js"></script>
 </body>
 </html>

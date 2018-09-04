@@ -2,6 +2,13 @@ html {
     overflow-x:auto;
     overflow-y:scroll;
 }
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none !important;
+}
+
 body, dl, dt, dd, ul, ol, li, pre, form, fieldset, input, p, blockquote, th, td {
     font-weight:400;
     margin:0;

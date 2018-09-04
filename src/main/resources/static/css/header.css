@@ -7,31 +7,120 @@
 .tnc_container {
     padding-left: 0px;
     padding-right: 0px;
+    min-width: 720px;
 }
 
-.tnc_head_bg {
+.tnc_head {
     border-top: 2px solid var(--tnc_green);
     background-color: #1b2b3b;
-}
-
-.tnc_head_bd {
     height: 58px;
     font-size: 14px !important;
     padding: 0px;
 }
 
-.tnc_head_bd .tnc_logo {
-    display: block;
-    width: 211px;
-    top: 0;
-    left: 0;
-    height: 58px;
-    background: url("../img/logo.png") no-repeat;
-    z-index: 10;
+.tnc_head_right {
+    position: absolute;
+    right: 10%;
+    display: inline-block;
 }
 
-.tnc_gray_bg {
-    background-color: #f2f3f5;
+.tnc_head_login {
+    display: inline-block;
+    line-height: 58px;
+    /*position: absolute;*/
+    /*right: 150px;*/
+    text-align: center;
+    color: var(--tnc_green);
+    z-index: 12;
+}
+.tnc_head_dropdown {
+    margin-left: 5px;
+    display: inline-block;
+    line-height: 58px;
+    color: var(--tnc_green);
+}
+
+.tnc_head_dropdown > a{
+    color: var(--tnc_green);
+}
+
+.tnc_head_menu {
+    overflow: hidden;
+    display: inline-block;
+}
+.tnc_head_menu ul {
+    margin-bottom: 0px;
+}
+
+.tnc_head_menu_item {
+    line-height: 58px;
+    display: inline-block;
+    margin-left: 1rem;
+}
+
+.tnc_head_menu_item a {
+    color: #ffffff;
+}
+.tnc_head_menu_item a:hover {
+    color: var(--tnc_green);
+}
+.tnc_head_menu_item .tnc_head_menu_active {
+    color: var(--tnc_green);
+}
+
+.tnc_header_active a {
+    color: var(--tnc_green);
+}
+.tnc_header_active a:hover {
+    text-decoration: underline !important;
+}
+
+.tnc_head_tel {
+    margin-left: 10px;
+    display: inline-block;
+    line-height: 58px;
+    color: #c8c8ce;
+    z-index: 12;
+}
+
+.tnc_head_bd {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.tnc_collapse_list {
+    width: 100px;
+    padding: 5px;
+    position: absolute;
+    top: 45px;
+    left: 60px;
+    z-index: 12;
+    background-color: #284664;
+    border-radius: 5px;
+}
+.triangle_border_up{
+    width:0;
+    height:0;
+    border-width:0 6px 6px;
+    border-style:solid;
+    border-color:transparent transparent #284664;/*透明 透明  灰*/
+    margin:40px auto;
+    position:absolute;
+    top: 0px;
+    left: 105px;
+    z-index: 13;
+}
+.tnc_collapse_list a {
+    padding: 6px;
+    text-align: center;
+    line-height: 14px;
+    display: block;
+    color: #8fb3da;
+}
+
+.tnc_collapse_list a:hover {
+    text-decoration: underline !important;
 }
 
 @media (min-width: 1000px) {
@@ -41,7 +130,21 @@
         width: 80%;
     }
 }
+@media (max-width: 1000px) {
+    .tnc_head_right {
+        right: 20px;
+    }
+}
 
+.tnc_head .tnc_logo {
+    display: block;
+    width: 211px;
+    top: 0;
+    left: 0;
+    height: 58px;
+    background: url("../img/logo.png") no-repeat;
+    z-index: 10;
+}
 .tnc_head_brand {
     float: left;
     padding-top: .25rem;
@@ -52,32 +155,16 @@
     color: var(--tnc_green);
 }
 
-.show {
-    background-color: #1b2b3b;
-    z-index: 999;
+.tnc_head_welcome {
+    display: inline-block;
+    line-height: 58px;
+    font-size: 14px;
+    color: #c8c8ce;
+    margin-bottom: 0px;
 }
 
-.tnc_head_menu li .nav-link {
-    padding-left: 1rem !important;
-}
-
-/*重写bootstrap navbar高亮字体颜色*/
-.navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link {
-    color: var(--tnc_green);
-}
-.navbar-dark .navbar-nav .nav-link {
-    color: #ffffff;
-}
-.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
-    color: var(--tnc_green);
-}
 /*去除row外边距*/
 .row {
     margin-right: 0px;
     margin-left: 0px;
-}
-
-.carousel-item img{
-    max-width: 100%;
-    height:auto;
 }
