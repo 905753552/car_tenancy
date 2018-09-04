@@ -1,0 +1,55 @@
+.tnc_md_icon_item {
+    text-align: center;
+    width: 25%;
+    padding-top: 24px;
+    height: 100px;
+    font-size: 16px;
+}
+
+.tnc_gray_bg {
+    background-color: #f2f3f5;
+}
+
+.tnc_icon_list {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.tnc_service_list {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.tnc_service_list .tnc_service_item {
+    height: 300px;
+    width: 260px;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.tnc_service_item h2 {
+    font-size: 20px;
+    color: #2f2f39;
+    text-align: center;
+    font-weight: 400;
+    line-height: 75px;
+    padding-top: 6px;
+}
+
+.tnc_service_list div i {
+    font-size: 50px;
+}
+
+.tnc_service_list div p {
+    color: #939a9f;
+    font-size: 14px;
+    text-align: center;
+    line-height: 42px;
+    padding-bottom: 18px;
+    margin-bottom: 0px;
+}
+
