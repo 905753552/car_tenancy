@@ -32,7 +32,6 @@
 .tnc_input:focus {
     border: 1px solid #00c189;
     color: #606060;
-    padding: 9px 10px;
 }
 
 .tnc_textarea {
@@ -53,13 +52,11 @@
 .tnc_textarea:focus {
     border: 1px solid #00c189;
     color: #606060;
-    padding: 9px 10px;
 }
 
 .tnc_input:focus {
     border: 1px solid #00c189;
     color: #606060;
-    padding: 9px 10px;
 }
 
 .tnc_btn {
