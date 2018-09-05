@@ -1,52 +1,113 @@
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #D3D3D3;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #D3D3D3;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #D3D3D3;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:    #D3D3D3;
+}
+
+:root {
+    --tnc_green: #00c189;
+}
+
 .tnc_input {
-    border: 1px solid #e9ebee;
-    color: rgb(155, 155, 155);
-    padding: 9px 10px;
-    outline: 0;
-    border-radius: 0;
-    font: 14px/18px "Microsoft YaHei", SimSun, Tahoma, Verdana, Arial, sans-serif;
-    vertical-align: middle;
     background-color: #fff;
+    border: 1px solid #e9ebee;
+    border-radius: 0;
+    color: rgb(155, 155, 155);
+    font: 14px/18px "Microsoft YaHei", SimSun, Tahoma, Verdana, Arial, sans-serif;
+    height: 40px;
+    margin: 2px;
+    outline: 0;
+    padding: 9px 10px;
+    vertical-align: middle;
+    width: 250px;
 }
 
 .tnc_input:focus {
     border: 1px solid #00c189;
+    color: #606060;
+    padding: 9px 10px;
+}
+
+.tnc_textarea {
+    background-color: #fff;
+    border: 1px solid #e9ebee;
+    border-radius: 0;
     color: rgb(155, 155, 155);
+    font: 14px/18px "Microsoft YaHei", SimSun, Tahoma, Verdana, Arial, sans-serif;
+    height: 6rem;
+    margin: 2px;
+    outline: 0;
+    overflow-scrolling: auto;
+    padding: 9px 10px;
+    vertical-align: middle;
+    width: 250px;
+}
+
+.tnc_textarea:focus {
+    border: 1px solid #00c189;
+    color: #606060;
+    padding: 9px 10px;
+}
+
+.tnc_input:focus {
+    border: 1px solid #00c189;
+    color: #606060;
     padding: 9px 10px;
 }
 
 .tnc_btn {
     background-color: #fafbfc;
-    display: block;
+    display: inline-block;
     width: 160px;
     height: 40px;
     line-height: 40px;
     font-size: 14px;
-    margin: 0 auto;
+    margin: 2px;
     text-align: center;
-    color: #60606c;
+    color: #606060;
     border-radius: 3px;
     border: 1px solid #e4e6e9;
 }
 
 .tnc_btn:hover {
-    text-decoration: none;
     border: 1px solid var(--tnc_green);
     background-color: var(--tnc_green);
-    color: #fff;
+    color: #ffffff !important;
+    text-decoration: none;
 }
 
 .tnc_btn_green {
     background-color: var(--tnc_green);
-    color: #ffffff;
+    color: #ffffff !important;
     border-radius: 3px;
-    border: none;
+    border: 1px solid var(--tnc_green);
 }
 
 
 .tnc_btn_green:hover {
-    text-decoration: none;
     border: 1px solid #1e9f75;
     background-color: #1e9f75;
-    color: #fff;
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.tnc_btn_outline_green {
+    background-color: #ffffff;
+    color: var(--tnc_green) !important;
+    border-radius: 3px;
+    border-color: var(--tnc_green);
+}
+
+
+.tnc_btn_outline_green:hover {
+    background-color: var(--tnc_green);
+    color: #ffffff !important;
+    text-decoration: none;
 }
