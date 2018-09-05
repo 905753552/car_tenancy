@@ -31,6 +31,7 @@
 .tnc_input:focus {
     border: 1px solid #00c189;
     color: #606060;
+    outline: 0;
 }
 
 .tnc_textarea {
@@ -60,6 +61,7 @@
 
 .tnc_btn {
     background-color: #fafbfc;
+    cursor: pointer;
     display: inline-block;
     width: 160px;
     height: 40px;
@@ -70,6 +72,7 @@
     color: #606060;
     border-radius: 3px;
     border: 1px solid #e4e6e9;
+    outline: 0;
 }
 
 .tnc_btn:hover {
@@ -77,6 +80,7 @@
     background-color: var(--tnc_green);
     color: #ffffff !important;
     text-decoration: none;
+    outline: 0;
 }
 
 .tnc_btn_green {
