@@ -1,0 +1,294 @@
+.tnc_leftlist{
+    border: 1px solid #e7e8e9;
+}
+
+.tnc_carcon {
+    padding-top: 15px;
+    padding-bottom: 35px;
+    position: relative;
+}
+
+.tnc_lchoose_box {
+    position: relative;
+    width: 268px;
+    z-index: 9;
+}
+
+.tnc-lbox {
+    background-color: #fff;
+    color: #93939e
+}
+
+.bdbtm {
+    border-bottom: 1px solid #e7e8e9;
+}
+
+.tnc-lbox .tnc_left_title{
+    line-height: 42px;
+    font-size: 14px;
+    color: #60606c;
+    padding-left: 15px;
+}
+
+.tnc-lbox .tnc_chexing {
+    overflow: hidden;
+    padding: 10px 0 11px;
+}
+
+.tnc-lbox .tnc_chexing li:hover {
+    cursor: pointer;
+}
+
+.tnc-lbox .tnc_chexing li:hover {
+    cursor: pointer;
+}
+
+.tnc-lbox .tnc_chexing li {
+    width: 76px;
+    margin-left: 10px;
+    float: left;
+    text-align: center;
+}
+
+.tnc-lbox .tnc_chexing li a {
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.tnc-lbox .tnc_chexing li a.checked .cartxt {
+    color: #00c189;
+}
+
+.tnc-lbox .tnc_chexing li a .cartxt {
+    display: block;
+    line-height: 24px;
+    color: #93939e;
+}
+
+.tnc-lbox .tnc_chexing li i {
+    font-style: normal;
+    vertical-align: middle;
+}
+
+ /* 汽车模型css */
+.tnc-lbox .tnc_chexing li a.checked .zc_cx_bx {
+    background-position: -8px -41px;
+}
+
+.tnc-lbox .tnc_chexing .zc_cx_bx {
+    width: 29px;
+    background-position: -8px -14px;
+}
+
+.tnc-lbox .tnc_chexing li a.checked .zc_cx_sdjc {
+    background-position: -48px -41px;
+}
+
+.tnc-lbox .tnc_chexing .zc_cx_sdjc {
+    width: 45px;
+    background-position: -48px -14px;
+}
+
+.tnc-lbox .tnc_chexing li a.checked .zc_cx_jj {
+    background-position: -100px -41px;
+}
+
+.tnc-lbox .tnc_chexing .zc_cx_jj {
+    width: 51px;
+    background-position: -100px -14px;
+}
+
+.tnc-lbox .tnc_chexing li a.checked .zc_cx_sw {
+    background-position: -160px -41px;
+}
+
+.tnc-lbox .tnc_chexing .zc_cx_sw {
+    width: 54px;
+    background-position: -160px -14px;
+}
+
+.tnc-lbox .tnc_chexing li a.checked .zc_cx_hh {
+    background-position: -220px -41px;
+}
+
+.tnc-lbox .tnc_chexing .zc_cx_hh {
+    width: 61px;
+    background-position: -220px -14px;
+}
+
+.tnc-lbox .tnc_chexing li a.checked .zc_cx_suv {
+    background-position: -290px -41px;
+}
+
+.tnc-lbox .tnc_chexing .zc_cx_suv {
+    width: 47px;
+    background-position: -290px -14px;
+}
+
+.tnc-lbox .tnc_chexing li a.checked .zc_cx_zsw {
+    background-position: -352px -41px;
+}
+
+.tnc-lbox .tnc_chexing .zc_cx_zsw {
+    width: 49px;
+    background-position: -352px -14px;
+}
+
+.tnc-lbox .tnc_chexing li a.checked .zc_cx_gx {
+    background-position: -470px -41px;
+}
+
+.tnc-lbox .tnc_chexing .zc_cx_gx {
+    width: 47px;
+    background-position: -470px -14px;
+}
+
+.tnc-lbox .tnc_chexing li a.checked .zc_cx_dd {
+    background-position: -413px -41px;
+}
+
+.tnc-lbox .tnc_chexing .zc_cx_dd {
+    width: 42px;
+    background-position: -413px -14px;
+}
+
+.zc_cx_bx, .zc_cx_dd, .zc_cx_gx, .zc_cx_hh, .zc_cx_jj, .zc_cx_sdjc, .zc_cx_suv, .zc_cx_sw, .zc_cx_zsw {
+    height: 20px;
+    display: inline-block;
+    background: url(../img/tnc_type.png) no-repeat;
+}
+
+/* 价格css */
+.tnc-lbox .pri_range {
+    width: 240px;
+    margin: 5px auto 0;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.tnc-lbox .pri_range li {
+    display: inline-block;
+    float: left;
+    margin-right: 2px;
+}
+
+.tnc-lbox .pri_range li a {
+    display: inline-block;
+    float: left;
+}
+
+.tnc-lbox.price1 .pri_range li.bar1 a span{
+    background-color: #00c189;
+}
+
+.tnc-lbox.price2 .pri_range li.bar2 a span{
+    background-color: #00c189;
+}
+
+.tnc-lbox.price3 .pri_range li.bar3 a span{
+    background-color: #00c189;
+}
+
+.tnc-lbox.price4 .pri_range li.bar4 a span{
+    background-color: #00c189;
+}
+
+.tnc-lbox.price5 .pri_range li.bar5 a span{
+    background-color: #00c189;
+}
+
+.tnc-lbox .pri_range li a span {
+    display: inline-block;
+    height: 5px;
+    margin: 5px 0 5px;
+    background-color: #e9ebee;
+}
+
+.tnc-lbox .w40 {
+    width: 40px;
+}
+
+.tnc-lbox .w70 {
+    width: 70px;
+}
+
+.tnc-lbox .pri_num {
+    width: 240px;
+    margin: -2px auto 0;
+    padding-bottom: 12px;
+    overflow: hidden;
+}
+
+.tnc-lbox.price1 .pri_num li.pri1 {
+    color: #00c189;
+}
+
+.tnc-lbox.price2 .pri_num li.pri2 {
+    color: #00c189;
+}
+
+.tnc-lbox.price3 .pri_num li.pri3 {
+    color: #00c189;
+}
+
+.tnc-lbox.price4 .pri_num li.pri4 {
+    color: #00c189;
+}
+
+.tnc-lbox.price5 .pri_num li.pri5 {
+    color: #00c189;
+}
+
+.tnc-lbox.price6 .pri_num li.pri6 {
+    color: #00c189;
+}
+
+.tnc-lbox .pri_num li {
+    display: inline-block;
+    float: left;
+    font-size: 12px;
+    line-height: 24px;
+}
+
+.tnc-lbox .w37 {
+    width: 37px;
+}
+
+.tnc-lbox .w35 {
+    width: 35px;
+}
+
+.tnc-lbox .w42{
+    width: 42px;
+}
+
+.tnc-lbox .pri_num li.pri6 {
+    text-align: right;
+}
+
+.tnc-lbox .w44{
+    width: 44px;
+}
+
+/* 品牌css */
+.tnc-lbox .car_brand {
+    overflow: hidden;
+    padding: 5px 14px 12px;
+}
+
+.tnc-lbox .car_brand li {
+    float: left;
+    width: 60px;
+    font-size: 12px;
+    line-height: 24px;
+    cursor: pointer;
+}
+
+.tnc-lbox .car_brand li a.checked {
+    color: #00c189;
+}
+
+.tnc-lbox .car_brand li a {
+    color: #93939e;
+}
+
