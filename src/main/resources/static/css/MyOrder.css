@@ -11,20 +11,20 @@
 /* 汽车信息以及订单进度 */
 .order-block{
     width:100%;
-    height:229px;
     min-width:1000px;
     display:flex;
     justify-content:center;
     background:#F2F3F5;
 }
 .order-inner{
+    margin-top: 40px;
     width:1000px;
-    height:100%;
     display:flex;
     flex-direction:column;
     justify-content:center;
 }
 .order-proce{
+    margin-bottom:40px;
     display:block;
 }
 .car-info{
@@ -193,6 +193,10 @@
 .formText{
     margin-left:15px;
 }
+.name-label{
+    font-size: 14px;
+    color: #60606c;
+}
 input[type=text]{
     width:240px;
     height:30px;
@@ -203,12 +207,13 @@ input[type=text]{
     margin-left:20px;
 }
 .order-errorbox {
+    font-size:14px;
     position: absolute;
     top: -45px;
     left: 60px;
-    width: 288px;
-    height: 38px;
-    line-height: 38px;
+    width: 299px;
+    height: 39px;
+    line-height: 39px;
     border: 1px solid #dadadf;
     border-radius: 5px;
     padding-left: 10px;
@@ -237,13 +242,14 @@ input[type=text]{
 }
 
 .order-errorbox1 {
+    font-size:14px;
     display: none;
     position: absolute;
     top: -45px;
     left: 60px;
-    width: 288px;
-    height: 38px;
-    line-height: 38px;
+    width: 299px;
+    height: 39px;
+    line-height: 39px;
     border: 1px solid #dadadf;
     border-radius: 5px;
     padding-left: 10px;
@@ -271,13 +277,14 @@ input[type=text]{
     left: 0;
 }
 .order-errorbox2 {
+    font-size:14px;
     display: none;
     position: absolute;
     top: -45px;
     left: 60px;
-    width: 288px;
-    height: 38px;
-    line-height: 38px;
+    width: 299px;
+    height: 39px;
+    line-height: 39px;
     border: 1px solid #dadadf;
     border-radius: 5px;
     padding-left: 10px;
@@ -436,6 +443,7 @@ input[type=text]{
     padding: 10px;
     border: 1px solid #e4e6e9;
     width: 386px;
+    height:257px;
 }
 .bx-bubble .litar-l {
     position: absolute;
@@ -445,13 +453,13 @@ input[type=text]{
 .litar-l {
     width: 6px;
     height: 10px;
-    background-position: -394px -67px;
+    background-position-x:-394px;
+    background-position-y:-67px;
 }
 .litar-l, .litar-t {
-    display: inline-block;
-    background: url(https://image.zuchecdn.com/newversion/news/ordernew/order_sprite.png) no-repeat;
-    background-position-x: 0%;
-    background-position-y: 0%;
+    background-image:url(https://image.zuchecdn.com/newversion/news/ordernew/order_sprite.png);
+    display:inline-block;
+    vertical-align: middle;
 }
 .bx-bubble dl dd {
     line-height: 24px;
@@ -537,7 +545,7 @@ input[type=text]{
     justify-content:center;
 }
 .newpg-tggz .newpg-con {
-    margin-top: 20px;
+    margin: 20px auto 10px auto;
     background-color: #fff;
     width: 1000px;
     padding: 0;
