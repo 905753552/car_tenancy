@@ -2,6 +2,7 @@
     width: 922px;
     min-height: 724px;
     float: right;
+    /*overflow: scroll;*/
 }
 
 .info_bd {
