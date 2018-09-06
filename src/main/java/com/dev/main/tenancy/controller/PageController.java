@@ -28,4 +28,14 @@ public class PageController {
         return "register";
     }
 
+    @GetMapping("/cardetail")
+    public String cardetailPage() {
+        return "cardetail";
+    }
+
+    @GetMapping("/order2step")
+    public String order2stepPage() {
+        return "order2step";
+    }
+
 }

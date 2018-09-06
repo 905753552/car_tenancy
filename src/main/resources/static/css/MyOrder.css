@@ -714,10 +714,6 @@ fieldset, img {
     border: none;
     vertical-align: middle;
 }
-img[Attributes Style] {
-    width: 70px;
-    height: 30px;
-}
 .modify-pass .kanbuqing {
     display: inline-block;
     color: #2b99ff;
