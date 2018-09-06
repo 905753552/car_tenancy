@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>乘风租车</title>
+    <!--<link rel="stylesheet" href="/css/reset.css">-->
+    <!--<link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="/fonts/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="container-fluid tnc_container tnc_header">
+    <div class="row tnc_head">
+        <div class="tnc_head_bd">
+            <div><a class="tnc_head_brand tnc_logo" href="/"></a></div>
+
+            <div class="tnc_head_right">
+                <div class="tnc_head_tel">
+                    <div class="">
+                            <span class="">
+                                <i class="fa fa-phone"></i>
+                                <span>408-666-666</span>
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tnc_login_bd">
+        <div class="tnc_main">
+            <div class="zc_login_box" >
+                <ul class="tabs">
+                    <li id="normallogin"  v-on:click="showNormal" class="cur">登录</li>
+                    <li id="mobilelogin"  v-on:click="showMobile" >手机动态码登录</li>
+                    <input id="logintype" value="normal" type="hidden">
+                </ul>
+
+                <div class="boxremove" style="width:730px;position:relative;">
+                    <div class="tabcontents cur" style="float:left;">
+                        <!--输入错误提示-->
+                        <div class="zc_l_error" id="error_tips"></div>
+                        <ul>
+                            <li><label class="icon_wz"><span class="zc-iuser "></span></label>
+                                <input class="wipt t_val tnc_input" id="normal_id" placeholder="请输入手机号/证件号" maxlength="18" type="text" >
+                                <input class="wipt t_val tnc_input" id="phone_id" placeholder="请输入注册手机号" maxlength="18" style="display:none"
+                                       type="text">
+                            </li>
+                            <li class="pass_switchover"><label class="icon_wz"><span class="zc-ipsw "></span></label>
+
+                                <input class="wipt tnc_input" placeholder="请输入密码" id="xpasstext" type="password">
+                                <!--<input class="wipt" value="" id="xpassword" type="password">-->
+                            </li>
+
+                            <li class="clearfix" id="imageYzmLi" style="display:none">
+                                <label class="icon_wz"><span class="zc-iyzm"></span></label>
+                                <span class="fl"><input class="zc-iptsht t_val" id="yzmVal" placeholder="请输入右侧验证码" maxlength="6"
+                                                        type="text"></span>
+                                <span class="pic-yzm fr"><img id="yzmImg" src="" width="108px" height="36px"><i
+                                        id="yzmrefresh" class="zc-fresh"></i></span>
+                            </li>
+
+                            <li class="clearfix" id="phoneYzmLi" style="display:none">
+                                <label class="icon_wz"><span class="zc-idtm"></span></label>
+                                <span class="fl">
+                                    <input id="idtmVal" class="zc-iptsht t_val tnc_input" maxlength="6" placeholder="请输入动态验证码" type="text">
+                                </span>
+                                <span class="fr">
+                                    <input id="getidtm" class="btn-dtm btn-getdtm" value="获取手机动态码" type="button" v-on:click="getVerificationCode">
+                                    <input id="idtmcount" class="btn-dtm btn-dtmdao" value="60秒后可重发" style="display: none;" type="button">
+                                </span>
+                                <input id="smsOverTime" type="hidden">
+                            </li>
+                            <li class="tnc_list_che">
+                                <label class="fl" v-on:click="remenberme">
+                                    <span class="tnc-blyes" ></span>
+                                    <span class="zc_blyes_kong"></span>
+                                    <input id="autoLogin" checked="checked" class="login_checkbox" type="checkbox" hidden="true">记住密码</label>
+                                <a href="#" class="fr">忘记密码？</a>
+                                <div class="clear"></div>
+                            </li>
+                        </ul>
+                        <ul class="login_sub" id="login_sub">
+                            <li><input class="zc-btn btn-login" v-on:click="doLogin" value="登录" id="loginBt" type="submit"></li>
+                            <li>
+                                <div class="zc_login_rbox">还不是会员？<a
+                                        href="#" rel="nofollow">立即注册</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <input id="autoLogin" name="autoLogin" type="hidden">
+                    </div>
+
+                    <div class="tabcontents cur" id="imgYzmDiv" style="float:left">
+                        <div class="zc_l_error" id="error_tips_float"></div>
+                        <ul>
+                            <li><i class="zc_blue_yandown"></i> 请先输入以下验证码，获取手机动态码</li>
+                            <li class="clearfix">
+                                <label class="icon_wz"><span class="zc-iyzm"></span></label>
+                                <span class="fl"><input id="yzm_float" class="zc-iptsht t_val tnc_input" placeholder="输入验证码" maxlength="6"
+                                                        type="text"></span>
+                                <span class="pic-yzm fr"><img id="yzmImg_float" src="" width="108px" height="36px">
+                                    <i id="fresh_float" class="zc-fresh" v-on:click="getVerificationCode"></i></span>
+                            </li>
+                        </ul>
+                        <ul class="login_sub">
+                            <li class="pt5"><input class="zc-btn btn-login" value="确认" id="yzmconfirm" type="submit" v-on:click="subVerifyCode"></li>
+                            <li>
+                                <div class="zc_login_rbox" id="yzmcancel" v-on:click="cancelVerify">取消</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 隐藏域 -->
+        <input id="flag" value="" type="hidden">
+        <input id="xuserName" value="" type="hidden">
+        <div class="tnc_brand">
+            <div class="tnc_item">
+                <ul>
+
+                    <li>
+                        <!--<i class="zc-yecx"></i>-->
+                        <i class="fa fa-car" style="font-size: 32px;color: var(--tnc_green);"></i>
+                        <p><b>100+</b>车型</p>
+                    </li>
+                    <li>
+                        <!--<i class="zc-yewd"></i>-->
+                        <i class="fa fa-map-marker" style="font-size: 32px;color: var(--tnc_green);"></i>
+                        <p><b>1000+</b>网点</p>
+                    </li>
+                    <li>
+                        <!--<i class="zc-yecxn"></i>-->
+                        <i class="fa fa-wrench" style="font-size: 32px;color: var(--tnc_green);"></i>
+                        <p><b>100%</b>车险</p>
+                    </li>
+                    <li>
+                        <!--<i class="zc-yelc"></i>-->
+                        <i class="fa fa-tachometer" style="font-size: 32px;color: var(--tnc_green);"></i>
+                        <p>无限里程</p>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--foot start -->
+    <div class="tnc_footmenu">
+        <div class="help_list">
+            <dl class="wyd">
+                <dt>租车预订说明</dt>
+                <dd>
+                    <a target="_blank" href="#">服务时间</a>
+                    <a target="_blank" href="#">待租车况</a>
+                    <a target="_blank" href="#">服务预订</a>
+                    <a target="_blank" href="#">短租产品</a>
+                    <a target="_blank" href="#">租车资格</a>
+                    <a target="_blank" href="#">取还车说明</a>
+                </dd>
+            </dl>
+            <dl class="why">
+                <dt>会员管理</dt>
+                <dd>
+                    <a target="_blank" href="#">会员章程</a>
+                    <a target="_blank" href="#">会员细则</a>
+                    <a target="_blank" href="#">定级积分</a>
+                </dd>
+            </dl>
+            <dl class="wsj">
+                <dt>紧急事务处理</dt>
+                <dd>
+                    <a target="_blank" href="#">保险责任</a>
+                    <a target="_blank" href="#">理赔说明</a>
+                    <a target="_blank" href="#">事故处理</a>
+                    <a target="_blank" href="#"
+                       style="clear:both;">救援及备用车</a>
+                </dd>
+            </dl>
+            <dl class="wfy">
+                <dt>租车费用及结算</dt>
+                <dd>
+                    <a target="_blank" href="#">价格说明</a>
+                    <a target="_blank" href="#">结算流程</a>
+                    <a target="_blank" href="#">储值卡</a>
+                    <a target="_blank" href="#">积分</a>
+                </dd>
+            </dl>
+            <dl class="wbz">
+                <dt>帮助中心</dt>
+                <dd>
+                    <a target="_blank" href="#">常见问题</a>
+                    <a target="_blank" href="#">新手上路</a>
+                    <a target="_blank" href="#">服务规则</a>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <!--footmenu end -->
+
+    <!--footcopyright start -->
+    <div class="tnc_footcopyright">
+        <div class="tnc_fcr">
+            <div class="ainfor">
+                <a title="关于我们" href="#">关于我们</a>
+                <a title="投资者关系" target="_blank" href="#">投资者关系</a>
+                <a target="_parent" title="新闻中心" href="#">新闻中心</a>
+                <a title="加盟合作" target="_blank" href="#">加盟合作</a>
+                <a title="隐私保护" target="_parent" href="#">隐私保护</a>
+                <a title="网站导航" target="_parent" href="#">网站导航</a>
+                <a title="联系我们" target="_parent" href="#">联系我们</a>
+                <a title="招贤纳士" target="_blank" href="#">招贤纳士</a>
+                <a target="_blank" href="#" class="eng_wz">English<i class="eng_icon"></i></a>
+            </div>
+            <div class="zc_copyright">
+                <p class="fl">Copyright©2008-2018 www.chengfeng.com All Rights Reserved.　肇庆乘风汽车租赁有限公司 </p>
+                <p class="fr">如果您对乘风租车网站有任何意见，欢迎发送邮件到 <a href="mailto:web@xxx.com" class="yellowmailt">web@xxx.com</a>
+                </p>
+                <p class="clear pt10">
+                    <a target="_blank"
+                       href="#" tabindex="-1"
+                       id="urlknet" class="sz_k"></a>
+                    <a target="_blank" id="___szfw_logo___" href="https://search.szfw.org/cert/l/CX20121016001772002081"
+                       title="诚信网站" class="sz_c"></a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--foot end -->
+</div>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<!--<script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>-->
+<script src="/vue-2.5.17/vue.min.js"></script>
+<script src="/js/login.js" type="text/javascript"></script>
+</body>
+</html>

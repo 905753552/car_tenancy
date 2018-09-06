@@ -1,0 +1,197 @@
+.orderDetails {
+    width: 980px;
+    margin: 0 auto;
+    color: #848484;
+}
+.orderCarInfor-title b {
+    font-weight: normal;
+    color: #333333;
+}
+.orderCarInfor-title {
+    font-size: 12px;
+    font-family: 宋体;
+    color: rgb(0,193,137);
+    height: 35px;
+    line-height: 35px;
+}
+.orderDetails {
+    width: 980px;
+    margin: 0 auto;
+    color: #848484;
+}
+.carInfor-left {
+    width: 657px;
+}
+.carInfor-left h1 {
+    border-bottom: 1px solid #dbe4eb;
+}
+.carInfor-left h1, .carInfor-left h2 {
+    height: 50px;
+    line-height: 50px;
+    padding-left: 25px;
+    font-weight: normal;
+    color: rgb(51, 51, 51);
+    font-size: 16px;
+    font-family: 微软雅黑, arial, Simsun, sans-serif;
+    /*border-bottom: 1px solid rgb(97, 161, 223);*/
+    border-bottom: 1px solid rgb(0,193,137);
+}
+.carInfor-left h2 {
+    margin: 10px 0;
+}
+.carInfor-xj li {
+    width: 301px;
+    height: 38px;
+    line-height: 38px;
+    float: left;
+    color: rgb(51, 51, 51);
+    font-family: 宋体;
+    padding: 0px 5px 0px 20px;
+    border-bottom: 1px dashed rgb(219, 228, 235);
+}
+.carInfor-xj li.nonebd {
+    border: none;
+}
+/*icons*/
+.carInfor-xj b{ display:inline-block;width:20px;margin-right:5px; vertical-align:middle;}
+.pp,.cx,.ndk,.pzk,.zws,.cms,.rllx,.bsxlx,.pl,.rybh,.qdfs,.fdjjqxs,.pfbz,.tc,.yxrl,.yx,.zy,.tc,.qin,.dvd,.gps{background-image:url('../img/orderCarInforbg2.png');background-repeat:no-repeat;}
+.pp{height:18px; background-position:0px 0px}
+.cx{height:13px; background-position:0px -22px}
+.ndk{height:17px; background-position:0px -40px}
+.pzk{height:16px; background-position:0px -62px}
+.zws{height:18px; background-position:0px -83px}
+.cms{height:18px; background-position:0px -107px}
+.rllx{height:16px; background-position:0px -131px}
+.bsxlx{height:18px; background-position:0px -152px}
+.pl{height:11px; background-position:0px -175px}
+.rybh{height:18px; background-position:0px -190px}
+.qdfs{height:16px; background-position:0px -213px}
+.fdjjqxs{height:15px; background-position:0px -233px}
+.pfbz{height:14px; background-position:0px -251px}
+.tc{height:14px; background-position:0px -270px}
+.yxrl{height:19px; background-position:0px -288px}
+.yx{height:15px; background-position:0px -309px}
+.zy{height:16px; background-position:0px -329px}
+.tc{height:18px; background-position:0px -350px}
+.qin{height:17px; background-position:0px -373px}
+.dvd{height:17px; background-position:0px -395px}
+.gps{height:19px; background-position:0px -416px}
+
+/*picture*/
+#ifocus {
+    width: 627px;
+    height: 272px;
+    margin: 15px;
+}
+#ifocus_pic {
+    display: inline;
+    position: relative;
+    float: left;
+    width: 492px;
+    height: 271px;
+    overflow: hidden;
+    border: 1px solid #dbe4eb;
+    border-bottom-width: 2px;
+}
+#ifocus_piclist {
+    position: absolute;
+}
+#ifocus_piclist li {
+    width: 492px;
+    height: 271px;
+    overflow: hidden;
+}
+#ifocus_btn {
+    display: inline;
+    float: right;
+    width: 118px;
+}
+#ifocus_btn .current {
+    box-sizing:content-box;
+    background-color: #00c189;
+}
+#ifocus_btn li {
+    width: 118px;
+    height: 64px;
+    cursor: pointer;
+    margin-bottom: 2px;
+    border: 1px solid #dbe4eb;
+    background-color: #111746;
+}
+#ifocus_btn img {
+    width: 118px;
+    height: 64px;
+}
+img, fieldset {
+    border: none;
+    vertical-align: middle;
+}
+#ifocus_btn .current img {
+    width: 114px;
+    height: 60px;
+    margin: 2px;
+}
+
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, em, button {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 12px/1.5 Arial,"Microsoft yahei",Helvetica,Verdana,SimHei,sans-serif;
+    color: #333;
+    background-color: #f6fafb;
+}
+.fl {
+    float: left;
+}
+h1, h2, h3, h4, h5 {
+    font-family: "Times New Roman", Simsun;
+}
+.clearfix {
+    overflow: hidden;
+    zoom: 1;
+}
+ul, ol {
+    list-style: none;
+}
+.ac {
+    text-align: center;
+}
+.pt20 {
+    padding-top: 20px;
+}
+.pl20 {
+    padding-left: 20px;
+}
+/*按钮*/
+.fr {
+    float: right;
+}
+.f16 {
+    font-size: 10px;
+    font-family: "微软雅黑", arial, Simsun, sans-serif;
+}
+.btn_bluewauto {
+    background-position: 0px -105px;
+    border: 1px solid #f8f9fa;
+    border-radius: 2px;
+    height: 30px;
+    padding: 0px 8px;
+    cursor: pointer;
+    background-color: #00c189;
+    font-family: "微软雅黑", arial, Simsun, sans-serif;
+
+}
+.white {
+    color: #ffffff;
+}
+/*picture*/
+ul, ol {
+    list-style: none;
+}
+input[type="button"], input[type="submit"] {
+    -webkit-appearance: none;
+    vertical-align: middle;
+    line-height:normal;
+}

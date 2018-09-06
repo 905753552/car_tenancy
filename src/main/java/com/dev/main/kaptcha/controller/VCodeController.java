@@ -1,5 +1,6 @@
 package com.dev.main.kaptcha.controller;
 
+import com.dev.main.common.controller.exception.GlobalExceptionResolver;
 import com.dev.main.common.util.CookieUtils;
 import com.dev.main.common.util.ResultMap;
 import com.dev.main.kaptcha.service.ICaptchaService;
@@ -19,6 +20,7 @@ import java.io.IOException;
  */
 @Controller
 @RequestMapping("/api/captcha")
+@GlobalExceptionResolver
 public class VCodeController {
 
     @Autowired
