@@ -1,8 +1,7 @@
 .tnc_footer_help {
     display: flex;
     justify-content: space-around;
-    padding-top: 35px;
-    padding-bottom: 35px;
+    padding: 35px 0px;
     border-top: 1px solid #e9ebee;
     background-color: #ffffff;
 }
