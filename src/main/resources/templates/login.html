@@ -87,7 +87,7 @@
                             <li><input class="zc-btn btn-login" v-on:click="doLogin" value="登录" id="loginBt" type="submit"></li>
                             <li>
                                 <div class="zc_login_rbox">还不是会员？<a
-                                        href="#" rel="nofollow">立即注册</a>
+                                        href="/register" rel="nofollow">立即注册</a>
                                 </div>
                             </li>
                         </ul>
@@ -100,17 +100,18 @@
                             <li><i class="zc_blue_yandown"></i> 请先输入以下验证码，获取手机动态码</li>
                             <li class="clearfix">
                                 <label class="icon_wz"><span class="zc-iyzm"></span></label>
-                                <span class="fl"><input id="yzm_float" class="zc-iptsht t_val tnc_input" placeholder="输入验证码" maxlength="6"
-                                                        type="text"></span>
-                                <span class="pic-yzm fr"><img id="yzmImg_float" src="" width="108px" height="36px">
-                                    <i id="fresh_float" class="zc-fresh" v-on:click="getVerificationCode"></i></span>
+                                <span class="fl">
+                                    <input id="yzm_float" class="zc-iptsht t_val tnc_input" placeholder="输入验证码" maxlength="6" type="text">
+                                </span>
+                                <span class="pic-yzm fr">
+                                    <img id="yzmImg_float" src="" width="108px" height="36px">
+                                    <i id="fresh_float" class="zc-fresh" v-on:click="getVerificationCode"></i>
+                                </span>
                             </li>
                         </ul>
                         <ul class="login_sub">
                             <li class="pt5"><input class="zc-btn btn-login" value="确认" id="yzmconfirm" type="submit" v-on:click="subVerifyCode"></li>
-                            <li>
-                                <div class="zc_login_rbox" id="yzmcancel" v-on:click="cancelVerify">取消</div>
-                            </li>
+                            <li><div class="zc_login_rbox" id="yzmcancel" v-on:click="cancelVerify">取消</div> </li>
                         </ul>
                     </div>
                 </div>
