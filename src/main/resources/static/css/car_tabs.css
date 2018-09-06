@@ -1,0 +1,217 @@
+/*.nav .nav-tabs .nav-item a:active {*/
+/*background-color: #1c7430;*/
+/*}*/
+
+/*.nav-tabs .nav-link {*/
+/*border: 1px solid rgba(255,255,255,.5);*/
+/*!* border-top-left-radius: .25rem; *!*/
+/*!* border-top-right-radius: .25rem; *!*/
+/*}*/
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #495057;
+    background-color: #fff;
+    /*border-color: #28a745 #dee2e6 #fff;*/
+    /*上边框宽度*/
+    border-top-width: 2px;
+    /*上边框颜色*/
+    border-color: #28a745 #dee2e6 #fff;
+}
+
+.dev_underline{
+    border-bottom: 1px solid #e4ecc8;
+}
+.pic{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    padding: 0px 0px 0px 40px;/*上 右 下 左边距 */
+}
+
+.info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 0px 0px 0px;/*上 右 下 左边距 */
+}
+
+.info .info_block{
+    width: 282px;
+    padding:0 0 0 20px ;
+    /*border-bottom: 1px solid #e4e6e9;*/
+}
+.info .info_block .info_car_name{
+    font-size: 18px;
+    color: #60606c;
+    line-height: 1px;
+}
+.info_car_oth{
+    font-size: 14px;
+    line-height: 1px;
+}
+.info .info_block .bh_sale{
+    font-size: 0;
+    margin-top: 1px;
+}
+.info .info_block .bh_sale .re{
+    margin-top: 5px;
+    display: block;
+    cursor: pointer;
+}
+.info .info_block .bh_sale .bred{
+    color: #fff;
+    width: 30px;
+    line-height: 20px;
+    display: inline-block;
+    background-color: #ff8650;
+    font-size: 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+.info .info_block .bh_sale .sale_con{
+    font-style: normal;
+    border: 1px solid #dadadf;
+    border-left: none;
+    height: 18px;
+    line-height: 20px;
+    display: inline-block;
+    min-width: 100px;
+    vertical-align: middle;
+    padding: 0 8px;
+    color: #000000;
+    font-size: 12px;
+}
+.info .info_block .alltips{
+    margin-top: 12px;
+    font-size: 0;
+}
+.info .info_block .alltips .clear{
+    clear: both;
+}
+
+.dev_ord{
+    /*width: 340px;*/
+    /*padding: 30px 20px 30px 0;*/
+    /*border-bottom: 1px solid #e4e6e9;*/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 0px 0px 0px;/*上 右 下 左边距 */
+}
+/*!*订单按钮样式*!*/
+/*.dev_od_btnsize{*/
+/*width: 100px;*/
+/*height: 50px;*/
+/*font-size: 16px;*/
+/*text-align: center;*/
+/*}*/
+.dev_ord .dev_order_box{
+    width: 340px;
+    height: 50px;
+    float: right;
+    margin-bottom: 12px;
+}
+.dev_ord .dev_order_box .dev_od_price{
+    float: left;
+}
+.dev_ord .dev_order_box .dev_od_price .dev_car_price{
+    height: 50px;
+    width: 180px;
+    float: left;
+    position: relative;
+    left: 15px;
+}
+.dev_pri_ye{
+    float: left;
+    overflow: hidden;
+    padding: 0 12px 0 0;
+    min-width: 85px;
+}
+.dev_rmb{
+    display: inline-block;
+    font-size: 24px;
+    color: #fabe00;
+    font-style: normal;
+    line-height: 30px;
+}
+.dev_num{
+    display: inline-block;
+    font-size: 30px;
+    color: #fabe00;
+    font-style: normal;
+    line-height: 30px;
+}
+.dev_unit{
+    display: inline-block;
+    font-size: 12px;
+    font-style: normal;
+    margin-top: 12px;
+}
+.dev_od_btn{
+    /*float: right;*/
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 3px;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+}
+.dev_od_btn .dev_btn_yel{
+    background-color: #ff8650;
+}
+
+.navbar-nav li:hover{
+    display: block;
+    background: #fcfaff;
+    padding: 0.5px;
+
+}
+.dev_week_fontsize{
+    font-size: 12px;
+}
+.dev_week_savemoney{
+    font-style: normal;
+    /*color: #ff8650;*/
+    color: red;
+}
+.dev_week_ori{
+    text-decoration: line-through;
+}
+
+.dev_sort_btn{
+    /*/position: relative;*/
+    /*!*float: right;*!*/
+
+    font-size: 10px;
+    padding-top: 20px;
+    text-decoration: none;
+}
+.dev_sort_btn a:link{
+    text-decoration: none;
+}
+dev_sort_btn .nav-link2{
+    display: block;
+    padding: .5rem 1rem;
+    padding-right: 0px;
+    padding-left: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    border-top-width: 0px;
+    border-right-width: 0px;
+}
+.dev_od_btn_a{
+    /*font-size: 10px;*/
+    color:red;
+    font-weight: bold;
+    /*font-family:Arial;*/
+}
+.zc_btn_size{
+    width: 90px;
+    height: 38px;
+}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>car_tabs</title>
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/car_tabs.css">
+</head>
+<body>
+
+<div class="container">
+    <!--row start-->
+    <div class="row clearfix">
+        <!--col start-->
+        <div class="col-md-12 column" id="carInfoList">
+
+            <!--tabHeader  ul start-->
+            <ul class="nav nav-tabs" id="mycarInfoListTab">
+
+                <!--日租  必有套餐  tabHeader start-->
+                <li class="nav-item">
+                    <a class="nav-link active text-secondary" id="car_day_tab" data-toggle="tab" href="#pane_carDay">日租自驾</a>
+                </li>
+                <!--日租  必有套餐 tabHeader end-->
+                <!--其他套餐 tabHeader start-->
+                <li class="nav-item" v-for="carMenu in evenMenus">
+                    <a class="nav-link text-secondary" :id="carMenu.mid" data-toggle="tab" :href="'#pane_'+carMenu.mid">{{carMenu.mname}}</a>
+                </li>
+                <!--其他套餐 tabHeader end-->
+                <!--按价格排序 tabHeader start-->
+                <li class="nav-item">
+                    <div class="dev_sort_btn"><a class="nav-link2 text-secondary " id="dev_sort_button" onclick="doSort()" href="#"><span class="dev_od_btn_a">↓</span> 租金由高到低 </a></div>
+                </li>
+                <!--按价格排序 tabHeader end-->
+
+            </ul>
+            <!--tabHeader  ul end-->
+
+            <!--tabContent start-->
+            <div class=" tab-content">
+
+                <!--日租 start-->
+                <div class="tab-pane active" id="pane_carDay">
+
+                    <ul class="nav navbar-nav" id="car_day">
+                        <li v-if="items.length>0" v-for="item in items" class="list-unstyled">
+                            <div class="col-md-12 column">
+                                <div class="row clearfix dev_underline">
+                                    <div class="col-md-4 column pic">
+                                        <a :href="'#/url?carId='+item.carId"><img :src="item.carImg" alt="图片" width="230px" height="130px"></a>
+                                    </div>
+                                    <div class="col-md-3 column info">
+                                        <div class="info_block">
+                                            <p class="info_car_name">{{item.carName}}{{item.carVer}}</p>
+                                            <p class="info_car_oth">
+                                                {{item.carVan}}|{{item.carPower}}|乘坐{{item.carSeat}}人</p>
+                                            <div class="bh_sale">
+                                                <a class="re" data="87-1"><span class="bred">人气</span><i
+                                                        class="sale_con">{{item.carHot}}</i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 column dev_ord">
+                                        <div class="dev_order_box">
+                                            <div class="dev_od_price dev_od_price_set">
+                                                <div class="dev_car_price">
+	                           <span class="dev_pri_ye">
+	                               <em class="dev_rmb">¥</em>
+	                               <em class="dev_num">{{item.carPrice}}</em>
+	                               <em class="dev_unit"></em>
+	                           </span>
+                                                    <span class="dev_pri_ye">
+	                                    <em class=" dev_week_fontsize">单价:</em>
+	                                    <em class=" dev_week_fontsize">¥</em>
+	                                    <em class="dev_week_savemoney">{{item.carOriginalPrice}}</em>
+	                                    <em class=" dev_week_fontsize"> 每天</em>
+	                               </span>
+                                                </div>
+                                            </div>
+                                            <span class="dev_od_btn"><a href='#' @click="doCarOrder(item)"  class="btn zc_btn_size tnc_btn_green">租车</a></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+
+                </div>
+                <!--日租 end-->
+
+
+                <div class="tab-pane"  v-for="carMenuP in evenMenus" :id="'pane_'+carMenuP.mid">
+                    <ul class="nav navbar-nav">
+                        <li v-if="items.length>0" v-for="item in items" class="list-unstyled">
+                            <div class="col-md-12 column">
+                                <div class="row clearfix dev_underline">
+                                    <div class="col-md-4 column pic">
+                                        <a :href="'#/url?carId='+item.carId"><img :src="item.carImg" alt="图片" width="230px" height="130px"></a>
+                                    </div>
+                                    <div class="col-md-3 column info">
+                                        <div class="info_block">
+                                            <p class="info_car_name">{{item.carName}}{{item.carVer}}</p>
+                                            <p class="info_car_oth">
+                                                {{item.carVan}}|{{item.carPower}}|乘坐{{item.carSeat}}人</p>
+                                            <div class="bh_sale">
+                                                <a class="re" data="87-1"><span class="bred">人气</span><i
+                                                        class="sale_con">{{item.carHot}}</i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 column dev_ord">
+                                        <div class="dev_order_box">
+                                            <div class="dev_od_price dev_od_price_set">
+                                                <div class="dev_car_price">
+	                           <span class="dev_pri_ye">
+	                               <em class="dev_rmb">¥</em>
+	                               <em class="dev_num">{{item.carPrice}}</em>
+	                               <em class="dev_unit">/套餐价</em>
+	                           </span>
+                                                    <span class="dev_pri_ye">
+	                                    <em class=" dev_week_fontsize">原价:</em>
+	                                    <em class=" dev_week_fontsize">¥</em>
+	                                    <em class="dev_week_ori dev_week_fontsize">{{item.carOriginalPrice}}</em>
+	                                    <em class=" dev_week_fontsize"> | 节省 <i
+                                                class="dev_week_savemoney dev_week_fontsize">¥</i><i
+                                                class="dev_week_savemoney dev_week_fontsize">{{item.carOriginalPrice-item.carPrice}}</i></em>
+	                               </span>
+
+                                                </div>
+                                                <span class="dev_od_btn"> <a href='#' @click="doCarOrder(item)" class="btn tnc_btn_green">套餐预订</a></span>
+                                            </div>
+                                            <!---->
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--tabContent end-->
+        </div>
+        <!--col end-->
+    </div>
+    <!--row end-->
+</div>
+
+
+<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>-->
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>-->
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+<script src="/vue-2.5.17/vue.min.js"></script>
+
+<script>
+    // $(function () {
+    //     $('#myTab li:last-child a').tab('show')
+    // })
+</script>
+<script type="text/javascript" src="/js/car_tabs.js"></script>
+
+</body>
+</html>
