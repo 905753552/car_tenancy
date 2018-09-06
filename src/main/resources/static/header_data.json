@@ -1,6 +1,6 @@
 {
   "customer": {
-    "code": 500,
+    "code": 200,
     "msg": "测试文本",
     "customer": {
       "id" : "001",

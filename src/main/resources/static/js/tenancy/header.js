@@ -1,5 +1,5 @@
-$(document).ready(function(){
-    $("#tnc_toggle_area").hover(function(){
+$(document).ready(function () {
+    $("#tnc_toggle_area").hover(function () {
         $("#tnc_toggle_menu").toggle();
     });
 });
@@ -8,7 +8,7 @@ function getCustomer() {
     $.ajax({
         url: '/header_data.json',
         success: (data) => {
-            if (header_app.customer.code==200) {
+            if (data.customer.code == 200) {
                 header_app.customer = data.customer.customer;
             } else {
                 handleAjax(data.customer);
@@ -21,7 +21,7 @@ function logout() {
     $.ajax({
         url: '/header_data.json',
         success: (data) => {
-            if(data.logout.code == 200) {
+            if (data.logout.code == 200) {
                 header_app.customer = {};
             } else {
                 handleAjax(data.logout);
