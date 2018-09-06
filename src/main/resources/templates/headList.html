@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="../static/bootstrap-4.1.3/css/bootstrap.css">
-<link rel="stylesheet" href="../static/bootstrap-4.1.3/css/bootstrap-grid.css">
-<link rel="stylesheet" href="../static/bootstrap-4.1.3/css/bootstrap-reboot.css">
-<link rel="stylesheet" href="../static/css/headList.css">
-<link rel="stylesheet" href="../static/css/leftlist.css">
-<link rel="stylesheet" href="../static/css/style.css">
-<link rel="stylesheet" href="../static/css/reset.css">
-<link rel="stylesheet" href="../static/js/plugins/My97DatePicker/4.8/skin/WdatePicker.css">
+<link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap.css">
+<link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap-grid.css">
+<link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap-reboot.css">
+<link rel="stylesheet" href="css/headList.css">
+<link rel="stylesheet" href="/css/leftlist.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="/js/plugins/My97DatePicker/4.8/skin/WdatePicker.css">
 <head>
     <meta charset="UTF-8">
     <title>头部列表</title>
@@ -231,10 +231,10 @@
         </div>
     </div>
 </div>
-<script src="../static/js/jquery-3.3.1.min.js"></script>
-<script src="../static/bootstrap-4.1.3/js/bootstrap.min.js"></script>
-<script src="../static/js/plugins/My97DatePicker/4.8/WdatePicker.js"></script>
-<script src="../static/js/common/common.js"></script>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+<script src="/js/plugins/My97DatePicker/4.8/WdatePicker.js"></script>
+<script src="/js/common/common.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         var year = new Date().getFullYear();
@@ -251,7 +251,7 @@
         $("input[id='toDate']").val(dayTime);
     });
 
-    $('a').click(function(){//点击的时候给当前这个加上，其他的移除
+    $('a').click(function(){//点击的时候给当前这个加上
         $(this).addClass("checked").siblings("a").removeClass("checked");
     })
 </script>
