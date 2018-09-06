@@ -1,0 +1,13 @@
+{
+  "customer": {
+    "code": 200,
+    "msg": "测试文本",
+    "customer": {
+      "id" : "001",
+      "name": "测***"
+    }
+  },
+  "logout": {
+    "code": 200
+  }
+}

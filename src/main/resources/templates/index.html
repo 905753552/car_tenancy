@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="container-fluid tnc_container tnc_header">
-        <div class="row tnc_head">
+        <div v-cloak id="header-app" class="row tnc_head">
             <div class="tnc_head_bd">
                 <div><a class="tnc_head_brand tnc_logo" href="/"></a></div>
                 <div class="tnc_head_menu" >
@@ -30,11 +30,11 @@
                     </ul>
                 </div>
                 <div class="tnc_head_right">
-                    <div class="tnc_head_login tnc_header_active" style="display: none">
+                    <div v-show="!customer.id" class="tnc_head_login tnc_header_active" style="display: none">
                         <a href="#" class="">登录</a> / <a href="#" class="">注册</a>
                     </div>
-                    <div class="tnc_head_login" >
-                        <h1 class="tnc_head_welcome">您好，梁***</h1>
+                    <div v-show="customer.id" class="tnc_head_login" >
+                        <h1 class="tnc_head_welcome">您好，{{customer.name}}</h1>
                         <div id="tnc_toggle_area" class="tnc_head_dropdown">
                             <a id="tnc_toggle_area_btn" href="#">个人中心&nbsp;<i class="fa fa-caret-down"></i></a>
                             <div id="tnc_toggle_menu" style="display: none">
@@ -43,7 +43,7 @@
                                     <a href="#" class="bhpr reddot">我的订单</a>
                                     <a href="#">我的资产</a>
                                     <a href="#">我的账户</a>
-                                    <a href="#">退出登录</a>
+                                    <a href="javascript:;" @click="logout">退出登录</a>
                                 </div>
                             </div>
                         </div>
@@ -152,7 +152,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col col-md-10 offset-md-1 tnc_footer_help">
+            <div class="col-sm-12 col-md-10 offset-md-1 tnc_footer_help">
                 <dl class="tnc_footer_help_item">
                     <dt>租车预订说明</dt>
                     <dd>
@@ -251,6 +251,7 @@
 
 <script src="/js/jquery-3.3.1.min.js"></script>
 <script src="/js/popper.min.js"></script>
+<script src="/layui-v2.4.3/lay/modules/layer.js"></script>
 <script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 <script src="/vue-2.5.17/vue.min.js"></script>
 <script src="/js/common/common.js"></script>

@@ -76,6 +76,8 @@
     line-height: 58px;
     color: #c8c8ce;
     z-index: 12;
+    font-size: 18px;
+    font-weight: normal;
 }
 
 .tnc_head_bd {
