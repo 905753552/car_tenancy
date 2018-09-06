@@ -1,211 +1,211 @@
 .main{
-	width:auto;
-	display:flex;
+    width:auto;
+    display:flex;
 }
 .orderDetails{
-	width:100%;
-	display:flex;
-	flex-direction:column;
-	background:#F2F3F5;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    background:#F2F3F5;
 }
 /* 汽车信息以及订单进度 */
 .order-block{
-	width:100%;
-	height:229px;
-	min-width:1000px;
-	display:flex;
-	justify-content:center;
-	background:#F2F3F5;
+    width:100%;
+    height:229px;
+    min-width:1000px;
+    display:flex;
+    justify-content:center;
+    background:#F2F3F5;
 }
 .order-inner{
-	width:1000px;
-	height:100%;
-	display:flex;
-	flex-direction:column;
-	justify-content:center;
+    width:1000px;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 }
 .order-proce{
-	display:block;
+    display:block;
 }
 .car-info{
-	width:100%;
-	height:150px;
-	margin:auto auto 0px auto;
-	display:flex;
-	align-items:center;
-	background:white;
+    width:100%;
+    height:150px;
+    margin:auto auto 0px auto;
+    display:flex;
+    align-items:center;
+    background:white;
 }
 .ifl{
-	width:50%;
-	height:100%;
-	display:flex;
-	justify-content:center;
-	align-items:center;
+    width:50%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 .img{
-	width:50%;
-	height:100%;
-	display:flex;
-	justify-content:center;
-	align-items:center;
+    width:50%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 .lin{
-	width:50%;
-	height:70%;
+    width:50%;
+    height:70%;
 }
 .lp1{
-	width:100%;
-	height:30px;
-	line-height:30px;
-	font-size:18px;
-	margin:5px auto 5px auto;
-	color:#60606c;
+    width:100%;
+    height:30px;
+    line-height:30px;
+    font-size:18px;
+    margin:5px auto 5px auto;
+    color:#60606c;
 }
 .lp2{
-	width:100%;
-	height:24px;
-	margin:5px auto 5px auto;
-	line-height:24px;
-	font-size:12px;
-	color:#93939e;
+    width:100%;
+    height:24px;
+    margin:5px auto 5px auto;
+    line-height:24px;
+    font-size:12px;
+    color:#93939e;
 }
 .base-btn{
-	width:100%;
-	height:28px;
+    width:100%;
+    height:28px;
 }
 .ifl .lin .look-config{
-	width: 120px;
-	height: 28px;
-	line-height:28px;
+    width: 120px;
+    height: 28px;
+    line-height:28px;
 }
 .ifl .lin .look-change{
-	width: 78px;
-	height: 26px;
-	line-height: 26px;
+    width: 78px;
+    height: 26px;
+    line-height: 26px;
 }
 .ifl .lin .look-config a:hover{
-	background-color: #fff;
+    background-color: #fff;
 }
 .ifr{
-	width:50%;
-	height:100%;
-	display:flex;
-	border-left:thin solid #eeeeee;
+    width:50%;
+    height:100%;
+    display:flex;
+    border-left:thin solid #eeeeee;
 }
 .detail{
-	width:50%;
-	height:100%;
-	display:flex;
-	justify-content:center;
-	align-items:center;
+    width:50%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 .ul{
-	width:80%;
-	height:75%;
+    width:80%;
+    height:75%;
 }
 .ifr-qc{
-	background-image:url(https://image.zuchecdn.com/newversion/news/ordernew/order_sprite.png);
+    background-image:url(https://image.zuchecdn.com/newversion/news/ordernew/order_sprite.png);
     background-position-x:-326px;
     background-position-y:0px;
     display:inline-block;
     width:16px;
     height:16px;
-	vertical-align: middle;
-} 
+    vertical-align: middle;
+}
 .ifr-time{
-	background-image:url(https://image.zuchecdn.com/newversion/news/ordernew/order_sprite.png);
+    background-image:url(https://image.zuchecdn.com/newversion/news/ordernew/order_sprite.png);
     background-position-x:-380px;
     background-position-y:0px;
     display:inline-block;
     width:14px;
     height:14px;
-	vertical-align: middle;
-} 
+    vertical-align: middle;
+}
 .ifr-local{
-	background-image:url(https://image.zuchecdn.com/newversion/news/ordernew/order_sprite.png);
+    background-image:url(https://image.zuchecdn.com/newversion/news/ordernew/order_sprite.png);
     background-position-x:-380px;
     background-position-y:-22px;
     display:inline-block;
     width:12px;
     height:14px;
-	vertical-align: middle;
+    vertical-align: middle;
 }
 .ifr-hc{
-	background-image:url(https://image.zuchecdn.com/newversion/news/ordernew/order_sprite.png);
+    background-image:url(https://image.zuchecdn.com/newversion/news/ordernew/order_sprite.png);
     background-position-x:-355px;
     background-position-y:0px;
     display:inline-block;
     width:16px;
     height:16px;
-	vertical-align: middle;
-} 
+    vertical-align: middle;
+}
 .line1{
-	margin:20px auto 10px auto;
+    margin:20px auto 10px auto;
 }
 .line2{
-	margin:5px auto 5px auto;
+    margin:5px auto 5px auto;
 }
 .line3{
-	margin:5px auto 5px auto;
+    margin:5px auto 5px auto;
 }
 /* 提交订单信息填写 */
 .newpg-conf{
-	min-width: 1000px;
-	width:100%;
-	height:830px;
-	display:flex;
-	justify-content:center;
-	background:#F2F3F5;
+    min-width: 1000px;
+    width:100%;
+    height:830px;
+    display:flex;
+    justify-content:center;
+    background:#F2F3F5;
 }
 .newpg-con{
-	margin-top: 25px;
-	background: #fff;
-	padding: 0 20px 60px;
-	width: 1000px;
+    margin-top: 25px;
+    background: #fff;
+    padding: 0 20px 60px;
+    width: 1000px;
 }
 .newpg-conf h3{
-	font-family: Arial,"Microsoft yahei";
-	font-weight: 400;
-	font-size: 18px;
-	color: #2b99ff;
-	line-height: 40px;
-	margin: 0;
-	padding-top: 20px;
-	border-bottom: 2px solid #c8c8ce;
+    font-family: Arial,"Microsoft yahei";
+    font-weight: 400;
+    font-size: 18px;
+    color: #2b99ff;
+    line-height: 40px;
+    margin: 0;
+    padding-top: 20px;
+    border-bottom: 2px solid #c8c8ce;
 }
 .newpg-conf h3 .ifred{
-	font-size: 14px;
-	color: #ff8650;
-	display: inline-block;
-	margin-left: 10px;
+    font-size: 14px;
+    color: #ff8650;
+    display: inline-block;
+    margin-left: 10px;
 }
 .form-info{
-	width:100%;
-	height:210px;
-	display:flex;
-	flex-direction:column;
+    width:100%;
+    height:210px;
+    display:flex;
+    flex-direction:column;
 }
 .formGrop{
-	display:flex;
-	align-items:center;
-	margin:12px auto 0 25px;
+    display:flex;
+    align-items:center;
+    margin:12px auto 0 25px;
 }
 .formText{
-	margin-left:15px;
+    margin-left:15px;
 }
 input[type=text]{
-	width:240px;
-	height:30px;
+    width:240px;
+    height:30px;
 }
 .formGrop .acceptInfo{
-	width:15px;
-	height:15px;
-	margin-left:20px;
+    width:15px;
+    height:15px;
+    margin-left:20px;
 }
 .order-errorbox {
     position: absolute;
-	top: -45px;
-	left: 60px;
+    top: -45px;
+    left: 60px;
     width: 288px;
     height: 38px;
     line-height: 38px;
@@ -239,8 +239,8 @@ input[type=text]{
 .order-errorbox1 {
     display: none;
     position: absolute;
-	top: -45px;
-	left: 60px;
+    top: -45px;
+    left: 60px;
     width: 288px;
     height: 38px;
     line-height: 38px;
@@ -273,8 +273,8 @@ input[type=text]{
 .order-errorbox2 {
     display: none;
     position: absolute;
-	top: -45px;
-	left: 60px;
+    top: -45px;
+    left: 60px;
     width: 288px;
     height: 38px;
     line-height: 38px;
@@ -306,13 +306,13 @@ input[type=text]{
 }
 
 .zc-retan{
-	background-image:url(https://image.zuchecdn.com/newversion/news/common/icon.png);
+    background-image:url(https://image.zuchecdn.com/newversion/news/common/icon.png);
     background-position-x:-440px;
     background-position-y:0;
     display:inline-block;
     width:17px;
     height:17px;
-	vertical-align: middle;
+    vertical-align: middle;
 }
 .order-errorbox i {
     font-style: normal;
@@ -332,10 +332,10 @@ input[type=text]{
 .zc-close{
     display: inline-block;
     background: url(https://image.zuchecdn.com/newversion/news/common/icon.png) no-repeat;
-	width: 12px;
+    width: 12px;
     height: 12px;
     background-position: -480px 0;
-	vertical-align: middle;
+    vertical-align: middle;
 }
 /* 下单后提示语 */
 .newpg-conf .info-msg p {
@@ -418,12 +418,12 @@ input[type=text]{
     position: relative;
 }
 .blue-ques {
-	display: inline-block;
-	background: url(https://image.zuchecdn.com/newversion/news/ordernew/order_sprite.png) no-repeat;
-	width: 16px;
+    display: inline-block;
+    background: url(https://image.zuchecdn.com/newversion/news/ordernew/order_sprite.png) no-repeat;
+    width: 16px;
     height: 16px;
     background-position: -329px -23px;
-	vertical-align: middle;
+    vertical-align: middle;
 }
 .bx-bubble {
     display: none;
@@ -533,14 +533,14 @@ input[type=text]{
 /* 退改规则 */
 .newpg-tggz {
     min-width: 1000px;
-	display:flex;
-	justify-content:center;
+    display:flex;
+    justify-content:center;
 }
 .newpg-tggz .newpg-con {
     margin-top: 20px;
     background-color: #fff;
-	width: 1000px;
-	padding: 0;
+    width: 1000px;
+    padding: 0;
 }
 .newpg-tggz .top {
     height: 39px;
@@ -641,7 +641,7 @@ a {
 }
 .modify-pass .modiul {
     width: 350px;
-    margin: 30px auto 0;
+    margin: 0 auto 0;
 }
 .modify-pass .mod-save {
     width: 180px;
