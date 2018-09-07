@@ -117,7 +117,7 @@
 
 							<div class="formGrop" style="position:relative;">
 								<div class="name-label"><i style="color:red;">*&nbsp&nbsp</i>姓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp名</div>
-								<input name="xname" id="xname" style="margin-left:15px;" class="tnc_input" type="text" placeholder=请输入您的姓名 default-value="请输入您的姓名" value="" maxlength="50" onblur="checkMemberFormName();">
+								<input name="xname" id="xname" style="margin-left:15px;" class="tnc_input" type="text" placeholder=请输入您的姓名 default-value="请输入您的姓名" value="" maxlength="50" @blur="checkMemberFormName">
 								<div class="order-errorbox order-erpos" style="display: none;">
 									<span class="arout">◆<span class="arin">◆</span></span>
 									<span class="zc-retan"></span>
@@ -137,7 +137,7 @@
 							</div>
 							<div class="formGrop" style="position:relative;">
 								<div class="name-label"><i style="color:red;">*&nbsp&nbsp</i>证件号码</div>
-								<input value="" class="tnc_input" style="margin-left:15px;" onblur="checkMemberIdentitycard();" name="xidentitycard" placeholder=请输入证件号码 default-value="请输入证件号码" id="xidentitycard" maxlength="20" type="text">
+								<input value="" class="tnc_input" style="margin-left:15px;" @blur="checkMemberIdentitycard" name="xidentitycard" placeholder=请输入证件号码 default-value="请输入证件号码" id="xidentitycard" maxlength="20" type="text">
 								<div class="order-errorbox1 order-erpos1" style="display: none;">
 									<span class="arout">◆<span class="arin">◆</span></span>
 									<span class="zc-retan"></span>
@@ -147,7 +147,7 @@
 							</div>
 							<div class="formGrop" style="position:relative;">
 								<div class="name-label">&nbsp&nbsp&nbsp&nbsp邮&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp箱</div>
-								<input default-value="请输入邮箱" style="margin-left:15px;" placeholder=请输入邮箱 class="tnc_input" value="" id="memberEmail" name="xemail" onblur="checkMemberEmail();" maxlength="50" type="text">
+								<input default-value="请输入邮箱" style="margin-left:15px;" placeholder=请输入邮箱 class="tnc_input" value="" id="memberEmail" name="xemail" @blur="checkMemberEmail" maxlength="50" type="text">
 								<div class="order-errorbox2 order-erpos2" style="display: none;">
 									<span class="arout">◆<span class="arin">◆</span></span>
 									<span class="zc-retan"></span>
@@ -216,7 +216,7 @@
 						<span class="ddall"><i>¥</i><i class="orderTotalPrice all">456</i></span>
 					</div>
 					<!-- <a href="javascript:void(0);" onclick="goFourthStep()" id="monitor_fourth_next" class="gopay-blue">提交订单</a> -->
-					<input class="tnc_btn tnc_btn_green gopay-blue" onclick="goFourthStep()" value="提交订单" id="monitor_fourth_next" type="button">
+					<input class="tnc_btn tnc_btn_green gopay-blue" value="提交订单" id="monitor_fourth_next" type="button">
 				</div>
 			</div>
 		</div>
@@ -391,7 +391,7 @@
 								<!-- <input type="text" value="" id="verifyid" placeholder="手机验证码" class="s" onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"> -->
 								<input class="tnc_input s" placeholder="手机验证码">
 								<!-- <input type="button" id="sendKeyid" class="getyzm" onclick="sendKey()" value="获取验证码"> -->
-								<a class="tnc_btn tnc_btn_outline_green getyzm" value="获取验证码">获取验证码</a>
+								<a class="tnc_btn tnc_btn_outline_green getyzm" @click="getVerifyCode" value="获取验证码">获取验证码</a>
 								<div class="order-errorboxred order-erpos" style="display: none;">
 									<i class="err-con" id="mverifyid"></i>
 								</div>
