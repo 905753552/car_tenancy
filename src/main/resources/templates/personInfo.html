@@ -153,7 +153,7 @@
                                 </div>
                                 <div class="clear"></div>
                             </li>
-                            <li style="min-height: 110px; padding-top: 12px;">
+                            <li style="padding: 12px 0 10px 0; height:auto">
                                 <div class="row">
                                     <label class="info_label col-md-3 col-sm-2">通信地址</label>
                                     <span class="igirnfo_span col-md-6 col-sm-6" style="line-height: 40px">
@@ -209,7 +209,7 @@
             <div class="clearfix"></div>
         </div>
     </div>
-    <div class="row" style="background-color: #fff">
+    <div class="row tnc_footer_background">
         <div class="col-sm-12 col-md-10 offset-md-1 tnc_footer_help">
             <dl class="tnc_footer_help_item">
                 <dt>租车预订说明</dt>
@@ -339,11 +339,12 @@
         // 变换验证码
         changeImageVerifyCode();
     }
-
     /*改变验证码图片*/
     function changeImageVerifyCode() {
         $("#yzmImg_float").attr("src", "/api/captcha/generate?_t=" + new Date().getTime());
     }
+
+
 
     // 表单检验
     var formCheck = function () {
