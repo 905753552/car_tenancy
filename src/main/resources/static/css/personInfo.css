@@ -3,6 +3,7 @@ body {
     padding: 0px 0px !important;
 }
 .info_bd {
+    min-height: 600px;
     padding: 0 30px;
     position: relative;
     background-color: #fff;
@@ -135,7 +136,7 @@ body {
     z-index: 15;
 }
 .myleft {
-    margin: 15px 0px; padding-right: 0;
+    margin-top: 15px; padding-right: 0;
 }
 .myright {
     margin: 15px 0px;

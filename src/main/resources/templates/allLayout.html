@@ -11,21 +11,6 @@
 <link rel="stylesheet" href="/css/footer.css">
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/personInfo.css">
-<style type="text/css">
-    .myleft {
-        margin: 15px 0px; padding-right: 0;
-    }
-    .myright {
-        margin: 15px 0px;
-    }
-    .myborder-line {
-        border-top: 1px solid #e9ebee;
-        border-bottom: 1px solid #e9ebee;
-    }
-    .mybtndiv {
-        height: 100px; line-height: 100px; margin-left: 215px
-    }
-</style>
 <body>
 <div class="container-fluid tnc_container tnc_header">
     <div v-cloak id="header-app" class="row tnc_head">
@@ -75,8 +60,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-2 col-sm-3 myleft">
+        <div class="col-md-2 col-sm-3 myleft offset-md-1">
             <div class="infoleft_bd">
                 <dl>
                     <dt class="info_h2">订单中心</dt>
@@ -106,8 +90,8 @@
                 <div class="mybtndiv">
                     <button type="button" class="tnc_btn tnc_btn_green">保存</button>
                 </div>
+                <div class="myborder-line"></div>
             </div>
-            <div class="clearfix"></div>
         </div>
     </div>
     <div class="row">
