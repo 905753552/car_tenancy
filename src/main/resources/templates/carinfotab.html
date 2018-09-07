@@ -9,29 +9,30 @@
     <link rel="stylesheet" href="/css/car_tabs.css">
 </head>
 <body>
-
+<br><br>
+<button onclick="doSeachByAllType()">查车</button>
 <div class="container">
     <!--row start-->
     <div class="row clearfix">
         <!--col start-->
-        <div class="col-md-12 column" id="carInfoList">
+        <div class="col-md-12 column" v-cloak id="carInfoTab-app">
 
             <!--tabHeader  ul start-->
             <ul class="nav nav-tabs" id="mycarInfoListTab">
 
                 <!--日租  必有套餐  tabHeader start-->
                 <li class="nav-item">
-                    <a class="nav-link active text-secondary" id="car_day_tab" data-toggle="tab" href="#pane_carDay">日租自驾</a>
+                    <a class="nav-link active text-secondary" id="carDay" @click="doSeachByPackage('carDay')" data-toggle="tab" href="#pane_carDay">日租自驾</a>
                 </li>
                 <!--日租  必有套餐 tabHeader end-->
                 <!--其他套餐 tabHeader start-->
                 <li class="nav-item" v-for="carMenu in evenMenus">
-                    <a class="nav-link text-secondary" :id="carMenu.mid" data-toggle="tab" :href="'#pane_'+carMenu.mid">{{carMenu.mname}}</a>
+                    <a class="nav-link text-secondary" :id="carMenu.mid" @click="doSeachByPackage(carMenu.mid)" data-toggle="tab" :href="'#pane_'+carMenu.mid">{{carMenu.mname}}</a>
                 </li>
                 <!--其他套餐 tabHeader end-->
                 <!--按价格排序 tabHeader start-->
                 <li class="nav-item">
-                    <div class="dev_sort_btn"><a class="nav-link2 text-secondary " id="dev_sort_button" onclick="doSort()" href="#"><span class="dev_od_btn_a">↓</span> 租金由高到低 </a></div>
+                    <div class="dev_sort_btn"><a class="nav-link2 text-secondary " id="dev_sort_button" @click="doSort" href="#"><span class="dev_od_btn_a">↓</span> 租金由高到低 </a></div>
                 </li>
                 <!--按价格排序 tabHeader end-->
 
@@ -68,13 +69,13 @@
                                                 <div class="dev_car_price">
 	                           <span class="dev_pri_ye">
 	                               <em class="dev_rmb">¥</em>
-	                               <em class="dev_num">{{item.carPrice}}</em>
+	                               <em class="dev_num">{{item.carTotalPrice}}</em>
 	                               <em class="dev_unit"></em>
 	                           </span>
                                                     <span class="dev_pri_ye">
 	                                    <em class=" dev_week_fontsize">单价:</em>
 	                                    <em class=" dev_week_fontsize">¥</em>
-	                                    <em class="dev_week_savemoney">{{item.carOriginalPrice}}</em>
+	                                    <em class="dev_week_savemoney">{{item.carPrice}}</em>
 	                                    <em class=" dev_week_fontsize"> 每天</em>
 	                               </span>
                                                 </div>
@@ -93,7 +94,7 @@
                 <!--日租 end-->
 
 
-                <div class="tab-pane"  v-for="carMenuP in evenMenus" :id="'pane_'+carMenuP.mid">
+                <div class="tab-pane "  v-for="carMenuP in evenMenus" :id="'pane_'+carMenuP.mid">
                     <ul class="nav navbar-nav">
                         <li v-if="items.length>0" v-for="item in items" class="list-unstyled">
                             <div class="col-md-12 column">
@@ -118,16 +119,16 @@
                                                 <div class="dev_car_price">
 	                           <span class="dev_pri_ye">
 	                               <em class="dev_rmb">¥</em>
-	                               <em class="dev_num">{{item.carPrice}}</em>
+	                               <em class="dev_num">{{item.carTotalPackagePrice}}</em>
 	                               <em class="dev_unit">/套餐价</em>
 	                           </span>
                                                     <span class="dev_pri_ye">
 	                                    <em class=" dev_week_fontsize">原价:</em>
 	                                    <em class=" dev_week_fontsize">¥</em>
-	                                    <em class="dev_week_ori dev_week_fontsize">{{item.carOriginalPrice}}</em>
+	                                    <em class="dev_week_ori dev_week_fontsize">{{item.carTotalPrice}}</em>
 	                                    <em class=" dev_week_fontsize"> | 节省 <i
                                                 class="dev_week_savemoney dev_week_fontsize">¥</i><i
-                                                class="dev_week_savemoney dev_week_fontsize">{{item.carOriginalPrice-item.carPrice}}</i></em>
+                                                class="dev_week_savemoney dev_week_fontsize">{{item.carTotalPrice-item.carTotalPackagePrice}}</i></em>
 	                               </span>
 
                                                 </div>
