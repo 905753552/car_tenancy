@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>会员注册--乘风租车</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fonts/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/register.css">
+
+</head>
+<body>
+<div class="container-fluid tnc_container tnc_header">
+    <div class="row tnc_head">
+        <div class="tnc_head_bd">
+            <div><a class="tnc_head_brand tnc_logo" href="/"></a></div>
+            <div class="tnc_head_menu" >
+                <ul class="">
+                    <li class="tnc_head_menu_item">
+                        <a class="tnc_head_menu_active" href="/">首页 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="tnc_head_menu_item">
+                        <a class="" href="#">选车</a>
+                    </li>
+                    <li class="tnc_head_menu_item">
+                        <a class="" href="#">门店</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tnc_head_right">
+                <div class="tnc_head_tel">
+                    <div class="">
+                            <span class="">
+                                <i class="fa fa-phone"></i>
+                                <span>408-666-666</span>
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+       <div class="form_bg">
+           <div class="form_body">
+                <div class="form_detail">
+                    <div class="form_head_text">注册新用户</div>
+                    <div class="form_input" id="input_listen">
+                        <div class="zc_l_error" id="error_tips"></div>
+                        <ul>
+                            <li class="tnc_inputbox">
+                                <span class="rstar">*</span>
+                                <label><span class="tnc_iuser"></span></label>
+                                <input id="xname" class="tnc_input iptstyle" type="text" placeholder="请输入您的真实姓名" maxlength="20">
+                            </li>
+                            <li class="tnc_inputbox">
+                                <span class="rstar">*</span>
+                                <label><span class="tnc_phone"></span></label>
+                                <input id="xphone" class="tnc_input iptstyle" type="text" placeholder="请输入您的手机号" maxlength="11">
+                            </li>
+                            <li class="tnc_inputbox">
+                                <span class="rstar">*</span>
+                                <label><span class="tnc_mail"></span></label>
+                                <input id="xcode" class="tnc_input iptstyle" type="text" placeholder="请输入手机动态码" maxlength="6">
+                                <button class="tnc_btn tnc_btn_green btn_vcode" id="getYzmBtn" style="display: inline-block;"  v-on:click="getVerifyCode" >获取手机动态码</button>
+
+                            </li>
+
+                            <li class="tnc_inputbox">
+                                <span class="rstar">*</span>
+                                <label><span class="tnc_psw"></span></label>
+                                <input id="xpsw" class="tnc_input iptstyle" type="password" v-on:input ="inputPsw" placeholder="建议6-18位数字、字母、符号的组合" maxlength="20">
+                                <div class="zc-safepsw" id="pwdLevelDiv">
+                                    <span class="safe_1">弱</span>
+                                    <span class="safe_2">中</span>
+                                    <span class="safe_3">强</span>
+                                </div>
+                            </li>
+                            <li class="tnc_inputbox">
+                                <label><span class="tnc_coupon"></span></label>
+                                <input id="xcoupon" class="tnc_input iptstyle" type="text" placeholder="如有优惠码，请填写优惠码" maxlength="20">
+                            </li>
+                        </ul>
+                    </div>
+                    <p class="clause">
+                        <input type="checkbox" checked="checked">
+                        我已阅读并同意
+                        <a href="#" target="_blank">《乘风租车会员服务条款》</a>
+                    </p>
+                    <input type="button" class="tnc_btn tnc_btn_green tnc_register" v-on:click="doRegister" value="注册">
+                </div>
+
+
+               <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+                   <div class="modal-dialog" role="document">
+                       <div class="modal-content">
+                           <div class="modal-header modal_hd_color">
+                               <p class="modal-title" style="font-size: 16px" >请输入以下验证码，获取手机动态码</p>
+                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                   <span aria-hidden="true">&times;</span>
+                               </button>
+                           </div>
+                           <div class="modal-body vcodeinput" style="height: 200px">
+                               <input id="verifyCode" class="tnc_input code_input" placeholder="请输入验证码">
+                               <span class="pic-yzm fr">
+                            <img id="yzmImg_float" src="" width="108px" height="36px">
+                        <i id="fresh_float" class="zc-fresh" v-on:click="changeImageVerifyCode"></i>
+                    </span>
+
+                           </div>
+                           <div class="modal-footer" style="margin: 0 auto">
+                               <button type="button" class="tnc_btn tnc_btn_green" v-on:click="sub_verify_code">确认</button>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+
+                <div class="form_coupon">
+                    <div class="coupon_detail">
+                        <div class="coupon_head">已有账号？
+                            <a href="/login" >立即登录 »</a>
+                        </div>
+                        <div class="wapbox">
+                            <img class="qcode" src="https://image.zuchecdn.com/newStatic/newversion/common/tipsregist.png">
+                        </div>
+                    </div>
+                </div>
+           </div>
+       </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-10 offset-md-1 tnc_icon_list">
+            <div class="tnc_md_icon_item" style="border-left: 1px solid #e9ebee;">
+                <i class="fa fa-car" style="font-size: 32px;color: var(--tnc_green);"></i>
+                <p>100+车型</p>
+            </div>
+            <div class="tnc_md_icon_item"  style="border-left: 1px solid #e9ebee;">
+                <i class="fa fa-map-marker" style="font-size: 32px;color: var(--tnc_green);"></i>
+                <p>1000+网点</p>
+            </div>
+            <div class="tnc_md_icon_item"  style="border-left: 1px solid #e9ebee;">
+                <i class="fa fa-wrench" style="font-size: 32px;color: var(--tnc_green);"></i>
+                <p>100%车检</p>
+            </div>
+            <div class="tnc_md_icon_item"  style="border-left: 1px solid #e9ebee;border-right: 1px solid #e9ebee;">
+                <i class="fa fa-tachometer" style="font-size: 32px;color: var(--tnc_green);"></i>
+                <p>无限里程</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-md-10 offset-md-1 tnc_footer_help">
+            <dl class="tnc_footer_help_item">
+                <dt>租车预订说明</dt>
+                <dd>
+                    <a target="_blank" href="#">服务时间</a>
+                    <a target="_blank" href="#">待租车况</a>
+                    <a target="_blank" href="#">服务预订</a>
+                    <a target="_blank" href="#">短租产品</a>
+                    <a target="_blank" href="#">租车资格</a>
+                    <a target="_blank" href="#">取还车说明</a>
+                </dd>
+            </dl>
+            <dl class="tnc_footer_help_item">
+                <dt>会员管理</dt>
+                <dd>
+                    <a target="_blank" href="#">会员章程</a>
+                    <a target="_blank" href="#">会员细则</a>
+                    <a target="_blank" href="#">定级积分</a>
+                </dd>
+            </dl>
+            <dl class="tnc_footer_help_item">
+                <dt>紧急事务处理</dt>
+                <dd>
+                    <a target="_blank" href="#">保险责任</a>
+                    <a target="_blank" href="#">理赔说明</a>
+                    <a target="_blank" href="#">事故处理</a>
+                    <a target="_blank" href="#">救援及备用车</a>
+                </dd>
+            </dl>
+            <dl class="tnc_footer_help_item">
+                <dt>租车费用及结算</dt>
+                <dd>
+                    <a target="_blank" href="#">价格说明</a>
+                    <a target="_blank" href="#">结算流程</a>
+                    <a target="_blank" href="#">储值卡</a>
+                    <a target="_blank" href="#">积分</a>
+                </dd>
+            </dl>
+            <dl class="tnc_footer_help_item">
+                <dt>帮助中心</dt>
+                <dd>
+                    <a target="_blank" href="#">常见问题</a>
+                    <a target="_blank" href="#">新手上路</a>
+                    <a target="_blank" href="#">服务规则 </a>
+                </dd>
+            </dl>
+            </dl>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+    <script src="/layui-v2.4.3/lay/modules/layer.js"></script>
+    <script src="/vue-2.5.17/vue.min.js"></script>
+    <script src="/js/common/common.js"></script>
+    <script src="/js/tenancy/register.js"></script>
+</body>
+</html>
