@@ -3,234 +3,305 @@
 <link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap.css">
 <link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap-grid.css">
 <link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap-reboot.css">
+<link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/headList.css">
 <link rel="stylesheet" href="/css/leftList.css">
-<link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/reset.css">
 <link rel="stylesheet" href="/js/plugins/My97DatePicker/4.8/skin/WdatePicker.css">
+<link rel="stylesheet" href="/fonts/font-awesome-4.7.0/css/font-awesome.css">
+<link rel="stylesheet" href="/css/header.css">
+<link rel="stylesheet" href="/css/footer.css">
+<link rel="stylesheet" href="/css/index.css">
 <head>
     <meta charset="UTF-8">
     <title>头部列表</title>
+    <style>
+        body {
+            background-color: #f2f3f5;
+            padding: 0px 0px !important;
+        }
+
+        .bo_bg {
+            background: #fff;
+        }
+
+        .top-menu input {
+            width: 150px;
+        }
+
+        .top-menu label {
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        .menu-left {
+            display: inline-block;
+            margin-top: 15px;
+        }
+        .menu-input-group {
+            display: inline-block;
+            width:368px;
+            margin-right: 30px;
+        }
+    </style>
 </head>
-<body>
-<div class="tnc_zc_headlist">
-    <from id="firstOrderInfo" style="height: auto">
-        <div class="tnc_dz_conbox tnc_zc_main">
-            <div class="tnc_h1">
-                <div class="tnc_choose_ul">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="tnc_ch_box">
-                                <label class="tnc_c_car">取车</label>
-                                <input type="text" home-flag value="肇庆" maxlength="10"
-                                       default-value="选择城市" link-input="fromCityId"
-                                       class="tnc_inpcity tnc_input_citySD tnc_input_text"
-                                       name="fromCity" id="fromCity" t_popup="0">
-                                <input type="hidden" id="fromCityId" name="fromCityId" value="338">
-                                <input type="text" home-flag value="星湖大道店" maxlength="30"
-                                       default-value="请选择取车门店" link-input="fromStoreId"
-                                       class="tnc_inpstore tnc_input_citySD tnc_input_text" name="fromStoreName"
-                                       id="fromStoreName" t_popup="0" ischain="1">
-                            </div>
-                            <input type="hidden" value="2432" name="fromStoreId" id="fromStoreId">
-                            <div class="tnc_label">
-                                <label class="tnc_cartext" for="showsentAddress_span1">送车上门</label>
-                                <span class="" id="showsentAddress_span1" disabled="disabled"
-                                      style="display: none"></span>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="tnc_ch_box tnc_cardate">
-                                <label class="tnc_c_date">取车时间</label>
-                                <div class="tnc_ch_box tnc_divin">
-                                    <input type="text" value=""
-                                           class="tnc_inpdate tnc_input_calendar tnc_input_text Wdate"
-                                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
-                                           name="fromDate" id="fromDate" readonly="readonly" autocomplete="on">
-                                </div>
-                                <div class="tnc_cartime tnc_ch_box tnc_divin">
-                                    <input type="text" value="10:00" default-value="08:00-21:00"
-                                           class="tnc_inptime tnc_input_timedown tnc_input_text tnc_input_citySD"
-                                           readonly="readonly" name="fromHourMinute" id="fromHourMinute">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="tnc_ch_box tnc_mt10 tnc_p-re">
-                                <label class="tnc_c_car">还车</label>
-                                <input type="text" home-flag value="肇庆" maxlength="10"
-                                       default-value="选择城市" link-input="toCityId"
-                                       class="tnc_inpcity tnc_input_citySD tnc_input_text" name="toCity" id="toCity"
-                                       t_popup="0">
-                                <input type="hidden" id="toCityId" name="toCityId" value="338">
-                                <input type="text" home-flag value="星湖大道店" maxlength="30"
-                                       default-value="请选择取车门店" link-input="toStoreId"
-                                       class="tnc_inpstore tnc_input_citySD tnc_input_text" name="toStoreName"
-                                       id="toStoreName"
-                                       t_popup="0"
-                                       ischain="1">
-                                <input type="hidden" value="2432" name="toStoreId" id="toStoreId">
-                                <div class="tnc_label">
-                                    <label class="tnc_cartext" for="showpickAddress_span2">上门取车</label>
-                                    <span class="" id="showpickAddress_span2" disabled="disabled"
-                                          style="display: none"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="tnc_ch_box tnc_cardate tnc_mt10 tnc_p-re">
-                                <label class="tnc_c_date">还车时间</label>
-                                <div class="tnc_ch_box tnc_divin">
-                                    <input type="text" value=""
-                                           class="tnc_inpdate tnc_input_calendar tnc_input_text Wdate"
-                                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
-                                           name="toDate" id="toDate" readonly="readonly" autocomplete="on">
-                                </div>
-                                <div class="tnc_cartime tnc_ch_box tnc_divin">
-                                    <input type="text" value="10:00" default-value="08:00-21:00"
-                                           class="tnc_inptime tnc_input_timedown tnc_input_text tnc_input_citySD"
-                                           readonly="readonly" name="toHourMinute" id="toHourMinute">
-                                </div>
+<body >
+<div class="container-fluid tnc_container tnc_header">
+    <div class="row tnc_head" style="">
+        <div class="tnc_head_bd">
+            <div><a class="tnc_head_brand tnc_logo" href="/"></a></div>
+            <div class="tnc_head_menu">
+                <ul class="">
+                    <li class="tnc_head_menu_item">
+                        <a class="tnc_head_menu_active" href="/">首页 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="tnc_head_menu_item">
+                        <a class="" href="#">选车</a>
+                    </li>
+                    <li class="tnc_head_menu_item">
+                        <a class="" href="#">门店</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tnc_head_right">
+                <div class="tnc_head_login tnc_header_active" style="display: none">
+                    <a href="#" class="">登录</a> / <a href="#" class="">注册</a>
+                </div>
+                <div class="tnc_head_login">
+                    <h1 class="tnc_head_welcome">您好，梁***</h1>
+                    <div id="tnc_toggle_area" class="tnc_head_dropdown">
+                        <a id="tnc_toggle_area_btn" href="#">个人中心&nbsp;<i class="fa fa-caret-down"></i></a>
+                        <div id="tnc_toggle_menu" style="display: none">
+                            <div class="triangle_border_up"></div>
+                            <div class="tnc_collapse_list">
+                                <a href="#" class="bhpr reddot">我的订单</a>
+                                <a href="#">我的资产</a>
+                                <a href="#">我的账户</a>
+                                <a href="#">退出登录</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="tnc_choose_div">
-                    <i>租期:<em class="tnc_bred">2天</em>，不限里程</i>
-                    <input type="button" value="立即选车" class="tnc_btn tnc_btn_green">
+                <div class="tnc_head_tel">
+                    <div class="">
+                            <span class="">
+                                <i class="fa fa-phone"></i>
+                                <span>408-666-666</span>
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <from id="firstOrderInfo">
+        <div class="row bo_bg">
+            <div class="col-md-12 col-lg-10 offset-lg-1 col-sm-12">
+                <div class="menu-left">
+                    <div class="menu-input-group" >
+                        <div class="row top-menu">
+                            <label class="col-defineone tnc_c_car">&emsp;取车&emsp;</label>
+                            <input type="text" home-flag value="肇庆" maxlength="10"
+                                   default-value="选择城市" link-input="fromCityId"
+                                   class="col-definetwo tnc_inpcity tnc_input_citySD tnc_input_text"
+                                   name="fromCity" id="fromCity2" t_popup="0">
+                            <input type="text" home-flag value="星湖大道店" maxlength="30"
+                                   default-value="请选择取车门店" link-input="fromStoreId"
+                                   class="col-definethree tnc_inpstore tnc_input_citySD tnc_input_text" name="fromStoreName"
+                                   id="fromStoreName" t_popup="0" ischain="1">
+                            <input type="hidden" value="2432" name="fromStoreId" id="fromStoreId">
+                            <input type="hidden" class="" for="showsentAddress_span1" value="送车上门">
+                            <span class="" id="showsentAddress_span1" disabled="disabled"
+                                  style="display: none"></span>
+                        </div>
+                        <div class="row top-menu">
+                            <label class="tnc_c_car col-defineone">&emsp;还车&emsp;</label>
+                            <input type="text" home-flag value="肇庆" maxlength="10"
+                                   default-value="选择城市" link-input="toCityId"
+                                   class="tnc_inpcity tnc_input_citySD tnc_input_text col-definetwo" name="toCity"
+                                   id="toCity"
+                                   t_popup="0">
+                            <input type="hidden" id="toCityId" name="toCityId" value="338">
+                            <input type="text" home-flag value="星湖大道店" maxlength="30"
+                                   default-value="请选择取车门店" link-input="toStoreId"
+                                   class="tnc_inpstore tnc_input_citySD tnc_input_text col-definethree" name="toStoreName"
+                                   id="toStoreName"
+                                   t_popup="0"
+                                   ischain="1">
+                            <input type="hidden" value="2432" name="toStoreId" id="toStoreId">
+                            <input type="hidden" class="" for="showpickAddress_span2" value="上门取车">
+                            <span class="" id="showpickAddress_span2" disabled="disabled"
+                                  style="display: none"></span>
+                        </div>
+                    </div>
+                    <div class="menu-input-group" >
+                        <div class="row top-menu" >
+                            <label class="col-definefour tnc_c_date">取车时间</label>
+                            <input type="text" value=""
+                                   class="col-definefive tnc_inpdate tnc_input_calendar tnc_input_text Wdate"
+                                   onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+                                   name="fromDate" id="fromDate" readonly="readonly" autocomplete="on">
+                            <input type="text" value="10:00" default-value="08:00-21:00"
+                                   class="col-definesix tnc_inptime tnc_input_timedown tnc_input_text tnc_input_citySD"
+                                   readonly="readonly" name="fromHourMinute" id="fromHourMinute">
+                        </div>
+                        <div class="row top-menu">
+                            <label class="col-definefour tnc_c_date">还车时间</label>
+                            <input type="text" value=""
+                                   class="col-definefive tnc_inpdate tnc_input_calendar tnc_input_text Wdate"
+                                   onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+                                   name="toDate" id="toDate" readonly="readonly" autocomplete="on">
+                            <input type="text" value="10:00" default-value="08:00-21:00"
+                                   class="col-definesix tnc_inptime tnc_input_timedown tnc_input_text tnc_input_citySD"
+                                   readonly="readonly" name="toHourMinute" id="toHourMinute">
+                        </div>
+                    </div>
+                    <div class="" style="display:inline-block;margin-top: 15px;margin-bottom: 15px;text-align: center">
+                        <div style=""><i>租期:<em class="tnc_bred">2天</em>，不限里程</i></div>
+                        <input type="button" value="立即选车" class="tnc2_btn tnc_btn_green">
+                    </div>
                 </div>
             </div>
         </div>
     </from>
-</div>
-<div class="tnc_zc_main tnc_carcon">
-    <div class="tnc_leftlist tnc_h1">
-        <div class="tnc_lchoose_box">
-            <div class="tnc-lbox bdbtm orderLevel">
-                <p class="tnc_left_title">车型</p>
-                <ul class="tnc_chexing">
-                    <li class="tnc_filter filter_level all">
-                        <a class="checked cxdefault">
-                            <i class="zc_cx_bx"></i>
-                            <i class="cartxt">不限</i>
-                        </a>
-                    </li>
-                    <li class="orderlevelcheck filter_level brandname">
-                        <a href="#" data="1">
-                            <i class="zc_cx_sdjc"></i>
-                            <i class="cartxt">手动紧凑型</i>
-                        </a>
-                    </li>
-                    <li class="orderlevelcheck filter_level brandname">
-                        <a href="#" data="3">
-                            <i class="zc_cx_jj"></i>
-                            <i class="cartxt">经济型</i>
-                        </a>
-                    </li>
-                    <li class="orderlevelcheck filter_level brandname">
-                        <a href="#" data="5">
-                            <i class="zc_cx_sw"></i>
-                            <i class="cartxt">商务型</i>
-                        </a>
-                    </li>
-                    <li class="orderlevelcheck filter_level brandname">
-                        <a href="#" data="6">
-                            <i class="zc_cx_hh"></i>
-                            <i class="cartxt">豪华型</i>
-                        </a>
-                    </li>
-                    <li class="orderlevelcheck filter_level brandname">
-                        <a href="#" data="7">
-                            <i class="zc_cx_suv"></i>
-                            <i class="cartxt">SUV</i>
-                        </a>
-                    </li>
-                    <li class="orderlevelcheck filter_level brandname">
-                        <a href="#" data="8">
-                            <i class="zc_cx_zsw"></i>
-                            <i class="cartxt">6至15座商务</i>
-                        </a>
-                    </li>
-                    <li class="orderlevelcheck filter_level brandname">
-                        <a href="#" data="9">
-                            <i class="zc_cx_gx"></i>
-                            <i class="cartxt">个性车</i>
-                        </a>
-                    </li>
-                    <li class="orderlevelcheck filter_level brandname">
-                        <a href="#" data="12">
-                            <i class="zc_cx_dd"></i>
-                            <i class="cartxt">电动车</i>
-                        </a>
-                    </li>
-                </ul>
+    <div class="row">
+        <div class="col-md-3 offset-lg-1 tnc_carcon">
+            <div class="tnc_leftlist tnc_h1">
+                <div class="tnc_lchoose_box">
+                    <div class="tnc-lbox bdbtm orderLevel">
+                        <p class="tnc_left_title">车型</p>
+                        <ul class="tnc_chexing">
+                            <li class="tnc_filter filter_level all">
+                                <a class="checked cxdefault">
+                                    <i class="zc_cx_bx"></i>
+                                    <i class="cartxt">不限</i>
+                                </a>
+                            </li>
+                            <li class="orderlevelcheck filter_level brandname">
+                                <a href="#" data="1">
+                                    <i class="zc_cx_sdjc"></i>
+                                    <i class="cartxt">手动紧凑型</i>
+                                </a>
+                            </li>
+                            <li class="orderlevelcheck filter_level brandname">
+                                <a href="#" data="3">
+                                    <i class="zc_cx_jj"></i>
+                                    <i class="cartxt">经济型</i>
+                                </a>
+                            </li>
+                            <li class="orderlevelcheck filter_level brandname">
+                                <a href="#" data="5">
+                                    <i class="zc_cx_sw"></i>
+                                    <i class="cartxt">商务型</i>
+                                </a>
+                            </li>
+                            <li class="orderlevelcheck filter_level brandname">
+                                <a href="#" data="6">
+                                    <i class="zc_cx_hh"></i>
+                                    <i class="cartxt">豪华型</i>
+                                </a>
+                            </li>
+                            <li class="orderlevelcheck filter_level brandname">
+                                <a href="#" data="7">
+                                    <i class="zc_cx_suv"></i>
+                                    <i class="cartxt">SUV</i>
+                                </a>
+                            </li>
+                            <li class="orderlevelcheck filter_level brandname">
+                                <a href="#" data="8">
+                                    <i class="zc_cx_zsw"></i>
+                                    <i class="cartxt">6至15座商务</i>
+                                </a>
+                            </li>
+                            <li class="orderlevelcheck filter_level brandname">
+                                <a href="#" data="9">
+                                    <i class="zc_cx_gx"></i>
+                                    <i class="cartxt">个性车</i>
+                                </a>
+                            </li>
+                            <li class="orderlevelcheck filter_level brandname">
+                                <a href="#" data="12">
+                                    <i class="zc_cx_dd"></i>
+                                    <i class="cartxt">电动车</i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tnc-lbox bdbtm orderRent price1">
+                        <p class="tnc_left_title">价格 <span class="sma12">(元)</span></p>
+                        <ul class="pri_range">
+                            <li class="bar1 orderlevelcheck filter_rent_money all"><a class="checked jgdefault"
+                                                                                      data="0-*"><span
+                                    class="w40"></span></a></li>
+                            <li class="bar2 prli orderlevelcheck filter_rent_money"><a href="#" data="0-150"><span
+                                    class="w40"></span></a></li>
+                            <li class="bar3 prli orderlevelcheck filter_rent_money"><a href="#" data="150-300"><span
+                                    class="w40"></span></a></li>
+                            <li class="bar4 prli orderlevelcheck filter_rent_money"><a href="#" data="300-500"><span
+                                    class="w40"></span></a></li>
+                            <li class="bar5 prli orderlevelcheck filter_rent_money"><a href="#" data="500-*"><span
+                                    class="w70"></span></a></li>
+                        </ul>
+                        <ul class="pri_num">
+                            <li class="pri1 w37 checked jgdefault">不限</li>
+                            <li class="pri2 w35 numli">0</li>
+                            <li class="pri3 w42 numli">150</li>
+                            <li class="pri4 w42 numli">300</li>
+                            <li class="pri5 w37 numli">500</li>
+                            <li class="pri6 w44 numli">500+</li>
+                        </ul>
+                    </div>
+                    <div class="tnc-lbox bdbtm orderBrand">
+                        <p class="tnc_left_title">品牌</p>
+                        <ul class="car_brand">
+                            <li class="orderlevelcheck filter_brand all"><a class="checked ppdefault">不限</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="12">奥迪</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="11">宝马</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="20">奔驰</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="10">本田</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="2">标致</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="3">别克</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="16">比亚迪</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="21">长城</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="8">大众</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="7">丰田</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="9">福特</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="22">金杯</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="18">凯迪拉克</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="17">铃木</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="14">马自达</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="15">奇瑞</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="6">起亚</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="13">斯柯达</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="5">现代</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="4">雪佛兰</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="1">雪铁龙</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="23">猎豹</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="24">日产</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="25">沃尔沃</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="28">依维柯</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="29">华泰</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="30">野马</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="31">三菱</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="32">MINI</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="33">雪铁龙DS</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="34">北京汽车</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="35">菲亚特</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="36">江淮</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="37">江铃</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="38">上汽大通</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="39">华颂</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="40">风行</a></li>
+                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="41">广汽</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="tnc-lbox bdbtm orderRent price1">
-                <p class="tnc_left_title">价格 <span class="sma12">(元)</span></p>
-                <ul class="pri_range">
-                    <li class="bar1 orderlevelcheck filter_rent_money all"><a class="checked jgdefault" data="0-*"><span class="w40"></span></a></li>
-                    <li class="bar2 prli orderlevelcheck filter_rent_money"><a href="#" data="0-150"><span class="w40"></span></a></li>
-                    <li class="bar3 prli orderlevelcheck filter_rent_money"><a href="#" data="150-300"><span class="w40"></span></a></li>
-                    <li class="bar4 prli orderlevelcheck filter_rent_money"><a href="#" data="300-500"><span class="w40"></span></a></li>
-                    <li class="bar5 prli orderlevelcheck filter_rent_money"><a href="#" data="500-*"><span class="w70"></span></a></li>
-                </ul>
-                <ul class="pri_num">
-                    <li class="pri1 w37 checked jgdefault">不限</li>
-                    <li class="pri2 w35 numli">0</li>
-                    <li class="pri3 w42 numli">150</li>
-                    <li class="pri4 w42 numli">300</li>
-                    <li class="pri5 w37 numli">500</li>
-                    <li class="pri6 w44 numli">500+</li>
-                </ul>
-            </div>
-            <div class="tnc-lbox bdbtm orderBrand">
-                <p class="tnc_left_title">品牌</p>
-                <ul class="car_brand">
-                    <li class="orderlevelcheck filter_brand all"><a class="checked ppdefault">不限</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="12">奥迪</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="11">宝马</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="20">奔驰</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="10">本田</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="2">标致</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="3">别克</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="16">比亚迪</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="21">长城</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="8">大众</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="7">丰田</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="9">福特</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="22">金杯</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="18">凯迪拉克</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="17">铃木</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="14">马自达</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="15">奇瑞</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="6">起亚</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="13">斯柯达</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="5">现代</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="4">雪佛兰</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="1">雪铁龙</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="23">猎豹</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="24">日产</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="25">沃尔沃</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="28">依维柯</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="29">华泰</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="30">野马</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="31">三菱</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="32">MINI</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="33">雪铁龙DS</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="34">北京汽车</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="35">菲亚特</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="36">江淮</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="37">江铃</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="38">上汽大通</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="39">华颂</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="40">风行</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="#" data="41">广汽</a></li>
-                </ul>
-            </div>
-        </div>
         </div>
     </div>
 </div>
+
+
+
 <script src="/js/jquery-3.3.1.min.js"></script>
 <script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 <script src="/js/plugins/My97DatePicker/4.8/WdatePicker.js"></script>
@@ -251,7 +322,7 @@
         $("input[id='toDate']").val(dayTime);
     });
 
-    $('a').click(function(){//点击的时候给当前这个加上
+    $('a').click(function () {//点击的时候给当前这个加上
         $(this).addClass("checked").siblings("a").removeClass("checked");
     })
 </script>
