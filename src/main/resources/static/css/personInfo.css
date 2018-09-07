@@ -1,9 +1,8 @@
-.info_myright {
-    min-height: 724px;
+body {
+    background-color: #f2f3f5;
+    padding: 0px 0px !important;
 }
-
 .info_bd {
-    min-height: 768px;
     padding: 0 30px;
     position: relative;
     background-color: #fff;
@@ -17,16 +16,13 @@
     font-weight: 400;
     margin: 0;
 }
-
 .info_bd li {
     height: 60px;
     border-bottom: 1px solid #e9ebee;
 }
-
 .info_bd ul {
     border-top: 1px solid #e9ebee;
 }
-
 .info_label {
     display: inline-block;
     line-height: 59px;
@@ -36,7 +32,6 @@
     color: #60606c;
     margin: 0;
 }
-
 .info_span {
     position: relative;
     margin: 0;
@@ -44,42 +39,36 @@
     width: 320px;
     z-index: 18;
 }
-
 .info_input {
     width: 100%;
 }
-
 .info_float_r {
     line-height: 59px;
     padding-right: 15px;
     color: #c6c6ce;
     font-size: 14px;
 }
-
 .info_select {
     width: 100%;
     margin-bottom: -2px;
 }
-
 .info_select_address {
     width: 47.422%;
     margin-bottom: -2px;
 }
-
 .info_input:focus {
     color: rgb(96, 96, 108);
 }
-
 .clear {
     clear: both;
 }
-
 .info_changephone {
     color: #6ab0ff;
     text-decoration: none;
     outline: 0;
     cursor: pointer;
-    display: block
+    display: block;
+    text-align: center;
 }
 .info_code {
     background-color: #d2fbe0;
@@ -118,9 +107,43 @@
     text-decoration: none;
     outline: 0;
 }
-
 .infoleft_bd a:hover {
     text-decoration: none;
     color: #00c189;
     background-color: #d2fbe0;
+}
+.modal_hd_color {
+    height: 50px;
+    line-height: 50px;
+    background-color: #f3f4f6;
+    position: relative;
+}
+.vcodeinput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.zc-fresh {
+    display: inline-block;
+    background: url("/img/icon_new.png") no-repeat;
+    width: 16px;
+    height: 16px;
+    background-position: -520px 0;
+    position: absolute;
+    top: 94px;
+    right: 72px;
+    z-index: 15;
+}
+.myleft {
+    margin: 15px 0px; padding-right: 0;
+}
+.myright {
+    margin: 15px 0px;
+}
+.myborder-line {
+    border-top: 1px solid #e9ebee;
+    border-bottom: 1px solid #e9ebee;
+}
+.mybtndiv {
+    height: 100px; line-height: 100px; margin-left: 215px
 }

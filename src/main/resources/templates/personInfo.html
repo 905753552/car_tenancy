@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>个人信息页</title>
@@ -11,79 +11,12 @@
 <link rel="stylesheet" href="/css/footer.css">
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/personInfo.css">
-<style type="text/css">
-    body {
-        background-color: #f2f3f5;
-        padding: 0px 0px !important;
-
-    }
-    .modal_hd_color {
-        height: 50px;
-        line-height: 50px;
-        background-color: #f3f4f6;
-        position: relative;
-    }
-    .input-errlog{
-        display: block;
-        position: absolute;
-        left: 10px;
-        top: -44px;
-        z-index: 20;
-    }
-    .ipt-err{
-        display: none;
-        width: 288px;
-        height: 38px;
-        line-height: 38px;
-        border: 1px solid #dadadf;
-        border-radius: 5px;
-        padding-left: 10px;
-        background-color: #fff;
-        -webkit-box-shadow: 0 0 20px rgba(0,0,0,.25);
-        -moz-box-shadow: 0 0 20px rgba(0,0,0,.25);
-        box-shadow: 0 0 20px rgba(0,0,0,.25);
-    }
-     .arrowbox {
-        position: absolute;
-        left: 50%;
-        margin-left: -9px;
-        bottom: -7px;
-        width: 18px;
-        height: 25px;
-        color: #dadadf;
-        font-size: 20px;
-        font-family: SimSun;
-    }
-    .arrow {
-        top: -1px;
-        left: 0;
-        position: absolute;
-        height: 25px;
-        color: #fff;
-    }
-    .zc-retan {
-        width: 17px;
-        height: 17px;
-        background-position: -440px 0;
-        vertical-align: middle;
-    }
-     .zc-close {
-        position: absolute;
-        top: 14px;
-        right: 10px;
-        cursor: pointer;
-        width: 12px;
-        height: 12px;
-        background-position: -480px 0;
-    }
-
-</style>
 <body>
 <div class="container-fluid tnc_container tnc_header">
     <div v-cloak id="header-app" class="row tnc_head">
         <div class="tnc_head_bd">
             <div><a class="tnc_head_brand tnc_logo" href="/"></a></div>
-            <div class="tnc_head_menu" >
+            <div class="tnc_head_menu">
                 <ul class="">
                     <li class="tnc_head_menu_item">
                         <a class="tnc_head_menu_active" href="/">首页 <span class="sr-only">(current)</span></a>
@@ -100,13 +33,13 @@
                 <div v-show="!customer.id" class="tnc_head_login tnc_header_active" style="display: none">
                     <a href="#" class="">登录</a> / <a href="#" class="">注册</a>
                 </div>
-                <div v-show="customer.id" class="tnc_head_login" >
+                <div v-show="customer.id" class="tnc_head_login">
                     <h1 class="tnc_head_welcome">您好，{{customer.name}}</h1>
                     <div id="tnc_toggle_area" class="tnc_head_dropdown">
                         <a id="tnc_toggle_area_btn" href="#">个人中心&nbsp;<i class="fa fa-caret-down"></i></a>
                         <div id="tnc_toggle_menu" style="display: none">
                             <div class="triangle_border_up"></div>
-                            <div class="tnc_collapse_list" >
+                            <div class="tnc_collapse_list">
                                 <a href="#" class="bhpr reddot">我的订单</a>
                                 <a href="#">我的资产</a>
                                 <a href="#">我的账户</a>
@@ -117,10 +50,10 @@
                 </div>
                 <div class="tnc_head_tel">
                     <div class="">
-                                <span class="">
-                                    <i class="fa fa-phone"></i>
-                                    <span>408-666-666</span>
-                                </span>
+                        <span class="">
+                            <i class="fa fa-phone"></i>
+                            <span>408-666-666</span>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -128,7 +61,7 @@
     </div>
     <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-md-2 col-sm-3 info_myright" style="margin: 15px 0px; padding-right: 0">
+        <div class="col-md-2 col-sm-3 myleft">
             <div class="infoleft_bd">
                 <dl>
                     <dt class="info_h2">订单中心</dt>
@@ -146,26 +79,26 @@
                 </dl>
             </div>
         </div>
-        <div class="info_myright col-md-8 col-sm-9" style="margin: 15px 0px">
-        <div class="info_bd">
-            <h2 class="info_h2">我的信息</h2>
-            <div>
-                <form>
-                    <div class="zc_l_error" id="error_tips"></div>
-                    <ul>
-                        <li>
-                            <div class="row">
-                                <label class="info_label col-md-3 col-sm-2">姓名</label>
-                                <span class="info_span col-md-6 col-sm-6">
-                                    <input type="text" class="tnc_input info_input" id="username" value="" placeholder="真实姓名，方便租车时核对身份">
+        <div class="col-md-8 col-sm-9 myright">
+            <div class="info_bd">
+                <h2 class="info_h2">我的信息</h2>
+                <div>
+                    <form>
+                        <ul>
+                            <li>
+                                <div class="row">
+                                    <label class="info_label col-md-3 col-sm-2">姓名</label>
+                                    <span class="info_span col-md-6 col-sm-6">
+                                    <input type="text" class="tnc_input info_input" id="username" value=""
+                                           placeholder="真实姓名，方便租车时核对身份">
                                 </span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li style="min-height: 103px; padding-top: 12px;">
-                            <div class="row">
-                                <label class="info_label col-md-3 col-sm-2">证件</label>
-                                <span class="info_span col-md-6 col-sm-6" style="line-height: 0px;">
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                            <li style="min-height: 103px; padding-top: 12px;">
+                                <div class="row">
+                                    <label class="info_label col-md-3 col-sm-2">证件</label>
+                                    <span class="info_span col-md-6 col-sm-6" style="line-height: 0px;">
                                 <select class="tnc_input info_select">
                                     <option value="">请选择证件类型</option>
                                     <option value="10">身份证</option>
@@ -173,54 +106,58 @@
                                     <option value="12">港澳居民来往大陆通行证</option>
                                     <option value="13">外籍护照</option>
                                 </select>
-                                <input type="text" class="tnc_input info_input"  value=""
+                                <input type="text" class="tnc_input info_input" value=""
                                        placeholder="输入证件号码">
                             </span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li>
-                            <div class="row">
-                                <label class="info_label col-md-3 col-sm-2">手机号码</label>
-                                <span class="info_span col-md-6 col-sm-6">
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <label class="info_label col-md-3 col-sm-2">手机号码</label>
+                                    <span class="info_span col-md-6 col-sm-6">
                                     <input type="text" class="tnc_input info_input"
-                                       style="background-color: #ffffff; border:none" id="userPhome" disabled
-                                       value="17876253409">
+                                           style="background-color: #ffffff; border:none" id="userPhome" disabled
+                                           value="17876253409">
                                 </span>
-                                <span id="changePhoneBtn" class="info_changephone info_float_r  col-md-2 col-sm-2">修改</span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li id="changePhoneForm" style="min-height: 170px;display: none;padding-top: 12px; ">
-                            <div class="row">
-                                <label class="info_label col-md-3 col-sm-2">手机号码</label>
-                                <span class="info_span col-md-6 col-sm-6" style="line-height: 50px;" >
+                                    <span id="changePhoneBtn"
+                                          class="info_changephone info_float_r col-md-2 col-sm-2">修改</span>
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                            <li id="changePhoneForm" style="min-height: 170px;display: none;padding-top: 12px; ">
+                                <div class="row">
+                                    <label class="info_label col-md-3 col-sm-2">手机号码</label>
+                                    <span class="info_span col-md-6 col-sm-6" style="line-height: 50px;">
                                     <div>
-                                        <input type="text" class="tnc_input info_input" id="oldPhone" value="" placeholder="原手机号">
-                                        <input type="text" class="tnc_input info_input"  value="" placeholder="新手机号">
+                                        <input type="text" class="tnc_input info_input" id="oldPhone" value=""
+                                               placeholder="原手机号">
+                                        <input type="text" class="tnc_input info_input" value="" placeholder="新手机号">
                                     </div>
-                                    <div style="height: 50px; width: 320px;">
-                                        <input type="text" class="tnc_input" style="width: 192px;" value="" placeholder="手机动态码">
-                                        <a href="javascript:;" class="tnc_btn tnc_btn_outline_green info_code" data-toggle="modal" data-target="#myModal">获取手机动态码</a>
+                                    <div style="height: 50px;">
+                                        <input type="text" class="tnc_input" style="width: 192px;" value=""
+                                               placeholder="手机动态码">
+                                        <a href="javascript:;" class="tnc_btn tnc_btn_outline_green info_code"
+                                           onclick="getVerify_Code()">获取手机动态码</a>
                                     </div>
                                 </span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li>
-                            <div class="row">
-                                <label class="info_label col-md-3 col-sm-2">电子邮箱</label>
-                                <span class="info_span col-md-6 col-sm-6">
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <label class="info_label col-md-3 col-sm-2">电子邮箱</label>
+                                    <span class="info_span col-md-6 col-sm-6">
                                 <input type="text" class="tnc_input info_input" value=""
                                        placeholder="输入常用邮箱">
                             </span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li style="min-height: 110px; padding-top: 12px;">
-                            <div class="row">
-                                <label class="info_label col-md-3 col-sm-2">通信地址</label>
-                                <span class="igirnfo_span col-md-6 col-sm-6" style="line-height: 40px" >
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                            <li style="min-height: 110px; padding-top: 12px;">
+                                <div class="row">
+                                    <label class="info_label col-md-3 col-sm-2">通信地址</label>
+                                    <span class="igirnfo_span col-md-6 col-sm-6" style="line-height: 40px">
                                 <select class="tnc_input info_select_address" style="margin-right: 10px">
                                     <option value="">请选择省</option>
                                     <option value="10">身份证</option>
@@ -235,47 +172,46 @@
                                     <option value="12">港澳居民来</option>
                                     <option value="13">外籍护照</option>
                                 </select>
-                                <input type="text" class="tnc_input info_input"  value=""
+                                <input type="text" class="tnc_input info_input" value=""
                                        placeholder="输入详细地址">
                             </span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li>
-                            <div class="row">
-                                <label class="info_label col-md-3 col-sm-2">紧急联系人</label>
-                                <span class="info_span col-md-6 col-sm-6">
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <label class="info_label col-md-3 col-sm-2">紧急联系人</label>
+                                    <span class="info_span col-md-6 col-sm-6">
                                 <input type="text" class="tnc_input info_input" id="" value="" placeholder="请输入紧急联系人姓名">
                             </span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li>
-                            <div class="row">
-                                <label class="info_label col-md-3 col-sm-2">紧急联系电话</label>
-                                <span class="info_span col-md-6 col-sm-6">
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <label class="info_label col-md-3 col-sm-2">紧急联系电话</label>
+                                    <span class="info_span col-md-6 col-sm-6">
                                 <input type="text" class="tnc_input info_input" id="" value="" placeholder="请输入紧急联系人电话">
                             </span>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li style="height: 100px">
-                            <div style="height: 100px; line-height: 100px; margin-left: 215px">
-                                <button type="button" class="tnc_btn tnc_btn_green" onclick="formCheck()">保存</button>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                    </ul>
-                </form>
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                            <li style="height: 100px">
+                                <div style="height: 100px; line-height: 100px; margin-left: 215px">
+                                    <button type="button" class="tnc_btn tnc_btn_green" onclick="formCheck()">保存
+                                    </button>
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
             </div>
+            <div class="clearfix"></div>
         </div>
-        <div class="clearfix"></div>
     </div>
-        <div class="col-md-1"></div>
-    </div>
-
-    <div class="row">
-        <div class="col col-md-10 offset-md-1 tnc_footer_help">
+    <div class="row" style="background-color: #fff">
+        <div class="col-sm-12 col-md-10 offset-md-1 tnc_footer_help">
             <dl class="tnc_footer_help_item">
                 <dt>租车预订说明</dt>
                 <dd>
@@ -340,8 +276,11 @@
             <span class="">Copyright©20xx-20xx www.wind.zuche.com All Rights Reserved.　肇庆乘风汽车租赁有限公司 粤ICP备10000518号   粤公网安备号 11010502020518</span>
             <span class="">如果您对乘风租车网站有任何意见，欢迎发送邮件到 <a href="Mailto:web@wind.com" class="">web@wind.com</a></span>
             <span class="">
-                    <a target="_blank" href="https://ss.knet.cn/verifyseal.dll?sn=2011091400100014977&amp;ct=df&amp;pa=294005" rel="nofollow" tabindex="-1" id="urlknet" class="sz_k"></a>
-                    <a target="_blank" id="___szfw_logo___" href="https://search.szfw.org/cert/l/CX20121016001772002081" rel="nofollow" title="诚信网站" class="sz_c"></a>
+                    <a target="_blank"
+                       href="https://ss.knet.cn/verifyseal.dll?sn=2011091400100014977&amp;ct=df&amp;pa=294005"
+                       rel="nofollow" tabindex="-1" id="urlknet" class="sz_k"></a>
+                    <a target="_blank" id="___szfw_logo___" href="https://search.szfw.org/cert/l/CX20121016001772002081"
+                       rel="nofollow" title="诚信网站" class="sz_c"></a>
                 </span>
         </div>
     </div>
@@ -357,9 +296,16 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" style="height: 200px">
 
+            <div class="modal-body vcodeinput" style="height: 200px">
+                <input id="verifyCode" class="tnc_input code_input" placeholder="请输入验证码">
+                <span class="pic-yzm fr">
+                        <img id="yzmImg_float" src="" width="108px" height="36px">
+                    <i id="fresh_float" class="zc-fresh" onclick="changeImageVerifyCode()"></i>
+                </span>
             </div>
+
+
             <div class="modal-footer" style="margin: 0 auto">
                 <button type="button" class="tnc_btn tnc_btn_green">确认</button>
             </div>
@@ -375,10 +321,11 @@
 <script src="/js/common/common.js"></script>
 <script src="/js/jquery.validate.min.js"></script>
 <script src="/js/tenancy/header.js"></script>
+<script src="/js/tenancy/register.js"></script>
 <script>
-    $(document).ready(function(){
-        $("#changePhoneBtn").click(function(){
-            var display =  $("#changePhoneForm").toggle().is(':hidden');
+    $(document).ready(function () {
+        $("#changePhoneBtn").click(function () {
+            var display = $("#changePhoneForm").toggle().is(':hidden');
             if (display) {
                 $("#changePhoneBtn").html("修改")
             } else {
@@ -386,22 +333,37 @@
             }
         });
     });
+
+    /*获取验证码*/
+    function getVerify_Code() {
+        $('#myModal').modal('show');
+        // 变换验证码
+        changeImageVerifyCode();
+    }
+
+    /*改变验证码图片*/
+    function changeImageVerifyCode() {
+        $("#yzmImg_float").attr("src", "/api/captcha/generate?_t=" + new Date().getTime());
+    }
+
     // 表单检验
     var formCheck = function () {
         checkUserNameNull();
     }
+
     /*输入错误消息提示框*/
     function showlogintips(top, left, tipslocation, tipsinfo) {
         var basehtml = '<div class="input-errlog ipt-err" style="top:' + top + "px;left:" + left + 'px;"><span class="arrowbox">◆<span class="arrow">◆</span></span><span class="zc-retan"></span><i>' + tipsinfo + '</i><span class="zc-close"></span></div>';
         $(tipslocation).html(basehtml);
         $(".ipt-err").show();
-        $(".zc-close").click(function() {
+        $(".zc-close").click(function () {
             $(this).parent().remove()
         })
     }
-    var checkUserNameNull = function()  {
+
+    var checkUserNameNull = function () {
         // 姓名
-        if($("#username").val() == ''){
+        if ($("#username").val() == '') {
             showlogintips(44, 250, "#error_tips", "请输入真实姓名");
             $('#username').focus();
             return false;
@@ -411,7 +373,7 @@
 
     var form = $('body').find('form');
     form.validate({
-        rules : {
+        rules: {
             username: {checkUserNameNull: true}
         }
     });

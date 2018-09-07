@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:border-top="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>修改密码页</title>
+    <title>个人信息页</title>
 </head>
 <link rel="stylesheet" href="/css/reset.css">
 <link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap.min.css">
@@ -12,39 +12,18 @@
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/personInfo.css">
 <style type="text/css">
-    .vcodeinput {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .myleft {
+        margin: 15px 0px; padding-right: 0;
     }
-    .safe_1 {
-        background-color: #e42437d9;
-        border: 1px solid #e42437d9;
-        color: #f8f9fa;
+    .myright {
+        margin: 15px 0px;
     }
-    .safe_2 {
-        background-color: #fdb811;
-        border: 1px solid #fdb811;
-        border-left: none;
-        color: #f8f9fa;
+    .myborder-line {
+        border-top: 1px solid #e9ebee;
+        border-bottom: 1px solid #e9ebee;
     }
-     .safe_3 {
-        background-color: #00c189;
-        border: 1px solid #00c189;
-        border-left: none;
-        color: #f8f9fa;
-    }
-    .vcodeinput span {
-        float: left;
-        width: 54px;
-        height: 20px;
-        line-height: 20px;
-        background-color: #f2f3f5;
-        text-align: center;
-        font-size: 12px;
-        color: #93939e;
-        border: 1px solid #e9ebee;
-        border-right: none;
+    .mybtndiv {
+        height: 100px; line-height: 100px; margin-left: 215px
     }
 </style>
 <body>
@@ -117,61 +96,20 @@
         </div>
         <div class="col-md-8 col-sm-9 myright">
             <div class="info_bd">
-                <h2 class="info_h2">修改密码</h2>
-                <div>
-                    <form>
-                        <ul>
-                            <li>
-                                <div class="row">
-                                    <label class="info_label col-md-3 col-sm-2">原密码</label>
-                                    <span class="info_span col-md-6 col-sm-6">
-                                                <input type="password" class="tnc_input info_input " id="" value=""
-                                                       placeholder="输入原来密码">
-                                            </span>
-                                </div>
-                                <div class="clear"></div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <label class="info_label col-md-3 col-sm-2">新密码</label>
-                                    <span class="info_span col-md-6 col-sm-6">
-                                        <input type="password" class="tnc_input info_input" id="new_pwd" value=""
-                                       placeholder="建议6-18位数字、字母、符号的组合密码">
-                                    </span>
-                                    <div class="vcodeinput col-md-3 col-sm-2" id="pwdLevelDiv">
-                                        <span class="safe_1">弱</span>
-                                        <span class="safe_2">中</span>
-                                        <span class="safe_3">强</span>
-                                    </div>
-                                </div>
-                                <div class="clear"></div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <label class="info_label col-md-3 col-sm-2">确认密码</label>
-                                    <span class="info_span col-md-6 col-sm-6">
-                                                <input type="password" class="tnc_input info_input"
-                                                       data-equal-to="#new_pwd" value="" placeholder="再次输入密码">
-                                            </span>
-                                </div>
-                                <div class="clear"></div>
-                            </li>
-                            <li style="height: 100px">
-                                <div style="height: 100px; line-height: 100px; margin-left: 215px">
-                                    <button type="submit" class="tnc_btn tnc_btn_green">保存</button>
-                                </div>
-                                <div class="clear"></div>
-                            </li>
-                        </ul>
-                    </form>
+                <h2 class="info_h2">我的信息</h2>
+                <div class="myborder-line">
+                    <!--body-->
+
+
+
                 </div>
-                <div class="clear"></div>
+                <div class="mybtndiv">
+                    <button type="button" class="tnc_btn tnc_btn_green">保存</button>
+                </div>
             </div>
             <div class="clearfix"></div>
         </div>
-        <div class="col-md-1"></div>
     </div>
-
     <div class="row">
         <div class="col col-md-10 offset-md-1 tnc_footer_help">
             <dl class="tnc_footer_help_item">
@@ -238,12 +176,12 @@
             <span class="">Copyright©20xx-20xx www.wind.zuche.com All Rights Reserved.　肇庆乘风汽车租赁有限公司 粤ICP备10000518号   粤公网安备号 11010502020518</span>
             <span class="">如果您对乘风租车网站有任何意见，欢迎发送邮件到 <a href="Mailto:web@wind.com" class="">web@wind.com</a></span>
             <span class="">
-                <a target="_blank"
-                   href="https://ss.knet.cn/verifyseal.dll?sn=2011091400100014977&amp;ct=df&amp;pa=294005"
-                   rel="nofollow" tabindex="-1" id="urlknet" class="sz_k"></a>
-                <a target="_blank" id="___szfw_logo___" href="https://search.szfw.org/cert/l/CX20121016001772002081"
-                   rel="nofollow" title="诚信网站" class="sz_c"></a>
-            </span>
+                    <a target="_blank"
+                       href="https://ss.knet.cn/verifyseal.dll?sn=2011091400100014977&amp;ct=df&amp;pa=294005"
+                       rel="nofollow" tabindex="-1" id="urlknet" class="sz_k"></a>
+                    <a target="_blank" id="___szfw_logo___" href="https://search.szfw.org/cert/l/CX20121016001772002081"
+                       rel="nofollow" title="诚信网站" class="sz_c"></a>
+                </span>
         </div>
     </div>
 </div>
@@ -256,8 +194,4 @@
 <script src="/js/common/common.js"></script>
 <script src="/js/jquery.validate.min.js"></script>
 <script src="/js/tenancy/header.js"></script>
-<script src="/js/tenancy/register.js"></script>
-<script>
-    var form = $('body').find('form');
-</script>
 </html>
