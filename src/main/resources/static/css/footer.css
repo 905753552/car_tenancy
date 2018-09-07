@@ -1,9 +1,12 @@
+.tnc_footer_background {
+    border-top: 1px solid #e9ebee;
+    background-color: #ffffff;
+}
 .tnc_footer_help {
     display: flex;
     justify-content: space-around;
     padding: 35px 0px;
-    border-top: 1px solid #e9ebee;
-    background-color: #ffffff;
+
 }
 
 .tnc_footer_help .tnc_footer_help_item {
