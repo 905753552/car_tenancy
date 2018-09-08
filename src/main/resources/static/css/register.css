@@ -267,3 +267,34 @@ span.pic-yzm {
 .safetybg_3 span.safety_1,.safetybg_3 span.safety_2,.safetybg_3 span.safety_3 {
     background: #fdb811
 }
+
+/*注册成功页面样式*/
+.content_text{
+    width: 55%;
+
+}
+.text_tips{
+    width: 90%;
+    height: 320px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.successText{
+    text-align: center;
+    margin-top: 80px;
+    font-size: 22px;
+}
+
+.successgreen{
+    color: #00c189;
+}
+.tohire {
+   width: 250px;
+}
+.congText{
+    margin: 48px auto;
+    color: #93939e;
+}

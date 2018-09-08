@@ -1,0 +1,182 @@
+
+.form_bg{
+    width: 100%;
+    background-color: #f2f3f5;
+    padding: 60px 0;
+}
+.find_body{
+    width: 80%;
+    height: 558px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid #eceef0;
+    overflow: hidden;
+
+}
+
+.tnc_option{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.zc-blcir,.zc-oryes,.zc-iuser,.zc-idtm,.zc-fresh{
+    display: inline-block;
+    background: url("/img/icon_new.png") no-repeat
+
+}
+.zc-iuser {
+    width: 14px;
+    height: 20px;
+    background-position: 0 -50px;
+}
+.zc-blcir {
+    width: 26px;
+    height: 26px;
+    background-position: -79px -99px
+}
+.zc-oryes {
+    width: 26px;
+    height: 26px;
+    background-position: 4px -93px
+}
+.zc-findbox {
+    width: 624px;
+    margin: 80px auto;
+    overflow: hidden
+}
+.zc-fresh {
+    width: 16px;
+    height: 16px;
+    background-position: -520px 0
+}
+.zc-findbox li {
+    float: left;
+    width: 154px;
+    height: 50px;
+    position: relative
+}
+
+.zc-findbox li span.e-place {
+    float: left;
+    width: 154px;
+    height: 12px
+}
+
+.zc-findbox li span.line {
+    border-bottom: 2px solid #e4e6e9
+}
+
+.zc-findbox li .zc-blcir {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    top: 0;
+    left: 64px;
+    z-index: 18;
+    color: #fff;
+    font-style: normal;
+    text-align: center;
+    font-size: 18px;
+    background-position: -119px -99px
+}
+
+.zc-findbox li .zc-blcir i.zc-oryes {
+    vertical-align: top
+}
+
+.zc-findbox li i.find-proce {
+    float: left;
+    width: 154px;
+    margin-top: 6px;
+    color: #93939e;
+    text-align: center;
+    font-style: normal;
+    font-size: 12px
+}
+
+.zc-findbox li.passed span.line {
+    border-bottom: 2px solid #6ab0ff
+}
+
+.zc-findbox li.passed .zc-blcir {
+    background-position: -79px -99px
+}
+
+.zc-findbox li.passed i.find-proce {
+    color: #6ab0ff
+}
+
+.tnc_find{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.tnc_findipt{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.tnc_iptbox {
+    position: relative;
+    margin: 20px auto;
+}
+.tnc_iptbox label {
+    position: absolute;
+    left: 5px;
+    top: 12px;
+    z-index: 9;
+    width: 34px;
+    height: 28px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.ipt_user{
+    padding-left: 35px;
+    width: 290px;
+
+}
+.btn_user{
+    width: 290px;
+}
+.tnc_code{
+    display: flex;
+}
+.btn_sub_code{
+    width: 320px;
+}
+.tips_text{
+    margin-top: 50px;
+    line-height: 36px;
+    text-align: center;
+    color: #93939e;
+    font-size: 14px;
+}
+.bhide{
+    display: none;
+}
+
+.psw_ul{
+    /*width: 100%;*/
+}
+
+.psw_ul li{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#pwdLevelDiv{
+    width: 180px;
+}
+.btn_sub_psw{
+    width: 320px;
+    margin: 30px auto;
+}

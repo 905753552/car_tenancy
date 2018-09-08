@@ -66,13 +66,13 @@
             contentType:'application/json',
             dataType:'json',
             error: function(res) {
-                 console.log("network error");
+                console.log("network error");
                 // alert("网络问题未获取到，请稍后重试");
                 $(".modal-title").text("网络问题未获取到，请稍后重试");
             },
             success: function(res) {
                 if(res.code == 200){
-                     console.log(res);
+                    console.log(res);
                     // alert("验证通过，请输入短信验证码");
                     $("#getYzmBtn").attr("disabled","true");
                     //超时重发时间，先默认60秒
@@ -127,7 +127,7 @@
             doShowTips("用户名不能为数字");
             return false;
         }
-        console.log(isMobile($("#xphone").val()));
+       // console.log(isMobile($("#xphone").val()));
         if($("#xphone").val() == ""){
             $("#xphone").focus();
             doShowTips("手机号码不能为空");
