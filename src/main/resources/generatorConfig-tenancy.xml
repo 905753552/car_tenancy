@@ -62,7 +62,7 @@
 		<!-- 必须要有的，使用这个配置链接数据库
 	        @TODO:是否可以扩展
 	     -->
-	    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql:///test_db" userId="dev" password="dev">
+	    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql:///car_tenancy" userId="dev" password="dev">
 	        <!-- 这里面可以设置property属性，每一个property属性都设置到配置的Driver上 -->
 	    </jdbcConnection>
 
@@ -90,7 +90,7 @@
 		        targetPackage：生成的类要放的包，真实的包受enableSubPackages属性控制；
 		        targetProject：目标项目，指定一个存在的目录下，生成的内容会放到指定目录中，如果目录不存在，MBG不会自动建目录
 		-->
-		<javaModelGenerator targetPackage="com.dev.main.shiro.domain" targetProject="src/main/java">
+		<javaModelGenerator targetPackage="com.dev.main.tenancy.domain" targetProject="src/main/java">
 	        <!--  for MyBatis3/MyBatis3Simple
 				自动为每一个生成的类创建一个构造方法，构造方法包含了所有的field；而不是使用setter；
 	         -->
@@ -110,7 +110,7 @@
 			            注意：如果在key class或者record class中有root class相同的属性，MBG就不会重新生成这些属性了，包括：
 			                1，属性名相同，类型相同，有相同的getter/setter方法；
 	         -->
-	        <property name="rootClass" value="com.dev.main.shiro.domain.BaseDomain"/>
+	        <property name="rootClass" value="com.dev.main.common.domain.BaseDomain"/>
 
 	        <!-- 设置是否在getter方法中，对String类型字段调用trim()方法 -->
 	        <property name="trimStrings" value="true"/>
@@ -121,7 +121,7 @@
 		     或者只使用Mapper接口+Annotation，所以，如果 javaClientGenerator配置中配置了需要生成XML的话，这个元素就必须配置
 	      targetPackage/targetProject:同javaModelGenerator
 	     -->
-	    <sqlMapGenerator targetPackage="mapper" targetProject="/home/hayate/workspace/idea/car_tenancy/src/main/resources">
+	    <sqlMapGenerator targetPackage="mapper" targetProject="/home/hayate/workspace/idea/car_tenancy/src/main/resources/tenancy">
 	        <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
 	        <property name="enableSubPackages" value="false"/>
 	    </sqlMapGenerator>
@@ -134,7 +134,7 @@
 	            3，XMLMAPPER：会生成Mapper接口，接口完全依赖XML；
 	        	注意，如果context是MyBatis3Simple：只支持ANNOTATEDMAPPER和XMLMAPPER
 	    -->
-	    <javaClientGenerator targetPackage="com.dev.main.shiro.dao" type="XMLMAPPER" targetProject="src/main/java">
+	    <javaClientGenerator targetPackage="com.dev.main.tenancy.dao" type="XMLMAPPER" targetProject="src/main/java">
 	        <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
 	        <property name="enableSubPackages" value="false"/>
 
@@ -183,41 +183,13 @@
 		-->
 		<!--要根据哪张表生成，要在这里配置 -->
 		<!--用百分号表示生成所有表,可以直接省去一个一个写 <table tableName="%" /> -->
-	    <!--<table  domainObjectName="SysUser" tableName="sys_user" delimitIdentifiers="false" enableCountByExample="false"
+	    <table  domainObjectName="SysUser" tableName="sys_user" delimitIdentifiers="false" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
   			<property name="useActualColumnNames" value="false"/>
 	    </table>
-		<table  domainObjectName="SysPermission" tableName="sys_permission" delimitIdentifiers="false" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-  			<property name="useActualColumnNames" value="false"/>
-	    </table>
-		<table  domainObjectName="SysRole" tableName="sys_role" delimitIdentifiers="false" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-  			<property name="useActualColumnNames" value="false"/>
-	    </table>
-		<table  domainObjectName="SysUserPermission" tableName="sys_user_permission" delimitIdentifiers="false" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-  			<property name="useActualColumnNames" value="false"/>
-	    </table>
-		<table  domainObjectName="SysUserRole" tableName="sys_user_role" delimitIdentifiers="false" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-  			<property name="useActualColumnNames" value="false"/>
-	    </table>
-		<table  domainObjectName="SysUserPermission" tableName="sys_user_permission" delimitIdentifiers="false" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-  			<property name="useActualColumnNames" value="false"/>
-	    </table>
-		<table  domainObjectName="SysRolePermission" tableName="sys_role_permission" delimitIdentifiers="false" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-  			<property name="useActualColumnNames" value="false"/>
-	    </table>-->
+
+
 
 	</context>
 </generatorConfiguration>

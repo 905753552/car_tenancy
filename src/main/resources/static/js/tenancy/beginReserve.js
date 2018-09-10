@@ -13,6 +13,14 @@ new Vue({
         }
     }
 });
+new Vue({
+    el: '.feeul',
+    methods: {
+        showOtherCost:function(){
+            showOtherCost();
+        }
+    }
+});
 // 检查姓名
 function checkMemberFormName() {
     $("#nameInfo").parents(".order-errorbox").hide(),
@@ -23,6 +31,7 @@ function checkMemberFormName() {
     if (xname && $.trim(xname) && xname != defaultValue) {
         if (isInteger(trim(xname)))
             $("#nameInfo").html("姓名不能是数字！"),
+                $("#xname").val(""),
                 $("#nameInfo").parents(".order-errorbox").show(),
                 $(function () {
                     $(".order-errorbox .zc-close").click(function () {
@@ -35,6 +44,7 @@ function checkMemberFormName() {
                 flag = !1;
         else if (getBytesLength(xname) > 30)
             $("#nameInfo").html("姓名长度不能超过30个字符！"),
+                $("#xname").val(""),
                 $("#nameInfo").parents(".order-errorbox").show(),
                 $(function () {
                     $(".order-errorbox .zc-close").click(function () {
@@ -47,6 +57,7 @@ function checkMemberFormName() {
                 flag = !1;
         else if (checkStr(trim(xname)))
             $("#nameInfo").html("不能含有特殊字符！"),
+                $("#xname").val(""),
                 $("#nameInfo").parents(".order-errorbox").show(),
                 $(function () {
                     $(".order-errorbox .zc-close").click(function () {
@@ -61,6 +72,7 @@ function checkMemberFormName() {
             for (var j = 0; j < trim(xname).length; j++)
                 if (" " == $.trim(xname).substring(j, j + 1)) {
                     $("#nameInfo").html("姓名中不能有空格！"),
+                        $("#xname").val(""),
                         $("#nameInfo").parents(".order-errorbox").show(),
                         $(function () {
                             $(".order-errorbox .zc-close").click(function () {
@@ -75,6 +87,7 @@ function checkMemberFormName() {
                 }
     } else
         $("#nameInfo").html("请输入真实姓名！"),
+            $("#xname").val(""),
             $("#nameInfo").parents(".order-errorbox").show(),
             $(function () {
                 $(".order-errorbox .zc-close").click(function () {
@@ -99,6 +112,7 @@ function checkMemberIdentitycard() {
         if (xidentitycard.length > 20)
             flag = !1,
                 $("#identitycardInfo").html("您输入的证件号码太长！"),
+                $("#xidentitycard").val(""),
                 $("#identitycardInfo").parents(".order-errorbox1").show(),
                 $(function () {
                     $(".order-errorbox1 .zc-close").click(function () {
@@ -109,6 +123,7 @@ function checkMemberIdentitycard() {
             if (10 == xcardtype)
                 if (1 == checkIDCard(trim(xidentitycard)))
                     $("#identitycardInfo").html("您输入的证件号码有误，请认真核实！"),
+                        $("#xidentitycard").val(""),
                         $("#identitycardInfo").parents(".order-errorbox1").show(),
                         $(function () {
                             $(".order-errorbox1 .zc-close").click(function () {
@@ -123,6 +138,7 @@ function checkMemberIdentitycard() {
                         ,
                         birthday = new Date(parseInt(xidentitycard.substring(6, 10)), parseInt(xidentitycard.substring(10, 12)) - 1, parseInt(xidentitycard.substring(12, 14)));
                     18 == xidentitycard.length && birthday.getTime() - converted.getTime() > 0 && ($("#identitycardInfo").html("您输入的证件号码有误，请认真核实！"),
+                        $("#xidentitycard").val(""),
                         $("#identitycardInfo").parents(".order-errorbox1").show(),
                         $(function () {
                             $(".order-errorbox1 .zc-close").click(function () {
@@ -133,6 +149,7 @@ function checkMemberIdentitycard() {
                 }
         } else
             $("#identitycardInfo").html("您输入的证件号码有误，请认真核实！"),
+                $("#xidentitycard").val(""),
                 $("#identitycardInfo").parents(".order-errorbox1").show(),
                 $(function () {
                     $(".order-errorbox1 .zc-close").click(function () {
@@ -142,6 +159,7 @@ function checkMemberIdentitycard() {
                 flag = !1;
     else
         $("#identitycardInfo").html("请输入证件号码！"),
+            $("#xidentitycard").val(""),
             $("#identitycardInfo").parents(".order-errorbox1").show(),
             $(function () {
                 $(".order-errorbox1 .zc-close").click(function () {
@@ -160,8 +178,10 @@ function checkMemberEmail() {
         , defaultValue = $("#memberEmail").attr("default-value");
     return $.trim(xemail) && xemail != defaultValue && (isEmail($.trim(xemail)) ? $.trim(xemail).length > 50 ? (flag = !1,
         $("#emailInfo").html("您输入的邮箱地址过长！"),
+            $("#memberEmail").val(""),
         $("#emailInfo").parents(".order-errorbox2").show()) : flag = 1 : (flag = !1,
             $("#emailInfo").html("您输入的邮箱地址有误，请认真核实！"),
+        $("#memberEmail").val(""),
             $("#emailInfo").parents(".order-errorbox2").show()
     )),
         flag,
@@ -198,6 +218,13 @@ function checkMobile(val) {
 /*改变验证码图片*/
 function changeImageVerifyCode() {
     $("#yzmImg_float").attr("src", "/api/captcha/generate?_t="+new Date().getTime());
+}
+// 显示其他费用
+function showOtherCost() {
+    var $nextLi = $(".opcl").next(".bluelist");
+    $nextLi.hasClass("show") ? ($nextLi.removeClass("show"),
+        $(".opcl").find(".blue-downarr").removeClass("open")) : ($nextLi.addClass("show"),
+        $(".opcl").find(".blue-downarr").addClass("open"))
 }
 function trim(str) {
     var strReturn;
@@ -248,7 +275,7 @@ function getBytesLength(str) {
 }
 
 function checkStr(str) {
-    for (var flag = !1, checkString = "`~!@#$%^&*()+-=[]{}\\|;':\",./<>?", j = 0; j < checkString.length; j++)
+    for (var flag = !1, checkString = "`~!@#$%^&*()+-=[]{}\\|;':\",.。，/<>?", j = 0; j < checkString.length; j++)
         if (-1 != str.indexOf(checkString.substring(j, j + 1))) {
             flag = !0;
             break

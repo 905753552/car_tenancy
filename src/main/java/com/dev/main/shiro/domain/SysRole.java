@@ -1,5 +1,7 @@
 package com.dev.main.shiro.domain;
 
+import com.dev.main.common.domain.BaseDomain;
+
 public class SysRole extends BaseDomain {
     // 主键
     private Long id;

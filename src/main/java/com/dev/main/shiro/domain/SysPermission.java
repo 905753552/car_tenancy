@@ -1,5 +1,8 @@
 package com.dev.main.shiro.domain;
 
+import com.dev.main.common.domain.BaseDomain;
+import java.util.Date;
+
 public class SysPermission extends BaseDomain {
     // 主键
     private Long id;
@@ -30,6 +33,12 @@ public class SysPermission extends BaseDomain {
 
     // 状态：1-可用，0-禁用
     private Integer status;
+
+    // 创建时间
+    private Date gmtCreate;
+
+    // 修改时间
+    private Date gmtModified;
 
     public Long getId() {
         return id;
@@ -109,5 +118,21 @@ public class SysPermission extends BaseDomain {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Date getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
+
+    public Date getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
     }
 }

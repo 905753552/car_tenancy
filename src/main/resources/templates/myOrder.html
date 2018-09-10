@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>乘风租车————全球租车领导品牌</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fonts/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/myOrder.css"/>
+</head>
+<body class="main">
+<div class="container-fluid tnc_container tnc_header">
+    <div v-cloak id="header-app" class="row tnc_head"
+         style="height:61px;background-color: #ffffff;border-bottom: 1px solid #e8e9ea">
+        <div class="tnc_head_bd">
+            <div><a class="tnc_head_brand tnc_logo" href="/"></a></div>
+            <div class="tnc_head_right">
+                <div v-show="!customer.id" class="tnc_head_login tnc_header_active" style="display: none">
+                    <a href="#" class="">登录</a> / <a href="#" class="">注册</a>
+                </div>
+                <div v-show="customer.id" class="tnc_head_login">
+                    <h1 class="tnc_head_welcome" style="color: #9e9e9e">您好，{{customer.name}}</h1>
+                    <div id="tnc_toggle_area" class="tnc_head_dropdown">
+                        <a id="tnc_toggle_area_btn" href="#">个人中心&nbsp;<i class="fa fa-caret-down"></i></a>
+                        <div id="tnc_toggle_menu" style="display: none">
+                            <div class="triangle_border_up"></div>
+                            <div class="tnc_collapse_list">
+                                <a href="#" class="bhpr reddot">我的订单</a>
+                                <a href="#">我的资产</a>
+                                <a href="#">我的账户</a>
+                                <a href="javascript:;" @click="logout">退出登录</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tnc_head_tel">
+                    <div class="">
+                            <span class="">
+                                <i class="fa fa-phone"></i>
+                                <span style="color: #9e9e9e">408-666-666</span>
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="printBody">
+
+        <div class="printdiv">
+            <div class="Wbanner980">
+
+
+                <div class="bluebgbd sz_succeedB">
+                    <div class="succeedinfo p10_0 sz_bluebbb">
+                        <span class="sz_suc_font colorBlue">预订成功</span>
+                        <span class="f14">&nbsp;订单总价:</span>
+                        <span class="sz_priceOrange">
+	<em class="rmb">¥</em>
+	<em class="num">
+		496
+	</em>
+</span>
+                        <span class="orderinfo_invoice ora_s" id="invoice-btn" style="display: inline;">开发票</span>
+                    </div>
+                    <div class="f14 p10_0">
+                        <span>订单号：15362794554761</span>
+                        <a>|</a>
+                        <span>租车人：林盛丰</span>
+                        <a>|</a>
+                        <span>租期：2天</span>
+                        <a>|</a>
+                        <span>取车时需要刷取预授权:</span>
+                        <span class="carPrice sz_priceOrangeSmall">
+				<em class="rmb" style="font:15px/15px '微软雅黑';">¥</em>
+				<em class="num" style="font:15px/15px arial;">&nbsp;3000</em>
+			</span>
+                    </div>
+                </div>
+
+                <br>
+                <div class="order_s_info index_bdb2 orDeBoxRight m20_0" style="background:#fff;">
+
+                    <h3>基本信息</h3>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="f14">
+                        <tbody>
+                        <tr>
+                            <td width="10">&nbsp;</td>
+                            <td colspan="3" rowspan="3" align="center" valign="middle"
+                                class="borderBlueB borderBlueR pre"
+                                height="99">
+                                <img src="https://image.zuchecdn.com/brand/order/kia.png">
+                                <img src="https://fimg.zuchecdn.com/upload/web/modepic/480.jpg" width="138" height="80">
+                                <!--<span class="config-btn">配置信息</span>-->
+                                <input type="button" class="tnc_btn tnc_btn_green config-btn" value="配置信息">
+                            </td>
+                            <td width="240" align="center" class="borderBlueR borderBlueBda" rowspan="2">
+                                <strong>取车时间</strong>：2018-09-08 10:00:00
+                            </td>
+                            <td width="78" align="right" class="borderBlueBda " rowspan="2"><strong>取车地点</strong>：</td>
+                            <td rowspan="2" height="66" class="borderBlueBda" width="260">
+                                肇庆[加盟]&nbsp;星湖大道店
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="borderBlueB">&nbsp;</td>
+                            <td rowspan="2" align="center" valign="middle" class="borderBlueR borderBlueB" height="66">
+                                <strong>还车时间</strong>：2018-09-10 10:00:00
+                            </td>
+                            <td rowspan="2" align="right" class="borderBlueB"><strong>还车地点</strong>：</td>
+                            <td rowspan="2" align="left" valign="middle" class="borderBlueB">
+                                肇庆[加盟]&nbsp;星湖大道店
+                            </td>
+                        </tr>
+                        <tr class="f16 borderBlueB" style="font-family:'微软雅黑';">
+                            <td>&nbsp;</td>
+                            <td height="33" align="center" valign="middle" class="borderBlueR">起亚K2</td>
+                            <td align="center" valign="middle" class="borderBlueR">三厢/1.4自动</td>
+                            <td align="center" valign="middle" class="borderBlueR">乘坐5人</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="pink">费用明细</h3>
+                    <div class="orderFeeDetails">
+                        <div class="feeItem borderBlueBda">
+                            <div class="feePrice">
+	                    	<span class="sz_OrderpOrangeM">
+	                            <em class="rmb">¥</em>
+	                            <em class="num">396</em>
+	                        </span>
+                            </div>
+                            <div class="calculate">
+		                        <span class="sz_priceGraySmall">
+		                            <em class="num">198x2</em>
+		                            <em class="unit">=</em>	
+		                        </span>
+                            </div>
+                            <span class="feeName">车辆租赁及服务费</span>
+                        </div>
+
+                        <div class="feeItem borderBlueBda">
+                            <div class="feePrice">
+	                    	<span class="sz_OrderpOrangeM">
+	                            <em class="rmb">¥</em>
+	                            <em class="num">80</em>
+	                        </span>
+                            </div>
+                            <div class="calculate">
+		                        <span class="sz_priceGraySmall">
+		                            <em class="num">40x2</em>
+		                            <em class="unit">=</em>	
+		                        </span>
+                            </div>
+                            <span class="feeName">基础服务费</span>
+                        </div>
+
+                        <div class="feeItem borderBlueBda selectabletotal onsttone" style="overflow:inherit;">
+                            <div class="feePrice">
+	                    <span class="sz_OrderpOrangeM">
+	                        <em class="rmb">¥</em>
+	                        <em class="num">20</em>
+	                    </span>
+                            </div>
+                            <div class="calculate">
+	                    <span class="sz_priceGraySmall">
+	                        <em class="unit">合计</em>	
+	                    </span>
+                            </div>
+                            <span class="feeName">其他费用<b class="down" style="display: none;"></b><b class="up"
+                                                                                                    style="display: block;"> </b></span>
+                        </div>
+
+                        <div class="feeline50 discount borderBlueBda sttwrap " style="display: none;">
+                            <div class="feePrice">
+		                    <span class="sz_OrderpOrangeM">
+		                        <em class="rmb"></em>
+		                        <em class="rmb">¥</em>
+		                        <em class="num">20</em>
+		                    </span>
+                            </div>
+                            <span class="feeName bold">车辆整备费</span>
+                        </div>
+
+                        <div class="feeline50 discount borderBlueBda sttwrapthree">
+                            <div class="feePrice">
+                    <span class="sz_OrderpOrangeM">
+                        <em class="rmb"></em>
+                        <em class="rmb">¥</em>
+                        <em class="num">496</em>
+                    </span>
+                            </div>
+                            <span class="feeName bold">需支付</span>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="orderFeeTotal">
+                        <div class="total02">
+
+                            <span class="yjtotal">订单总价：</span>
+                            <span class="sz_OrderpOrangeB">
+            <em class="rmb">¥</em>
+            <em class="num">496</em>
+        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ac">
+                    <div class="sz_dd_kjt d_none">
+                        <div class="yellow_box">
+                            <div class="yellow_sj"></div>
+                            快捷取还，优先办理！<br>
+                            A.取车时无需现场刷租车预授权，直接验车取车；<br>
+                            B.还车时无需现场刷违章预授权，只需验车即可完成还车手续；<br>
+                            C.在门店取还车时，无需等待，优先办理。
+                        </div>
+                    </div>
+
+
+                    <input id="orderCancel" type="button" onclick="cancelOrderTrip();" value="取消订单"
+                           class="tnc_btn btn_graywauto gray f16">&nbsp;&nbsp;
+
+                    <div id="orderModifyDiv" class="top_new_tip_btn">
+                        <img alt="new" src="https://image.zuchecdn.com/newversion/common/newRed.png">
+                        <input id="orderModify" type="button" onclick="modifyOrder('31972774');" value="修改订单"
+                               class="tnc_btn btn_graywauto gray f16">
+                    </div>&nbsp;&nbsp;
+
+                    <input id="monitor_fifth_detail" type="button" onclick="gotoOrderCenter()" value="订单中心"
+                           class="tnc_btn btn_graywauto gray f16">&nbsp;&nbsp;
+                    <input id="printPage" type="button" value="打印订单" onclick="window.print()"
+                           class="tnc_btn btn_graywauto gray f16">&nbsp;&nbsp;
+                </div>
+
+
+                <div class="index_bdb2 m20_0 p20 bg_white">
+                    <p class="f16 pb10">如何取车</p>
+                    <p class="f12 gray line_h24">
+                        1.取车时,出示以下证件的原件：本人二代身份证、本人国内有效驾驶证正副本、本人一张信用及可用额度均不低于3000元的国内有效信用卡，所有证件有效期须至少超过当次租期的一个月以上。</p>
+                    <p class="f12 gray line_h24">2.请您准时取车，超时取车，起租时间按预订取车时间起算。</p>
+                </div>
+                <div class="index_bdb2 m20_0 p20 bg_white">
+                    <p class="f16 pb10">退改规则</p>
+                    <p class="f12 gray line_h24" style="padding-left:12px;">订单修改或取消：<br> a)取车时间距当前时间≥2个工作小时，请提前致电400 616
+                        6666：取车时间在门店的营业时间内，请提前2小时申请；取车时间在门店营业时间之外，请您尽早致电申请。<br>
+                        b)取车时间距当前时间＜2个工作小时，不接受修改。驾照认证授权：取车前，您可通过神州租车APP、神州租车官网等网络渠道自行认证驾照，或到门店由工作人员协助认证驾照。您的驾照信息仅作为身份和驾驶资格认证。<br>
+                    </p>
+
+
+                    &nbsp;<font class="gray">（小贴士：如果您修改订单或取消订单重新预订，价格可能会发生变化。）</font><br>
+
+                </div>
+            </div>
+
+
+            <div id="dialogSE" class="orderDialog popup_block d_none" mask-data="#?w=540">
+                <h3 class="f14 bold ac gray">取消订单</h3>
+                <div class="p20_0">
+                    <span style="padding-left:30px;" class="cancelMsg d_none"><font color="red"></font></span>
+                    <ul>
+                        <li class="pb2 gray_666 pt10 " style="padding-left:30px">
+                            <strong>订单号：15362794554761可以取消</strong><br>
+                            取消订单的原因：
+                        </li>
+                        <li class="pt10 ac">
+                            <table width="400" align="center">
+                                <tbody>
+                                <tr>
+                                    <td height="26" class="al pl20" nowrap="">
+                                        <div name="__monitorCancel1"><input type="radio" value="3" name="cancelReason"
+                                                                            id="monitor_cancel1" onclick=""> 行程发生变更
+                                        </div>
+                                    </td>
+                                    <td class="al pl20" nowrap="">
+                                        <div name="__monitorCancel2"><input onclick="" id="monitor_cancel2" type="radio"
+                                                                            name="cancelReason" value="7"> 不满意价格
+                                        </div>
+                                    </td>
+                                    <td class="al pl20" nowrap="">
+                                        <div name="__monitorCancel3"><input onclick="" id="monitor_cancel3" type="radio"
+                                                                            name="cancelReason" value="23"> 选择其他租车公司
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="26" class="al pl20" nowrap="">
+                                        <div name="__monitorCancel4"><input onclick="" id="monitor_cancel4" type="radio"
+                                                                            name="cancelReason" value="24"> 其它出行替代
+                                        </div>
+                                    </td>
+                                    <td class="al pl20" nowrap="">
+                                        <div name="__monitorCancel5"><input onclick="" id="monitor_cancel5" type="radio"
+                                                                            name="cancelReason" value="9"> 天气原因
+                                        </div>
+                                    </td>
+                                    <td class="al pl20" nowrap="">
+                                        <div name="__monitorCancel6"><input onclick="" id="monitor_cancel6" type="radio"
+                                                                            name="cancelReason" value="10"> 其它
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        <li class="ac pt15">
+                            <br>
+                            <input type="button" value="取消并提交原因" data-id="31972774" data-mobile="" id="cancelOrder"
+                                   class="btn_orgwauto white f14">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="button" value="不取消订单" id="closeBg_Button" class="btn_orgwauto white f14">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <input type="hidden" id="stateName" name="stateName" value="预订成功">
+
+            <div class="cffade" style="display: none;"></div>
+            <div class="configbox" style="display: none;">
+                <div class="cftitle">
+		<span>
+		起亚K2配置信息</span>
+                    <i class="cfclose"></i>
+                </div>
+                <div class="cflist">
+                    <ul>
+                        <li>
+                            <b class="zws">&nbsp;</b>座 位 数：
+                            <span>
+						5
+				</span>
+                        </li>
+                        <li>
+                            <b class="cms">&nbsp;</b>车 门 数：
+                            <span>
+						4
+				</span>
+                        </li>
+                        <li>
+                            <b class="rllx">&nbsp;</b>燃料类型：
+                            <span>
+						汽油
+				</span>
+                        </li>
+                        <li>
+                            <b class="bsxlx">&nbsp;</b>变速箱类型：
+                            <span>
+						AT
+				</span>
+                        </li>
+                        <li>
+                            <b class="pl">&nbsp;</b>排　　量：
+                            <span>1396</span>
+                        </li>
+                        <li>
+                            <b class="rybh">&nbsp;</b>燃油标号：
+                            <span>
+						92-93汽油
+				</span>
+                        </li>
+                        <li>
+                            <b class="qdfs">&nbsp;</b>驱动方式：
+                            <span>
+						前驱
+				</span>
+                        </li>
+                        <li>
+                            <b class="fdjjqxs">&nbsp;</b>发动机进气形式：
+                            <span>
+						自然吸气
+				</span>
+                        </li>
+                        <li>
+                            <b class="tc">&nbsp;</b>天　　窗：
+                            <span>
+						无
+				</span>
+                        </li>
+                        <li>
+                            <b class="yxrl">&nbsp;</b>油箱容量：
+                            <span>
+						43
+				</span>
+                        </li>
+                        <li>
+                            <b class="yx">&nbsp;</b>音　　箱：
+                            <span>
+						4
+				</span>
+                        </li>
+                        <li>
+                            <b class="zy">&nbsp;</b>座　　椅：
+                            <span>
+						织物座椅
+				</span>
+                        </li>
+                        <li>
+                            <b class="dcld">&nbsp;</b>倒车雷达：
+                            <span>
+						无
+				</span>
+                        </li>
+                        <li>
+                            <b class="qin">&nbsp;</b>气　　囊：
+                            <span>
+						2
+				</span>
+                        </li>
+                        <li class="nonebd">
+                            <b class="dvd">&nbsp;</b>DVD / CD：
+                            <span>
+						CD
+				</span>
+                        </li>
+                        <li class="nonebd">
+                            <b class="gps">&nbsp;</b>GPS导航：
+                            <span>
+						无
+				</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="order-success-alertbox" style="display: none;">
+            <div class="s-aboxin">
+                <a href="javascript:void(0);" class="close"></a>
+                <p><span>恭喜您</span><br>订单提交成功</p>
+                <a class="zc-btn btn-know">我知道了</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/layui-v2.4.3/lay/modules/layer.js"></script>
+<script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+<script src="/vue-2.5.17/vue.min.js"></script>
+<script src="/js/common/common.js"></script>
+<script src="/js/tenancy/myOrder.js"></script>
+<script src="/js/tenancy/header.js"></script>
+</body>
+</html>

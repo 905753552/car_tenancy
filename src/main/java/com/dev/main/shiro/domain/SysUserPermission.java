@@ -1,5 +1,7 @@
 package com.dev.main.shiro.domain;
 
+import com.dev.main.common.domain.BaseDomain;
+
 public class SysUserPermission extends BaseDomain {
     // 用户ID
     private Long uid;

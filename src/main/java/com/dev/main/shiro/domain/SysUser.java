@@ -1,5 +1,6 @@
 package com.dev.main.shiro.domain;
 
+import com.dev.main.common.domain.BaseDomain;
 import java.util.Date;
 
 public class SysUser extends BaseDomain {
@@ -19,7 +20,14 @@ public class SysUser extends BaseDomain {
     private Date lastAccessTime;
 
     // 状态：1-可用，0-禁用
-    private Integer status;
+    private Byte status;
+
+    private Byte isDelete;
+
+    // 时间戳
+    private Date gmtCreate;
+
+    private Date gmtModified;
 
     public String getId() {
         return id;
@@ -61,11 +69,35 @@ public class SysUser extends BaseDomain {
         this.lastAccessTime = lastAccessTime;
     }
 
-    public Integer getStatus() {
+    public Byte getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Byte status) {
         this.status = status;
+    }
+
+    public Byte getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Byte isDelete) {
+        this.isDelete = isDelete;
+    }
+
+    public Date getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
+
+    public Date getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
     }
 }

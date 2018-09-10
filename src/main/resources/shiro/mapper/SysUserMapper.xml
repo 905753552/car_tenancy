@@ -7,11 +7,13 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="salt" property="salt" jdbcType="VARCHAR" />
     <result column="last_access_time" property="lastAccessTime" jdbcType="TIMESTAMP" />
-    <result column="time_stamp" property="timeStamp" jdbcType="TIMESTAMP" />
-    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="DATE" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, username, password, salt, last_access_time, time_stamp, status
+    id, username, password, salt, last_access_time, status, is_delete, gmt_create, gmt_modified
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -25,11 +27,13 @@
   </delete>
   <insert id="insert" parameterType="com.dev.main.shiro.domain.SysUser" >
     insert into sys_user (id, username, password, 
-      salt, last_access_time, time_stamp, 
-      status)
+      salt, last_access_time, status, 
+      is_delete, gmt_create, gmt_modified
+      )
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{salt,jdbcType=VARCHAR}, #{lastAccessTime,jdbcType=TIMESTAMP}, #{timeStamp,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=INTEGER})
+      #{salt,jdbcType=VARCHAR}, #{lastAccessTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, 
+      #{isDelete,jdbcType=TINYINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=DATE}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.dev.main.shiro.domain.SysUser" >
     insert into sys_user
@@ -49,11 +53,17 @@
       <if test="lastAccessTime != null" >
         last_access_time,
       </if>
-      <if test="timeStamp != null" >
-        time_stamp,
-      </if>
       <if test="status != null" >
         status,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -72,11 +82,17 @@
       <if test="lastAccessTime != null" >
         #{lastAccessTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="timeStamp != null" >
-        #{timeStamp,jdbcType=TIMESTAMP},
-      </if>
       <if test="status != null" >
-        #{status,jdbcType=INTEGER},
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -95,11 +111,17 @@
       <if test="lastAccessTime != null" >
         last_access_time = #{lastAccessTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="timeStamp != null" >
-        time_stamp = #{timeStamp,jdbcType=TIMESTAMP},
-      </if>
       <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=DATE},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -110,8 +132,10 @@
       password = #{password,jdbcType=VARCHAR},
       salt = #{salt,jdbcType=VARCHAR},
       last_access_time = #{lastAccessTime,jdbcType=TIMESTAMP},
-      time_stamp = #{timeStamp,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=INTEGER}
+      status = #{status,jdbcType=TINYINT},
+      is_delete = #{isDelete,jdbcType=TINYINT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=DATE}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

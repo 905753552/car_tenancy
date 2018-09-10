@@ -1,7 +1,6 @@
 package com.dev.main.shiro.service.impl;
 
 import com.dev.main.shiro.bo.RolePermissionAllocationBo;
-import com.dev.main.shiro.domain.SysRole;
 import com.dev.main.shiro.service.ISysRoleService;
 import com.dev.main.shiro.util.Pagination;
 
@@ -15,7 +14,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
         return 0;
     }
 
-    @Override
+    /*@Override
     public int insert(SysRole record) {
         return 0;
     }
@@ -43,7 +42,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
     @Override
     public Pagination<SysRole> findPage(Map<String, Object> resultMap, Integer pageNo, Integer pageSize) {
         return null;
-    }
+    }*/
 
     @Override
     public Map<String, Object> deleteRoleById(String ids) {
@@ -60,10 +59,10 @@ public class SysRoleServiceImpl implements ISysRoleService {
         return null;
     }
 
-    @Override
+    /*@Override
     public List<SysRole> findNowAllPermission() {
         return null;
-    }
+    }*/
 
     @Override
     public void initData() {
