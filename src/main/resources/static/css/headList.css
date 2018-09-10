@@ -1,3 +1,27 @@
+
+.bo_bg {
+    background: #fff;
+}
+
+.top-menu input {
+    width: 150px;
+}
+
+.top-menu label {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.menu-left {
+    display: inline-block;
+    margin-top: 15px;
+}
+.menu-input-group {
+    display: inline-block;
+    width:368px;
+    margin-right: 30px;
+}
+
 .tnc_zc_headlist {
     position: relative;
     width: 100%;
