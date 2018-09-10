@@ -184,9 +184,9 @@
 }
 .form-info{
     width:100%;
-    height:210px;
     display:flex;
     flex-direction:column;
+    margin-bottom: 20px;
 }
 .formGrop{
     display:flex;
@@ -485,11 +485,46 @@ input[type=text]{
 .blue-downarr {
     width: 13px;
     height: 8px;
+}
+.blue-downarr.open {
+    background-position: -275px -24px;
+}
+.newpg-conf .feeul>li {
+    position: relative;
+    line-height: 50px;
+    border-bottom: 1px solid #e4e6e9;
+    padding: 0 20px 0 30px;
+}
+.newpg-conf .feeul>li.bluelist{
+    line-height: 30px;
+    padding: 0;
+    display: none;
+}
+.newpg-conf .feeul>li.bluelist.show {
+    display: block;
+}
+.blue-downarr{
+    background: url(https://image.zuchecdn.com/newversion/news/ordernew/order_sprite.png);
     background-position: -295px -24px;
+    display:inline-block;
+    width: 13px;
+    height: 8px;
+    vertical-align: middle;
 }
 .newpg-conf .feeul > li .fee-res > i {
     font-size: 12px;
     font-style: normal;
+}
+.newpg-conf .feeul>li.bluelist .otherul {
+    background-color: #f3fbfe;
+}
+.newpg-conf .feeul>li.bluelist .otherul li {
+    position: relative;
+    height: 30px;
+    border-top: 1px dashed #e4e6e9;
+    padding: 0 20px 0 48px;
+    margin-top: -1px;
+    font-size: 9px;
 }
 /* 订单总价 */
 .newpg-conf .orderFeeTotal {

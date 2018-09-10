@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>order2</title>
+    <title>乘风租车————全球租车领导品牌</title>
 	<link rel="stylesheet" href="/css/reset.css">
 	<link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/fonts/font-awesome-4.7.0/css/font-awesome.css">
@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="/css/header.css">
 	<link rel="stylesheet" href="/css/footer.css">
 	<link rel="stylesheet" href="/css/index.css">
-	<link rel="stylesheet" href="/css/MyOrder.css" />
+	<link rel="stylesheet" href="/css/beginReserve.css" />
 </head>
 <body class="main">
 <div class="container-fluid tnc_container tnc_header">
@@ -200,11 +200,20 @@
 							<span class="fee-pro">40x2</span>
 							<div class="clear"></div>
 						</li>
-						<li class="opcl" style="list-style:none">
+						<li class="opcl" style="list-style:none" @click="showOtherCost">
 							<span class="fee-txt">其他费用<i class="blue-downarr"></i></span>
-							<span class="fee-res"><i id="otherPriceTotal" total="20">20</i></span>
+							<span class="fee-res"><i id="otherPriceTotal" total="20">￥20</i></span>
 							<span class="fee-pro">合计</span>
 							<div class="clear"></div>
+						</li>
+						<li class="bluelist">
+							<ul class="otherul">
+								<li class="discount defaultFeeItem2000">
+									<span class="fee-txt">车辆整备费</span>
+									<span class="fee-res">¥20</span>
+									<div class="clear"></div>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</div>
@@ -414,7 +423,7 @@
 <script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 <script src="/vue-2.5.17/vue.min.js"></script>
 <script src="/js/common/common.js"></script>
-<script src="/js/MyOrder.js"></script>
+<script src="/js/tenancy/beginReserve.js"></script>
 <script src="/js/tenancy/header.js"></script>
 </body>
 </html>

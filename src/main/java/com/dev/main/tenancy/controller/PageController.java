@@ -35,7 +35,7 @@ public class PageController {
 
     @GetMapping("/order2step")
     public String order2stepPage() {
-        return "order2step";
+        return "beginReserve";
     }
 
 }
