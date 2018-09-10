@@ -223,23 +223,19 @@
     color: #00c189;
 }
 
-.tnc-lbox.price2 .pri_num li.pri2 {
+.tnc-lbox.price2 .pri_num li.pri2, .tnc-lbox.price2 .pri_num li.pri3 {
     color: #00c189;
 }
 
-.tnc-lbox.price3 .pri_num li.pri3 {
+.tnc-lbox.price3 .pri_num li.pri3, .tnc-lbox.price3 .pri_num li.pri4 {
     color: #00c189;
 }
 
-.tnc-lbox.price4 .pri_num li.pri4 {
+.tnc-lbox.price4 .pri_num li.pri4, .tnc-lbox.price4 .pri_num li.pri5 {
     color: #00c189;
 }
 
-.tnc-lbox.price5 .pri_num li.pri5 {
-    color: #00c189;
-}
-
-.tnc-lbox.price6 .pri_num li.pri6 {
+.tnc-lbox.price5 .pri_num li.pri6 {
     color: #00c189;
 }
 
