@@ -1,7 +1,6 @@
 package com.dev.main.shiro.service.impl;
 
 import com.dev.main.shiro.bo.SysPermissionBo;
-import com.dev.main.shiro.domain.SysPermission;
 import com.dev.main.shiro.service.ISysPermissionService;
 import com.dev.main.shiro.util.Pagination;
 
@@ -15,7 +14,7 @@ public class SysPermissionServiceImpl implements ISysPermissionService {
         return 0;
     }
 
-    @Override
+    /*@Override
     public SysPermission insert(SysPermission record) {
         return null;
     }
@@ -38,7 +37,7 @@ public class SysPermissionServiceImpl implements ISysPermissionService {
     @Override
     public int updateByPrimaryKey(SysPermission record) {
         return 0;
-    }
+    }*/
 
     @Override
     public Map<String, Object> deletePermissionById(String ids) {

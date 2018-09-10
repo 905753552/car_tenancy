@@ -2,7 +2,6 @@ package com.dev.main.shiro.service;
 
 import com.dev.main.shiro.bo.SysRoleBo;
 import com.dev.main.shiro.bo.UserRoleAllocationBo;
-import com.dev.main.shiro.domain.SysUser;
 import com.dev.main.shiro.util.Pagination;
 import org.springframework.ui.ModelMap;
 
@@ -12,7 +11,7 @@ import java.util.Map;
 public interface ISysUserService {
     int deleteByPrimaryKey(Long id);
 
-    SysUser insert(SysUser record);
+    /*SysUser insert(SysUser record);
 
     SysUser insertSelective(SysUser record);
 
@@ -24,7 +23,7 @@ public interface ISysUserService {
 
     SysUser login(String email ,String pswd);
 
-    SysUser findUserByEmail(String email);
+    SysUser findUserByEmail(String email);*/
 
     Pagination findByPage(Map<String, Object> resultMap, Integer pageNo,
                           Integer pageSize);

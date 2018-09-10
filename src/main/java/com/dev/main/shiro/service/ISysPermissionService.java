@@ -1,7 +1,6 @@
 package com.dev.main.shiro.service;
 
 import com.dev.main.shiro.bo.SysPermissionBo;
-import com.dev.main.shiro.domain.SysPermission;
 import com.dev.main.shiro.util.Pagination;
 
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.Set;
 public interface ISysPermissionService {
     int deleteByPrimaryKey(Long id);
 
-    SysPermission insert(SysPermission record);
+    /*SysPermission insert(SysPermission record);
 
     SysPermission insertSelective(SysPermission record);
 
@@ -19,7 +18,7 @@ public interface ISysPermissionService {
 
     int updateByPrimaryKeySelective(SysPermission record);
 
-    int updateByPrimaryKey(SysPermission record);
+    int updateByPrimaryKey(SysPermission record);*/
 
     Map<String, Object> deletePermissionById(String ids);
 

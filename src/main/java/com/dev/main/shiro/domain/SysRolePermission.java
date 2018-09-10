@@ -1,5 +1,7 @@
 package com.dev.main.shiro.domain;
 
+import com.dev.main.common.domain.BaseDomain;
+
 public class SysRolePermission extends BaseDomain {
     // 角色ID
     private Long rid;

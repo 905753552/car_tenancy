@@ -1,16 +1,12 @@
 package com.dev.main.shiro.realm;
 
-import com.dev.main.shiro.domain.SysUser;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
-import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class ExampleRealm extends AuthorizingRealm {
@@ -60,11 +56,12 @@ public class ExampleRealm extends AuthorizingRealm {
         String password = "example";
         // 盐值
         //ByteSource salt = ByteSource.Util.bytes(saltStr);
-        SysUser user = new SysUser();
+      /*  SysUser user = new SysUser();
         user.setId("12542");
         user.setUsername("example");
         user.setSalt("dsfsdf");
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, password, getName());
-        return info;
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, password, getName());*//*
+        return info;*/
+        return  null;
     }
 }

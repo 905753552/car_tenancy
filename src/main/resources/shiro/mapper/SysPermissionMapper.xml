@@ -10,13 +10,14 @@
     <result column="sort_string" property="sortString" jdbcType="VARCHAR" />
     <result column="parent_id" property="parentId" jdbcType="BIGINT" />
     <result column="parent_ids" property="parentIds" jdbcType="BIGINT" />
-    <result column="time_stamp" property="timeStamp" jdbcType="TIMESTAMP" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, url, name, type, code, sort_string, parent_id, parent_ids, time_stamp, description, 
-    status
+    id, url, name, type, code, sort_string, parent_id, parent_ids, description, status, 
+    gmt_create, gmt_modified
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -31,12 +32,14 @@
   <insert id="insert" parameterType="com.dev.main.shiro.domain.SysPermission" >
     insert into sys_permission (id, url, name, 
       type, code, sort_string, 
-      parent_id, parent_ids, time_stamp, 
-      description, status)
+      parent_id, parent_ids, description, 
+      status, gmt_create, gmt_modified
+      )
     values (#{id,jdbcType=BIGINT}, #{url,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{type,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{sortString,jdbcType=VARCHAR}, 
-      #{parentId,jdbcType=BIGINT}, #{parentIds,jdbcType=BIGINT}, #{timeStamp,jdbcType=TIMESTAMP}, 
-      #{description,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+      #{parentId,jdbcType=BIGINT}, #{parentIds,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.dev.main.shiro.domain.SysPermission" >
     insert into sys_permission
@@ -65,14 +68,17 @@
       <if test="parentIds != null" >
         parent_ids,
       </if>
-      <if test="timeStamp != null" >
-        time_stamp,
-      </if>
       <if test="description != null" >
         description,
       </if>
       <if test="status != null" >
         status,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -100,14 +106,17 @@
       <if test="parentIds != null" >
         #{parentIds,jdbcType=BIGINT},
       </if>
-      <if test="timeStamp != null" >
-        #{timeStamp,jdbcType=TIMESTAMP},
-      </if>
       <if test="description != null" >
         #{description,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -135,14 +144,17 @@
       <if test="parentIds != null" >
         parent_ids = #{parentIds,jdbcType=BIGINT},
       </if>
-      <if test="timeStamp != null" >
-        time_stamp = #{timeStamp,jdbcType=TIMESTAMP},
-      </if>
       <if test="description != null" >
         description = #{description,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -156,9 +168,10 @@
       sort_string = #{sortString,jdbcType=VARCHAR},
       parent_id = #{parentId,jdbcType=BIGINT},
       parent_ids = #{parentIds,jdbcType=BIGINT},
-      time_stamp = #{timeStamp,jdbcType=TIMESTAMP},
       description = #{description,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER}
+      status = #{status,jdbcType=INTEGER},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
