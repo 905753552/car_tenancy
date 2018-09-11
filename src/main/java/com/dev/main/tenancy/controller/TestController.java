@@ -1,13 +1,18 @@
 package com.dev.main.tenancy.controller;
 
+import com.dev.main.common.exception.DataNotFoundException;
 import com.dev.main.common.util.ResultMap;
+import com.dev.main.shiro.dao.SysUserMapper;
+import com.dev.main.shiro.domain.SysUser;
+import com.dev.main.tenancy.controller.exception.TenancyExceptionResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@TenancyExceptionResolver
 public class TestController {
-/*
+
     @Autowired
     private SysUserMapper sysUserMapper;
 
@@ -17,6 +22,10 @@ public class TestController {
 
     @GetMapping("/tnc/test")
     public ResultMap test() {
-        return ResultMap.success().put("user", sysUserMapper.selectByPrimaryKey(1L));
-    }*/
+        SysUser user = sysUserMapper.selectByPrimaryKey(1L);
+        if (user == null) {
+            throw new DataNotFoundException("用户不存在");
+        }
+        return ResultMap.success().put("user", user);
+    }
 }

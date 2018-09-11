@@ -66,5 +66,5 @@ spring:
 #    minIdle: 0 # 连接池中的最小空闲连接
 
 mybatis:
-  mapperLocations: classpath*:mapper/*.xml
+  mapperLocations: classpath*:*/mapper/*.xml
   typeAliasesPackage: com.dev.main.domain #起别名。可省略写mybatis的xml中的resultType的全路径
