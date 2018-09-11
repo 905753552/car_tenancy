@@ -3,21 +3,22 @@
 <mapper namespace="com.dev.main.shiro.dao.SysPermissionMapper" >
   <resultMap id="BaseResultMap" type="com.dev.main.shiro.domain.SysPermission" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="TINYINT" />
     <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="sort_string" property="sortString" jdbcType="VARCHAR" />
     <result column="parent_id" property="parentId" jdbcType="BIGINT" />
-    <result column="parent_ids" property="parentIds" jdbcType="BIGINT" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="parent_ids" property="parentIds" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, url, name, type, code, sort_string, parent_id, parent_ids, description, status, 
-    gmt_create, gmt_modified
+    id, name, description, url, type, code, sort_string, parent_id, parent_ids, status, 
+    is_deleted, gmt_create, gmt_modified
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -30,15 +31,15 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.dev.main.shiro.domain.SysPermission" >
-    insert into sys_permission (id, url, name, 
-      type, code, sort_string, 
-      parent_id, parent_ids, description, 
-      status, gmt_create, gmt_modified
+    insert into sys_permission (id, name, description, 
+      url, type, code, sort_string, 
+      parent_id, parent_ids, status, 
+      is_deleted, gmt_create, gmt_modified
       )
-    values (#{id,jdbcType=BIGINT}, #{url,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{sortString,jdbcType=VARCHAR}, 
-      #{parentId,jdbcType=BIGINT}, #{parentIds,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, #{code,jdbcType=VARCHAR}, #{sortString,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=BIGINT}, #{parentIds,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{isDeleted,jdbcType=TINYINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.dev.main.shiro.domain.SysPermission" >
@@ -47,11 +48,14 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="url != null" >
-        url,
-      </if>
       <if test="name != null" >
         name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="url != null" >
+        url,
       </if>
       <if test="type != null" >
         type,
@@ -68,11 +72,11 @@
       <if test="parentIds != null" >
         parent_ids,
       </if>
-      <if test="description != null" >
-        description,
-      </if>
       <if test="status != null" >
         status,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
       </if>
       <if test="gmtCreate != null" >
         gmt_create,
@@ -85,14 +89,17 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="url != null" >
-        #{url,jdbcType=VARCHAR},
-      </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
       <if test="type != null" >
-        #{type,jdbcType=VARCHAR},
+        #{type,jdbcType=TINYINT},
       </if>
       <if test="code != null" >
         #{code,jdbcType=VARCHAR},
@@ -104,13 +111,13 @@
         #{parentId,jdbcType=BIGINT},
       </if>
       <if test="parentIds != null" >
-        #{parentIds,jdbcType=BIGINT},
-      </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
+        #{parentIds,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=INTEGER},
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=TINYINT},
       </if>
       <if test="gmtCreate != null" >
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -123,14 +130,17 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.dev.main.shiro.domain.SysPermission" >
     update sys_permission
     <set >
-      <if test="url != null" >
-        url = #{url,jdbcType=VARCHAR},
-      </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
       <if test="type != null" >
-        type = #{type,jdbcType=VARCHAR},
+        type = #{type,jdbcType=TINYINT},
       </if>
       <if test="code != null" >
         code = #{code,jdbcType=VARCHAR},
@@ -142,13 +152,13 @@
         parent_id = #{parentId,jdbcType=BIGINT},
       </if>
       <if test="parentIds != null" >
-        parent_ids = #{parentIds,jdbcType=BIGINT},
-      </if>
-      <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
+        parent_ids = #{parentIds,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
       </if>
       <if test="gmtCreate != null" >
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -161,15 +171,16 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dev.main.shiro.domain.SysPermission" >
     update sys_permission
-    set url = #{url,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR},
+    set name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
       code = #{code,jdbcType=VARCHAR},
       sort_string = #{sortString,jdbcType=VARCHAR},
       parent_id = #{parentId,jdbcType=BIGINT},
-      parent_ids = #{parentIds,jdbcType=BIGINT},
-      description = #{description,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
+      parent_ids = #{parentIds,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

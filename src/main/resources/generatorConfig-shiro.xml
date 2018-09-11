@@ -62,7 +62,7 @@
 		<!-- 必须要有的，使用这个配置链接数据库
 	        @TODO:是否可以扩展
 	     -->
-	    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql:///test_db" userId="dev" password="dev">
+	    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql:///car_tenancy" userId="dev" password="dev">
 	        <!-- 这里面可以设置property属性，每一个property属性都设置到配置的Driver上 -->
 	    </jdbcConnection>
 

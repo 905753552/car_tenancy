@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dev.main.tenancy.dao.TncOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.dev.main.tenancy.domain.TncOrder" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="credentials_type" property="credentialsType" jdbcType="TINYINT" />
+    <result column="credentials_number" property="credentialsNumber" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="total_amount" property="totalAmount" jdbcType="DECIMAL" />
+    <result column="order_amount" property="orderAmount" jdbcType="DECIMAL" />
+    <result column="base_amount" property="baseAmount" jdbcType="DECIMAL" />
+    <result column="service_amount" property="serviceAmount" jdbcType="DECIMAL" />
+    <result column="other_amount" property="otherAmount" jdbcType="DECIMAL" />
+    <result column="coupon_id" property="couponId" jdbcType="BIGINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="discount" property="discount" jdbcType="DECIMAL" />
+    <result column="deposit" property="deposit" jdbcType="DECIMAL" />
+    <result column="return_deposit" property="returnDeposit" jdbcType="DECIMAL" />
+    <result column="is_deposit_returned" property="isDepositReturned" jdbcType="TINYINT" />
+    <result column="package_name" property="packageName" jdbcType="VARCHAR" />
+    <result column="get_store_id" property="getStoreId" jdbcType="BIGINT" />
+    <result column="return_store_id" property="returnStoreId" jdbcType="BIGINT" />
+    <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="return_date" property="returnDate" jdbcType="TIMESTAMP" />
+    <result column="real_return_date" property="realReturnDate" jdbcType="TIMESTAMP" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="car_item_id" property="carItemId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, credentials_type, credentials_number, email, phone, total_amount, order_amount, 
+    base_amount, service_amount, other_amount, coupon_id, description, discount, deposit, 
+    return_deposit, is_deposit_returned, package_name, get_store_id, return_store_id, 
+    start_date, return_date, real_return_date, pay_time, status, is_deleted, gmt_create, 
+    gmt_modified, car_item_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tnc_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tnc_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dev.main.tenancy.domain.TncOrder" >
+    insert into tnc_order (id, name, credentials_type, 
+      credentials_number, email, phone, 
+      total_amount, order_amount, base_amount, 
+      service_amount, other_amount, coupon_id, 
+      description, discount, deposit, 
+      return_deposit, is_deposit_returned, package_name, 
+      get_store_id, return_store_id, start_date, 
+      return_date, real_return_date, pay_time, 
+      status, is_deleted, gmt_create, 
+      gmt_modified, car_item_id)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{credentialsType,jdbcType=TINYINT}, 
+      #{credentialsNumber,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{totalAmount,jdbcType=DECIMAL}, #{orderAmount,jdbcType=DECIMAL}, #{baseAmount,jdbcType=DECIMAL}, 
+      #{serviceAmount,jdbcType=DECIMAL}, #{otherAmount,jdbcType=DECIMAL}, #{couponId,jdbcType=BIGINT}, 
+      #{description,jdbcType=VARCHAR}, #{discount,jdbcType=DECIMAL}, #{deposit,jdbcType=DECIMAL}, 
+      #{returnDeposit,jdbcType=DECIMAL}, #{isDepositReturned,jdbcType=TINYINT}, #{packageName,jdbcType=VARCHAR}, 
+      #{getStoreId,jdbcType=BIGINT}, #{returnStoreId,jdbcType=BIGINT}, #{startDate,jdbcType=TIMESTAMP}, 
+      #{returnDate,jdbcType=TIMESTAMP}, #{realReturnDate,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModified,jdbcType=TIMESTAMP}, #{carItemId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dev.main.tenancy.domain.TncOrder" >
+    insert into tnc_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="credentialsType != null" >
+        credentials_type,
+      </if>
+      <if test="credentialsNumber != null" >
+        credentials_number,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="totalAmount != null" >
+        total_amount,
+      </if>
+      <if test="orderAmount != null" >
+        order_amount,
+      </if>
+      <if test="baseAmount != null" >
+        base_amount,
+      </if>
+      <if test="serviceAmount != null" >
+        service_amount,
+      </if>
+      <if test="otherAmount != null" >
+        other_amount,
+      </if>
+      <if test="couponId != null" >
+        coupon_id,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="deposit != null" >
+        deposit,
+      </if>
+      <if test="returnDeposit != null" >
+        return_deposit,
+      </if>
+      <if test="isDepositReturned != null" >
+        is_deposit_returned,
+      </if>
+      <if test="packageName != null" >
+        package_name,
+      </if>
+      <if test="getStoreId != null" >
+        get_store_id,
+      </if>
+      <if test="returnStoreId != null" >
+        return_store_id,
+      </if>
+      <if test="startDate != null" >
+        start_date,
+      </if>
+      <if test="returnDate != null" >
+        return_date,
+      </if>
+      <if test="realReturnDate != null" >
+        real_return_date,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="carItemId != null" >
+        car_item_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="credentialsType != null" >
+        #{credentialsType,jdbcType=TINYINT},
+      </if>
+      <if test="credentialsNumber != null" >
+        #{credentialsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderAmount != null" >
+        #{orderAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="baseAmount != null" >
+        #{baseAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceAmount != null" >
+        #{serviceAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="otherAmount != null" >
+        #{otherAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="couponId != null" >
+        #{couponId,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="deposit != null" >
+        #{deposit,jdbcType=DECIMAL},
+      </if>
+      <if test="returnDeposit != null" >
+        #{returnDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="isDepositReturned != null" >
+        #{isDepositReturned,jdbcType=TINYINT},
+      </if>
+      <if test="packageName != null" >
+        #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="getStoreId != null" >
+        #{getStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="returnStoreId != null" >
+        #{returnStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnDate != null" >
+        #{returnDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realReturnDate != null" >
+        #{realReturnDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carItemId != null" >
+        #{carItemId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dev.main.tenancy.domain.TncOrder" >
+    update tnc_order
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="credentialsType != null" >
+        credentials_type = #{credentialsType,jdbcType=TINYINT},
+      </if>
+      <if test="credentialsNumber != null" >
+        credentials_number = #{credentialsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null" >
+        total_amount = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderAmount != null" >
+        order_amount = #{orderAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="baseAmount != null" >
+        base_amount = #{baseAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="serviceAmount != null" >
+        service_amount = #{serviceAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="otherAmount != null" >
+        other_amount = #{otherAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="couponId != null" >
+        coupon_id = #{couponId,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="deposit != null" >
+        deposit = #{deposit,jdbcType=DECIMAL},
+      </if>
+      <if test="returnDeposit != null" >
+        return_deposit = #{returnDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="isDepositReturned != null" >
+        is_deposit_returned = #{isDepositReturned,jdbcType=TINYINT},
+      </if>
+      <if test="packageName != null" >
+        package_name = #{packageName,jdbcType=VARCHAR},
+      </if>
+      <if test="getStoreId != null" >
+        get_store_id = #{getStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="returnStoreId != null" >
+        return_store_id = #{returnStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="startDate != null" >
+        start_date = #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnDate != null" >
+        return_date = #{returnDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realReturnDate != null" >
+        real_return_date = #{realReturnDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carItemId != null" >
+        car_item_id = #{carItemId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dev.main.tenancy.domain.TncOrder" >
+    update tnc_order
+    set name = #{name,jdbcType=VARCHAR},
+      credentials_type = #{credentialsType,jdbcType=TINYINT},
+      credentials_number = #{credentialsNumber,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      total_amount = #{totalAmount,jdbcType=DECIMAL},
+      order_amount = #{orderAmount,jdbcType=DECIMAL},
+      base_amount = #{baseAmount,jdbcType=DECIMAL},
+      service_amount = #{serviceAmount,jdbcType=DECIMAL},
+      other_amount = #{otherAmount,jdbcType=DECIMAL},
+      coupon_id = #{couponId,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      discount = #{discount,jdbcType=DECIMAL},
+      deposit = #{deposit,jdbcType=DECIMAL},
+      return_deposit = #{returnDeposit,jdbcType=DECIMAL},
+      is_deposit_returned = #{isDepositReturned,jdbcType=TINYINT},
+      package_name = #{packageName,jdbcType=VARCHAR},
+      get_store_id = #{getStoreId,jdbcType=BIGINT},
+      return_store_id = #{returnStoreId,jdbcType=BIGINT},
+      start_date = #{startDate,jdbcType=TIMESTAMP},
+      return_date = #{returnDate,jdbcType=TIMESTAMP},
+      real_return_date = #{realReturnDate,jdbcType=TIMESTAMP},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      car_item_id = #{carItemId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dev.main.tenancy.dao.TncCarMapper" >
+  <resultMap id="BaseResultMap" type="com.dev.main.tenancy.domain.TncCar" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="series" property="series" jdbcType="VARCHAR" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="residual" property="residual" jdbcType="INTEGER" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="config_section" property="configSection" jdbcType="VARCHAR" />
+    <result column="seat_quantity" property="seatQuantity" jdbcType="INTEGER" />
+    <result column="door_quantity" property="doorQuantity" jdbcType="INTEGER" />
+    <result column="fuel_type" property="fuelType" jdbcType="VARCHAR" />
+    <result column="transmission_type" property="transmissionType" jdbcType="VARCHAR" />
+    <result column="displacement" property="displacement" jdbcType="INTEGER" />
+    <result column="octane_rating" property="octaneRating" jdbcType="VARCHAR" />
+    <result column="driven_method" property="drivenMethod" jdbcType="VARCHAR" />
+    <result column="en_itk_form" property="enItkForm" jdbcType="VARCHAR" />
+    <result column="skylight" property="skylight" jdbcType="TINYINT" />
+    <result column="tank_capacity" property="tankCapacity" jdbcType="DOUBLE" />
+    <result column="speaker" property="speaker" jdbcType="INTEGER" />
+    <result column="box_quantity" property="boxQuantity" jdbcType="INTEGER" />
+    <result column="seat" property="seat" jdbcType="VARCHAR" />
+    <result column="reversing_radar" property="reversingRadar" jdbcType="TINYINT" />
+    <result column="airbag" property="airbag" jdbcType="INTEGER" />
+    <result column="dvd_cd" property="dvdCd" jdbcType="VARCHAR" />
+    <result column="gps" property="gps" jdbcType="TINYINT" />
+    <result column="type_id" property="typeId" jdbcType="BIGINT" />
+    <result column="store_id" property="storeId" jdbcType="BIGINT" />
+    <result column="brand_id" property="brandId" jdbcType="BIGINT" />
+    <result column="access_times" property="accessTimes" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, series, quantity, residual, year, config_section, seat_quantity, door_quantity, 
+    fuel_type, transmission_type, displacement, octane_rating, driven_method, en_itk_form, 
+    skylight, tank_capacity, speaker, box_quantity, seat, reversing_radar, airbag, dvd_cd, 
+    gps, type_id, store_id, brand_id, access_times, status, is_deleted, gmt_create, gmt_modified
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tnc_car
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tnc_car
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dev.main.tenancy.domain.TncCar" >
+    insert into tnc_car (id, series, quantity, 
+      residual, year, config_section, 
+      seat_quantity, door_quantity, fuel_type, 
+      transmission_type, displacement, octane_rating, 
+      driven_method, en_itk_form, skylight, 
+      tank_capacity, speaker, box_quantity, 
+      seat, reversing_radar, airbag, 
+      dvd_cd, gps, type_id, 
+      store_id, brand_id, access_times, 
+      status, is_deleted, gmt_create, 
+      gmt_modified)
+    values (#{id,jdbcType=BIGINT}, #{series,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{residual,jdbcType=INTEGER}, #{year,jdbcType=INTEGER}, #{configSection,jdbcType=VARCHAR}, 
+      #{seatQuantity,jdbcType=INTEGER}, #{doorQuantity,jdbcType=INTEGER}, #{fuelType,jdbcType=VARCHAR}, 
+      #{transmissionType,jdbcType=VARCHAR}, #{displacement,jdbcType=INTEGER}, #{octaneRating,jdbcType=VARCHAR}, 
+      #{drivenMethod,jdbcType=VARCHAR}, #{enItkForm,jdbcType=VARCHAR}, #{skylight,jdbcType=TINYINT}, 
+      #{tankCapacity,jdbcType=DOUBLE}, #{speaker,jdbcType=INTEGER}, #{boxQuantity,jdbcType=INTEGER}, 
+      #{seat,jdbcType=VARCHAR}, #{reversingRadar,jdbcType=TINYINT}, #{airbag,jdbcType=INTEGER}, 
+      #{dvdCd,jdbcType=VARCHAR}, #{gps,jdbcType=TINYINT}, #{typeId,jdbcType=BIGINT}, 
+      #{storeId,jdbcType=BIGINT}, #{brandId,jdbcType=BIGINT}, #{accessTimes,jdbcType=BIGINT}, 
+      #{status,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModified,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dev.main.tenancy.domain.TncCar" >
+    insert into tnc_car
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="series != null" >
+        series,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="residual != null" >
+        residual,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="configSection != null" >
+        config_section,
+      </if>
+      <if test="seatQuantity != null" >
+        seat_quantity,
+      </if>
+      <if test="doorQuantity != null" >
+        door_quantity,
+      </if>
+      <if test="fuelType != null" >
+        fuel_type,
+      </if>
+      <if test="transmissionType != null" >
+        transmission_type,
+      </if>
+      <if test="displacement != null" >
+        displacement,
+      </if>
+      <if test="octaneRating != null" >
+        octane_rating,
+      </if>
+      <if test="drivenMethod != null" >
+        driven_method,
+      </if>
+      <if test="enItkForm != null" >
+        en_itk_form,
+      </if>
+      <if test="skylight != null" >
+        skylight,
+      </if>
+      <if test="tankCapacity != null" >
+        tank_capacity,
+      </if>
+      <if test="speaker != null" >
+        speaker,
+      </if>
+      <if test="boxQuantity != null" >
+        box_quantity,
+      </if>
+      <if test="seat != null" >
+        seat,
+      </if>
+      <if test="reversingRadar != null" >
+        reversing_radar,
+      </if>
+      <if test="airbag != null" >
+        airbag,
+      </if>
+      <if test="dvdCd != null" >
+        dvd_cd,
+      </if>
+      <if test="gps != null" >
+        gps,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="brandId != null" >
+        brand_id,
+      </if>
+      <if test="accessTimes != null" >
+        access_times,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="series != null" >
+        #{series,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="residual != null" >
+        #{residual,jdbcType=INTEGER},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="configSection != null" >
+        #{configSection,jdbcType=VARCHAR},
+      </if>
+      <if test="seatQuantity != null" >
+        #{seatQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="doorQuantity != null" >
+        #{doorQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="fuelType != null" >
+        #{fuelType,jdbcType=VARCHAR},
+      </if>
+      <if test="transmissionType != null" >
+        #{transmissionType,jdbcType=VARCHAR},
+      </if>
+      <if test="displacement != null" >
+        #{displacement,jdbcType=INTEGER},
+      </if>
+      <if test="octaneRating != null" >
+        #{octaneRating,jdbcType=VARCHAR},
+      </if>
+      <if test="drivenMethod != null" >
+        #{drivenMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="enItkForm != null" >
+        #{enItkForm,jdbcType=VARCHAR},
+      </if>
+      <if test="skylight != null" >
+        #{skylight,jdbcType=TINYINT},
+      </if>
+      <if test="tankCapacity != null" >
+        #{tankCapacity,jdbcType=DOUBLE},
+      </if>
+      <if test="speaker != null" >
+        #{speaker,jdbcType=INTEGER},
+      </if>
+      <if test="boxQuantity != null" >
+        #{boxQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="seat != null" >
+        #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="reversingRadar != null" >
+        #{reversingRadar,jdbcType=TINYINT},
+      </if>
+      <if test="airbag != null" >
+        #{airbag,jdbcType=INTEGER},
+      </if>
+      <if test="dvdCd != null" >
+        #{dvdCd,jdbcType=VARCHAR},
+      </if>
+      <if test="gps != null" >
+        #{gps,jdbcType=TINYINT},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=BIGINT},
+      </if>
+      <if test="accessTimes != null" >
+        #{accessTimes,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dev.main.tenancy.domain.TncCar" >
+    update tnc_car
+    <set >
+      <if test="series != null" >
+        series = #{series,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="residual != null" >
+        residual = #{residual,jdbcType=INTEGER},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="configSection != null" >
+        config_section = #{configSection,jdbcType=VARCHAR},
+      </if>
+      <if test="seatQuantity != null" >
+        seat_quantity = #{seatQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="doorQuantity != null" >
+        door_quantity = #{doorQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="fuelType != null" >
+        fuel_type = #{fuelType,jdbcType=VARCHAR},
+      </if>
+      <if test="transmissionType != null" >
+        transmission_type = #{transmissionType,jdbcType=VARCHAR},
+      </if>
+      <if test="displacement != null" >
+        displacement = #{displacement,jdbcType=INTEGER},
+      </if>
+      <if test="octaneRating != null" >
+        octane_rating = #{octaneRating,jdbcType=VARCHAR},
+      </if>
+      <if test="drivenMethod != null" >
+        driven_method = #{drivenMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="enItkForm != null" >
+        en_itk_form = #{enItkForm,jdbcType=VARCHAR},
+      </if>
+      <if test="skylight != null" >
+        skylight = #{skylight,jdbcType=TINYINT},
+      </if>
+      <if test="tankCapacity != null" >
+        tank_capacity = #{tankCapacity,jdbcType=DOUBLE},
+      </if>
+      <if test="speaker != null" >
+        speaker = #{speaker,jdbcType=INTEGER},
+      </if>
+      <if test="boxQuantity != null" >
+        box_quantity = #{boxQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="seat != null" >
+        seat = #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="reversingRadar != null" >
+        reversing_radar = #{reversingRadar,jdbcType=TINYINT},
+      </if>
+      <if test="airbag != null" >
+        airbag = #{airbag,jdbcType=INTEGER},
+      </if>
+      <if test="dvdCd != null" >
+        dvd_cd = #{dvdCd,jdbcType=VARCHAR},
+      </if>
+      <if test="gps != null" >
+        gps = #{gps,jdbcType=TINYINT},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="brandId != null" >
+        brand_id = #{brandId,jdbcType=BIGINT},
+      </if>
+      <if test="accessTimes != null" >
+        access_times = #{accessTimes,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dev.main.tenancy.domain.TncCar" >
+    update tnc_car
+    set series = #{series,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      residual = #{residual,jdbcType=INTEGER},
+      year = #{year,jdbcType=INTEGER},
+      config_section = #{configSection,jdbcType=VARCHAR},
+      seat_quantity = #{seatQuantity,jdbcType=INTEGER},
+      door_quantity = #{doorQuantity,jdbcType=INTEGER},
+      fuel_type = #{fuelType,jdbcType=VARCHAR},
+      transmission_type = #{transmissionType,jdbcType=VARCHAR},
+      displacement = #{displacement,jdbcType=INTEGER},
+      octane_rating = #{octaneRating,jdbcType=VARCHAR},
+      driven_method = #{drivenMethod,jdbcType=VARCHAR},
+      en_itk_form = #{enItkForm,jdbcType=VARCHAR},
+      skylight = #{skylight,jdbcType=TINYINT},
+      tank_capacity = #{tankCapacity,jdbcType=DOUBLE},
+      speaker = #{speaker,jdbcType=INTEGER},
+      box_quantity = #{boxQuantity,jdbcType=INTEGER},
+      seat = #{seat,jdbcType=VARCHAR},
+      reversing_radar = #{reversingRadar,jdbcType=TINYINT},
+      airbag = #{airbag,jdbcType=INTEGER},
+      dvd_cd = #{dvdCd,jdbcType=VARCHAR},
+      gps = #{gps,jdbcType=TINYINT},
+      type_id = #{typeId,jdbcType=BIGINT},
+      store_id = #{storeId,jdbcType=BIGINT},
+      brand_id = #{brandId,jdbcType=BIGINT},
+      access_times = #{accessTimes,jdbcType=BIGINT},
+      status = #{status,jdbcType=TINYINT},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

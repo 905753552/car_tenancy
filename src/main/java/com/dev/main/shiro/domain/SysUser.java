@@ -4,11 +4,14 @@ import com.dev.main.common.domain.BaseDomain;
 import java.util.Date;
 
 public class SysUser extends BaseDomain {
-    // 主键
-    private String id;
+    // （管理）系统用户 主键 (自增)
+    private Long id;
 
-    // 用户名
+    // 用户名 唯一
     private String username;
+
+    // 微信号
+    private String wechatId;
 
     // 密码
     private String password;
@@ -16,25 +19,42 @@ public class SysUser extends BaseDomain {
     // 盐值
     private String salt;
 
-    // 最后交互时间
+    // 上次登录时间
     private Date lastAccessTime;
 
     // 状态：1-可用，0-禁用
     private Byte status;
 
-    private Byte isDelete;
+    // 手机号
+    private String phone;
 
-    // 时间戳
+    // 性别
+    private Byte gender;
+
+    // 姓名
+    private String name;
+
+    // 身份证号
+    private String idCard;
+
+    // 邮箱
+    private String email;
+
+    // 是否删除 1-删除 
+    private Byte isDeleted;
+
+    // 创建时间
     private Date gmtCreate;
 
+    // 修改时间
     private Date gmtModified;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -43,6 +63,14 @@ public class SysUser extends BaseDomain {
 
     public void setUsername(String username) {
         this.username = username == null ? null : username.trim();
+    }
+
+    public String getWechatId() {
+        return wechatId;
+    }
+
+    public void setWechatId(String wechatId) {
+        this.wechatId = wechatId == null ? null : wechatId.trim();
     }
 
     public String getPassword() {
@@ -77,12 +105,52 @@ public class SysUser extends BaseDomain {
         this.status = status;
     }
 
-    public Byte getIsDelete() {
-        return isDelete;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setIsDelete(Byte isDelete) {
-        this.isDelete = isDelete;
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
+    }
+
+    public Byte getGender() {
+        return gender;
+    }
+
+    public void setGender(Byte gender) {
+        this.gender = gender;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard == null ? null : idCard.trim();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
+    public Byte getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Byte isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public Date getGmtCreate() {

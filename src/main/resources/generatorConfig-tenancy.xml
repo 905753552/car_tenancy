@@ -183,13 +183,95 @@
 		-->
 		<!--要根据哪张表生成，要在这里配置 -->
 		<!--用百分号表示生成所有表,可以直接省去一个一个写 <table tableName="%" /> -->
-	    <table  domainObjectName="SysUser" tableName="sys_user" delimitIdentifiers="false" enableCountByExample="false"
+	    <table  domainObjectName="AddressRegion" tableName="address_region" delimitIdentifiers="false" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
   			<property name="useActualColumnNames" value="false"/>
 	    </table>
-
-
-
+		<table  domainObjectName="SysConfig" tableName="sys_config" delimitIdentifiers="false" enableCountByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false"/>
+		</table>
+		<table  domainObjectName="TncAddress" tableName="tnc_address" delimitIdentifiers="false" enableCountByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false"/>
+		</table>
+		<table  domainObjectName="TncAds" tableName="tnc_ads" delimitIdentifiers="false" enableCountByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false"/>
+		</table>
+		<table  domainObjectName="TncBrand" tableName="tnc_brand" delimitIdentifiers="false" enableCountByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false"/>
+		</table>
+		<table  domainObjectName="TncCar" tableName="tnc_car" delimitIdentifiers="false" enableCountByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false"/>
+		</table>
+		<table  domainObjectName="TncCarItem" tableName="tnc_car_item" delimitIdentifiers="false" enableCountByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false"/>
+		</table>
+		<table  domainObjectName="TncCarPic" tableName="tnc_car_pic" delimitIdentifiers="false" enableCountByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false"/>
+		</table>
+		<table  domainObjectName="TncCarType" tableName="tnc_car_type" delimitIdentifiers="false" enableCountByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false"/>
+		</table>
+		<table  domainObjectName="TncComment" tableName="tnc_comment" delimitIdentifiers="false" enableCountByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false"/>
+		</table>
+		<table  domainObjectName="TncCoupon" tableName="tnc_coupon" delimitIdentifiers="false" enableCountByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false"/>
+		</table>
+		<table  domainObjectName="TncCustomer" tableName="tnc_customer" delimitIdentifiers="false" enableCountByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false"/>
+		</table>
+		<table  domainObjectName="TncOrder" tableName="tnc_order" delimitIdentifiers="false" enableCountByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false"/>
+		</table>
+		<table  domainObjectName="TncPackageScheme" tableName="tnc_package_scheme" delimitIdentifiers="false" enableCountByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false"/>
+		</table>
+		<table  domainObjectName="TncPoint" tableName="tnc_point" delimitIdentifiers="false" enableCountByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false"/>
+		</table>
+		<table  domainObjectName="TncPointLog" tableName="tnc_point_log" delimitIdentifiers="false" enableCountByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false"/>
+		</table>
+		<table  domainObjectName="TncPriceScheme" tableName="tnc_price_scheme" delimitIdentifiers="false" enableCountByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false"/>
+		</table>
+		<table  domainObjectName="TncStore" tableName="tnc_store" delimitIdentifiers="false" enableCountByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false"/>
+		</table>
 	</context>
 </generatorConfiguration>

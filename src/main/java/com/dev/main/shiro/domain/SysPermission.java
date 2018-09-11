@@ -7,14 +7,17 @@ public class SysPermission extends BaseDomain {
     // 主键
     private Long id;
 
-    // url地址
-    private String url;
-
-    // 权限名
+    // 角色名 唯一
     private String name;
 
-    // 类型
-    private String type;
+    // 描述
+    private String description;
+
+    // 权限url
+    private String url;
+
+    // 权限类型 0-菜单 1-api
+    private Byte type;
 
     // 权限代码，使用分隔符":"
     private String code;
@@ -22,17 +25,17 @@ public class SysPermission extends BaseDomain {
     // 排序字符串
     private String sortString;
 
-    // 直接父权限ID
+    // 直接父权限 外键
     private Long parentId;
 
-    // 所有父权限ID，使用分隔符"/"
-    private Long parentIds;
-
-    // 描述
-    private String description;
+    // 所有父权限，使用“/”分隔
+    private String parentIds;
 
     // 状态：1-可用，0-禁用
-    private Integer status;
+    private Byte status;
+
+    // 是否删除 1-删除 
+    private Byte isDeleted;
 
     // 创建时间
     private Date gmtCreate;
@@ -48,14 +51,6 @@ public class SysPermission extends BaseDomain {
         this.id = id;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
-    }
-
     public String getName() {
         return name;
     }
@@ -64,12 +59,28 @@ public class SysPermission extends BaseDomain {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getType() {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
+    }
+
+    public Byte getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+    public void setType(Byte type) {
+        this.type = type;
     }
 
     public String getCode() {
@@ -96,28 +107,28 @@ public class SysPermission extends BaseDomain {
         this.parentId = parentId;
     }
 
-    public Long getParentIds() {
+    public String getParentIds() {
         return parentIds;
     }
 
-    public void setParentIds(Long parentIds) {
-        this.parentIds = parentIds;
+    public void setParentIds(String parentIds) {
+        this.parentIds = parentIds == null ? null : parentIds.trim();
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
-    }
-
-    public Integer getStatus() {
+    public Byte getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Byte status) {
         this.status = status;
+    }
+
+    public Byte getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Byte isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public Date getGmtCreate() {
