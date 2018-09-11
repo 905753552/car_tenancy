@@ -88,7 +88,7 @@
 
                 </div>
                 <div class="mybtndiv">
-                    <button type="button" class="tnc_btn tnc_btn_green">保存</button>
+                    <button type="button" class="tnc_btn tnc_btn_green" id="save_btn">保存</button>
                 </div>
                 <div class="myborder-line"></div>
             </div>
@@ -178,4 +178,11 @@
 <script src="/js/common/common.js"></script>
 <script src="/js/jquery.validate.min.js"></script>
 <script src="/js/tenancy/header.js"></script>
+<script>
+    window.onkeydown = function(){
+        if (event.keyCode===13){  //回车键的键值为13
+            $("#save_btn").click();//模拟按下submit确认按钮
+        }
+    }
+</script>
 </html>
