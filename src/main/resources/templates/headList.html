@@ -3,15 +3,16 @@
 <link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap.css">
 <link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap-grid.css">
 <link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap-reboot.css">
+<link rel="stylesheet" href="/layui-v2.4.3/css/layui.css" media="all">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/headList.css">
 <link rel="stylesheet" href="/css/leftList.css">
 <link rel="stylesheet" href="/css/reset.css">
-<link rel="stylesheet" href="/js/plugins/My97DatePicker/4.8/skin/WdatePicker.css">
 <link rel="stylesheet" href="/fonts/font-awesome-4.7.0/css/font-awesome.css">
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/footer.css">
 <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/css/car_tabs.css">
 <head>
     <meta charset="UTF-8">
     <title>头部列表</title>
@@ -24,7 +25,7 @@
 </head>
 <body>
 <div class="container-fluid tnc_container tnc_header">
-    <div class="row tnc_head" style="">
+    <div class="row tnc_head">
         <div class="tnc_head_bd">
             <div><a class="tnc_head_brand tnc_logo" href="/"></a></div>
             <div class="tnc_head_menu">
@@ -76,14 +77,14 @@
                 <div class="menu-left">
                     <div class="menu-input-group">
                         <div class="row top-menu">
-                            <label class="col-defineone tnc_c_car">&emsp;取车&emsp;</label>
+                            <label class="tnc_c_car">&emsp;取车&emsp;</label>
                             <input type="text" home-flag value="肇庆" maxlength="10"
                                    default-value="选择城市" link-input="fromCityId"
-                                   class="col-definetwo tnc_inpcity tnc_input_citySD tnc_input_text"
+                                   class="tnc_inpcity tnc_input_citySD tnc_input_text"
                                    name="fromCity" id="fromCity2" t_popup="0">
                             <input type="text" home-flag value="星湖大道店" maxlength="30"
                                    default-value="请选择取车门店" link-input="fromStoreId"
-                                   class="col-definethree tnc_inpstore tnc_input_citySD tnc_input_text"
+                                   class="tnc_inpstore tnc_input_citySD tnc_input_text"
                                    name="fromStoreName" id="fromStoreName" t_popup="0" ischain="1">
                             <input type="hidden" value="2432" name="fromStoreId" id="fromStoreId">
                             <input type="hidden" class="" for="showsentAddress_span1" value="送车上门">
@@ -91,15 +92,15 @@
                                   style="display: none"></span>
                         </div>
                         <div class="row top-menu">
-                            <label class="tnc_c_car col-defineone">&emsp;还车&emsp;</label>
+                            <label class="tnc_c_car">&emsp;还车&emsp;</label>
                             <input type="text" home-flag value="肇庆" maxlength="10"
                                    default-value="选择城市" link-input="toCityId"
-                                   class="tnc_inpcity tnc_input_citySD tnc_input_text col-definetwo"
+                                   class="tnc_inpcity tnc_input_citySD tnc_input_text"
                                    name="toCity" id="toCity" t_popup="0">
                             <input type="hidden" id="toCityId" name="toCityId" value="338">
                             <input type="text" home-flag value="星湖大道店" maxlength="30"
                                    default-value="请选择取车门店" link-input="toStoreId"
-                                   class="tnc_inpstore tnc_input_citySD tnc_input_text col-definethree"
+                                   class="tnc_inpstore tnc_input_citySD tnc_input_text"
                                    name="toStoreName" id="toStoreName" t_popup="0" ischain="1">
                             <input type="hidden" value="2432" name="toStoreId" id="toStoreId">
                             <input type="hidden" class="" for="showpickAddress_span2" value="上门取车">
@@ -109,23 +110,21 @@
                     </div>
                     <div class="menu-input-group">
                         <div class="row top-menu">
-                            <label class="col-definefour tnc_c_date">取车时间</label>
+                            <label class="tnc_c_date">取车时间</label>
                             <input type="text" value=""
-                                   class="col-definefive tnc_inpdate tnc_input_calendar tnc_input_text Wdate"
-                                   onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+                                   class="tnc_inpdate tnc_input_calendar tnc_input_text layui-input cal_bg"
                                    name="fromDate" id="fromDate" readonly="readonly" autocomplete="on">
                             <input type="text" value="10:00" default-value="08:00-21:00"
-                                   class="col-definesix tnc_inptime tnc_input_timedown tnc_input_text tnc_input_citySD"
+                                   class="tnc_inptime tnc_input_timedown tnc_input_text tnc_input_citySD"
                                    readonly="readonly" name="fromHourMinute" id="fromHourMinute">
                         </div>
                         <div class="row top-menu">
-                            <label class="col-definefour tnc_c_date">还车时间</label>
+                            <label class="tnc_c_date">还车时间</label>
                             <input type="text" value=""
-                                   class="col-definefive tnc_inpdate tnc_input_calendar tnc_input_text Wdate"
-                                   onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+                                   class="tnc_inpdate tnc_input_calendar tnc_input_text layui-input cal_bg"
                                    name="toDate" id="toDate" readonly="readonly" autocomplete="on">
                             <input type="text" value="10:00" default-value="08:00-21:00"
-                                   class="col-definesix tnc_inptime tnc_input_timedown tnc_input_text tnc_input_citySD"
+                                   class="tnc_inptime tnc_input_timedown tnc_input_text tnc_input_citySD"
                                    readonly="readonly" name="toHourMinute" id="toHourMinute">
                         </div>
                     </div>
@@ -138,12 +137,12 @@
         </div>
     </from>
     <div class="row">
-        <div class="col-md-3 offset-lg-1 tnc_carcon">
+        <div class="col-defineone offset-lg-1 tnc_carcon">
             <div class="tnc_leftlist tnc_h1">
                 <div class="tnc_lchoose_box">
                     <div class="tnc-lbox bdbtm orderLevel">
                         <p class="tnc_left_title">车型</p>
-                        <ul class="tnc_chexing">
+                        <ul class="tnc_chexing" id="ch_type">
                             <li class="tnc_filter filter_level all">
                                 <a class="cxdefault checked">
                                     <i class="zc_cx_bx"></i>
@@ -225,7 +224,7 @@
                     </div>
                     <div class="tnc-lbox bdbtm orderBrand">
                         <p class="tnc_left_title">品牌</p>
-                        <ul class="car_brand">
+                        <ul class="car_brand" id="ch_brand">
                             <li class="orderlevelcheck filter_brand all"><a class="checked ppdefault">不限</a></li>
                             <li class="orderlevelcheck filter_brand brandname"><a href="#" data="12">奥迪</a></li>
                             <li class="orderlevelcheck filter_brand brandname"><a href="#" data="11">宝马</a></li>
@@ -270,14 +269,194 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-12 col-lg-8 pad-define1">
+            <!--<button onclick="doSeachByAllType()">查车</button>-->
+            <div class="container">
+                <!--row start-->
+                <div class="row clearfix">
+                    <!--col start-->
+                    <div class="col-md-12 column" v-cloak id="carInfoTab-app">
+                        <!--tabHeader  ul start-->
+                        <ul class="nav nav-tabs bg-define" id="mycarInfoListTab">
+                            <!--日租  必有套餐  tabHeader start-->
+                            <li class="nav-item wid-define">
+                                <a class="nav-link active pad-define2 text-secondary" id="carDay"
+                                   @click="doSeachByPackage('carDay')" data-toggle="tab" href="#pane_carDay">日租自驾</a>
+                            </li>
+                            <!--日租  必有套餐 tabHeader end-->
+                            <!--其他套餐 tabHeader start-->
+                            <li class="nav-item wid-define" v-for="carMenu in evenMenus">
+                                <a class="nav-link pad-define2 text-secondary" :id="carMenu.mid"
+                                   @click="doSeachByPackage(carMenu.mid)" data-toggle="tab"
+                                   :href="'#pane_'+carMenu.mid">{{carMenu.mname}}</a>
+                            </li>
+                            <!--其他套餐 tabHeader end-->
+                            <!--按价格排序 tabHeader start-->
+                            <div class="col-md-3 price-lo dev_sort_btn">
+                                <a class="nav-link2 text-secondary" id="dev_sort_button" @click="doSort" href="#">
+                                    <span class="dev_od_btn_a">↓</span> 租金由高到低
+                                </a>
+                            </div>
+                            <!--按价格排序 tabHeader end-->
+                        </ul>
+                        <!--tabHeader  ul end-->
+
+                        <!--tabContent start-->
+                        <div class=" tab-content">
+                            <!--日租 start-->
+                            <div class="tab-pane active bg-define" id="pane_carDay">
+                                <ul class="nav navbar-nav" id="car_day">
+                                    <li v-if="items.length>0" v-for="item in items" class="list-unstyled dev_underline">
+                                        <div class="col-md-12 column">
+                                            <div class="row clearfix">
+                                                <div class="col-md-4 column pic">
+                                                    <a :href="'#/url?carId='+item.carId">
+                                                        <img :src="item.carImg" alt="图片" width="230px"
+                                                             height="130px"></a>
+                                                </div>
+                                                <div class="col-md-3 column info">
+                                                    <div class="info_block">
+                                                        <p class="info_car_name">{{item.carName}}{{item.carVer}}</p>
+                                                        <p class="info_car_oth">
+                                                            {{item.carVan}}|{{item.carPower}}|乘坐{{item.carSeat}}人</p>
+                                                        <div class="bh_sale">
+                                                            <a class="re" data="87-1"><span class="bred">人气</span><i
+                                                                    class="sale_con">{{item.carHot}}</i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5 column dev_ord">
+                                                    <div class="dev_order_box">
+                                                        <div class="dev_od_price dev_od_price_set">
+                                                            <div class="dev_car_price">
+	                           <span class="dev_pri_ye">
+	                               <em class="dev_rmb">¥</em>
+	                               <em class="dev_num">{{item.carTotalPrice}}</em>
+	                               <em class="dev_unit"></em>
+	                           </span>
+                                                                <span class="dev_pri_ye">
+                                    <em class=" dev_week_fontsize">单价:</em>
+                                    <em class=" dev_week_fontsize">¥</em>
+                                    <em class="dev_week_savemoney">{{item.carPrice}}</em>
+                                    <em class=" dev_week_fontsize"> 每天</em>
+                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <span class="dev_od_btn">
+                                                            <a href='#' @click="doCarOrder(item)"
+                                                               class="btn zc_btn_size tnc_btn_green">租车</a></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--日租 end-->
+
+                            <div class="tab-pane " v-for="carMenuP in evenMenus" :id="'pane_'+carMenuP.mid">
+                                <ul class="nav navbar-nav">
+                                    <li v-if="items.length>0" v-for="item in items" class="list-unstyled">
+                                        <div class="col-md-12 column">
+                                            <div class="row clearfix dev_underline">
+                                                <div class="col-md-4 column pic">
+                                                    <a :href="'#/url?carId='+item.carId">
+                                                        <img :src="item.carImg" alt="图片" width="230px"
+                                                             height="130px"></a>
+                                                </div>
+                                                <div class="col-md-3 column info">
+                                                    <div class="info_block">
+                                                        <p class="info_car_name">{{item.carName}}{{item.carVer}}</p>
+                                                        <p class="info_car_oth">
+                                                            {{item.carVan}}|{{item.carPower}}|乘坐{{item.carSeat}}人</p>
+                                                        <div class="bh_sale">
+                                                            <a class="re" data="87-1"><span class="bred">人气</span><i
+                                                                    class="sale_con">{{item.carHot}}</i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5 column dev_ord">
+                                                    <div class="dev_order_box">
+                                                        <div class="dev_od_price dev_od_price_set">
+                                                            <div class="dev_car_price">
+	                           <span class="dev_pri_ye">
+	                               <em class="dev_rmb">¥</em>
+	                               <em class="dev_num">{{item.carTotalPackagePrice}}</em>
+	                               <em class="dev_unit">/套餐价</em>
+	                           </span>
+                                                                <span class="dev_pri_ye">
+	                                    <em class=" dev_week_fontsize">原价:</em>
+	                                    <em class=" dev_week_fontsize">¥</em>
+	                                    <em class="dev_week_ori dev_week_fontsize">{{item.carTotalPrice}}</em>
+	                                    <em class=" dev_week_fontsize"> | 节省 <i
+                                                class="dev_week_savemoney dev_week_fontsize">¥</i><i
+                                                class="dev_week_savemoney dev_week_fontsize">{{item.carTotalPrice-item.carTotalPackagePrice}}</i></em>
+	                               </span>
+                                                            </div>
+                                                            <span class="dev_od_btn">
+                                                                <a href='#' @click="doCarOrder(item)"
+                                                                   class="btn tnc_btn_green">套餐预订</a></span>
+                                                        </div>
+                                                        <!---->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--tabContent end-->
+                    </div>
+                    <!--col end-->
+                </div>
+                <!--row end-->
+            </div>
+        </div>
     </div>
 </div>
 
 
 <script src="/js/jquery-3.3.1.min.js"></script>
 <script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>
-<script src="/js/plugins/My97DatePicker/4.8/WdatePicker.js"></script>
+<script src="/layui-v2.4.3/layui.all.js"></script>
+<script src="/vue-2.5.17/vue.min.js"></script>
 <script src="/js/common/common.js"></script>
 <script src="/js/tenancy/leftList_ch.js"></script>
+<script src="/js/tenancy/car_tabs.js"></script>
+<script>
+    layui.use(['laydate', 'layer'], function () {
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+
+        laydate.render({
+            elem: '#fromDate' //指定元素
+            ,btns:['now', 'confirm']
+            ,theme:'#00c189'
+            ,min:0
+            ,max:89
+            ,change: function(value){
+                console.log(value);
+            }
+        });
+        laydate.render({
+            elem: '#toDate' //指定元素
+            ,btns:['now', 'confirm']
+            ,theme:'#00c189'
+            ,min:0
+            ,max:89
+        });
+
+    });
+    $(function () {
+        $("#mycarInfoListTab li a").click(function () {
+            $(this).parent().siblings('li').children().removeClass('active');  // 删除其他兄弟元素的样式
+            $(this).addClass('active');                   // 添加当前元素的样式
+            return false;                                 //加这句来阻止跳转 可用来调试效果
+        });
+    });
+</script>
 </body>
 </html>

@@ -282,6 +282,7 @@
 
 .tnc-lbox .car_brand li a.checked {
     color: #00c189;
+    font-weight: bold;
 }
 
 .tnc-lbox .car_brand li a {

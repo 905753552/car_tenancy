@@ -12,6 +12,10 @@
     padding-right: 5px;
 }
 
+.cal_bg {
+    background: #fff url(../img/calendar.png) no-repeat right;
+}
+
 .menu-left {
     display: inline-block;
     margin-top: 15px;
