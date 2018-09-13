@@ -5,7 +5,7 @@ package com.dev.main.common.statics;
  */
 public interface StatusCode {
 
-    static final Integer SUCCESS = 200; // 成功
+    static final Integer SUCCESS = 0; // 成功
 
     static final Integer NO_LOGIN = 401; // 未授权
 
