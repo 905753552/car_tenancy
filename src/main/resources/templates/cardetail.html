@@ -7,37 +7,101 @@
     <link rel="stylesheet" type="text/css" href="/bootstrap-4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="/css/cardetail.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
 
 </head>
 <body>
 <script src="/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="/js/cardetail.js"></script>
 <script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>
-<!--<script src="/vue-2.5.17/vue.min.js"></script>-->
-<div class="orderDetails" style="padding-bottom:35px;">
+<script type="text/javascript" src="/js/tenancy/cardetail.js"></script>
+
+<div v-cloak id="header-app" class="row tnc_head">
+    <div class="tnc_head_bd">
+        <div><a class="tnc_head_brand tnc_logo" href="/"></a></div>
+        <div class="tnc_head_menu" >
+            <ul class="">
+                <li class="tnc_head_menu_item">
+                    <a class="tnc_head_menu_active" href="/">首页 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="tnc_head_menu_item">
+                    <a class="" href="#">选车</a>
+                </li>
+                <li class="tnc_head_menu_item">
+                    <a class="" href="#">门店</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tnc_head_right">
+            <div v-show="!customer.id" class="tnc_head_login tnc_header_active" style="display: none">
+                <a href="login" class="">登录</a> / <a href="/register" class="">注册</a>
+            </div>
+            <div v-show="customer.id" class="tnc_head_login" >
+                <h1 class="tnc_head_welcome">您好，{{customer.name}}</h1>
+                <div id="tnc_toggle_area" class="tnc_head_dropdown">
+                    <a id="tnc_toggle_area_btn" href="#">个人中心&nbsp;<i class="fa fa-caret-down"></i></a>
+                    <div id="tnc_toggle_menu" style="display: none">
+                        <div class="triangle_border_up"></div>
+                        <div class="tnc_collapse_list" >
+                            <a href="#" class="bhpr reddot">我的订单</a>
+                            <a href="#">我的资产</a>
+                            <a href="#">我的账户</a>
+                            <a href="javascript:;" @click="logout">退出登录</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tnc_head_tel">
+                <div class="">
+                            <span class="">
+                                <i class="fa fa-phone"></i>
+                                <span>408-666-666</span>
+                            </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div id="cardetail_app" class="orderDetails" style="padding-bottom:35px;">
+
+    <div class="fr" style="width:301px">
+        <div class="orderBoxBlue m20_0">
+            <div class="ac p10_0" style="  border: solid 1px #dbe4eb; margin: 100px 0px"><a style="display:block;" id='specileMoreA' href="javascript:void(0);"><img src="/img/cardetail_more.jpg"></a></div>
+        </div>
+    </div>
+
     <p class="orderCarInfor-title"><b>当前位置：</b><a href="https://www.zuche.com" style="color:#00c189;">神州租车 </a>&gt;<a href="https://order.zuche.com/order/OrderSecondControl.do" style="color:#00c189;">短租自驾</a>&gt; <span>
-			雪佛兰科鲁兹/三厢/1.5自动</span></p>
+			{{mytitle}}</span></p>
     <div class="fl carInfor-left">
         <h1>
             <input type="button" value="立即预订" class="tnc_btn tnc_btn_green fr" style="margin-top:12px;height: 30px;width: 100px">
-            雪佛兰科鲁兹/三厢/1.5自动</h1>
+            {{mytitle}}</h1>
         <div id="ifocus">
             <div id="ifocus_pic">
                 <div id="ifocus_piclist" style="left:0; top:0;">
                     <ul>
-                        <li><img src="https://fimg.zuchecdn.com/upload/web/preview/87_a.jpg"></li>
-                        <li><img src="https://fimg.zuchecdn.com/upload/web/preview/87_b.jpg"></li>
-                        <li><img src="https://fimg.zuchecdn.com/upload/web/preview/87_c.jpg"></li>
-                        <li><img src="https://fimg.zuchecdn.com/upload/web/preview/87_d.jpg"></li>
+                        <li v-for="img in car.imgs"><img :src="img"></li>
+                        <!--<li><img src="https://fimg.zuchecdn.com/upload/web/preview/87_a.jpg"></li>-->
+                        <!--<li><img src="https://fimg.zuchecdn.com/upload/web/preview/87_b.jpg"></li>-->
+                        <!--<li><img src="https://fimg.zuchecdn.com/upload/web/preview/87_c.jpg"></li>-->
+                        <!--<li><img src="https://fimg.zuchecdn.com/upload/web/preview/87_d.jpg"></li>-->
                     </ul>
                 </div>
             </div>
             <div id="ifocus_btn">
                 <ul>
-                    <li class="current"><img src="https://fimg.zuchecdn.com/upload/web/preview/87_a.jpg"></li>
-                    <li class="normal"><img src="https://fimg.zuchecdn.com/upload/web/preview/87_b.jpg"></li>
-                    <li class="normal"><img src="https://fimg.zuchecdn.com/upload/web/preview/87_c.jpg"></li>
-                    <li class="normal"><img src="https://fimg.zuchecdn.com/upload/web/preview/87_d.jpg"></li>
+                    <li class="current"><img :src="car.imgs[0]"></li>
+                    <li class="normal"><img :src="car.imgs[1]"></li>
+                    <li class="normal"><img :src="car.imgs[2]"></li>
+                    <li class="normal"><img :src="car.imgs[3]"></li>
+                    <!--<li class="current"><img src="https://fimg.zuchecdn.com/upload/web/preview/87_a.jpg"></li>-->
+                    <!--<li class="normal"><img src="https://fimg.zuchecdn.com/upload/web/preview/87_b.jpg"></li>-->
+                    <!--<li class="normal"><img src="https://fimg.zuchecdn.com/upload/web/preview/87_c.jpg"></li>-->
+                    <!--<li class="normal"><img src="https://fimg.zuchecdn.com/upload/web/preview/87_d.jpg"></li>-->
                 </ul>
             </div>
         </div>
@@ -45,57 +109,136 @@
 
 
         <h2><span>
-		科鲁兹</span>租车基本信息</h2>
+		{{car.name}}</span>租车基本信息</h2>
         <ul class="carInfor-xj clearfix">
             <li><b class="pp">&nbsp;</b>品　　牌：<span>
-			雪佛兰</span></li>
+			{{car.name}}</span></li>
             <li><b class="cx">&nbsp;</b>车　　系：<span>
-				科鲁兹</span></li>
+				{{car.series}}</span></li>
             <li class="nonebd"><b class="ndk">&nbsp;</b>年 代 款：<span>
-			2010</span></li>
+			{{car.year}}</span></li>
             <li class="nonebd"><b class="pzk">&nbsp;</b>配 置 款：<span>
-				天地版</span></li>
+				{{car.config_section}}</span></li>
         </ul>
-        <h2><span>科鲁兹</span>租车配置信息</h2>
+        <h2><span>{{car.name}}</span>租车配置信息</h2>
         <ul class="carInfor-xj clearfix">
             <li><b class="zws">&nbsp;</b>座 位 数：<span>
-				5</span></li>
+				{{car.seat_quantity}}</span></li>
             <li><b class="cms">&nbsp;</b>车 门 数：<span>
-						4</span></li>
+						{{car.door_quantity}}</span></li>
             <li><b class="rllx">&nbsp;</b>燃料类型：<span>
-			汽油</span></li>
+			{{car.fuel_type}}</span></li>
             <li><b class="bsxlx">&nbsp;</b>变速箱类型：<span>
-				AT</span></li>
-            <li><b class="pl">&nbsp;</b>排　　量：<span>1598</span></li>
+				{{car.transmission_type}}</span></li>
+            <li><b class="pl">&nbsp;</b>排　　量：<span>  {{car.displacement}}</span></li>
             <li><b class="rybh">&nbsp;</b>燃油标号：<span>
-				92-93汽油</span></li>
+				{{car.octane_rating}}</span></li>
             <li><b class="qdfs">&nbsp;</b>驱动方式：<span>
-				前驱</span></li>
+				{{car.driven_method}}</span></li>
             <li><b class="fdjjqxs">&nbsp;</b>发动机进气形式：<span>
-				自然吸气</span></li>
+				{{car.en_itk_form}}</span></li>
             <li><b class="tc">&nbsp;</b>天　　窗：<span>
-				单天窗</span></li>
+				{{car.skylight}}</span></li>
             <li><b class="yxrl">&nbsp;</b>油箱容量：<span>
-				60</span></li>
+				{{car.tank_capacity}}</span></li>
             <li><b class="yx">&nbsp;</b>音　　箱：<span>
-				6</span></li>
+				{{car.speaker}}</span></li>
             <li><b class="zy">&nbsp;</b>座　　椅：<span>
-				皮革座椅</span></li>
+				{{car.seat}}</span></li>
             <li><b class="tc">&nbsp;</b>倒车雷达：<span>
-				无</span></li>
+				{{car.reversing_radar}}</span></li>
             <li><b class="qin">&nbsp;</b>气　　囊：<span>
-			4</span></li>
+			{{car.airbag}}</span></li>
             <li class="nonebd"><b class="dvd">&nbsp;</b>DVD / CD：<span>
-				CD</span></li>
+				{{car.dvd_cd}}</span></li>
             <li class="nonebd"><b class="gps">&nbsp;</b>GPS导航：<span>
-				无</span></li>
+				{{car.gps}}</span></li>
         </ul>
         <div class="ac pt20"><input type="button" value="立即预订" class="tnc_btn tnc_btn_green"></div>
         <h2>同等级别车型推荐</h2>
         <div class="carInfor-xj-a pl20">
-            暂无数据</div>
+            暂无数据
+            <button onclick="getCar()">ggg</button>
+        </div>
+
     </div>
 </div>
+
+<div class="row tnc_footer_background " style="display: inline">
+    <div class="col-sm-12 col-md-10 offset-md-1 tnc_footer_help">
+        <dl class="tnc_footer_help_item">
+            <dt>租车预订说明</dt>
+            <dd>
+                <a target="_blank" href="#">服务时间</a>
+                <a target="_blank" href="#">待租车况</a>
+                <a target="_blank" href="#">服务预订</a>
+                <a target="_blank" href="#">短租产品</a>
+                <a target="_blank" href="#">租车资格</a>
+                <a target="_blank" href="#">取还车说明</a>
+            </dd>
+        </dl>
+        <dl class="tnc_footer_help_item">
+            <dt>会员管理</dt>
+            <dd>
+                <a target="_blank" href="#">会员章程</a>
+                <a target="_blank" href="#">会员细则</a>
+                <a target="_blank" href="#">定级积分</a>
+            </dd>
+        </dl>
+        <dl class="tnc_footer_help_item">
+            <dt>紧急事务处理</dt>
+            <dd>
+                <a target="_blank" href="#">保险责任</a>
+                <a target="_blank" href="#">理赔说明</a>
+                <a target="_blank" href="#">事故处理</a>
+                <a target="_blank" href="#">救援及备用车</a>
+            </dd>
+        </dl>
+        <dl class="tnc_footer_help_item">
+            <dt>租车费用及结算</dt>
+            <dd>
+                <a target="_blank" href="#">价格说明</a>
+                <a target="_blank" href="#">结算流程</a>
+                <a target="_blank" href="#">储值卡</a>
+                <a target="_blank" href="#">积分</a>
+            </dd>
+        </dl>
+        <dl class="tnc_footer_help_item">
+            <dt>帮助中心</dt>
+            <dd>
+                <a target="_blank" href="#">常见问题</a>
+                <a target="_blank" href="#">新手上路</a>
+                <a target="_blank" href="#">服务规则 </a>
+            </dd>
+        </dl>
+        </dl>
+    </div>
+</div>
+
+<div class="row tnc_footer_link" style="background-color: #1b2b3b;">
+    <div class="col col-10 offset-md-1 tnc_about_link">
+        <a title="关于我们" href="https://huodong.zuche.com/gywm/" rel="nofollow">关于我们</a>
+        <a title="投资者关系" target="_blank" href="https://ir.zuche.com" rel="nofollow">投资者关系</a>
+        <a target="_parent" title="新闻中心" href="https://news.zuche.com/">新闻中心</a>
+        <a title="加盟合作" target="_blank" href="https://jiameng.zuche.com">加盟合作</a>
+        <a title="隐私保护" target="_parent" href="https://huodong.zuche.com/ysbh/" rel="nofollow">隐私保护</a>
+        <a title="网站导航" target="_parent" href="https://help.zuche.com/sitemap/">网站导航</a>
+        <a title="联系我们" target="_parent" href="https://huodong.zuche.com/lxwm/" rel="nofollow">联系我们</a>
+        <a title="招贤纳士" target="_blank" href="http://hr.ucarinc.com/" rel="nofollow">招贤纳士</a>
+        <a target="_blank" href="https://en.zuche.com" class="eng_wz">English<i class="eng_icon"></i></a>
+    </div>
+    <div class="col col-10 offset-md-1 tnc_copyright">
+        <span class="">Copyright©20xx-20xx www.wind.zuche.com All Rights Reserved.　肇庆乘风汽车租赁有限公司 粤ICP备10000518号   粤公网安备号 11010502020518</span>
+        <span class="">如果您对乘风租车网站有任何意见，欢迎发送邮件到 <a href="Mailto:web@wind.com" class="">web@wind.com</a></span>
+        <span class="">
+                    <a target="_blank" href="https://ss.knet.cn/verifyseal.dll?sn=2011091400100014977&amp;ct=df&amp;pa=294005" rel="nofollow" tabindex="-1" id="urlknet" class="sz_k"></a>
+                    <a target="_blank" id="___szfw_logo___" href="https://search.szfw.org/cert/l/CX20121016001772002081" rel="nofollow" title="诚信网站" class="sz_c"></a>
+                </span>
+    </div>
+</div>
+
+<script src="/vue-2.5.17/vue.min.js"></script>
+<script type="text/javascript" src="/js/tenancy/cardetail_show.js"></script>
 </body>
 </html>
 

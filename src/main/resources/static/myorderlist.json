@@ -1,0 +1,110 @@
+{
+  "carMenu": {
+    "code": 500,
+    "msg": "测试文本",
+    "carmenu": [
+      {
+        "mid": "carWorkday",
+        "mname": "工作日套餐"
+      },
+      {
+        "mid": "carWeek",
+        "mname": "周套餐"
+      },
+      {
+        "mid": "carMon",
+        "mname": "月套餐"
+      },
+      {
+        "mid": "carYear",
+        "mname": "年套餐"
+      },
+      {
+        "mid": "dayday",
+        "mname": "日租自驾"
+      }
+    ]
+  },
+  "myorders": {
+    "code":200,
+    "msg":"测试文本",
+    "orders":[
+      {
+        "name":"奥迪",
+        "series":"A8",
+        "box_quantity":5,
+        "displacement":2458,
+        "transmission_type":"AT",
+        "seat_quantity":5,
+        "id":"15366353102763",
+        "get_store_name":"肇庆 - 肇庆学院G3-321",
+        "start_date":"2018-09-12 13:00",
+        "return_store_name":"广州 - 广州大学F2-220",
+        "return_date":"2018-09-13 13:00",
+        "total_amount":768,
+        "status":1,
+        "img":"https://fimg.zuchecdn.com/upload/web/modepic/825.jpg"
+      },{
+        "name":"宝马",
+        "series":"X5",
+        "box_quantity":5,
+        "displacement":3650,
+        "transmission_type":"AT",
+        "seat_quantity":5,
+        "id":"15365727971995",
+        "get_store_name":"火星 - 火星学院G3-321",
+        "start_date":"2018-09-12 13:00",
+        "return_store_name":"美国 - 哈佛大学F2-220",
+        "return_date":"2018-09-13 13:00",
+        "total_amount":899,
+        "status":2,
+        "img":"https://fimg.zuchecdn.com/upload/web/modepic/833.jpg"
+      },{
+        "name":"奔驰",
+        "series":"C300",
+        "box_quantity":5,
+        "displacement":3125,
+        "transmission_type":"AT",
+        "seat_quantity":5,
+        "id":"15364756288786",
+        "get_store_name":"日本 - 富士山学院G3-321",
+        "start_date":"2018-09-12 13:00",
+        "return_store_name":"越南 - 山卡拉大学F2-220",
+        "return_date":"2018-09-13 13:00",
+        "total_amount":667,
+        "status":3,
+        "img":"https://fimg.zuchecdn.com/upload/web/modepic/847.jpg"
+      },{
+        "name":"奔驰",
+        "series":"C300",
+        "box_quantity":5,
+        "displacement":3125,
+        "transmission_type":"AT",
+        "seat_quantity":5,
+        "id":"15364756288786",
+        "get_store_name":"日本 - 富士山学院G3-321",
+        "start_date":"2018-09-12 13:00",
+        "return_store_name":"越南 - 山卡拉大学F2-220",
+        "return_date":"2018-09-13 13:00",
+        "total_amount":667,
+        "status":4,
+        "img":"https://fimg.zuchecdn.com/upload/web/modepic/833.jpg"
+      },{
+        "name":"奔驰",
+        "series":"C300",
+        "box_quantity":5,
+        "displacement":3125,
+        "transmission_type":"AT",
+        "seat_quantity":5,
+        "id":"15364756288786",
+        "get_store_name":"日本 - 富士山学院G3-321",
+        "start_date":"2018-09-12 13:00",
+        "return_store_name":"越南 - 山卡拉大学F2-220",
+        "return_date":"2018-09-13 13:00",
+        "total_amount":667,
+        "status":0,
+        "img":"https://fimg.zuchecdn.com/upload/web/modepic/844.jpg"
+      }
+      ]
+  }
+}

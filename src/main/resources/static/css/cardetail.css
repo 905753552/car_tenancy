@@ -54,7 +54,7 @@
 }
 /*icons*/
 .carInfor-xj b{ display:inline-block;width:20px;margin-right:5px; vertical-align:middle;}
-.pp,.cx,.ndk,.pzk,.zws,.cms,.rllx,.bsxlx,.pl,.rybh,.qdfs,.fdjjqxs,.pfbz,.tc,.yxrl,.yx,.zy,.tc,.qin,.dvd,.gps{background-image:url('../img/orderCarInforbg2.png');background-repeat:no-repeat;}
+.pp,.cx,.ndk,.pzk,.zws,.cms,.rllx,.bsxlx,.pl,.rybh,.qdfs,.fdjjqxs,.pfbz,.tc,.yxrl,.yx,.zy,.tc,.qin,.dvd,.gps{background-image:url('../img/orderCarInforbg.png');background-repeat:no-repeat;}
 .pp{height:18px; background-position:0px 0px}
 .cx{height:13px; background-position:0px -22px}
 .ndk{height:17px; background-position:0px -40px}
@@ -132,6 +132,9 @@ img, fieldset {
     margin: 2px;
 }
 
+.m20_0 {
+    margin: 20px 0;
+}
 html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, em, button {
     margin: 0;
     padding: 0;
@@ -194,4 +197,15 @@ input[type="button"], input[type="submit"] {
     -webkit-appearance: none;
     vertical-align: middle;
     line-height:normal;
+}
+
+input.citySD {
+    background: url(https://image.zuchecdn.com/newversion/common/input_select.png) no-repeat center right;
+}
+input.bluewords {
+    color: #61a1df;
+}
+
+input.graybde2 {
+    border: 1px solid #e2e2e2;
 }

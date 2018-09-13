@@ -1,0 +1,425 @@
+.zc_myright .memberlist_bd, .myright .orderlist_bd {
+    padding: 20px 30px;
+    position: relative;
+}
+.zc_myright .memberlist_bd h2, .myright .orderlist_bd h2 {
+    line-height: 40px;
+    font-size: 18px;
+    color: #60606c;
+    font-weight: 400;
+}
+.zc_addmembers_bd, .zc_query-condition_bd {
+    position: absolute;
+    top: 25px;
+    right: 0;
+    min-width: 580px;
+    z-index: 5;
+}
+.zc_addmembers_bd .add-tab, .zc_query-condition_bd .zc_box {
+    padding-right: 30px;
+}
+.zc_addmembers_bd .fr, .zc_query-condition_bd .fr {
+    height: 30px;
+    line-height: 30px;
+    color: #93939e;
+    padding-left: 10px;
+}
+.fr {
+    float: right;
+}
+input[type=button], input[type=submit] {
+    -webkit-appearance: none;
+    vertical-align: middle;
+}
+input[type=password], input[type=text] {
+    border-radius: 0;
+    width: 298px;
+    padding: 9px 10px;
+    border-color: #e9ebee;
+    border-style: solid;
+    border-width: 1px;
+    height: 18px;
+    font: 14px/18px "Microsoft YaHei",SimSun,Tahoma,Verdana,Arial,sans-serif;
+    outline: 0;
+    color: #93939e;
+    vertical-align: middle;
+    background-color: #fff;
+}
+.zc_blue_sub {
+    padding: 0 10px;
+    min-width: 78px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    border-radius: 2px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #6ab0ff;
+    cursor: pointer;
+    border: none;
+}
+.zc_gray_sub {
+    padding: 0 10px;
+    min-width: 86px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #93939e;
+    border: 1px solid #e9ebee;
+    border-radius: 2px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #fafbfd;
+    cursor: pointer;
+}
+.pl15, .zc_query-condition_bd .pl15 {
+    padding-left: 15px;
+    padding-right: 0;
+}
+.zc_query-condition_bd input.inputDay, .zc_query-condition_bd input.w175, .zc_query-condition_bd input.w98 {
+    width: 153px;
+    height: 18px;
+    line-height: 18px;
+    padding: 5px 10px;
+}
+.zc_iptcalendar {
+    background: url(https://image.zuchecdn.com/newversion/news/common/input_calendar.png) no-repeat center right;
+}
+.h20 {
+    height: 15px;
+    line-height: 15px;
+}
+.myright .orderlist_bd .subbox {
+    height: 36px;
+    margin-top: -36px;
+}
+/*.myright .orderlist_bd .subbox a.cura, .zc_myright .orderlist_bd .subbox a:hover {*/
+    /*text-decoration: none;*/
+    /*color: #fff;*/
+    /*background-color: #00c189;*/
+    /*border: 1px solid #00c189;*/
+/*}*/
+/*.myright .orderlist_bd .subbox a {*/
+    /*display: block;*/
+    /*position: relative;*/
+    /*height: 36px;*/
+    /*line-height: 36px;*/
+    /*border: 1px solid #e9ebee;*/
+    /*float: left;*/
+    /*margin-right: -1px;*/
+    /*background-color: #f8f8fa;*/
+    /*min-width: 90px;*/
+    /*text-align: center;*/
+    /*text-decoration: none;*/
+    /*font-size: 14px;*/
+    /*color: #93939e;*/
+    /*cursor: pointer;*/
+/*}*/
+.layui-tab-title  li.layui-this{
+    text-decoration: none;
+    color: #fff;
+    background-color: #00c189;
+}
+.layui-tab-title  li{
+    display: block;
+    position: relative;
+    height: 41px;
+    border: 1px solid #e9ebee;
+    float: left;
+    margin-right: -1px;
+    background-color: #f8f8fa;
+    min-width: 90px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    color: #93939e;
+    cursor: pointer;
+}
+.myright .orderlist_bd .subbox_m {
+    height: 34px;
+    border-bottom: 1px solid #f8f8fa;
+    border-bottom-color: #e9ebee;
+}
+
+a {
+    color: #6ab0ff;
+    text-decoration: none;
+    blr: expression(this.onFocus=this.blur());
+    outline: 0;
+}
+.zc_myorder_info {
+    padding-top: 14px;
+}
+
+table {
+    border-collapse: collapse;
+}
+.pc_tableHD thead .zc_table_order thead {
+    background-color: #f8f8fa;
+}
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.pc_tableHD th.al, .zc_table_order th.al {
+    padding-left: 17px;
+}
+
+.pc_tableHD td.al, .pc_tableHD th.al, .zc_table_order td.al, .zc_table_order th.al {
+    text-align: left;
+}
+.pc_tableHD th, .zc_table_order th {
+    height: 30px;
+    line-height: 30px;
+    background-color: #f8f8fa;
+    font-size: 12px;
+    color: #93939e;
+    font-weight: 400;
+}
+.pc_tableHD td.ac, .pc_tableHD th.ac, .zc_table_order td.ac, .zc_table_order th.ac {
+    text-align: center;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+.zc_table_order td {
+    position: relative;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e9ebee;
+}
+td, th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+fieldset, img {
+    border: none;
+    vertical-align: middle;
+}
+img {
+    width: 166px;
+    height: 97px;
+}
+.zc_table_order .ol-carinfo b {
+    font-size: 14px;
+    color: #60606c;
+    display: inline-block;
+    padding-bottom: 8px;
+}
+strong, b {
+    font-weight: bold;
+}
+.administrator_m_icon, .amount .logo, .arrowd, .arrowd-y, .diamond_m_icon, .eng_icon, .goldcard_m_icon, .graykaicon, .lighten, .ordinary_m_icon, .platina_m_icon, .s_dest, .silver_m_icon, .state, .sz_c, .sz_k, .trumpeticon, .zc-blcir, .zc-blyes, .zc-close, .zc-fresh, .zc-gryes, .zc-idtm, .zc-iphone, .zc-ipsw, .zc-iuser, .zc-iyhm, .zc-iyzm, .zc-oratan, .zc-oryes, .zc-peyeh, .zc-peyes, .zc-retan, .zc-tel, .zc-yecx, .zc-yecxn, .zc-yelc, .zc-yewd, .zc_asset_i, .zc_blue_yandown, .zc_fetch_i, .zc_giveback_i, .zc_has_ory, .zc_help_i, .zc_newsinfo, .zc_nont_ory, .zc_ordown, .zc_phone_i, .zc_record_i, .zc_service_i, .zc_share_i, .zc_switch_c, .zc_time_icon, .zc_top_i, .zc_yuanbj {
+    display: inline-block;
+    background: url(../img/icon_new.png) no-repeat;
+    background-image: url(../img/icon_new.png);
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-repeat-x: no-repeat;
+    background-repeat-y: no-repeat;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+}
+.zc_table_order .ol-carinfo p {
+    font-size: 12px;
+    color: #93939e;
+    padding-bottom: 3px;
+    margin-bottom: 0rem;
+}
+.zc_table_order .ol-caraddress {
+    border-left: 1px dotted #e9ebee;
+    border-right: 1px dotted #e9ebee;
+    min-height: 100px;
+    padding: 20px 20px;
+}
+.zc_table_order .ol-caraddress p.qhicon {
+    position: relative;
+    font-size: 12px;
+    color: #60606c;
+    padding-left: 24px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.zc_table_order .ol-caraddress p .zc_fetch_i, .zc_table_order .ol-caraddress p .zc_giveback_i {
+    position: absolute;
+    display: block;
+    top: 2px;
+    left: 0;
+}
+.zc_fetch_i {
+    width: 16px;
+    height: 16px;
+    background-position: -170px -235px;
+    background-position-x: -170px;
+    background-position-y: -235px;
+}
+.zc_table_order .ol-caraddress p.qhtime {
+    font-size: 12px;
+    color: #93939e;
+    padding-left: 24px;
+    padding-bottom: 8px;
+    margin-bottom: 0rem;
+}
+.zc_giveback_i {
+    width: 16px;
+    height: 16px;
+    background-position: -170px -262px;
+    background-position-x: -170px;
+    background-position-y: -262px;
+}
+
+.zc_table_order .ol-aggregate {
+    border-right: 1px dotted #e9ebee;
+    min-height: 100px;
+    line-height: 100px;
+    text-align: center;
+    font-size: 14px;
+    color: #60606c;
+}
+.s-gray {
+    color: #93939e;
+    font-size: 14px;
+    display: block;
+}
+.zc_table_order .a-view {
+    font-size: 12px;
+    color: #6ab0ff;
+    line-height: 30px;
+}
+.sz_page_box {
+    padding: 30px 10px;
+}
+.zc_table_order .ol-aggregate span {
+    font-size: 19px;
+}
+.sz_page {
+    overflow: hidden;
+    zoom: 1;
+    text-align: center;
+}
+.sz_page a.on, .sz_page a:hover {
+    border-bottom: solid 1px #00c189;
+    border-top: solid 1px #00c189;
+    color: #fff;
+    text-decoration: none;
+    background-color: #00c189;
+}
+.sz_page a {
+    display: inline-block;
+    line-height: 28px;
+    border: 1px solid #e9ebee;
+    color: #93939e;
+    min-width: 29px;
+    text-align: center;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-left: -4px;
+}
+myright .memberlist_bd, .myright .notice_bd, .myright .orderlist_bd, .myright .orderstate_bd {
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 5px rgba(228,230,233,1);
+    -moz-box-shadow: 0 0 5px rgba(228,230,233,1);
+    box-shadow: 0 0 5px rgba(228,230,233,1);
+}
+.orderstate_bd {
+    margin-top: 10px;
+}
+blockquote, body, button, code, dd, div, dl, dt, em, fieldset, form, h1, h2, h3, h4, h5, h6, html, input, legend, li, ol, p, pre, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+}
+.orderstate_bd h3 {
+    height: 42px;
+    line-height: 42px;
+    padding-left: 20px;
+    border-bottom: 1px solid #e9ebee;
+    font-size: 14px;
+    color: #60606c;
+}
+.orderstate_bd ul {
+    padding: 20px 0 0 20px;
+    overflow: hidden;
+}
+ol, ul {
+    list-style: none;
+}
+.orderstate_bd ul li {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    background-color: #f8f8fa;
+    width: 210px;
+    height: 70px;
+    padding: 10px 10px 0 10px;
+}
+.s-green {
+    color: #8cc152;
+    font-size: 14px;
+    display: block;
+}
+.s-orange {
+    color: #ff8650;
+    font-size: 14px;
+    display: block;
+}
+.s-blue {
+    color: #00cee1;
+    font-size: 14px;
+    display: block;
+}
+.s-orange {
+    color: #ff8650;
+    font-size: 14px;
+    display: block;
+}
+.s-yellow {
+    color: #fabe00;
+    font-size: 14px;
+    display: block;
+}
+.s-gray {
+    color: #93939e;
+    font-size: 14px;
+    display: block;
+}
+
+.orderstate_bd ul li p {
+    color: #93939e;
+    font-size: 12px;
+}
+.notice_bd h3 {
+    height: 42px;
+    line-height: 42px;
+    padding-left: 20px;
+    border-bottom: 1px solid #e9ebee;
+    font-size: 14px;
+    color: #60606c;
+    background-color: #fffcf5;
+    margin-bottom: 14px;
+}
+.notice_bd {
+    margin-top: 10px;
+    padding-bottom: 20px;
+    min-height: 150px;
+}
+.notice_bd p {
+    color: #93939e;
+    font-size: 12px;
+    padding-left: 20px;
+    line-height: 24px;
+}
+td.ol-carinfo {
+    padding-left: 10px;
+}
