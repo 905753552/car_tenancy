@@ -94,6 +94,17 @@
                                 </div>
                                 <div class="clear"></div>
                             </li>
+                            <li>
+                                <div class="row">
+                                    <label class="info_label col-md-3 col-sm-2">性别</label>
+                                    <span class="info_span col-md-6 col-sm-6">
+                                        &nbsp;&nbsp;
+                                        <input type="radio" name="sex" value="man" title="男" checked>&nbsp;男&emsp;&nbsp;&nbsp;
+                                        <input type="radio" name="sex" value="lady" title="女">&nbsp;女
+                                    </span>
+                                </div>
+                                <div class="clear"></div>
+                            </li>
                             <li style="min-height: 103px; padding-top: 12px;">
                                 <div class="row">
                                     <label class="info_label col-md-3 col-sm-2">证件</label>
@@ -319,6 +330,16 @@
 <script src="/js/tenancy/header.js"></script>
 <script src="/js/tenancy/personInfo.js"></script>
 <script>
+    $(document).ready(function () {
+        $("#changePhoneBtn").click(function () {
+            var display = $("#changePhoneForm").toggle().is(':hidden');
+            if (display) {
+                $("#changePhoneBtn").html("修改")
+            } else {
+                $("#changePhoneBtn").html("取消修改")
+            }
+        });
+    });
     window.onkeydown = function(){
         if (event.keyCode===13){  //回车键的键值为13
             $("#save_btn").click();//模拟按下submit确认按钮
