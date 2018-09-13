@@ -1,13 +1,4 @@
-$(document).ready(function () {
-    $("#changePhoneBtn").click(function () {
-        var display = $("#changePhoneForm").toggle().is(':hidden');
-        if (display) {
-            $("#changePhoneBtn").html("修改")
-        } else {
-            $("#changePhoneBtn").html("取消修改")
-        }
-    });
-});
+
 /*获取验证码*/
 function getVerify_Code() {
     $('#myModal').modal('show');
@@ -232,3 +223,14 @@ function checkForm() {
         return false;
     }
 }
+$(".infoleft_bd a").click(function () {
+    $(this).parent().siblings('dd').children().removeClass('infoleft_a');
+    $(this).parent().parent().siblings('dl').children().children().removeClass('infoleft_a');  // 删除其他兄弟元素的样式
+    $(this).addClass('infoleft_a');  // 添加当前元素的样式
+    return false;                                 //加这句来阻止跳转 可用来调试效果
+});
+$(".coupon_hd a").click(function () {
+    $(this).parent().siblings('div').children().removeClass('coupon_a_stop');  // 删除其他兄弟元素的样式
+    $(this).addClass('coupon_a_stop');  // 添加当前元素的样式
+    return false;                                 //加这句来阻止跳转 可用来调试效果
+});
