@@ -57,14 +57,13 @@
                 <div class="bluebgbd sz_succeedB">
                     <div class="succeedinfo p10_0 sz_bluebbb">
                         <span class="sz_suc_font colorBlue">预订成功</span>
-                        <span class="f14">&nbsp;订单总价:</span>
+                        <span class="f14">&nbsp;合计:</span>
                         <span class="sz_priceOrange">
 	<em class="rmb">¥</em>
 	<em class="num">
 		496
 	</em>
 </span>
-                        <span class="orderinfo_invoice ora_s" id="invoice-btn" style="display: inline;">开发票</span>
                     </div>
                     <div class="f14 p10_0">
                         <span>订单号：15362794554761</span>
@@ -72,12 +71,6 @@
                         <span>租车人：林盛丰</span>
                         <a>|</a>
                         <span>租期：2天</span>
-                        <a>|</a>
-                        <span>取车时需要刷取预授权:</span>
-                        <span class="carPrice sz_priceOrangeSmall">
-				<em class="rmb" style="font:15px/15px '微软雅黑';">¥</em>
-				<em class="num" style="font:15px/15px arial;">&nbsp;3000</em>
-			</span>
                     </div>
                 </div>
 
@@ -188,15 +181,35 @@
                             <span class="feeName bold">车辆整备费</span>
                         </div>
 
-                        <div class="feeline50 discount borderBlueBda sttwrapthree">
+                        <div class="feeItem borderBlueBda">
                             <div class="feePrice">
-                    <span class="sz_OrderpOrangeM">
-                        <em class="rmb"></em>
-                        <em class="rmb">¥</em>
-                        <em class="num">496</em>
-                    </span>
+	                    	<span class="sz_OrderpOrangeM">
+	                            <em class="rmb">¥</em>
+	                            <em class="num">200</em>
+	                        </span>
                             </div>
-                            <span class="feeName bold">需支付</span>
+                            <div class="calculate">
+		                        <span class="sz_priceGraySmall">
+		                            <em class="num"></em>
+		                            <em class="unit"></em>
+		                        </span>
+                            </div>
+                            <span class="feeName">押金</span>
+                        </div>
+                        <div class="feeItem borderBlueBda">
+                            <div class="feePrice">
+	                    	<span class="sz_OrderpOrangeM">
+	                            <em class="rmb">¥</em>
+	                            <em class="num">200</em>
+	                        </span>
+                            </div>
+                            <div class="calculate">
+		                        <span class="sz_priceGraySmall">
+		                            <em class="num"></em>
+		                            <em class="unit">-</em>
+		                        </span>
+                            </div>
+                            <span class="feeName">优惠券</span>
                         </div>
 
 
@@ -206,7 +219,7 @@
                     <div class="orderFeeTotal">
                         <div class="total02">
 
-                            <span class="yjtotal">订单总价：</span>
+                            <span class="yjtotal">需支付：</span>
                             <span class="sz_OrderpOrangeB">
             <em class="rmb">¥</em>
             <em class="num">496</em>
@@ -215,15 +228,6 @@
                     </div>
                 </div>
                 <div class="ac">
-                    <div class="sz_dd_kjt d_none">
-                        <div class="yellow_box">
-                            <div class="yellow_sj"></div>
-                            快捷取还，优先办理！<br>
-                            A.取车时无需现场刷租车预授权，直接验车取车；<br>
-                            B.还车时无需现场刷违章预授权，只需验车即可完成还车手续；<br>
-                            C.在门店取还车时，无需等待，优先办理。
-                        </div>
-                    </div>
 
 
                     <input id="orderCancel" type="button" onclick="cancelOrderTrip();" value="取消订单"
@@ -239,6 +243,8 @@
                            class="tnc_btn btn_graywauto gray f16">&nbsp;&nbsp;
                     <input id="printPage" type="button" value="打印订单" onclick="window.print()"
                            class="tnc_btn btn_graywauto gray f16">&nbsp;&nbsp;
+                    <input id="toPay" type="button" value="去支付" onclick="javascript:window.location.href='payPage.html'"
+                           class="tnc_btn btn_graywauto gray f16" style="background-color: #1e9f75;color:white;">&nbsp;&nbsp;
                 </div>
 
 

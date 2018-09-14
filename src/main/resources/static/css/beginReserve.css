@@ -155,7 +155,6 @@
 .newpg-conf{
     min-width: 1000px;
     width:100%;
-    height:830px;
     display:flex;
     justify-content:center;
     background:#F2F3F5;
@@ -500,9 +499,83 @@ input[type=text]{
     padding: 0;
     display: none;
 }
+.newpg-conf .feeul>li.zc_query-condition_list{
+    padding: 0;
+    display: none;
+}
 .newpg-conf .feeul>li.bluelist.show {
     display: block;
 }
+.newpg-conf .feeul>li.zc_query-condition_list.show {
+    display: block;
+}
+
+
+.newpg-conf .feeul .zc_query-condition_list li {
+    margin: 20px;
+    cursor: pointer;
+}
+.newpg-conf .feeul .zc_query-condition_list .checked {
+    border: 2px solid #fabe00;
+    border-radius: 7px;
+}
+.newpg-conf .feeul .zc_query-condition_list .checked .zc-coupon-checked{
+    background-image:url(https://image.zuchecdn.com/newversion/order/zc_sprite.png);
+    background-position-x:2px;
+    background-position-y: -116px;
+    display:block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+}
+.zc-coupon-checked{
+    position: relative;
+    float: right;
+    margin-top: -20px;
+    background-color: #fabe00;
+}
+.newpg-conf .feeul>li.zc_query-condition_list .amount {
+    width: 200px;
+    height: 80px;
+    border-radius: 5px 5px 0 0;
+    background: #ff8650 url(https://image.zuchecdn.com/newversion/news/common/mycoupon_orange.gif) left bottom repeat-x;
+    position: relative;
+    overflow: hidden;
+}
+.newpg-conf .feeul>li.zc_query-condition_list .amount .moneyamount {
+    font-size: 50px;
+    color: #fff;
+    display: block;
+    line-height: 80px;
+    padding-left: 30px;
+}
+.newpg-conf .feeul>li.zc_query-condition_list .amount .moneyamount em {
+    font-style: normal;
+}
+.newpg-conf .feeul>li.zc_query-condition_list .time {
+    height: 30px;
+    line-height: 30px;
+    width: 200px;
+    padding-left: 10px;
+    border: 1px solid #ffbc9e;
+    border-top: 0 none;
+    border-radius: 0 0 5px 5px;
+    background-color: #fff9eb;
+    font-size: 10px;
+    color: #93939e;
+    position: relative;
+}
+.newpg-conf .feeul>li.zc_query-condition_list .zc_time_icon{
+    background-image:url(https://image.zuchecdn.com/newversion/news/ordernew/order_sprite.png);
+    background-position-x:-380px;
+    background-position-y:0px;
+    display:inline-block;
+    width:15px;
+    height:15px;
+    vertical-align: middle;
+}
+
+
 .blue-downarr{
     background: url(https://image.zuchecdn.com/newversion/news/ordernew/order_sprite.png);
     background-position: -295px -24px;
@@ -532,6 +605,7 @@ input[type=text]{
 }
 .newpg-conf .gopay {
     margin-top: 50px;
+    margin-bottom: 30px;
     height: 60px;
     background-color: #f3fbff;
     padding-left: 30px;
@@ -783,7 +857,7 @@ fieldset, img {
     color: #ff8650;
 }
 .modify-pass .modiul li.mtxt {
-    color: #60606c;
+    color: #1e9f75;
     font-size: 14px;
     height: 40px;
 }

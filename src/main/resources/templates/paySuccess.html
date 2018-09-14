@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>乘风租车————全球租车领导品牌</title>
+	<link rel="stylesheet" href="/css/reset.css">
+	<link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/fonts/font-awesome-4.7.0/css/font-awesome.css">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/header.css">
+	<link rel="stylesheet" href="/css/footer.css">
+	<link rel="stylesheet" href="/css/index.css">
+	<link rel="stylesheet" href="/css/paySuccess.css">
+</head>
+<body>
+<div class="container-fluid tnc_container tnc_header">
+	<div v-cloak id="header-app" class="row tnc_head" style="height:61px;background-color: #ffffff;border-bottom: 1px solid #e8e9ea">
+		<div class="tnc_head_bd">
+			<div><a class="tnc_head_brand tnc_logo" href="/"></a></div>
+			<div class="tnc_head_right">
+				<div v-show="!customer.id" class="tnc_head_login tnc_header_active" style="display: none">
+					<a href="#" class="">登录</a> / <a href="#" class="">注册</a>
+				</div>
+				<div v-show="customer.id" class="tnc_head_login" >
+					<h1 class="tnc_head_welcome" style="color: #9e9e9e">您好，{{customer.name}}</h1>
+					<div id="tnc_toggle_area" class="tnc_head_dropdown">
+						<a id="tnc_toggle_area_btn" href="#">个人中心&nbsp;<i class="fa fa-caret-down"></i></a>
+						<div id="tnc_toggle_menu" style="display: none">
+							<div class="triangle_border_up"></div>
+							<div class="tnc_collapse_list" >
+								<a href="#" class="bhpr reddot">我的订单</a>
+								<a href="#">我的资产</a>
+								<a href="#">我的账户</a>
+								<a href="javascript:;" @click="logout">退出登录</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tnc_head_tel">
+					<div class="">
+                            <span class="">
+                                <i class="fa fa-phone"></i>
+                                <span style="color: #9e9e9e">408-666-666</span>
+                            </span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<div class="wrap1">
+	<div class="wrap2">
+		<div class="tdou_wrap">
+			<div class="messOuter">
+				<div class="mess">
+					<img src="http://tb2.bdstatic.com/tb/static-comforum/widget/tdou_success/img/success_1d68c01.png">
+					<span>支付成功</span>
+				</div>
+				<span class="costMoney">您已成功支付
+					<span class="money-num-color">2000</span>元，
+					<span class="money-num-color change">5秒后</span>跳转回首页
+				</span>
+				<div class="recharge-info">
+					<div class="recharge-item">
+						<span class="recharge-left">租期：</span>
+						<span class="game-name">2天</span>
+					</div>
+					<div class="recharge-item">
+						<span class="recharge-left">账号：</span>
+						<span class="game-account">怪盗荆棘</span>
+					</div>
+					<div class="recharge-item">
+						<span class="recharge-left">租用车：</span>
+						<span class="game-name">起亚K2 粤A66666</span>
+					</div>
+					<div class="recharge-item">
+						<span class="recharge-left">订单ID：</span>
+						<span class="game-account">3ap99r3wviasw1709</span>
+					</div>
+					<div class="recharge-item">
+						<span class="recharge-left">支付时间：</span>
+						<span class="game-time">2017-09-22 20:33:35</span>
+					</div>
+					<input class="tnc_btn tnc_btn_green gopay-blue recharge"
+						   value="继续预订"
+						   id="monitor_fourth_next"
+						   type="button"
+						   style="position: relative;left: 80px"
+						   onclick="javascript:window.location.href='myOrder.html'">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/layui-v2.4.3/lay/modules/layer.js"></script>
+<script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+<script src="/vue-2.5.17/vue.min.js"></script>
+<script src="/js/common/common.js"></script>
+<script src="/js/tenancy/paySuccess.js"></script>
+<script src="/js/tenancy/header.js"></script>
+</body>
+</html>

@@ -1,6 +1,28 @@
+// new Vue({
+//     el: '.container-fluid',
+//     data: {
+//         carInfo:{},
+//         personInfo:{}
+//     },
+//     created:function(){
+//         $.ajax({
+//             url:'/order_data.json',
+//             async: false,
+//             success:function(result){
+//                 if(result.car.code==0)
+//                     this.carInfo = result.car.data;
+//             },
+//             failure:function(msg){
+//                 alert(msg);
+//             }
+//         })
+//     }
+// });
 new Vue({
     el: '.form-info',
-    data: {},
+    data: {
+
+    },
     methods: {
         checkMemberFormName:function() {
             checkMemberFormName();
@@ -18,6 +40,36 @@ new Vue({
     methods: {
         showOtherCost:function(){
             showOtherCost();
+        },
+        showCoupon:function(){
+            showCoupon();
+        }
+    }
+});
+new Vue({
+    el: '#modifyModel',
+    methods: {
+        changeImageVerifyCode:function(){
+            changeImageVerifyCode();
+        },
+        checkTelphone:function(){
+            checkOriginalTel();
+        },
+        checkNewTel:function(){
+            checkNewTel();
+        },
+        countdown:function(){
+            var overtime = 60;
+            countdown(overtime);
+        },
+        checkCode:function(){
+            checkCode();
+        },
+        save:function(){
+            save();
+        },
+        getJson(){
+            getJson();
         }
     }
 });
@@ -105,7 +157,7 @@ function checkMemberIdentitycard() {
     $("#identitycardInfo").parents(".order-errorbox1").hide(),
         $("#identitycardInfo").html("");
     var flag = !0
-        , xcardtype = $("#op").attr("type-id")
+        , xcardtype = $(".op").attr("type-id")
         , xidentitycard = $("#xidentitycard").val()
         , defaultValue = $("#xidentitycard").attr("default-value");
     if (xidentitycard && defaultValue != xidentitycard)
@@ -217,7 +269,7 @@ function checkMobile(val) {
 }
 /*改变验证码图片*/
 function changeImageVerifyCode() {
-    $("#yzmImg_float").attr("src", "/api/captcha/generate?_t="+new Date().getTime());
+    $("#kaptchaImage").attr("src", "/api/captcha/generate?_t="+new Date().getTime());
 }
 // 显示其他费用
 function showOtherCost() {
@@ -225,6 +277,102 @@ function showOtherCost() {
     $nextLi.hasClass("show") ? ($nextLi.removeClass("show"),
         $(".opcl").find(".blue-downarr").removeClass("open")) : ($nextLi.addClass("show"),
         $(".opcl").find(".blue-downarr").addClass("open"))
+}
+// 显示优惠券
+function showCoupon() {
+    var $nextLi = $(".opcl1").next(".zc_query-condition_list");
+    $nextLi.hasClass("show") ? ($nextLi.removeClass("show"),
+        $(".opcl1").find(".blue-downarr").removeClass("open")) : ($nextLi.addClass("show"),
+        $(".opcl1").find(".blue-downarr").addClass("open"))
+}
+// 检查原手机号码
+function checkOriginalTel(){
+    var phonenumber = $("#originalTel").val();
+    var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+    if(phonenumber==''){
+        $("#moldTelid").text("原手机号不能为空"),
+            $("#moldTelid").parents(".order-errorboxred").css("display", "block");
+    }else{
+        if(!myreg.test(phonenumber))
+            $("#moldTelid").text("手机号格式不正确"),
+                $("#moldTelid").parents(".order-errorboxred").css("display", "block");
+        else
+        if(phonenumber=="17876253431")
+            $("#moldTelid").parents(".order-errorboxred").css("display", "none");
+        else
+            $("#moldTelid").text("请输入原手机号"),
+                $("#moldTelid").parents(".order-errorboxred").css("display", "block");
+    }
+
+}
+// 检查新手机号码
+function checkNewTel(){
+    var phonenumber = $("#newTel").val();
+    var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+    if(phonenumber==''){
+        $("#mnewTelid").text("新手机号不能为空"),
+            $("#mnewTelid").parents(".order-errorboxred").css("display", "block");
+    }else{
+        if(!myreg.test(phonenumber))
+            $("#mnewTelid").text("手机号格式不正确"),
+                $("#mnewTelid").parents(".order-errorboxred").css("display", "block");
+        else
+        if(phonenumber=="17876253431")
+            $("#mnewTelid").text("新旧手机号不能相同"),
+            $("#mnewTelid").parents(".order-errorboxred").css("display", "block");
+        else
+            $("#mnewTelid").parents(".order-errorboxred").css("display", "none");
+    }
+
+}
+// 检查验证码
+function checkCode(){
+    var code = $("#code").val();
+    if(code==''){
+        $("#myzm").text("验证码不能为空"),
+            $("#myzm").parents(".order-errorboxred").css("display", "block");
+    }else{
+        $("#myzm").parents(".order-errorboxred").css("display", "none");
+    }
+
+}
+/*获取验证码倒计时*/
+function countdown(overtime) {
+    if (--overtime < 1){
+        $("#getCode").text("获取验证码");
+        $('#getCode').removeAttr("disabled");
+        return;
+    }
+    $('#getCode').attr('disabled',"true");
+    $("#getCode").text(overtime + "秒可重发");
+    setTimeout(function() {
+        countdown(overtime)
+    }, 1e3);
+
+}
+//保存手机号修改
+function save(){
+    var code = $("#code").val();
+    send_VerifyCode(code);
+}
+function send_VerifyCode(code){
+    $.ajax({
+        type: "GET",
+        url: "/api/captcha/verify/"+code,
+        contentType:'application/json',
+        dataType:'json',
+        success: function(res) {
+            if(res.code == 200){
+                alert("验证码正确");
+
+            }else{
+                alert("验证码错误");
+            }
+        },
+        fail:function (res) {
+            alert("出错");
+        }
+    })
 }
 function trim(str) {
     var strReturn;
@@ -340,3 +488,13 @@ function checkIDCard(idcard) {
             return 1
     }
 }
+$(document).ready(function(){
+    $("#coupons li").each(function(i) {
+        $(this).click(function() {
+                $("#coupons").find("li").eq(i).siblings().removeClass("checked"),
+                    $("#coupons").find("li").eq(i).addClass("checked");
+            var $nextLi = $(".opcl1").next(".zc_query-condition_list");
+            $nextLi.removeClass("show"), $(".opcl1").find(".blue-downarr").removeClass("open");
+        })
+    })
+})
