@@ -13,7 +13,7 @@ spring:
       suffix: .html
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://119.29.94.246:3306/car_tenancy?useSSL=true&characterEncoding=utf8
+    url: jdbc:mysql://119.29.94.246:3306/car_tenancy?characterEncoding=utf8
     username: dev
     password: dev
     initialSize: 5
