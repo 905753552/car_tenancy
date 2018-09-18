@@ -13,7 +13,7 @@ spring:
       suffix: .html
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/car_tenancy?useSSL=true&characterEncoding=utf8
+    url: jdbc:mysql://119.29.94.246:3306/car_tenancy?useSSL=true&characterEncoding=utf8
     username: dev
     password: dev
     initialSize: 5
@@ -38,9 +38,9 @@ spring:
   redis:
     #数据库索引
     database: 0
-    host: 127.0.0.1
+    host: 119.29.94.246
     port: 6379
-    password:
+    password: redis272243
     jedis:
       pool:
         #最大连接数
