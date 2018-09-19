@@ -11,6 +11,8 @@ public interface TncCustomerMapper {
 
     TncCustomer selectByPrimaryKey(Long id);
 
+    TncCustomer selectByPhone(String phone);
+
     int updateByPrimaryKeySelective(TncCustomer record);
 
     int updateByPrimaryKey(TncCustomer record);

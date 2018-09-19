@@ -26,7 +26,7 @@ import java.util.Properties;
 public class ShiroConfig {
 
     @Bean
-    public CustomerRealm exampleRealm() {
+    public CustomerRealm customerRealm() {
         return new CustomerRealm();
     }
 
@@ -40,9 +40,7 @@ public class ShiroConfig {
         //filterMap.put("authc", formValid());
 
         // can go to login
-        shiroFilterFactoryBean.setLoginUrl("/login.html");
-        //doLogin success go to page
-        shiroFilterFactoryBean.setSuccessUrl("/success.html");
+        shiroFilterFactoryBean.setLoginUrl("/login");
         //do not Unauthorized page
         shiroFilterFactoryBean.setUnauthorizedUrl("/403.html");
         Map<String, String> map = new LinkedHashMap<String, String>();
@@ -68,7 +66,7 @@ public class ShiroConfig {
     @Bean
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(exampleRealm());
+        securityManager.setRealm(customerRealm());
         //缓存管理
         securityManager.setCacheManager(jedisCacheManager());
         //会话管理

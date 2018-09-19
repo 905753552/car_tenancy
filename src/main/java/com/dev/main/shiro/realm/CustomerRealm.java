@@ -1,15 +1,23 @@
 package com.dev.main.shiro.realm;
 
+import com.dev.main.tenancy.domain.TncCustomer;
+import com.dev.main.tenancy.service.ICustomerService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.security.auth.login.AccountLockedException;
 import java.util.HashSet;
 import java.util.Set;
 
 public class CustomerRealm extends AuthorizingRealm {
+
+    @Autowired
+    private ICustomerService customerService;
 
     public CustomerRealm() {
     }
@@ -44,24 +52,22 @@ public class CustomerRealm extends AuthorizingRealm {
     // 认证
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        UsernamePasswordToken account = (UsernamePasswordToken)token;
+        UsernamePasswordToken account = (UsernamePasswordToken) token;
         String username = ((UsernamePasswordToken) token).getUsername();
-
-        /*User user = exampleService.findByUsername(username);
-        if (user == null) {
-            throw new UnknownAccountException();
+        TncCustomer customer = customerService.findByPhone(username);
+        //账号不存在
+        if (customer == null) {
+            throw new UnknownAccountException("账号或密码不正确");
         }
-        String password = user.getPassword();*/
-        // String saltStr = "example";
-        String password = "example";
-        // 盐值
-        //ByteSource salt = ByteSource.Util.bytes(saltStr);
-      /*  SysUser user = new SysUser();
-        user.setId("12542");
-        user.setUsername("example");
-        user.setSalt("dsfsdf");
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, password, getName());*//*
-        return info;*/
-        return  null;
+        //账号锁定
+        if (customer.getStatus() == 0) {
+            throw new LockedAccountException("账号不可用");
+        }
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(customer, customer.getPassword(), ByteSource.Util.bytes(customer.getSalt()), getName());
+        return info;
+    }
+
+    public void setCustomerService(ICustomerService customerService) {
+        this.customerService = customerService;
     }
 }
