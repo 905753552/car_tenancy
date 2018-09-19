@@ -1,6 +1,7 @@
 package com.dev.main.shiro.redis;
 
 import com.dev.main.redis.util.JedisUtil;
+import com.dev.main.shiro.util.ShiroConstant;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.shiro.cache.Cache;
 import org.slf4j.Logger;
@@ -13,11 +14,9 @@ import java.util.*;
 public class JedisCache<K,V> implements Cache<K, V> ,Serializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(JedisCache.class);
 
-    private static final String PREFIX = "SHIRO_SESSION_ID_";
-
     private byte[] getByteKey(K k){
         if(k instanceof String){
-            String key = PREFIX+k;
+            String key = ShiroConstant.PREFIX+k;
             return key.getBytes();
         }else {
             return SerializationUtils.serialize((Serializable) k);
@@ -35,7 +34,7 @@ public class JedisCache<K,V> implements Cache<K, V> ,Serializable {
     public Set<K> keys() {
         Jedis jedis = JedisUtil.getJedis();
 
-        Set<byte[]> bytes = jedis.keys( (PREFIX + new String("*")).getBytes());
+        Set<byte[]> bytes = jedis.keys( (ShiroConstant.PREFIX + new String("*")).getBytes());
         Set<K>  keys = new HashSet<>();
         if(bytes!=null){
             for (byte[] b: bytes) {

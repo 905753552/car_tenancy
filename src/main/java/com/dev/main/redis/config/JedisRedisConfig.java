@@ -24,7 +24,7 @@ public class JedisRedisConfig {
     private long maxWaitMillis;
 
     @Bean
-    JedisConnectionFactory jedisConnectionFactory() {
+    public JedisConnectionFactory jedisConnectionFactory() {
         JedisConnectionFactory factory = new JedisConnectionFactory();
         factory.setHostName(host);
         factory.setPort(port);
@@ -33,8 +33,8 @@ public class JedisRedisConfig {
         return factory;
     }
 
-    @Bean
-    public JedisPool redisPoolFactory() {
+    @Bean("jedisPool")
+    public JedisPool jedisPool() {
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);

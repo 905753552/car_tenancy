@@ -41,20 +41,44 @@ public class SMSServiceImpl implements ISMSService {
         data.put(SmsConstant.CODE, code);
         //发短信
         SendSmsResponse smsResponse = smsSender.sendSms(phone, code);
+        // 把验证码存放在缓存中
+        Integer cookieExp = 60 * 100; // 过期时间 10 分钟
+        String key = SmsConstant.SMS_CODE_PREFIX + phone;
+        // 把数据存放到缓存中
+        redisTemplate.opsForValue().set(key, data, cookieExp, TimeUnit.SECONDS);
+        // 把验证码的key存在Cookie中，验证时使用
+        CookieUtils.addCookie(response, SmsConstant.COOKIE_NAME, key, cookieExp, SmsConstant.COOKIE_PATH);
+        System.out.println("短信接口返回的数据----------------");
+        System.out.println("Code=" + smsResponse.getCode());
+        System.out.println("Message=" + smsResponse.getMessage());
+        System.out.println("RequestId=" + smsResponse.getRequestId());
+        System.out.println("BizId=" + smsResponse.getBizId());
+
         Thread.sleep(3000L);
+
         //查明细
         if(smsResponse.getCode() != null && smsResponse.getCode().equals("OK")) {
             QuerySendDetailsResponse querySendDetailsResponse = smsSender.querySendDetails(smsResponse.getBizId());
-            // 把验证码存放在缓存中
-            Integer cookieExp = 60 * 5; // 过期时间 5 分钟
-            String key = SmsConstant.SMS_CODE_PREFIX + phone;
-            // 把数据存放到缓存中
-            redisTemplate.opsForValue().set(key, data, cookieExp, TimeUnit.SECONDS);
-            // 把验证码的key存在Cookie中，验证时使用
-            CookieUtils.addCookie(response, SmsConstant.COOKIE_NAME, key, cookieExp, SmsConstant.COOKIE_PATH);
-        } else {
-            throw new CommonException("发送验证码失败");
+            System.out.println("短信明细查询接口返回数据----------------");
+            System.out.println("Code=" + querySendDetailsResponse.getCode());
+            System.out.println("Message=" + querySendDetailsResponse.getMessage());
+            int i = 0;
+            for(QuerySendDetailsResponse.SmsSendDetailDTO smsSendDetailDTO : querySendDetailsResponse.getSmsSendDetailDTOs())
+            {
+                System.out.println("SmsSendDetailDTO["+i+"]:");
+                System.out.println("Content=" + smsSendDetailDTO.getContent());
+                System.out.println("ErrCode=" + smsSendDetailDTO.getErrCode());
+                System.out.println("OutId=" + smsSendDetailDTO.getOutId());
+                System.out.println("PhoneNum=" + smsSendDetailDTO.getPhoneNum());
+                System.out.println("ReceiveDate=" + smsSendDetailDTO.getReceiveDate());
+                System.out.println("SendDate=" + smsSendDetailDTO.getSendDate());
+                System.out.println("SendStatus=" + smsSendDetailDTO.getSendStatus());
+                System.out.println("Template=" + smsSendDetailDTO.getTemplateCode());
+            }
+            System.out.println("TotalCount=" + querySendDetailsResponse.getTotalCount());
+            System.out.println("RequestId=" + querySendDetailsResponse.getRequestId());
         }
+       System.out.println(phone + "_" + code);
 
     }
 
@@ -69,13 +93,18 @@ public class SMSServiceImpl implements ISMSService {
         Map<String, String> dataInCache = (HashMap<String, String>) redisTemplate.opsForValue().get(keyInCookie);
         String phoneInCache = dataInCache.get(SmsConstant.PHONE);  // 获取缓存中的手机号
         String codeInCache = dataInCache.get(SmsConstant.CODE); // 获取缓存中的验证码
-
+        System.out.println("phoneInCache:" + phoneInCache);
+        System.out.println("codeInCache:" + codeInCache);
+        System.out.println("codeInput:" + codeInput);
         if (dataInCache == null) {
             throw new CommonException("验证码已失效，请重新获取");
         }
+        System.out.println(phoneInCache);
+        System.out.println(phone);
+        System.out.println(phone.equals(phoneInCache));
         // 手机号不匹配
         if (!phone.equalsIgnoreCase(phoneInCache)) {
-            return false;
+            throw new CommonException("验证的手机号与接收验证码的手机号不一致");
         }
         // 验证码不正确
         if (!codeInput.equalsIgnoreCase(codeInCache)) {

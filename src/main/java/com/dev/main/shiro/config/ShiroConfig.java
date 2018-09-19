@@ -2,9 +2,13 @@ package com.dev.main.shiro.config;
 
 import com.dev.main.shiro.realm.CustomerRealm;
 
+import com.dev.main.shiro.realm.PhoneRealm;
 import com.dev.main.shiro.redis.JedisCacheManager;
 import com.dev.main.shiro.redis.RedisSessionDao;
+import com.dev.main.shiro.util.CustomizeModularRealmAuthenticator;
+import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -17,10 +21,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import javax.servlet.Filter;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 @Configuration
 public class ShiroConfig {
@@ -28,6 +29,23 @@ public class ShiroConfig {
     @Bean
     public CustomerRealm customerRealm() {
         return new CustomerRealm();
+    }
+
+    @Bean
+    public PhoneRealm phoneRealm() {
+        return new PhoneRealm();
+    }
+
+    @Bean
+    public CustomizeModularRealmAuthenticator customizeModularRealmAuthenticator() {
+        CustomizeModularRealmAuthenticator authenticator = new CustomizeModularRealmAuthenticator();
+        // 设置认证策略
+        authenticator.setAuthenticationStrategy(new AtLeastOneSuccessfulStrategy());
+        List<Realm> realms = new ArrayList<>();
+        realms.add(phoneRealm());
+        realms.add(customerRealm());
+        authenticator.setRealms(realms);
+        return  authenticator;
     }
 
     @Bean
@@ -66,11 +84,14 @@ public class ShiroConfig {
     @Bean
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(customerRealm());
+        securityManager.setAuthenticator(customizeModularRealmAuthenticator());
+
+        //securityManager.setRealms(realms);
         //缓存管理
         securityManager.setCacheManager(jedisCacheManager());
         //会话管理
         securityManager.setSessionManager(sessionManager());
+
         return securityManager;
     }
 
