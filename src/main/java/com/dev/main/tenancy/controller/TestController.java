@@ -1,6 +1,6 @@
 package com.dev.main.tenancy.controller;
 
-import com.dev.main.common.exception.DataNotFoundException;
+import com.dev.main.common.exception.CommonException;
 import com.dev.main.common.util.ResultMap;
 import com.dev.main.shiro.dao.SysUserMapper;
 import com.dev.main.shiro.domain.SysUser;
@@ -24,7 +24,7 @@ public class TestController {
     public ResultMap test() {
         SysUser user = sysUserMapper.selectByPrimaryKey(1L);
         if (user == null) {
-            throw new DataNotFoundException("用户不存在");
+            throw new CommonException("用户不存在");
         }
         return ResultMap.success().put("user", user);
     }

@@ -1,8 +1,6 @@
 package com.dev.main.common.controller.exception;
 
-import com.dev.main.common.exception.DataNotFoundException;
-import com.dev.main.common.exception.DataUpdateException;
-import com.dev.main.common.exception.IllegalParameterException;
+import com.dev.main.common.exception.CommonException;
 import com.dev.main.common.util.ResultMap;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,23 +12,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 @ControllerAdvice(annotations = {GlobalExceptionResolver.class})
 public class CommonExceptionHandler {
 
-    @ExceptionHandler(value = DataNotFoundException.class)
+    @ExceptionHandler(value = CommonException.class)
     @ResponseBody
-    public ResultMap dataNotFoundExceptionHandler(DataNotFoundException e) {
-        e.printStackTrace();
-        return ResultMap.fail(e.getMessage());
-    }
-
-    @ExceptionHandler(value = DataUpdateException.class)
-    @ResponseBody
-    public ResultMap dataUpdateExceptionHandler(DataUpdateException e) {
-        e.printStackTrace();
-        return ResultMap.fail(e.getMessage());
-    }
-
-    @ExceptionHandler(value = IllegalParameterException.class)
-    @ResponseBody
-    public ResultMap illegalParameterExceptionHandler(IllegalParameterException e) {
+    public ResultMap dataNotFoundExceptionHandler(CommonException e) {
         e.printStackTrace();
         return ResultMap.fail(e.getMessage());
     }

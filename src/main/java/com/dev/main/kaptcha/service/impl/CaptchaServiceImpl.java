@@ -1,7 +1,7 @@
 package com.dev.main.kaptcha.service.impl;
 
-import com.dev.main.common.exception.DataNotFoundException;
-import com.dev.main.common.exception.IllegalParameterException;
+import com.dev.main.common.exception.CommonException;
+import com.dev.main.common.exception.CommonException;
 import com.dev.main.common.util.CommonUtil;
 import com.dev.main.common.util.CookieUtils;
 import com.dev.main.common.util.ResultMap;
@@ -48,7 +48,7 @@ public class CaptchaServiceImpl implements ICaptchaService {
         response.setContentType("image/jpeg");
 
         String capText = captchaProducer.createText();
-        Integer cookieExp = 60 * 5; // 过期时间 3 分钟
+        Integer cookieExp = 60 * 5; // 过期时间 5 分钟
         String uuid = CommonUtil.createUUID(); // 作为Redis中的验证码的key，同时存储在Cookie中用于
         redisTemplate.opsForValue().set(CaptchaConstant.CAPTCHA_CODE_PREFIX + uuid, capText, cookieExp, TimeUnit.SECONDS);
         CookieUtils.addCookie(response, CaptchaConstant.COOKIE_NAME, CaptchaConstant.CAPTCHA_CODE_PREFIX + uuid, cookieExp, CaptchaConstant.COOKIE_PATH);
@@ -66,10 +66,10 @@ public class CaptchaServiceImpl implements ICaptchaService {
     @Override
     public boolean verify(String uuidInCookie, String codeInput, HttpServletRequest request, HttpServletResponse response) {
         if (StringUtils.isBlank(uuidInCookie)) {
-            throw new DataNotFoundException("验证码已失效，请重新获取");
+            throw new CommonException("验证码已失效，请重新获取");
         }
         if (StringUtils.isBlank(codeInput)) {
-            throw new IllegalParameterException("请输入验证码");
+            throw new CommonException("请输入验证码");
         }
         String codeInCache = (String) redisTemplate.opsForValue().get(uuidInCookie);
 
@@ -77,7 +77,7 @@ public class CaptchaServiceImpl implements ICaptchaService {
 
         redisTemplate.delete(uuidInCookie);
         if (codeInCache == null) {
-            throw new DataNotFoundException("验证码已失效，请重新获取");
+            throw new CommonException("验证码已失效，请重新获取");
         }
         if (codeInCache.equalsIgnoreCase(codeInput)) {
             return true;

@@ -68,3 +68,12 @@ spring:
 mybatis:
   mapperLocations: classpath*:*/mapper/*.xml
   typeAliasesPackage: com.dev.main.domain #起别名。可省略写mybatis的xml中的resultType的全路径
+
+aliyun:
+  sms:
+    accessKeyId: LTAIVDGqBGLycvS6
+    accessKeySecret: vgo8ef5LIzY7WajIpqyugeYxZMaGsx
+    vcode:
+        singName: 乘风租车
+        templateCode: SMS_144450894
+
