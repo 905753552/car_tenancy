@@ -9,9 +9,9 @@ import org.apache.shiro.subject.PrincipalCollection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ExampleRealm extends AuthorizingRealm {
+public class CustomerRealm extends AuthorizingRealm {
 
-    public ExampleRealm() {
+    public CustomerRealm() {
     }
 
     // 授权

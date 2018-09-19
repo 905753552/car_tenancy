@@ -1,6 +1,6 @@
 package com.dev.main.shiro.config;
 
-import com.dev.main.shiro.realm.ExampleRealm;
+import com.dev.main.shiro.realm.CustomerRealm;
 
 import com.dev.main.shiro.redis.JedisCacheManager;
 import com.dev.main.shiro.redis.RedisSessionDao;
@@ -26,8 +26,8 @@ import java.util.Properties;
 public class ShiroConfig {
 
     @Bean
-    public ExampleRealm exampleRealm() {
-        return new ExampleRealm();
+    public CustomerRealm exampleRealm() {
+        return new CustomerRealm();
     }
 
     @Bean

@@ -8,6 +8,8 @@ import com.dev.main.common.util.ResultMap;
 import com.dev.main.shiro.util.ShiroFilterUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
@@ -85,5 +87,19 @@ public class ShiroExceptionHandler extends CommonExceptionHandler {
     public ResultMap incorrectCredentialsException(IncorrectCredentialsException e) {
         e.printStackTrace();
         return ResultMap.fail("用户名或密码错误");
+    }
+
+    @ResponseBody
+    @ExceptionHandler({UnknownAccountException.class})
+    public ResultMap unknownAccountException(UnknownAccountException e) {
+        e.printStackTrace();
+        return ResultMap.fail("用户名或密码错误");
+    }
+
+    @ResponseBody
+    @ExceptionHandler({LockedAccountException.class})
+    public ResultMap lockedAccountException(LockedAccountException e) {
+        e.printStackTrace();
+        return ResultMap.fail("账号已被锁定");
     }
 }
