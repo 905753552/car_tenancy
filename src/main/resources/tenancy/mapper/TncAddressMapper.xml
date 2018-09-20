@@ -12,6 +12,9 @@
     <result column="latitude" property="latitude" jdbcType="DECIMAL" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <association property="province" column="province_id" select="com.dev.main.tenancy.dao.AddressRegionMapper.selectByPrimaryKey" javaType="com.dev.main.tenancy.domain.AddressRegion"/>
+    <association property="city" column="city_id" select="com.dev.main.tenancy.dao.AddressRegionMapper.selectByPrimaryKey" javaType="com.dev.main.tenancy.domain.AddressRegion"/>
+    <association property="area" column="area_id" select="com.dev.main.tenancy.dao.AddressRegionMapper.selectByPrimaryKey" javaType="com.dev.main.tenancy.domain.AddressRegion"/>
   </resultMap>
   <sql id="Base_Column_List" >
     id, province_id, city_id, area_id, detail, store_or_user, longitude, latitude, gmt_create, 

@@ -1,23 +1,24 @@
-// new Vue({
-//     el: '.container-fluid',
-//     data: {
-//         carInfo:{},
-//         personInfo:{}
-//     },
-//     created:function(){
-//         $.ajax({
-//             url:'/order_data.json',
-//             async: false,
-//             success:function(result){
-//                 if(result.car.code==0)
-//                     this.carInfo = result.car.data;
-//             },
-//             failure:function(msg){
-//                 alert(msg);
-//             }
-//         })
-//     }
-// });
+var car_id = $.getUrlParam('id');
+new Vue({
+    el: '.ifl',
+    data: {
+        carInfo:{}
+    },
+    created:function(){
+        var self = this;
+        $.ajax({
+            type:'get',
+            url:'/tnc/order/select/'+car_id,
+            async: false,
+            success:function(result){
+                self.carInfo = result;
+            },
+            error:function(msg){
+                alert(msg);
+            }
+        })
+    }
+});
 new Vue({
     el: '.form-info',
     data: {
@@ -58,12 +59,16 @@ new Vue({
         checkNewTel:function(){
             checkNewTel();
         },
-        countdown:function(){
+        getPhoneCode:function(){
             var overtime = 60;
             countdown(overtime);
+            getPhoneCode();
         },
         checkCode:function(){
             checkCode();
+        },
+        checkPhoneCode:function(){
+            checkPhoneCode();
         },
         save:function(){
             save();
@@ -244,24 +249,6 @@ function checkMemberEmail() {
         })
 }
 
-/*获取验证码*/
-function getVerifyCode() {
-    if( $("#xphone").val() == "" ||  $("#xphone").val() == null){
-        $("#xphone").focus();
-        layer.msg('电话不能空', () => {});
-        return ;
-    }
-    if (!checkMobile($("#xphone").val())){
-        $("#xphone").focus();
-        layer.msg('手机号码格式错误',() => {});
-        return ;
-    }else{
-        $('#myModal').modal('show');
-        // 变换验证码
-        changeImageVerifyCode();
-    }
-
-}
 /*验证手机*/
 function checkMobile(val) {
     return /^(((13[0-9]{1})|(15[0-9]{1})|(14[0-9]{1})|(16[5-6])|(17[0-9]{1})|(18[0-9]{1})|(19[8-9]{1}))+\d{8})$/.test(val);
@@ -325,7 +312,7 @@ function checkNewTel(){
     }
 
 }
-// 检查验证码
+// 检查图片验证码
 function checkCode(){
     var code = $("#code").val();
     if(code==''){
@@ -335,6 +322,34 @@ function checkCode(){
         $("#myzm").parents(".order-errorboxred").css("display", "none");
     }
 
+}
+// 检查手机验证码
+function checkPhoneCode(){
+    var code = $("#phoneCode").val();
+    if(code==''){
+        $("#mverifyid").text("手机验证码不能为空"),
+            $("#mverifyid").parents(".order-errorboxred").css("display", "block");
+    }else{
+        $("#mverifyid").parents(".order-errorboxred").css("display", "none");
+    }
+
+}
+//获取手机验证码
+function getPhoneCode(){
+    var tel = $('#newTel').val();
+    $.ajax({
+        type: "GET",
+        url: "/api/alisms/"+tel,
+        contentType:'application/json',
+        dataType:'json',
+        success: function(res) {
+            if(res.code==0)
+                console.log("发送成功")
+        },
+        error:function (res) {
+            console.log("请求出错，错误："+res.msg);
+        }
+    })
 }
 /*获取验证码倒计时*/
 function countdown(overtime) {
@@ -352,25 +367,78 @@ function countdown(overtime) {
 }
 //保存手机号修改
 function save(){
-    var code = $("#code").val();
-    send_VerifyCode(code);
+    // var code = $("#code").val();
+    // send_VerifyCode(code);
+    // var phoneCode = $('#phoneCode').val();
+    // var phone = $('#newTel').val();
+    // verifyPhoneCode(phoneCode,phone);
+    // $("#mverifyid").text("手机验证码不能为空"),
+    //     $("#mverifyid").parents(".order-errorboxred").css("display", "block");
+    var code = $("#code").val()
+    ,phoneCode = $('#phoneCode').val()
+    ,phone = $('#newTel').val();
+    //判断原手机号码
+    checkOriginalTel();
+    //判断新手机号码
+    checkNewTel();
+    //判断图片验证码
+    checkCode();
+    //判断手机验证码
+    checkPhoneCode();
+    //判断是否可发送验证 验证码
+    if($("#moldTelid").parents(".order-errorboxred").css("display")=='none'
+        &&$("#mnewTelid").parents(".order-errorboxred").css("display")=='none'
+        &&$("#myzm").parents(".order-errorboxred").css("display")=='none'
+        &&$("#mverifyid").parents(".order-errorboxred").css("display")=='none'){
+        //首先验证图片验证码
+        send_VerifyCode(code);
+        //如果图片验证码正确，则判断手机验证码
+        if($("#myzm").parents(".order-errorboxred").css("display")=='none'){
+            verifyPhoneCode(phoneCode,phone);
+            //判断手机验证码
+            if($("#mverifyid").parents(".order-errorboxred").css("display")=='none'){
+                //这里写修改手机号码的函数
+            }
+        }
+    }
 }
+//验证手机验证码是否正确
+function verifyPhoneCode(phoneCode,phone){
+    $.ajax({
+        type: "GET",
+        url: "/api/alisms/verify/"+phone+"/"+phoneCode,
+        contentType:'application/json',
+        dataType:'json',
+        async:false,
+        success: function(res) {
+            if(res.code!=0)
+            //提示手机验证码出错
+                $("#mverifyid").text("手机验证码错误"),
+                    $("#mverifyid").parents(".order-errorboxred").css("display", "block");
+        },
+        error:function (res) {
+            console.log("请求出错，错误："+res);
+        }
+    })
+}
+//验证图片验证码是否正确
 function send_VerifyCode(code){
     $.ajax({
         type: "GET",
         url: "/api/captcha/verify/"+code,
         contentType:'application/json',
         dataType:'json',
+        async:false,
         success: function(res) {
-            if(res.code == 200){
-                alert("验证码正确");
-
-            }else{
-                alert("验证码错误");
-            }
+            if(res.code!=0)
+                //提示验证码出错
+                $("#myzm").text("验证码错误"),
+                    $("#myzm").parents(".order-errorboxred").css("display", "block"),
+                    //改变图片验证码
+                    changeImageVerifyCode();
         },
-        fail:function (res) {
-            alert("出错");
+        error:function (res) {
+            console.log("请求出错，错误："+res);
         }
     })
 }

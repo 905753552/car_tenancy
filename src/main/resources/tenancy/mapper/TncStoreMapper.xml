@@ -12,6 +12,7 @@
     <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <association property="tncAddress" column="addr_id" select="com.dev.main.tenancy.dao.TncAddressMapper.selectByPrimaryKey" javaType="com.dev.main.tenancy.domain.TncAddress"/>
   </resultMap>
   <sql id="Base_Column_List" >
     id, name, addr_id, service_tel, manager_phone, manager_name, status, is_deleted, 

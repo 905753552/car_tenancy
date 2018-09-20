@@ -11,11 +11,20 @@ public class TncAddress extends BaseDomain {
     // 省 外键
     private Long provinceId;
 
+    // 省对象 外键
+    private AddressRegion province;
+
     // 市 外键
     private Long cityId;
 
+    // 市对象 外键
+    private AddressRegion city;
+
     // 区 外键
     private Long areaId;
+
+    // 区对象 外键
+    private AddressRegion area;
 
     // 地址 详细地址
     private String detail;
@@ -113,5 +122,29 @@ public class TncAddress extends BaseDomain {
 
     public void setGmtModified(Date gmtModified) {
         this.gmtModified = gmtModified;
+    }
+
+    public AddressRegion getProvince() {
+        return province;
+    }
+
+    public void setProvince(AddressRegion province) {
+        this.province = province;
+    }
+
+    public AddressRegion getCity() {
+        return city;
+    }
+
+    public void setCity(AddressRegion city) {
+        this.city = city;
+    }
+
+    public AddressRegion getArea() {
+        return area;
+    }
+
+    public void setArea(AddressRegion area) {
+        this.area = area;
     }
 }

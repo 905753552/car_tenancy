@@ -79,8 +79,14 @@ public class TncCar extends BaseDomain {
     // 门店 外键
     private Long storeId;
 
+    // 门店对象 外键
+    private TncStore tncStore;
+
     // 品牌 外键
     private Long brandId;
+
+    // 品牌对象 外键
+    private TncBrand tncBrand;
 
     // 访问次数
     private Long accessTimes;
@@ -143,6 +149,21 @@ public class TncCar extends BaseDomain {
 
     public void setConfigSection(String configSection) {
         this.configSection = configSection == null ? null : configSection.trim();
+    }
+    public TncBrand getTncBrand() {
+        return tncBrand;
+    }
+
+    public void setTncBrand(TncBrand tncBrand) {
+        this.tncBrand = tncBrand;
+    }
+
+    public TncStore getTncStore() {
+        return tncStore;
+    }
+
+    public void setTncStore(TncStore tncStore) {
+        this.tncStore = tncStore;
     }
 
     public Integer getSeatQuantity() {

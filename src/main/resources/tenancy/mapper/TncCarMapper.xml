@@ -33,6 +33,8 @@
     <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <association property="tncBrand" column="brand_id" select="com.dev.main.tenancy.dao.TncBrandMapper.selectByPrimaryKey" javaType="com.dev.main.tenancy.domain.TncBrand"/>
+    <association property="tncStore" column="store_id" select="com.dev.main.tenancy.dao.TncStoreMapper.selectByPrimaryKey" javaType="com.dev.main.tenancy.domain.TncStore"/>
   </resultMap>
   <sql id="Base_Column_List" >
     id, series, quantity, residual, year, config_section, seat_quantity, door_quantity, 
@@ -41,7 +43,7 @@
     gps, type_id, store_id, brand_id, access_times, status, is_deleted, gmt_create, gmt_modified
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from tnc_car
     where id = #{id,jdbcType=BIGINT}

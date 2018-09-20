@@ -120,68 +120,8 @@
             </div>
         </div>
     </div>
-    <div class="zc-modal-overlay" style="display: none;"></div>
-    <div id="orderPaymentDialog" class="zc-modal" style="display: none;">
-        <div class="zc-modal-title zc-gray border-bottom">
-            <p>支付提示</p>
-            <i class="zc-sprite zc-modal-close"></i>
-        </div>
-        <div class="zc-modal-content">
-            <div class="zc-modal-msg zc-gray">
-                请您在新打开的页面中进行支付,支付完成前请不要关闭该窗口
-            </div>
-            <div class="zc-modal-action">
-                <button class="button-left button-yellow" type="button"
-                        onclick="order_payment.paymentResult('15363902408571')">支付成功
-                </button>
-                <button class="button-right button-jacinth" type="button"
-                        onclick="order_payment.paymentResult('15363902408571')">支付失败 重新支付
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="zc-modal zc-modal-success" style="display: none;">
-        <div class="zc-modal-title zc-gray">
-            <i class="zc-sprite zc-modal-close"></i>
-        </div>
-        <div class="zc-modal-content">
-            <div class="zc-modal-tip zc-modal-tip-success">
-                <i class="zc-sprite zc-success-icon"></i>
-                <span class="zc-modal-tip-content">恭喜您支付成功</span>
-            </div>
-            <div class="zc-modal-action">
-                <a class="button-center button-yellow queryOrderDetail"
-                   href="https://order.zuche.com/order/QueryOrderDetailControl.do?orderId=32012911">查看我的订单</a>
-            </div>
-        </div>
-    </div>
-    <div class="withdraw_cover" style="display:none">
-        <div class="wrap">
-            <div class="con">
-                <h3>请输入支付密码</h3>
-                <span class="close"></span>
-                <p class="safe_tip">您在安全的环境中，请放心使用！</p>
-                <p class="password">
-                    <label>支付密码</label>
-                    <input type="password" id="password">
-                    <a href="https://mycar.zuche.com/member/person/paymentPWD.do?forget=forget&amp;from=payOrder&amp;orderNo=15363902408571&amp;itemType=3"
-                       style="color: #6ab0ff">忘记密码？</a>
-                </p>
-                <button id="password_commit" onclick="javascript:order_payment.password_commit()">确定</button>
-            </div>
-        </div>
-    </div>
 </div>
 
-
-<div id="confirmDialog" class="tempDialog d_none popup_block popup_block_show" mask-data="#?w=350"
-     style="display: none; width: 350px; position: absolute; top: 271px; left: 516px;"><a
-        href="javascript:zuche_maskplayer.close('confirmDialog')" id="close_confirmDialog" class="close maskclose1">&nbsp;</a>
-    <div class="orderDialog" style="width: 350px;min-height: 150px;"><h1 class="f18h1 pc_masklayer_b ac">温馨提示</h1>
-        <p class="msg_p p10 ac f14 fontBlue" style="word-wrap: break-word;word-break: normal;">跳转页面绑定信用卡?</p>
-        <p class="ac p10"><input name="" type="button" id="confirm_confirmDialog" value="确定"
-                                 class="btn_bluewauto white f14w w80 maskclose confirmBtn"></p></div>
-</div>
 <script src="/js/jquery-3.3.1.min.js"></script>
 <script src="/js/popper.min.js"></script>
 <script src="/layui-v2.4.3/lay/modules/layer.js"></script>

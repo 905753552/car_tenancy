@@ -66,6 +66,121 @@
 								<a class="tnc_btn tnc_btn_outline_green look-change" value="tnc_btn tnc_btn_outline_green">修改订单</a>
 							</div>
 						</div>
+                        <div class="modal fade" id="car-details">
+                            <div class="modal-dialog" style="max-width:600px;">
+                                <div class="modal-content">
+
+                                    <!-- 模态框头部 -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">起亚K2配置信息</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <!-- 模态框主体 -->
+                                    <div class="modal-body">
+                                        <div class="cflist">
+                                            <ul>
+                                                <li>
+                                                    <b class="zws">&nbsp;</b>座 位 数：
+                                                    <span>
+										5
+								</span>
+                                                </li>
+                                                <li>
+                                                    <b class="cms">&nbsp;</b>车 门 数：
+                                                    <span>
+										4
+								</span>
+                                                </li>
+                                                <li>
+                                                    <b class="rllx">&nbsp;</b>燃料类型：
+                                                    <span>
+										汽油
+								</span>
+                                                </li>
+                                                <li>
+                                                    <b class="bsxlx">&nbsp;</b>变速箱类型：
+                                                    <span>
+										AT
+								</span>
+                                                </li>
+                                                <li>
+                                                    <b class="pl">&nbsp;</b>排　　量：
+                                                    <span>1396</span>
+                                                </li>
+                                                <li>
+                                                    <b class="rybh">&nbsp;</b>燃油标号：
+                                                    <span>
+										92-93汽油
+								</span>
+                                                </li>
+                                                <li>
+                                                    <b class="qdfs">&nbsp;</b>驱动方式：
+                                                    <span>
+										前驱
+								</span>
+                                                </li>
+                                                <li>
+                                                    <b class="fdjjqxs">&nbsp;</b>发动机进气形式：
+                                                    <span>
+										自然吸气
+								</span>
+                                                </li>
+                                                <li>
+                                                    <b class="tc">&nbsp;</b>天　　窗：
+                                                    <span>
+										无
+								</span>
+                                                </li>
+                                                <li>
+                                                    <b class="yxrl">&nbsp;</b>油箱容量：
+                                                    <span>
+										43
+								</span>
+                                                </li>
+                                                <li>
+                                                    <b class="yx">&nbsp;</b>音　　箱：
+                                                    <span>
+										4
+								</span>
+                                                </li>
+                                                <li>
+                                                    <b class="zy">&nbsp;</b>座　　椅：
+                                                    <span>
+										织物座椅
+								</span>
+                                                </li>
+                                                <li>
+                                                    <b class="dcld">&nbsp;</b>倒车雷达：
+                                                    <span>
+										无
+								</span>
+                                                </li>
+                                                <li>
+                                                    <b class="qin">&nbsp;</b>气　　囊：
+                                                    <span>
+										2
+								</span>
+                                                </li>
+                                                <li class="nonebd">
+                                                    <b class="dvd">&nbsp;</b>DVD / CD：
+                                                    <span>
+										CD
+								</span>
+                                                </li>
+                                                <li class="nonebd">
+                                                    <b class="gps">&nbsp;</b>GPS导航：
+                                                    <span>
+										无
+								</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
 					</div>
 					<div class="ifr">
 						<div class="detail">
@@ -167,7 +282,7 @@
 				<div class="info-msg">
 					<p>下单成功后，提醒信息会发送至手机
 						<i id="mmid">178****3431</i>
-						<a href="javascript:void(0)" data-toggle="modal" data-target="#modifyModel" onclick="changeImageVerifyCode();">[修改]</a>
+						<a href="javascript:void(0)" data-toggle="modal" data-target="#modifyModel" onclick="changeImageVerifyCode()">[修改]</a>
 					</p>
 				</div>
 				<div class="papers-tip">
@@ -266,124 +381,14 @@
 			<div class="newpg-con">
 				<div class="top">退改规则</div>
 				<dl>
+					<dt>1.订单取消</dt>
+					<dd>非神州租车原因导致订单取消，预付款中的基础服务费、车辆整备费及可选服务费等将退还客户，车辆租赁及服务费不退。</dd>
+					<dt>2.订单修改</dt>
+					<dd><br>a)取车时间距当前时间≥2个工作小时，如需修改订单，请在门店营业时间前2个工作小时以上致电400 616 6666。若神州租车车辆可以满足更改订单的需求，可以为您修改订单，否则不予修改。<br>b)取车时间距当前时间＜2个工作小时，不接受修改。</dd>
 					<dd>（小贴士：如果您修改订单或取消订单重新预订，价格可能会发生变化。）</dd>
+					<dd>3.提前还车：允许提前还车，但已预付的租金不退。</dd>
 					<br><br>
 				</dl>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="car-details">
-		<div class="modal-dialog" style="max-width:600px;">
-			<div class="modal-content">
-
-				<!-- 模态框头部 -->
-				<div class="modal-header">
-					<h4 class="modal-title">起亚K2配置信息</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-
-				<!-- 模态框主体 -->
-				<div class="modal-body">
-					<div class="cflist">
-						<ul>
-							<li>
-								<b class="zws">&nbsp;</b>座 位 数：
-								<span>
-										5
-								</span>
-							</li>
-							<li>
-								<b class="cms">&nbsp;</b>车 门 数：
-								<span>
-										4
-								</span>
-							</li>
-							<li>
-								<b class="rllx">&nbsp;</b>燃料类型：
-								<span>
-										汽油
-								</span>
-							</li>
-							<li>
-								<b class="bsxlx">&nbsp;</b>变速箱类型：
-								<span>
-										AT
-								</span>
-							</li>
-							<li>
-								<b class="pl">&nbsp;</b>排　　量：
-								<span>1396</span>
-							</li>
-							<li>
-								<b class="rybh">&nbsp;</b>燃油标号：
-								<span>
-										92-93汽油
-								</span>
-							</li>
-							<li>
-								<b class="qdfs">&nbsp;</b>驱动方式：
-								<span>
-										前驱
-								</span>
-							</li>
-							<li>
-								<b class="fdjjqxs">&nbsp;</b>发动机进气形式：
-								<span>
-										自然吸气
-								</span>
-							</li>
-							<li>
-								<b class="tc">&nbsp;</b>天　　窗：
-								<span>
-										无
-								</span>
-							</li>
-							<li>
-								<b class="yxrl">&nbsp;</b>油箱容量：
-								<span>
-										43
-								</span>
-							</li>
-							<li>
-								<b class="yx">&nbsp;</b>音　　箱：
-								<span>
-										4
-								</span>
-							</li>
-							<li>
-								<b class="zy">&nbsp;</b>座　　椅：
-								<span>
-										织物座椅
-								</span>
-							</li>
-							<li>
-								<b class="dcld">&nbsp;</b>倒车雷达：
-								<span>
-										无
-								</span>
-							</li>
-							<li>
-								<b class="qin">&nbsp;</b>气　　囊：
-								<span>
-										2
-								</span>
-							</li>
-							<li class="nonebd">
-								<b class="dvd">&nbsp;</b>DVD / CD：
-								<span>
-										CD
-								</span>
-							</li>
-							<li class="nonebd">
-								<b class="gps">&nbsp;</b>GPS导航：
-								<span>
-										无
-								</span>
-							</li>
-						</ul>
-					</div>
-				</div>
-
 			</div>
 		</div>
 	</div>
@@ -431,11 +436,11 @@
 							<li>
 								<label>手机验证码</label>
 								<!-- <input type="text" value="" id="verifyid" placeholder="手机验证码" class="s" onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"> -->
-								<input class="tnc_input s" placeholder="手机验证码">
+								<input class="tnc_input s" id = "phoneCode" placeholder="手机验证码" @blur="checkPhoneCode">
 								<!-- <input type="button" id="sendKeyid" class="getyzm" onclick="sendKey()" value="获取验证码"> -->
-								<button class="tnc_btn tnc_btn_outline_green getyzm" id="getCode" @click="countdown">获取验证码</button>
+								<button class="tnc_btn tnc_btn_outline_green getyzm" id="getCode" @click="getPhoneCode">获取验证码</button>
 								<div class="order-errorboxred order-erpos" style="display: none;">
-									<i class="err-con" id="mverifyid"></i>
+									<i class="err-con" id="mverifyid">请输入手机验证码</i>
 								</div>
 							</li>
 							<li class="mtxt">修改成功后，请使用新手机号登录。</li>
@@ -456,6 +461,7 @@
 <script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 <script src="/vue-2.5.17/vue.min.js"></script>
 <script src="/js/common/common.js"></script>
+<script src="/js/tenancy/getParam.js"></script>
 <script src="/js/tenancy/beginReserve.js"></script>
 <script src="/js/tenancy/header.js"></script>
 </body>
