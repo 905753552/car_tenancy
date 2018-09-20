@@ -49,9 +49,20 @@ public class PhoneRealm extends AuthorizingRealm {
         String codeInput = strs[1];
         TncCustomer customer = customerService.findByPhone(phone);
         customer = new TncCustomer();
+
         // 验证验证码
-        if (!smsService.verifyCode(keyInCookie, phone, codeInput, req, resp)) {
-            throw new CommonException("验证码不正确");
+        boolean ok = false;
+        try {
+            ok = smsService.verifyCode(keyInCookie, phone, codeInput, req, resp);
+        } catch (CommonException e) {
+            e.printStackTrace();
+            throw e;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CommonException(e.getMessage());
+        }
+        if (!ok) {
+            throw new CommonException("验证码错误");
         }
         AuthenticationInfo info = new SimpleAuthenticationInfo(customer, "ok", getName());
         return info;
