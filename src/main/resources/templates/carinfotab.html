@@ -10,7 +10,29 @@
 </head>
 <body>
 <br><br>
-<button onclick="doSeachByAllType()">查车</button>
+<button class="btn" onclick="doSearchByAllType()">查车</button>
+<button class="btn" onclick="doChangeType('SD')">手动紧凑型</button>
+<button class="btn" onclick="doChangeType('JJ')">经济型</button>
+<button class="btn" onclick="doChangeType('SW')">商务型</button>
+<button class="btn" onclick="doChangeType('HH')">豪华型</button>
+<button class="btn" onclick="doChangeType('SUV')">SUV</button>
+<button class="btn" onclick="doChangeType('GX')">个性车</button>
+<button class="btn" onclick="doCheckByType()">类型</button>
+<br>
+<br>
+<button class="btn" onclick="doChangePrice(0)">0</button>
+<button class="btn" onclick="doChangePrice(150)">150</button>
+<button class="btn" onclick="doChangePrice(300)">300</button>
+<button class="btn" onclick="doChangePrice(500)">500</button>
+<button class="btn" onclick="doChangePrice(501)">500+</button>
+<br><br>
+<button class="btn" onclick="doChangeBrand('奥迪')">奥迪</button>
+<button class="btn" onclick="doChangeBrand('奔驰')">奔驰</button>
+<button class="btn" onclick="doChangeBrand('宝马')">宝马</button>
+
+
+<br>
+<br>
 <div class="container">
     <!--row start-->
     <div class="row clearfix">
@@ -22,12 +44,12 @@
 
                 <!--日租  必有套餐  tabHeader start-->
                 <li class="nav-item">
-                    <a class="nav-link active text-secondary" id="carDay" @click="doSeachByPackage('carDay')" data-toggle="tab" href="#pane_carDay">日租自驾</a>
+                    <a class="nav-link active text-secondary" id="carDay" @click="doSearchByPackage('carDay')" data-toggle="tab" href="#pane_carDay">日租自驾</a>
                 </li>
                 <!--日租  必有套餐 tabHeader end-->
                 <!--其他套餐 tabHeader start-->
                 <li class="nav-item" v-for="carMenu in evenMenus">
-                    <a class="nav-link text-secondary" :id="carMenu.mid" @click="doSeachByPackage(carMenu.mid)" data-toggle="tab" :href="'#pane_'+carMenu.mid">{{carMenu.mname}}</a>
+                    <a class="nav-link text-secondary" :id="carMenu.mid" @click="doSearchByPackage(carMenu.mid)" data-toggle="tab" :href="'#pane_'+carMenu.mid">{{carMenu.mname}}</a>
                 </li>
                 <!--其他套餐 tabHeader end-->
                 <!--按价格排序 tabHeader start-->
@@ -152,21 +174,17 @@
 </div>
 
 
-<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>-->
-<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>-->
-<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>-->
-
 <script src="/js/jquery-3.3.1.min.js"></script>
 <script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 <script src="/vue-2.5.17/vue.min.js"></script>
+<script src="/layui-v2.4.3/lay/modules/layer.js"></script>
 
 <script>
     // $(function () {
     //     $('#myTab li:last-child a').tab('show')
     // })
 </script>
-<script type="text/javascript" src="/js/car_tabs.js"></script>
+<script type="text/javascript" src="/js/tenancy/car_tabs.js"></script>
 
 </body>
 </html>

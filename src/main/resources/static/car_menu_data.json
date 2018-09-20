@@ -1,6 +1,6 @@
 {
   "carMenu": {
-    "code": 500,
+    "code": 0,
     "msg": "测试文本",
     "carmenu": [
       {
@@ -41,10 +41,55 @@
         "carTotalPrice":0,
         "carPackagePrice":80,
         "carTotalPackagePrice":0,
-        "carHot":777
+        "carHot":777,
+        "carType":"手动紧凑型"
       },{
         "carId":19,
-        "carImg":"https://fimg.zuchecdn.com/upload/web/modepic/480.jpg",
+        "carImg":"https://fimg.zuchecdn.com/upload/web/modepic/846.jpg",
+        "carName":"奔驰",
+        "carVer":"A8",
+        "carVan":"三厢",
+        "carPower":"1.8自动",
+        "carSeat":"6",
+        "carPrice":1800,
+        "carTotalPrice":0,
+        "carPackagePrice":120,
+        "carTotalPackagePrice":0,
+        "carHot":777,
+        "carType":"经济型"
+
+      },{
+        "carId":16,
+        "carImg":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536655028&di=f4827a5065d70760bb21b4c1929c12fc&imgtype=jpg&er=1&src=http%3A%2F%2Fimg4.cache.netease.com%2Fphoto%2F0008%2F2014-10-28%2FA9LNB533294V0008.550x.0.jpg",
+        "carName":"宝马",
+        "carVer":"5系",
+        "carVan":"三厢",
+        "carPower":"1.8自动",
+        "carSeat":"6",
+        "carPrice":1300,
+        "carTotalPrice":0,
+        "carPackagePrice":160,
+        "carTotalPackagePrice":0,
+        "carHot":77756,
+        "carType":"商务型"
+      },
+      {
+        "carId":15,
+        "carImg":"https://fimg.zuchecdn.com/upload/web/modepic/845.jpg",
+        "carName":"奥迪",
+        "carVer":"A8",
+        "carVan":"三厢",
+        "carPower":"1.8自动",
+        "carSeat":"6",
+        "carPrice":1200,
+        "carTotalPrice":0,
+        "carPackagePrice":80,
+        "carTotalPackagePrice":0,
+        "carHot":777,
+        "carType":"手动紧凑型"
+      },{
+        "carId":19,
+        "carImg":"https://fimg.zuchecdn.com/upload/web/modepic/825.jpg",
         "carName":"奔驰",
         "carVer":"A8",
         "carVan":"三厢",
@@ -54,7 +99,8 @@
         "carTotalPrice":0,
         "carPackagePrice":120,
         "carTotalPackagePrice":0,
-        "carHot":777
+        "carHot":777,
+        "carType":"经济型"
 
       },{
         "carId":16,
@@ -66,9 +112,70 @@
         "carSeat":"6",
         "carPrice":130,
         "carTotalPrice":0,
-        "carPackagePrice":100,
+        "carPackagePrice":160,
         "carTotalPackagePrice":0,
-        "carHot":77756
+        "carHot":77756,
+        "carType":"商务型"
+      }
+    ]
+  },
+  "carBrand": {
+    "code": 500,
+    "msg": "测试文本",
+    "carbrand": [
+      {
+        "carBrand":"奥迪"
+      },
+      {
+        "carBrand":"宝马"
+      },
+      {
+        "carBrand":"奔驰"
+      },
+      {
+        "carBrand":"奥迪"
+      },
+      {
+        "carBrand":"宝马"
+      },
+      {
+        "carBrand":"奔驰"
+      },
+      {
+        "carBrand":"奥迪"
+      },
+      {
+        "carBrand":"宝马"
+      },
+      {
+        "carBrand":"奔驰"
+      },
+      {
+        "carBrand":"奥迪"
+      },
+      {
+        "carBrand":"宝马"
+      },
+      {
+        "carBrand":"奔驰"
+      },
+      {
+        "carBrand":"奥迪"
+      },
+      {
+        "carBrand":"宝马"
+      },
+      {
+        "carBrand":"奔驰"
+      },
+      {
+        "carBrand":"奥迪"
+      },
+      {
+        "carBrand":"宝马"
+      },
+      {
+        "carBrand":"奔驰"
       }
     ]
   }

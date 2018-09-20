@@ -3,14 +3,21 @@
 }
 
 .tnc_carcon {
+    /*position: fixed;*/
+    /*top: 500px;*/
     padding-top: 15px;
     padding-bottom: 35px;
+    width: 268px;
+    height: 600px;
     position: relative;
 }
 
 .tnc_lchoose_box {
-    position: relative;
+    position: fixed;
+    /*top: 189px;*/
+    /*position: relative;*/
     width: 268px;
+    /*height: 600px;*/
     z-index: 9;
 }
 
@@ -288,4 +295,3 @@
 .tnc-lbox .car_brand li a {
     color: #93939e;
 }
-

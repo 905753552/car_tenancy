@@ -11,6 +11,11 @@
   <sql id="Base_Column_List" >
     id, name, is_deleted, gmt_create, gmt_modified
   </sql>
+  <select id="listTncBrand" resultMap="BaseResultMap">
+    select id, name
+    from tnc_brand
+    where is_deleted = 0
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

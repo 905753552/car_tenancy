@@ -28,6 +28,7 @@
     align-items: center;
     justify-content: center;
     min-height: 180px;
+    /*min-width: 699px;*/
     padding: 0px 0px 0px 40px;/*上 右 下 左边距 */
 }
 

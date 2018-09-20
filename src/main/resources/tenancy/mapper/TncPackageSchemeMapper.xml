@@ -13,6 +13,14 @@
   <sql id="Base_Column_List" >
     id, name, days_min, days_max, is_deleted, gmt_create, gmt_modified
   </sql>
+
+  <select id="listPackageScheme" resultMap="BaseResultMap">
+    select
+    id, name, days_min, days_max
+    from tnc_package_scheme
+    where is_deleted = 0
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

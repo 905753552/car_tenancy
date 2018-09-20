@@ -24,7 +24,7 @@
     </style>
 </head>
 <body>
-<div class="container-fluid tnc_container tnc_header">
+<div class="container-fluid tnc_container tnc_header" v-cloak id="carInfoTab-app">
     <div class="row tnc_head">
         <div class="tnc_head_bd">
             <div><a class="tnc_head_brand tnc_logo" href="/"></a></div>
@@ -71,7 +71,7 @@
             </div>
         </div>
     </div>
-    <from id="firstOrderInfo">
+    <from id="firstOrderInfo" >
         <div class="row bo_bg">
             <div class="col-md-12 col-lg-10 offset-lg-1 col-sm-12">
                 <div class="menu-left">
@@ -129,70 +129,72 @@
                         </div>
                     </div>
                     <div class="" style="display:inline-block;margin-top: 15px;margin-bottom: 15px;text-align: center">
-                        <div style=""><i>租期:<em class="tnc_bred">2天</em>，不限里程</i></div>
+                        <div style=""><i>租期:<em class="tnc_bred"><label>{{days}}</label>天</em>，不限里程</i></div>
                         <input type="button" value="立即选车" class="tnc2_btn tnc_btn_green">
                     </div>
                 </div>
             </div>
         </div>
     </from>
-    <div class="row">
-        <div class="col-defineone offset-lg-1 tnc_carcon">
-            <div class="tnc_leftlist tnc_h1">
+<!--<button data-spy="affix">asaas</button>-->
+
+    <div class="row" id="myRow">
+        <div class="col-defineone offset-lg-1 tnc_carcon" >
+            <div class="tnc_leftlist tnc_h1" >
                 <div class="tnc_lchoose_box">
                     <div class="tnc-lbox bdbtm orderLevel">
                         <p class="tnc_left_title">车型</p>
                         <ul class="tnc_chexing" id="ch_type">
                             <li class="tnc_filter filter_level all">
-                                <a class="cxdefault checked">
+                                <a class="cxdefault checked" id="typebx" onclick="doChangeType('BX')">
                                     <i class="zc_cx_bx"></i>
                                     <i class="cartxt">不限</i>
                                 </a>
                             </li>
                             <li class="orderlevelcheck filter_level brandname">
-                                <a href="#" data="1">
+                                <a href="#" data="1" onclick="doChangeType('SD')">
                                     <i class="zc_cx_sdjc"></i>
                                     <i class="cartxt">手动紧凑型</i>
                                 </a>
                             </li>
                             <li class="orderlevelcheck filter_level brandname">
-                                <a href="#" data="3">
+                                <a href="#" data="3" onclick="doChangeType('JJ')">
                                     <i class="zc_cx_jj"></i>
                                     <i class="cartxt">经济型</i>
                                 </a>
                             </li>
                             <li class="orderlevelcheck filter_level brandname">
-                                <a href="#" data="5">
+                                <a href="#" data="5" onclick="doChangeType('SW')">
                                     <i class="zc_cx_sw"></i>
                                     <i class="cartxt">商务型</i>
                                 </a>
                             </li>
                             <li class="orderlevelcheck filter_level brandname">
-                                <a href="#" data="6">
+                                <a href="#" data="6" onclick="doChangeType('HH')">
                                     <i class="zc_cx_hh"></i>
                                     <i class="cartxt">豪华型</i>
                                 </a>
                             </li>
                             <li class="orderlevelcheck filter_level brandname">
-                                <a href="#" data="7">
+                                <a href="#" data="7" onclick="doChangeType('SUV')">
                                     <i class="zc_cx_suv"></i>
                                     <i class="cartxt">SUV</i>
                                 </a>
                             </li>
                             <li class="orderlevelcheck filter_level brandname">
-                                <a href="#" data="8">
+                                <a href="#" data="8" onclick="doChangeType('6SW')">
                                     <i class="zc_cx_zsw"></i>
                                     <i class="cartxt">6至15座商务</i>
                                 </a>
                             </li>
                             <li class="orderlevelcheck filter_level brandname">
-                                <a href="#" data="9">
+                                <a href="#" data="9" onclick="doChangeType('GX')">
                                     <i class="zc_cx_gx"></i>
                                     <i class="cartxt">个性车</i>
                                 </a>
                             </li>
                             <li class="orderlevelcheck filter_level brandname">
-                                <a href="#" data="12">
+                                <a href="#" data="12" onclick="doChangeType('DD')">
                                     <i class="zc_cx_dd"></i>
                                     <i class="cartxt">电动车</i>
                                 </a>
@@ -203,219 +205,253 @@
                         <p class="tnc_left_title">价格 <span class="sma12">(元)</span></p>
                         <ul class="pri_range" id="ch_num">
                             <li class="bar1 orderlevelcheck filter_rent_money all">
-                                <a class="checked jgdefault" data="0-*"><span class="w40"></span></a></li>
+                                <a class="checked jgdefault" id="pbx" data="0-*" onclick="doChangePrice(0)"><span class="w40"></span></a></li>
                             <li class="bar2 prli orderlevelcheck filter_rent_money">
-                                <a href="#" data="0-150"><span class="w40"></span></a></li>
+                                <a href="#" data="0-150" onclick="doChangePrice(150)"><span class="w40"></span></a></li>
                             <li class="bar3 prli orderlevelcheck filter_rent_money">
-                                <a href="#" data="150-300"><span class="w40"></span></a></li>
+                                <a href="#" data="150-300" onclick="doChangePrice(300)"><span class="w40"></span></a></li>
                             <li class="bar4 prli orderlevelcheck filter_rent_money">
-                                <a href="#" data="300-500"><span class="w40"></span></a></li>
+                                <a href="#" data="300-500" onclick="doChangePrice(500)"><span class="w40"></span></a></li>
                             <li class="bar5 prli orderlevelcheck filter_rent_money">
-                                <a href="#" data="500-*"><span class="w70"></span></a></li>
+                                <a href="#" data="500-*" onclick="doChangePrice(501)"><span class="w70"></span></a></li>
                         </ul>
                         <ul class="pri_num">
                             <li class="pri1 w37 checked jgdefault">不限</li>
                             <li class="pri2 w35 numli">0</li>
-                            <li class="pri3 w42 numli">150</li>
-                            <li class="pri4 w42 numli">300</li>
-                            <li class="pri5 w37 numli">500</li>
-                            <li class="pri6 w44 numli">500+</li>
+                            <li class="pri3 w42 numli" >150</li>
+                            <li class="pri4 w42 numli" >300</li>
+                            <li class="pri5 w37 numli" >500</li>
+                            <li class="pri6 w44 numli" >500+</li>
                         </ul>
                     </div>
                     <div class="tnc-lbox bdbtm orderBrand">
                         <p class="tnc_left_title">品牌</p>
                         <ul class="car_brand" id="ch_brand">
-                            <li class="orderlevelcheck filter_brand all"><a class="checked ppdefault">不限</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="12">奥迪</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="11">宝马</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="20">奔驰</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="10">本田</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="2">标致</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="3">别克</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="16">比亚迪</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="21">长城</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="8">大众</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="7">丰田</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="9">福特</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="22">金杯</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="18">凯迪拉克</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="17">铃木</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="14">马自达</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="15">奇瑞</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="6">起亚</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="13">斯柯达</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="5">现代</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="4">雪佛兰</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="1">雪铁龙</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="23">猎豹</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="24">日产</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="25">沃尔沃</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="28">依维柯</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="29">华泰</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="30">野马</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="31">三菱</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="32">MINI</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="33">雪铁龙DS</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="34">北京汽车</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="35">菲亚特</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="36">江淮</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="37">江铃</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="38">上汽大通</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="39">华颂</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="40">风行</a></li>
-                            <li class="orderlevelcheck filter_brand brandname"><a href="#" data="41">广汽</a></li>
+                            <li class="orderlevelcheck filter_brand all"><a class="checked ppdefault" id="cbx" @click="doChangeBrand('CBX')">不限</a></li>
+                            <li class="orderlevelcheck filter_brand brandname" v-for="item in carBrands"><a href="#" @click="doChangeBrand(item.name)">{{item.name}}</a></li>
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="11" onclick="doChangeBrand('宝马')">宝马</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="20" onclick="doChangeBrand('奔驰')">奔驰</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="10" onclick="doChangeBrand('本田')">本田</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="2" onclick="doChangeBrand('标致')">标致</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="3" onclick="doChangeBrand('别克')">别克</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="16" onclick="doChangeBrand('比亚迪')">比亚迪</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="21" onclick="doChangeBrand('长城')">长城</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="8" onclick="doChangeBrand('大众')">大众</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="7" onclick="doChangeBrand('丰田')">丰田</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="9" onclick="doChangeBrand('福特')">福特</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="22" onclick="doChangeBrand('金杯')">金杯</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="18" onclick="doChangeBrand('凯迪拉克')">凯迪拉克</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="17" onclick="doChangeBrand('铃木')">铃木</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="14" onclick="doChangeBrand('马自达')">马自达</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="15" onclick="doChangeBrand('奇瑞')">奇瑞</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="6" onclick="doChangeBrand('起亚')">起亚</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="13" onclick="doChangeBrand('斯柯达')">斯柯达</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="5" onclick="doChangeBrand('现代')">现代</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="4" onclick="doChangeBrand('雪佛兰')">雪佛兰</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="1" onclick="doChangeBrand('雪铁龙')">雪铁龙</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="23" onclick="doChangeBrand('猎豹')">猎豹</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="24" onclick="doChangeBrand('日产')">日产</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="25" onclick="doChangeBrand('沃尔沃')">沃尔沃</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="28" onclick="doChangeBrand('依维柯')">依维柯</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="29" onclick="doChangeBrand('华泰')">华泰</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="30" onclick="doChangeBrand('野马')">野马</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="31" onclick="doChangeBrand('三菱')">三菱</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="32" onclick="doChangeBrand('MINI')">MINI</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="33" onclick="doChangeBrand('雪铁龙DS')">雪铁龙DS</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="34" onclick="doChangeBrand('北京汽车')">北京汽车</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="35" onclick="doChangeBrand('菲亚特')">菲亚特</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="36" onclick="doChangeBrand('江淮')">江淮</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="37" onclick="doChangeBrand('奥迪')">江铃</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="38" onclick="doChangeBrand('奥迪')">上汽大通</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="39" onclick="doChangeBrand('奥迪')">华颂</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="40" onclick="doChangeBrand('奥迪')">风行</a></li>-->
+                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="41" onclick="doChangeBrand('奥迪')">广汽</a></li>-->
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="col-md-12 col-lg-8 pad-define1">
             <!--<button onclick="doSeachByAllType()">查车</button>-->
-            <div class="container">
-                <!--row start-->
-                <div class="row clearfix">
-                    <!--col start-->
-                    <div class="col-md-12 column" v-cloak id="carInfoTab-app">
-                        <!--tabHeader  ul start-->
-                        <ul class="nav nav-tabs bg-define" id="mycarInfoListTab">
-                            <!--日租  必有套餐  tabHeader start-->
-                            <li class="nav-item wid-define">
-                                <a class="nav-link active pad-define2 text-secondary" id="carDay"
-                                   @click="doSeachByPackage('carDay')" data-toggle="tab" href="#pane_carDay">日租自驾</a>
-                            </li>
-                            <!--日租  必有套餐 tabHeader end-->
-                            <!--其他套餐 tabHeader start-->
-                            <li class="nav-item wid-define" v-for="carMenu in evenMenus">
-                                <a class="nav-link pad-define2 text-secondary" :id="carMenu.mid"
-                                   @click="doSeachByPackage(carMenu.mid)" data-toggle="tab"
-                                   :href="'#pane_'+carMenu.mid">{{carMenu.mname}}</a>
-                            </li>
-                            <!--其他套餐 tabHeader end-->
-                            <!--按价格排序 tabHeader start-->
-                            <div class="col-md-3 price-lo dev_sort_btn">
-                                <a class="nav-link2 text-secondary" id="dev_sort_button" @click="doSort" href="#">
-                                    <span class="dev_od_btn_a">↓</span> 租金由高到低
-                                </a>
-                            </div>
-                            <!--按价格排序 tabHeader end-->
-                        </ul>
-                        <!--tabHeader  ul end-->
+            <!--
+            <button class="btn" onclick="doSearchByAllType()">查车</button>
+            <button class="btn" onclick="doChangeType('SD')">手动紧凑型</button>
+            <button class="btn" onclick="doChangeType('JJ')">经济型</button>
+            <button class="btn" onclick="doChangeType('SW')">商务型</button>
+            <button class="btn" onclick="doChangeType('HH')">豪华型</button>
+            <button class="btn" onclick="doChangeType('SUV')">SUV</button>
+            <button class="btn" onclick="doChangeType('GX')">个性车</button>
+            <button class="btn" onclick="doCheckByType()">类型</button>
+            <br>
+            <br>
+            <button class="btn" onclick="doChangePrice(0)">0</button>
+            <button class="btn" onclick="doChangePrice(150)">150</button>
+            <button class="btn" onclick="doChangePrice(300)">300</button>
+            <button class="btn" onclick="doChangePrice(500)">500</button>
+            <button class="btn" onclick="doChangePrice(501)">500+</button>
+            <br><br>
+            <button class="btn" onclick="doChangeBrand('奥迪')">奥迪</button>
+            <button class="btn" onclick="doChangeBrand('奔驰')">奔驰</button>
+            <button class="btn" onclick="doChangeBrand('宝马')">宝马</button>-->
+            <!--row start-->
+            <div class="row clearfix">
+                <!--col start-->
+                <div class="col-md-12 column"  >
 
-                        <!--tabContent start-->
-                        <div class=" tab-content">
-                            <!--日租 start-->
-                            <div class="tab-pane active bg-define" id="pane_carDay">
-                                <ul class="nav navbar-nav" id="car_day">
-                                    <li v-if="items.length>0" v-for="item in items" class="list-unstyled dev_underline">
-                                        <div class="col-md-12 column">
-                                            <div class="row clearfix">
-                                                <div class="col-md-4 column pic">
-                                                    <a :href="'#/url?carId='+item.carId">
-                                                        <img :src="item.carImg" alt="图片" width="230px"
-                                                             height="130px"></a>
-                                                </div>
-                                                <div class="col-md-3 column info">
-                                                    <div class="info_block">
-                                                        <p class="info_car_name">{{item.carName}}{{item.carVer}}</p>
-                                                        <p class="info_car_oth">
-                                                            {{item.carVan}}|{{item.carPower}}|乘坐{{item.carSeat}}人</p>
-                                                        <div class="bh_sale">
-                                                            <a class="re" data="87-1"><span class="bred">人气</span><i
-                                                                    class="sale_con">{{item.carHot}}</i></a>
-                                                        </div>
+                    <!--tabHeader  ul start-->
+                    <ul class="nav nav-tabs  bg-define" id="mycarInfoListTab">
+
+                        <!--日租  必有套餐  tabHeader start-->
+                        <li class=" nav-item wid-define" disabled="true" >
+                            <a class="nav-link active pad-define2 text-secondary"  id="carDay" @click="doSearchByPackage('carDay')" data-toggle="tab" href="#pane_carDay">日租自驾</a>
+                        </li>
+                        <!--日租  必有套餐 tabHeader end-->
+                        <!--其他套餐 tabHeader start-->
+                        <li class="nav-item wid-define" v-for="carMenu in evenMenus">
+                            <a class="nav-link pad-define2 text-secondary" :id="carMenu.id" @click="doSearchByPackage(carMenu.id)" data-toggle="tab" :href="'#pane_'+carMenu.id">{{carMenu.name}}</a>
+                        </li>
+                        <!--其他套餐 tabHeader end-->
+                        <!--按价格排序 tabHeader start-->
+                        <!--<li class="nav-item">-->
+                            <!--<div class="dev_sort_btn"><a class="nav-link2 text-secondary " id="dev_sort_button" @click="doSort" href="#"><span class="dev_od_btn_a">↓</span> 租金由高到低 </a></div>-->
+                        <!--</li>-->
+                        <!--按价格排序 tabHeader end-->
+                        <!--按价格排序 tabHeader start-->
+                        <div class="col-md-3 price-lo dev_sort_btn">
+                            <a class="nav-link2 text-secondary" id="dev_sort_button" @click="doSort" href="#">
+                                <span class="dev_od_btn_a">↓</span> 租金由高到低
+                            </a>
+                        </div>
+                        <!--按价格排序 tabHeader end-->
+
+                    </ul>
+                    <!--tabHeader  ul end-->
+
+                    <!--tabContent start-->
+                    <div class=" tab-content">
+
+                        <!--日租 start-->
+                        <div class="tab-pane active bg-define" id="pane_carDay">
+
+                            <ul class="nav navbar-nav" id="car_day">
+                                <li v-if="items.length>0" v-for="item in items" class="list-unstyled">
+                                    <div class="col-md-12 column">
+                                        <div class="row clearfix dev_underline">
+                                            <div class="col-md-4 column pic">
+                                                <a :href="'#/url?carId='+item.carId"><img :src="item.carImg" alt="图片" width="230px" height="130px"></a>
+                                            </div>
+                                            <div class="col-md-3 column info">
+                                                <div class="info_block">
+                                                    <p class="info_car_name">{{item.carName}}{{item.carVer}}</p>
+                                                    <p class="info_car_oth">
+                                                        {{item.carVan}}|{{item.carPower}}|乘坐{{item.carSeat}}人</p>
+                                                    <div class="bh_sale">
+                                                        <a class="re" data="87-1"><span class="bred">人气</span><i
+                                                                class="sale_con">{{item.carHot}}</i></a>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-5 column dev_ord">
-                                                    <div class="dev_order_box">
-                                                        <div class="dev_od_price dev_od_price_set">
-                                                            <div class="dev_car_price">
+                                            </div>
+                                            <div class="col-md-5 column dev_ord">
+                                                <div class="dev_order_box">
+                                                    <div class="dev_od_price dev_od_price_set">
+                                                        <div class="dev_car_price">
 	                           <span class="dev_pri_ye">
 	                               <em class="dev_rmb">¥</em>
 	                               <em class="dev_num">{{item.carTotalPrice}}</em>
 	                               <em class="dev_unit"></em>
 	                           </span>
-                                                                <span class="dev_pri_ye">
-                                    <em class=" dev_week_fontsize">单价:</em>
-                                    <em class=" dev_week_fontsize">¥</em>
-                                    <em class="dev_week_savemoney">{{item.carPrice}}</em>
-                                    <em class=" dev_week_fontsize"> 每天</em>
-                                </span>
-                                                            </div>
+                                                            <span class="dev_pri_ye">
+	                                    <em class=" dev_week_fontsize">单价:</em>
+	                                    <em class=" dev_week_fontsize">¥</em>
+	                                    <em class="dev_week_savemoney">{{item.carPrice}}</em>
+	                                    <em class=" dev_week_fontsize"> 每天</em>
+	                               </span>
                                                         </div>
-                                                        <span class="dev_od_btn">
-                                                            <a href='#' @click="doCarOrder(item)"
-                                                               class="btn zc_btn_size tnc_btn_green">租车</a></span>
+                                                    </div>
+                                                    <span class="dev_od_btn"><a href='#' @click="doCarOrder(item)"  class="btn zc_btn_size tnc_btn_green">租车</a></span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+
+                        </div>
+                        <!--日租 end-->
+
+
+                        <div class="tab-pane bg-define"  v-for="carMenuP in evenMenus" :id="'pane_'+carMenuP.id">
+                            <ul class="nav navbar-nav">
+                                <li v-if="items.length>0" v-for="item in items" class="list-unstyled">
+                                    <div class="col-md-12 column">
+                                        <div class="row clearfix dev_underline">
+                                            <div class="col-md-4 column pic">
+                                                <a :href="'#/url?carId='+item.carId"><img :src="item.carImg" alt="图片" width="230px" height="130px"></a>
+                                            </div>
+                                            <div class="col-md-3 column info">
+                                                <div class="info_block">
+                                                    <p class="info_car_name">{{item.carName}}{{item.carVer}}</p>
+                                                    <p class="info_car_oth">
+                                                        {{item.carVan}}|{{item.carPower}}|乘坐{{item.carSeat}}人</p>
+                                                    <div class="bh_sale">
+                                                        <a class="re" data="87-1"><span class="bred">人气</span><i
+                                                                class="sale_con">{{item.carHot}}</i></a>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!--日租 end-->
-
-                            <div class="tab-pane " v-for="carMenuP in evenMenus" :id="'pane_'+carMenuP.mid">
-                                <ul class="nav navbar-nav">
-                                    <li v-if="items.length>0" v-for="item in items" class="list-unstyled">
-                                        <div class="col-md-12 column">
-                                            <div class="row clearfix dev_underline">
-                                                <div class="col-md-4 column pic">
-                                                    <a :href="'#/url?carId='+item.carId">
-                                                        <img :src="item.carImg" alt="图片" width="230px"
-                                                             height="130px"></a>
-                                                </div>
-                                                <div class="col-md-3 column info">
-                                                    <div class="info_block">
-                                                        <p class="info_car_name">{{item.carName}}{{item.carVer}}</p>
-                                                        <p class="info_car_oth">
-                                                            {{item.carVan}}|{{item.carPower}}|乘坐{{item.carSeat}}人</p>
-                                                        <div class="bh_sale">
-                                                            <a class="re" data="87-1"><span class="bred">人气</span><i
-                                                                    class="sale_con">{{item.carHot}}</i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-5 column dev_ord">
-                                                    <div class="dev_order_box">
-                                                        <div class="dev_od_price dev_od_price_set">
-                                                            <div class="dev_car_price">
+                                            <div class="col-md-5 column dev_ord">
+                                                <div class="dev_order_box">
+                                                    <div class="dev_od_price dev_od_price_set">
+                                                        <div class="dev_car_price">
 	                           <span class="dev_pri_ye">
 	                               <em class="dev_rmb">¥</em>
 	                               <em class="dev_num">{{item.carTotalPackagePrice}}</em>
 	                               <em class="dev_unit">/套餐价</em>
 	                           </span>
-                                                                <span class="dev_pri_ye">
+                                                            <span class="dev_pri_ye">
 	                                    <em class=" dev_week_fontsize">原价:</em>
 	                                    <em class=" dev_week_fontsize">¥</em>
-	                                    <em class="dev_week_ori dev_week_fontsize">{{item.carTotalPrice}}</em>
+	                                    <em class="dev_week_ori dev_week_fontsize">{{item.carTotalPackagePrice}}</em>
 	                                    <em class=" dev_week_fontsize"> | 节省 <i
                                                 class="dev_week_savemoney dev_week_fontsize">¥</i><i
                                                 class="dev_week_savemoney dev_week_fontsize">{{item.carTotalPrice-item.carTotalPackagePrice}}</i></em>
 	                               </span>
-                                                            </div>
-                                                            <span class="dev_od_btn">
-                                                                <a href='#' @click="doCarOrder(item)"
-                                                                   class="btn tnc_btn_green">套餐预订</a></span>
-                                                        </div>
-                                                        <!---->
-                                                    </div>
 
+                                                        </div>
+                                                        <span class="dev_od_btn"> <a href='#' @click="doCarOrder(item)" class="btn tnc_btn_green">套餐预订</a></span>
+                                                    </div>
+                                                    <!---->
                                                 </div>
+
                                             </div>
                                         </div>
-                                    </li>
-                                </ul>
-                            </div>
+                                    </div>
+                                </li>
+                            </ul>
+
                         </div>
-                        <!--tabContent end-->
+                        <!--<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">-->
+                            <!--<legend>自定义首页、尾页、上一页、下一页文本</legend>-->
+                        <!--</fieldset>-->
+                        <!--<div id="demo3"></div>-->
+
                     </div>
-                    <!--col end-->
+                    <!--tabContent end-->
                 </div>
-                <!--row end-->
+                <!--col end-->
             </div>
+            <!--row end-->
+
+
+
         </div>
+
     </div>
-    <div class="row tnc_footer_background">
+
+        <div class="row tnc_footer_background">
         <div class="col-sm-12 col-md-10 offset-md-1 tnc_footer_help">
             <dl class="tnc_footer_help_item">
                 <dt>租车预订说明</dt>
@@ -511,6 +547,7 @@
             ,change: function(value){
                 console.log(value);
             }
+            ,format: 'yyyy-MM-dd'
         });
         laydate.render({
             elem: '#toDate' //指定元素
@@ -518,16 +555,62 @@
             ,theme:'#00c189'
             ,min:0
             ,max:89
+            ,format: 'yyyy-MM-dd'
         });
 
     });
-    $(function () {
-        $("#mycarInfoListTab li a").click(function () {
-            $(this).parent().siblings('li').children().removeClass('active');  // 删除其他兄弟元素的样式
-            $(this).addClass('active');                   // 添加当前元素的样式
-            return false;                                 //加这句来阻止跳转 可用来调试效果
+    layui.use(['laypage', 'layer'], function() {
+        var laypage = layui.laypage
+            , layer = layui.layer;
+        //自定义首页、尾页、上一页、下一页文本
+        laypage.render({
+            elem: 'demo3'
+            ,count: 6
+            ,limit:5
+            ,first: '首页'
+            ,last: '尾页'
+            ,prev: '<em>←</em>'
+            ,next: '<em>→</em>'
         });
+    })
+
+    function stickUp(){
+        let windowWidth = $(this).width();
+        if (windowWidth < 1173) {
+            $(".tnc_lchoose_box").css("position", 'relative')
+            $(".tnc_lchoose_box").css("top",'0px')
+        }else {
+            console.log("====")
+            $(".tnc_lchoose_box").css("position", 'fixed')
+            $(window).scroll(function () {
+                let y = 189 - window.scrollY;
+                if (y < 10) {
+                    y = 10
+                }
+                let scrollTop = $(this).scrollTop();
+                let scrollHeight = $(document).height();
+                let windowHeight = $(this).height();
+
+                let div = "";
+                if ($(document).scrollTop() + 100 >= $(document).height() - $(window).height()) {
+
+                    y = -220
+                    console.log(y)
+                }
+
+                $(".tnc_lchoose_box").css("top", y)
+            });
+        }
+    }
+
+    $(window).resize(function () {
+        stickUp()
+    })
+
+    $(document).ready(function(){
+        stickUp()
     });
+
 </script>
 </body>
 </html>
