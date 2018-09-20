@@ -1,8 +1,6 @@
 package com.dev.main.tenancy.controller;
 
-import com.dev.main.common.util.JsonUtils;
 import com.dev.main.common.util.ResultMap;
-import com.dev.main.tenancy.controller.exception.TenancyExceptionResolver;
 import com.dev.main.tenancy.dao.TncBrandMapper;
 import com.dev.main.tenancy.dao.TncPackageSchemeMapper;
 import com.dev.main.tenancy.domain.TncBrand;
