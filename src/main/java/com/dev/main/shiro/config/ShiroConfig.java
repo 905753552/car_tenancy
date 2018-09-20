@@ -1,160 +1,104 @@
 package com.dev.main.shiro.config;
 
 import com.dev.main.shiro.realm.CustomerRealm;
-
-import com.dev.main.shiro.realm.PhoneRealm;
-import com.dev.main.shiro.redis.JedisCacheManager;
-import com.dev.main.shiro.redis.RedisSessionDao;
-import com.dev.main.shiro.util.CustomizeModularRealmAuthenticator;
-import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy;
+import com.dev.main.shiro.redis.RedisShiroSessionDAO;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.SessionManager;
-import org.apache.shiro.session.mgt.eis.SessionDAO;
+import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
-import javax.servlet.Filter;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
 
     @Bean
     public CustomerRealm customerRealm() {
-        return new CustomerRealm();
+        CustomerRealm realm =  new CustomerRealm();
+        HashedCredentialsMatcher matcher = new HashedCredentialsMatcher();
+        matcher.setHashAlgorithmName("MD5");
+        matcher.setHashIterations(1);
+        realm.setCredentialsMatcher(matcher);
+        return realm;
     }
 
-    @Bean
-    public PhoneRealm phoneRealm() {
-        return new PhoneRealm();
+    @Bean("sessionManager")
+    public SessionManager sessionManager(RedisShiroSessionDAO redisShiroSessionDAO,
+                                         @Value("${security.redis.open}") boolean redisOpen,
+                                         @Value("${security.shiro.redis}") boolean shiroRedis){
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        //设置session过期时间为1小时(单位：毫秒)，默认为30分钟
+        sessionManager.setGlobalSessionTimeout(60 * 60 * 1000);
+        sessionManager.setSessionValidationSchedulerEnabled(true);
+        sessionManager.setSessionIdUrlRewritingEnabled(false);
+
+        //如果开启redis缓存且renren.shiro.redis=true，则shiro session存到redis里
+        if(redisOpen && shiroRedis){
+            sessionManager.setSessionDAO(redisShiroSessionDAO);
+        }
+        return sessionManager;
     }
 
-    @Bean
-    public CustomizeModularRealmAuthenticator customizeModularRealmAuthenticator() {
-        CustomizeModularRealmAuthenticator authenticator = new CustomizeModularRealmAuthenticator();
-        // 设置认证策略
-        authenticator.setAuthenticationStrategy(new AtLeastOneSuccessfulStrategy());
-        List<Realm> realms = new ArrayList<>();
-        realms.add(phoneRealm());
-        realms.add(customerRealm());
-        authenticator.setRealms(realms);
-        return  authenticator;
-    }
-
-    @Bean
-    public ShiroFilterFactoryBean createShiroFilter(SecurityManager securityManager) {
-        System.out.println("--------ShiroFilterFactoryBean-------");
-        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-        shiroFilterFactoryBean.setSecurityManager(securityManager);
-        Map<String, Filter> filterMap = new HashMap<>();
-        //map里面key值要为authc才能使用自定义的过滤器
-        //filterMap.put("authc", formValid());
-
-        // can go to login
-        shiroFilterFactoryBean.setLoginUrl("/login");
-        //do not Unauthorized page
-        shiroFilterFactoryBean.setUnauthorizedUrl("/403.html");
-        Map<String, String> map = new LinkedHashMap<String, String>();
-        //验证码的路径   不要跟下面需要认证的写在一个路径里  会被拦截的
-        //map.put("/servlet/**", "anon");
-        //需要把要授权的URL  全部装到filterChain中去过滤
-        /*UserInfo userInfo = userReposisty.findByUid(1);
-        for (Role role : userInfo.getRoles()) {
-            for (Permission permission : role.getPermissions()) {
-                if (permission.getUrl() != "") {
-                    String permissions = "perms[" + permission.getPermission() + "]";
-                    map.put(permission.getUrl(), permissions);
-                }
-            }
-        }*/
-        //map.put("/user*/*", "authc");
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
-        shiroFilterFactoryBean.setFilters(filterMap);
-
-        return shiroFilterFactoryBean;
-    }
-
-    @Bean
-    public SecurityManager securityManager() {
+    @Bean("securityManager")
+    public SecurityManager securityManager(CustomerRealm customerRealm, SessionManager sessionManager) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setAuthenticator(customizeModularRealmAuthenticator());
-
-        //securityManager.setRealms(realms);
-        //缓存管理
-        securityManager.setCacheManager(jedisCacheManager());
-        //会话管理
-        securityManager.setSessionManager(sessionManager());
-
+        securityManager.setRealm(customerRealm);
+        securityManager.setSessionManager(sessionManager);
         return securityManager;
     }
 
-    //密码盐   可以不必实现    因为一般密码可以自己定义自己的密码加密规则
-/*    @Bean
-    public HashedCredentialsMatcher hashedCredentialsMatcher(){
-        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        hashedCredentialsMatcher.setHashAlgorithmName("md5");
-        hashedCredentialsMatcher.setHashIterations(2);
-        return hashedCredentialsMatcher;
-    }*/
 
-    //开启aop注解
+    @Bean("shiroFilter")
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
+        ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
+        shiroFilter.setSecurityManager(securityManager);
+        shiroFilter.setLoginUrl("/login");
+        shiroFilter.setUnauthorizedUrl("/");
+
+        Map<String, String> filterMap = new LinkedHashMap<>();
+        /*filterMap.put("/swagger/**", "anon");
+        filterMap.put("/v2/api-docs", "anon");
+        filterMap.put("/swagger-ui.html", "anon");
+        filterMap.put("/webjars/**", "anon");
+        filterMap.put("/swagger-resources/**", "anon");*/
+
+        filterMap.put("/statics/**", "anon");
+        filterMap.put("/login", "anon");
+        filterMap.put("/security/login", "anon");
+        filterMap.put("/favicon.ico", "anon");
+        filterMap.put("/api/captcha/**", "anon");
+        filterMap.put("/security/captcha.jpg", "anon");
+        shiroFilter.setFilterChainDefinitionMap(filterMap);
+
+        return shiroFilter;
+    }
+
+    @Bean("lifecycleBeanPostProcessor")
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+        return new LifecycleBeanPostProcessor();
+    }
+
+    @Bean
+    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator proxyCreator = new DefaultAdvisorAutoProxyCreator();
+        proxyCreator.setProxyTargetClass(true);
+        return proxyCreator;
+    }
+
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
-        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
-        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
-        return authorizationAttributeSourceAdvisor;
-    }
-
-    @Bean(name = "simpleMappingExceptionResolver")
-    public SimpleMappingExceptionResolver
-    createSimpleMappingExceptionResolver() {
-        SimpleMappingExceptionResolver r = new SimpleMappingExceptionResolver();
-        Properties mappings = new Properties();
-        mappings.setProperty("DatabaseException", "databaseError");//数据库异常处理
-        mappings.setProperty("UnauthorizedException", "403");
-        r.setExceptionMappings(mappings);  // None by default
-        r.setDefaultErrorView("error");    // No default
-        r.setExceptionAttribute("ex");     // Default is "exception"
-        //r.setWarnLogCategory("example.MvcLogger");     // No default
-        return r;
-    }
-
-    //jedis缓存
-    @Bean
-    public JedisCacheManager jedisCacheManager() {
-        return new JedisCacheManager();
-    }
-
-    @Bean
-    public SessionManager sessionManager() {
-        DefaultWebSessionManager defaultWebSessionManager = new DefaultWebSessionManager();
-        defaultWebSessionManager.setSessionIdCookie(simpleCookie());
-        defaultWebSessionManager.setSessionDAO(sessionDAO());
-        //可以设置shiro提供的会话管理机制
-        //defaultWebSessionManager.setSessionDAO(new EnterpriseCacheSessionDAO());
-        return defaultWebSessionManager;
-    }
-
-
-
-    //这里就是会话管理的操作类
-    @Bean
-    public SessionDAO sessionDAO() {
-        return new RedisSessionDao();
-    }
-
-    //这里需要设置一个cookie的名称  原因就是会跟原来的session的id值重复的
-    @Bean
-    public SimpleCookie simpleCookie() {
-        SimpleCookie simpleCookie = new SimpleCookie("REDISSESSION");
-        return simpleCookie;
+        AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
+        advisor.setSecurityManager(securityManager);
+        return advisor;
     }
 
 

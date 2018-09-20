@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@TenancyExceptionResolver
 @RequestMapping("api/CarSelect")
 public class CarSelectController {
     @Autowired
