@@ -1,5 +1,7 @@
 package com.dev.main.tenancy.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.dev.main.common.util.JsonUtils;
 import com.dev.main.common.util.ResultMap;
 import com.dev.main.tenancy.controller.exception.TenancyExceptionResolver;
@@ -8,9 +10,7 @@ import com.dev.main.tenancy.dao.TncPackageSchemeMapper;
 import com.dev.main.tenancy.domain.TncBrand;
 import com.dev.main.tenancy.domain.TncPackageScheme;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,5 +32,13 @@ public class CarSelectController {
         System.out.println(resultMap);
      //   System.out.println(JsonUtils.toJsonStr(resultMap));
         return resultMap;
+    }
+
+    @PostMapping("/listCar")
+    public ResultMap listCar(@RequestBody String data){
+       JSONObject jsonObject =  JSON.parseObject(data);
+        System.out.println(jsonObject.get("carPID"));
+        System.out.println(jsonObject.get("carPlace"));
+        return null;
     }
 }
