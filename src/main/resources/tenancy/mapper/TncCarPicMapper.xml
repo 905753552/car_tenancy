@@ -5,12 +5,13 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="path" property="path" jdbcType="VARCHAR" />
     <result column="car_id" property="carId" jdbcType="BIGINT" />
+    <result column="is_cover" property="isCover" jdbcType="TINYINT" />
     <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, path, car_id, is_deleted, gmt_create, gmt_modified
+    id, path, car_id,is_cover, is_deleted, gmt_create, gmt_modified
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -23,11 +24,11 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.dev.main.tenancy.domain.TncCarPic" >
-    insert into tnc_car_pic (id, path, car_id, 
+    insert into tnc_car_pic (id, path, car_id,is_cover,
       is_deleted, gmt_create, gmt_modified
       )
     values (#{id,jdbcType=BIGINT}, #{path,jdbcType=VARCHAR}, #{carId,jdbcType=BIGINT}, 
-      #{isDeleted,jdbcType=TINYINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+      #{isCover,jdbcType=TINYINT},#{isDeleted,jdbcType=TINYINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.dev.main.tenancy.domain.TncCarPic" >
@@ -41,6 +42,9 @@
       </if>
       <if test="carId != null" >
         car_id,
+      </if>
+      <if test="isCover != null" >
+        is_cover,
       </if>
       <if test="isDeleted != null" >
         is_deleted,
@@ -62,6 +66,9 @@
       <if test="carId != null" >
         #{carId,jdbcType=BIGINT},
       </if>
+      <if test="isCover != null" >
+        #{isCover,jdbcType=TINYINT},
+      </if>
       <if test="isDeleted != null" >
         #{isDeleted,jdbcType=TINYINT},
       </if>
@@ -82,6 +89,10 @@
       <if test="carId != null" >
         car_id = #{carId,jdbcType=BIGINT},
       </if>
+      <if test="isCover != null" >
+        is_cover = #{isCover,jdbcType=TINYINT},
+      </if>
+
       <if test="isDeleted != null" >
         is_deleted = #{isDeleted,jdbcType=TINYINT},
       </if>
@@ -98,6 +109,7 @@
     update tnc_car_pic
     set path = #{path,jdbcType=VARCHAR},
       car_id = #{carId,jdbcType=BIGINT},
+      is_cover = #{isCover,jdbcType=TINYINT},
       is_deleted = #{isDeleted,jdbcType=TINYINT},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
