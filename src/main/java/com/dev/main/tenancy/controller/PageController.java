@@ -38,4 +38,9 @@ public class PageController {
         return "beginReserve";
     }
 
+    @GetMapping("/headList")
+    public String headListPage() {
+        return "headList";
+    }
+
 }
