@@ -173,7 +173,7 @@ function doSearchByAllType() {
      * @param place 地点
      * @param currentPackageId 套餐id
      */
-    let carPlace = "端州店"
+    let carPlace = "租车派"
     const data ={
         carPlace:carPlace,
         carPID:currentPackageId
@@ -185,30 +185,30 @@ function doSearchByAllType() {
         contentType: "application/json",
         data:JSON.stringify(data),
         success: function (data) {
-            if (data.cars.code == 0) {
-                // console.log(data.cars.carData)
-                // console.log(data.cars.carData.length)
-                // doHandelCarInfo(data.cars.carData)
+            if (data.code == 0) {
+                console.log(data.carData)
+                console.log(data.carData.length)
+                doHandelCarInfo(data.carData)
             } else {
-                handleAjax(data.cars);
+                handleAjax(data);
             }
         }
     })
 
-    $.ajax({
-        url: "/car_menu_data.json",
-        // data:JSON.stringify(data) ,
-        // contentType:"applicayion/json",
-        success: function (data) {
-            if (data.cars.code == 500) {
-                console.log(data.cars.carData)
-                console.log(data.cars.carData.length)
-                doHandelCarInfo(data.cars.carData)
-            } else {
-                handleAjax(data.cars);
-            }
-        }
-    })
+    // $.ajax({
+    //     url: "/car_menu_data.json",
+    //     // data:JSON.stringify(data) ,
+    //     // contentType:"applicayion/json",
+    //     success: function (data) {
+    //         if (data.cars.code == 500) {
+    //             console.log(data.cars.carData)
+    //             console.log(data.cars.carData.length)
+    //             doHandelCarInfo(data.cars.carData)
+    //         } else {
+    //             handleAjax(data.cars);
+    //         }
+    //     }
+    // })
 }
 
 //数据加工

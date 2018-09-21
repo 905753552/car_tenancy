@@ -1,5 +1,7 @@
 package com.dev.main.tenancy.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.dev.main.common.util.JsonUtils;
 import com.dev.main.common.util.ResultMap;
 import com.dev.main.tenancy.dao.TncBrandMapper;
 import com.dev.main.tenancy.dao.TncPackageSchemeMapper;
@@ -30,11 +32,12 @@ public class CarSelectController {
         return resultMap;
     }
 
-    @GetMapping("/listCar")
-    public ResultMap listCar(){
-
+    @PostMapping("/listCar")
+    public ResultMap listCar(@RequestBody String data){
+        String cp = JSONObject.parseObject(data).get("carPlace").toString();
+        Long pid =Long.valueOf(JSONObject.parseObject(data).get("carPID").toString());
         ResultMap resultMap = new ResultMap();
-        List<TncCarDataVo> li = iCarService.listCarData("租车派", (long) 1);
+        List<TncCarDataVo> li = iCarService.listCarData(cp, pid);
         System.out.println(resultMap);
         resultMap.put("carData",li);
         return resultMap;
