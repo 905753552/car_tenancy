@@ -6,10 +6,12 @@ $(document).ready(function () {
 
 function getCustomer() {
     $.ajax({
-        url: '/header_data.json',
+        url: '/api/shiro/token',
         success: (data) => {
-            if (data.customer.code == 200) {
-                header_app.customer = data.customer.customer;
+            if (data.code == 0) {
+                if(data.token) {
+                    header_app.customer = data.token;
+                }
             } else {
                 handleAjax(data.customer);
             }
@@ -18,15 +20,17 @@ function getCustomer() {
 }
 
 function logout() {
-    $.ajax({
-        url: '/header_data.json',
-        success: (data) => {
-            if (data.logout.code == 200) {
-                header_app.customer = {};
-            } else {
-                handleAjax(data.logout);
+    confirm("退出登录？", () => {
+        $.ajax({
+            url: '/api/shiro/logout',
+            success: (data) => {
+                if (data.code == 0) {
+                    header_app.customer = {};
+                } else {
+                    handleAjax(data.logout);
+                }
             }
-        }
+        })
     })
 }
 

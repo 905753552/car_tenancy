@@ -1,6 +1,7 @@
 // ajax全局配置
 $.ajaxSetup({
     dataType: "json",
+    contentType: 'application/json',
     cache: false,
     error: function (xhr, msg, exception) {
         if (xhr.status == "403")
@@ -24,4 +25,17 @@ function handleAjax(data) {
     } else {
         layer.msg(data.msg);
     }
+}
+
+//重写confirm式样框
+window.confirm = function(msg, callback) {
+    parent.layer.confirm(msg, {
+            btn: ['确定', '取消']
+        },
+        function() { //确定事件
+            if(typeof(callback) === "function") {
+                callback("ok");
+            }
+            layer.closeAll('dialog');
+        });
 }
