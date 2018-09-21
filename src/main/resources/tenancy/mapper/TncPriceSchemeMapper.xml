@@ -150,4 +150,12 @@
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <select id="listCarIdByPid"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List" />
+    from tnc_price_scheme
+    where package_id = #{Pid,jdbcType=BIGINT}
+  </select>
 </mapper>

@@ -95,4 +95,11 @@
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <select id="selectNameById" resultType="String" parameterType="java.lang.Long">
+    select name
+    from tnc_brand
+    where id = #{cid,jdbcType=BIGINT} and is_deleted = 0
+  </select>
 </mapper>

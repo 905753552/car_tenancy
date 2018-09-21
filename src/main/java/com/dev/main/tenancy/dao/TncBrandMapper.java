@@ -23,4 +23,6 @@ public interface TncBrandMapper {
      * @return
      */
     List<TncBrand> listTncBrand();
+
+    String selectNameById(Long cid);
 }

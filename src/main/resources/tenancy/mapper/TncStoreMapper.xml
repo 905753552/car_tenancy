@@ -151,4 +151,11 @@
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <select id="selectPrimaryKeyByName" resultType="Long"  parameterType="java.lang.String">
+    select id from tnc_store
+    where
+    name = #{xxoo}
+  </select>
 </mapper>

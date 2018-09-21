@@ -401,4 +401,12 @@
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="listCarByStoreId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List"/>
+    from tnc_car
+    where
+    store_id = #{id,jdbcType=BIGINT}
+  </select>
 </mapper>

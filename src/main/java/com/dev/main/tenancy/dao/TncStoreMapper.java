@@ -14,4 +14,11 @@ public interface TncStoreMapper {
     int updateByPrimaryKeySelective(TncStore record);
 
     int updateByPrimaryKey(TncStore record);
+
+    /**
+     * 根据门店名称查ID
+     * @param name
+     * @return
+     */
+    Long selectPrimaryKeyByName(String name);
 }

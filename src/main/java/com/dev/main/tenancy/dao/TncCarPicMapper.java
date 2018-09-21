@@ -14,4 +14,6 @@ public interface TncCarPicMapper {
     int updateByPrimaryKeySelective(TncCarPic record);
 
     int updateByPrimaryKey(TncCarPic record);
+
+    String selectPathByCid(Long cid);
 }
