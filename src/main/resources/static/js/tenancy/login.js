@@ -5,7 +5,7 @@ var ob =new Vue({
         tag:true,
         username:'',
         password:'',
-        loginUrl:''
+        loginUrl:'/api/shiro/login'
     },
     methods:{
         showNormal:function () {
@@ -95,11 +95,17 @@ var ob =new Vue({
     }
     /*正常账号登录请求*/
     function doNormalLogin() {
-        var data={};
+        var phone =$("#normal_id").val();
+        var psw = $("#xpasstext").val();
+        var data={
+            phone:phone,
+            password: psw,
+            loginType:'password'
+        };
+        console.log(data);
         $.ajax({
-            type: "post",
+            type: "POST",
             url: ob.loginUrl,
-            dataType: "json",
             data: data,
             error: function() {
                 showlogintips(-29, 30, "#error_tips", "网络异常，请稍后重试"),

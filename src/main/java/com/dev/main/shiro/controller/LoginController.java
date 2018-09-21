@@ -36,7 +36,7 @@ public class LoginController extends ShiroBaseController {
      * @param loginType "phone"或“password”
      * @return
      */
-    @GetMapping(value = "/login")
+    @PostMapping(value = "/login")
     public ResultMap login(String phone, String input, String loginType, HttpServletRequest request) {
         Subject subject = ShiroUtils.getSubject();
         UsernamePasswordToken token = null;

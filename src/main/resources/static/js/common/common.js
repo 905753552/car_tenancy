@@ -1,7 +1,6 @@
 // ajax全局配置
 $.ajaxSetup({
     dataType: "json",
-    contentType: 'application/json',
     cache: false,
     error: function (xhr, msg, exception) {
         if (xhr.status == "403")

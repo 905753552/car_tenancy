@@ -71,14 +71,13 @@
                 $(".modal-title").text("网络问题未获取到，请稍后重试");
             },
             success: function(res) {
-                if(res.code == 200){
+                if(res.code == 0){
                     console.log(res);
                     // alert("验证通过，请输入短信验证码");
                     $("#getYzmBtn").attr("disabled","true");
                     //超时重发时间，先默认60秒
                     countdown(60);
                     $('#myModal').modal('hide');
-
                 }else{
                     console.log(res);
                     $(".modal-title").text("验证码错误，请重新输入");
@@ -167,17 +166,28 @@
             psw =  $("#xpsw").val(),
             coupon = $("#xcoupon").val();
 
+        var data = {
+            tnc:{
+                name:name,
+                phone:phone,
+                password:psw
+            },
+            code:code,
+            coupon:coupon
+        }
+        console.log(data);
         $.ajax({
-           url: "/login",
-            data:{},
+            method:"POST",
+            url: "/api/user/register",
+            data:JSON.stringify(data),
+            // dataType:"json",
+            contentType:"application/text",
             success:function (res) {
-                if(res.code == 200){
+                if(res.code == 0){
                     alert("success");
                     window.location.href = "/index";
                 }
-                window.location.href = "/index";
             }
-
         });
     }
     /*提示不符合格式*/
