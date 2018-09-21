@@ -2,7 +2,7 @@ var carHandleData
 var lastCarHandleData
 var carMenuData
 //基础套餐ID
-const basePackageId = "carDay";
+const basePackageId = "1";
 //当前套餐ID
 var currentPackageId = basePackageId;
 //筛选车型
@@ -172,12 +172,33 @@ function doSearchByAllType() {
     /**
      * @param place 地点
      * @param currentPackageId 套餐id
-     * @param  dayTimes  租车天数
      */
+    let carPlace = "端州店"
+    const data ={
+        carPlace:carPlace,
+        carPID:currentPackageId
+    }
+   // console.log(JSON.stringify(data))
+    $.ajax({
+        type:"POST",
+        url:"/api/CarSelect/listCar",
+        contentType: "application/json",
+        data:JSON.stringify(data),
+        success: function (data) {
+            if (data.cars.code == 0) {
+                // console.log(data.cars.carData)
+                // console.log(data.cars.carData.length)
+                // doHandelCarInfo(data.cars.carData)
+            } else {
+                handleAjax(data.cars);
+            }
+        }
+    })
 
     $.ajax({
         url: "/car_menu_data.json",
-        // data:seachCondition ,
+        // data:JSON.stringify(data) ,
+        // contentType:"applicayion/json",
         success: function (data) {
             if (data.cars.code == 500) {
                 console.log(data.cars.carData)

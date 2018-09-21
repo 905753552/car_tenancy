@@ -36,6 +36,8 @@
     <association property="tncBrand" column="brand_id" select="com.dev.main.tenancy.dao.TncBrandMapper.selectByPrimaryKey" javaType="com.dev.main.tenancy.domain.TncBrand"/>
     <association property="tncStore" column="store_id" select="com.dev.main.tenancy.dao.TncStoreMapper.selectByPrimaryKey" javaType="com.dev.main.tenancy.domain.TncStore"/>
   </resultMap>
+
+
   <sql id="Base_Column_List" >
     id, series, quantity, residual, year, config_section, seat_quantity, door_quantity, 
     fuel_type, transmission_type, displacement, octane_rating, driven_method, en_itk_form, 

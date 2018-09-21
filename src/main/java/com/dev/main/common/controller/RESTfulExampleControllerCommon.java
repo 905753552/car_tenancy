@@ -12,6 +12,7 @@ public class RESTfulExampleControllerCommon extends CommonBaseController {
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public ResultMap searchExample(@PathVariable Integer id) {
+        System.out.println(1/0);
         return ResultMap.success("查找ID为" + id + "的资源");
     }
 
