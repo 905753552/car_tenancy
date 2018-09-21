@@ -3,6 +3,7 @@ package com.dev.main.aliyun_sms.controller;
 import com.aliyuncs.exceptions.ClientException;
 import com.dev.main.aliyun_sms.service.ISMSService;
 import com.dev.main.aliyun_sms.statics.SmsConstant;
+import com.dev.main.common.controller.exception.GlobalExceptionResolver;
 import com.dev.main.common.util.CookieUtils;
 import com.dev.main.common.util.ResultMap;
 import org.apache.commons.lang3.StringUtils;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/api/alisms")
+@GlobalExceptionResolver
 public class SMSController {
 
     @Autowired

@@ -1,5 +1,6 @@
 package com.dev.main.common.controller.exception;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.dev.main.common.exception.CommonException;
 import com.dev.main.common.statics.Constant;
 import com.dev.main.common.statics.StatusCode;
@@ -30,11 +31,30 @@ import java.util.Map;
 @ControllerAdvice(annotations = {GlobalExceptionResolver.class})
 public class CommonExceptionHandler {
 
-    @ExceptionHandler(value = CommonException.class)
+    @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public ResultMap dataNotFoundExceptionHandler(CommonException e) {
+    public ResultMap exceptionHandler(Exception e) {
         e.printStackTrace();
         return ResultMap.fail(e.getMessage());
+    }
+
+    /**
+     * 阿里云短信异常处理
+     * @param e
+     * @return
+     */
+    @ExceptionHandler({ClientException.class})
+    @ResponseBody
+    public ResultMap clientException(ClientException e) {
+        e.printStackTrace();
+        return ResultMap.fail();
+    }
+
+    @ExceptionHandler({InterruptedException.class})
+    @ResponseBody
+    public ResultMap interruptedException(InterruptedException e) {
+        e.printStackTrace();
+        return ResultMap.fail();
     }
 
     /**
@@ -111,10 +131,9 @@ public class CommonExceptionHandler {
         return ResultMap.fail("账号已被锁定,请联系管理员");
     }
 
-
-    @ExceptionHandler(value = Exception.class)
+    @ExceptionHandler(value = CommonException.class)
     @ResponseBody
-    public ResultMap exceptionHandler(Exception e) {
+    public ResultMap commonExceptionExceptionHandler(CommonException e) {
         e.printStackTrace();
         return ResultMap.fail(e.getMessage());
     }

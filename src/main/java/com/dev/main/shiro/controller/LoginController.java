@@ -1,20 +1,32 @@
 package com.dev.main.shiro.controller;
 
+import com.aliyuncs.exceptions.ClientException;
+import com.dev.main.common.controller.exception.GlobalExceptionResolver;
+import com.dev.main.common.exception.CommonException;
+import com.dev.main.common.statics.Constant;
+import com.dev.main.common.statics.StatusCode;
+import com.dev.main.common.util.JsonUtils;
 import com.dev.main.common.util.ResultMap;
 import com.dev.main.shiro.util.ShiroConstant;
+import com.dev.main.shiro.util.ShiroFilterUtils;
 import com.dev.main.shiro.util.ShiroUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.authz.AuthorizationException;
+import org.apache.shiro.authz.UnauthenticatedException;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.subject.Subject;
-import org.springframework.context.annotation.Scope;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/shiro")
+@GlobalExceptionResolver
 public class LoginController extends ShiroBaseController {
 
     /**
@@ -40,7 +52,6 @@ public class LoginController extends ShiroBaseController {
         return ResultMap.success();
     }
 
-
     /**
      * 退出
      */
@@ -49,4 +60,13 @@ public class LoginController extends ShiroBaseController {
         ShiroUtils.logout();
         return ResultMap.success();
     }
+
+    @ExceptionHandler(value = CommonException.class)
+    @ResponseBody
+    public ResultMap commonExceptionExceptionHandler(CommonException e) {
+        e.printStackTrace();
+        return ResultMap.fail(e.getMessage());
+    }
+
+
 }

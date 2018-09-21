@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -88,12 +89,10 @@ public class CustomerRealm extends AuthorizingRealm {
         } else { // 短信验证码登录
             String keyInCookie = CookieUtils.findCookieByName(req, SmsConstant.COOKIE_NAME);
             String phone = (String) token.getPrincipal();
-            String[] strs = StringUtils.split(phone); // 传进来的手机号与验证码使用"_"链接
-            String codeInput = req.getParameter("code");
+            String codeInput = req.getParameter("input");
             TncCustomer customer = customerService.findByPhone(phone);
-            customer = new TncCustomer();
             // 验证验证码
-            boolean ok = smsService.verifyCode(keyInCookie, phone, codeInput, req, resp);
+            boolean match = smsService.verifyCode(keyInCookie, phone, codeInput, req, resp);
             //账号不存在
             if (customer == null) {
                 throw new UnknownAccountException("账号或密码不正确");
@@ -102,7 +101,13 @@ public class CustomerRealm extends AuthorizingRealm {
             if (customer.getStatus() == 0) {
                 throw new LockedAccountException("账号不可用");
             }
-            AuthenticationInfo info = new SimpleAuthenticationInfo(customer, MD5Util.encodeByMD5("ok"), getName());
+            if (!match) {
+                throw new CommonException("验证码错误");
+            }
+            String hashAlgorithmName = "MD5";
+            Object okStr = new SimpleHash(hashAlgorithmName, "ok"); //加密后的"ok"
+
+            AuthenticationInfo info = new SimpleAuthenticationInfo(customer, okStr, getName());
             return info;
         }
 
