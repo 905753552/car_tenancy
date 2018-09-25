@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.dev.main.tenancy.domain.TncPriceScheme" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="base_price" property="basePrice" jdbcType="DECIMAL" />
+    <result column="base_hour_price" property="baseHourPrice" jdbcType="DECIMAL" />
     <result column="service_price" property="servicePrice" jdbcType="DECIMAL" />
     <result column="deposit" property="deposit" jdbcType="DECIMAL" />
     <result column="discount" property="discount" jdbcType="DECIMAL" />
@@ -14,7 +15,7 @@
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, base_price, service_price, deposit, discount, car_id, package_id, is_deleted, 
+    id, base_price,base_hour_price, service_price, deposit, discount, car_id, package_id, is_deleted,
     gmt_create, gmt_modified
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -28,11 +29,11 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.dev.main.tenancy.domain.TncPriceScheme" >
-    insert into tnc_price_scheme (id, base_price, service_price, 
+    insert into tnc_price_scheme (id, base_price,base_hour_price, service_price,
       deposit, discount, car_id, 
       package_id, is_deleted, gmt_create, 
       gmt_modified)
-    values (#{id,jdbcType=BIGINT}, #{basePrice,jdbcType=DECIMAL}, #{servicePrice,jdbcType=DECIMAL}, 
+    values (#{id,jdbcType=BIGINT}, #{basePrice,jdbcType=DECIMAL}, #{baseHourPrice,jdbcType=DECIMAL}, #{servicePrice,jdbcType=DECIMAL},
       #{deposit,jdbcType=DECIMAL}, #{discount,jdbcType=DECIMAL}, #{carId,jdbcType=BIGINT}, 
       #{packageId,jdbcType=BIGINT}, #{isDeleted,jdbcType=TINYINT}, #{gmtCreate,jdbcType=TIMESTAMP}, 
       #{gmtModified,jdbcType=TIMESTAMP})
@@ -45,6 +46,9 @@
       </if>
       <if test="basePrice != null" >
         base_price,
+      </if>
+      <if test="baseHourPrice != null" >
+        base_hour_price,
       </if>
       <if test="servicePrice != null" >
         service_price,
@@ -78,6 +82,9 @@
       <if test="basePrice != null" >
         #{basePrice,jdbcType=DECIMAL},
       </if>
+      <if test="baseHourPrice != null" >
+        #{baseHourPrice,jdbcType=DECIMAL},
+      </if>
       <if test="servicePrice != null" >
         #{servicePrice,jdbcType=DECIMAL},
       </if>
@@ -110,6 +117,9 @@
       <if test="basePrice != null" >
         base_price = #{basePrice,jdbcType=DECIMAL},
       </if>
+      <if test="baseHourPrice != null" >
+        base_hour_price = #{baseHourPrice,jdbcType=DECIMAL},
+      </if>
       <if test="servicePrice != null" >
         service_price = #{servicePrice,jdbcType=DECIMAL},
       </if>
@@ -140,6 +150,7 @@
   <update id="updateByPrimaryKey" parameterType="com.dev.main.tenancy.domain.TncPriceScheme" >
     update tnc_price_scheme
     set base_price = #{basePrice,jdbcType=DECIMAL},
+      base_hour_price = #{baseHourPrice,jdbcType=DECIMAL},
       service_price = #{servicePrice,jdbcType=DECIMAL},
       deposit = #{deposit,jdbcType=DECIMAL},
       discount = #{discount,jdbcType=DECIMAL},

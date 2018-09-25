@@ -11,6 +11,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class CustomerServiceImpl implements ICustomerService {
 
@@ -36,6 +38,11 @@ public class CustomerServiceImpl implements ICustomerService {
         String password = CryptographyUtil.MD5Hash(customer.getPassword(), salt);
         customer.setSalt(salt);
         customer.setPassword(password);
+
+        customer.setGmtCreate(new Date());
+        customer.setIsDeleted(new Byte("0"));
+        customer.setGmtModified(new Date());
+        customer.setStatus(new Byte("1"));
         tncCustomerMapper.insertSelective(customer);
 
     }
