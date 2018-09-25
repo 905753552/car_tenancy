@@ -138,9 +138,10 @@ console.log("------------------")
          returnCarTime:$("#toDate").val(),
          days:carInfoTab_app.days,
          packageId:currentPackageId,
-         carId:""
+         carId:1
     }
-    window.location.href="/tenancy/p/beginReserve?orderData="+encodeURIComponent(orderData)
+    let cData = encodeURIComponent(JSON.stringify(orderData))
+    window.location.href="/tenancy/p/beginReserve?orderData="+cData
 }
 //处理汽车品牌
 function doHandelCarBrand(data) {
