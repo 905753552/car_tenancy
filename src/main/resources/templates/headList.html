@@ -414,10 +414,10 @@
                                                             <span class="dev_pri_ye">
 	                                    <em class=" dev_week_fontsize">原价:</em>
 	                                    <em class=" dev_week_fontsize">¥</em>
-	                                    <em class="dev_week_ori dev_week_fontsize">{{item.carTotalPackagePrice}}</em>
+	                                    <em class="dev_week_ori dev_week_fontsize">{{item.carTotalPrice}}</em>
 	                                    <em class=" dev_week_fontsize"> | 节省 <i
                                                 class="dev_week_savemoney dev_week_fontsize">¥</i><i
-                                                class="dev_week_savemoney dev_week_fontsize">{{item.carTotalPrice-item.carTotalPackagePrice}}</i></em>
+                                                class="dev_week_savemoney dev_week_fontsize">{{(item.carTotalPrice-item.carTotalPackagePrice).toFixed(1)}}</i></em>
 	                               </span>
 
                                                         </div>

@@ -140,7 +140,13 @@ function doCarOrder(index) {
          priceId:carInfoTab_app.items[index].priceId
     }
     let cData = encodeURIComponent(JSON.stringify(orderData))
-    window.location.href="/tenancy/p/beginReserve?"+cData
+    let url = "/tenancy/p/beginReserve?"+cData;
+    carInfoTab_app.menu.forEach(function (item) {
+        if(item.name == "年租套餐" && item.id == currentPackageId){
+            url = "/tenancy/p/annualRentOrder?"+cData;
+        }
+    })
+    window.location.href = url
 }
 //处理汽车品牌
 function doHandelCarBrand(data) {
@@ -230,8 +236,8 @@ function doSearchByAllType() {
 function doHandelCarInfo(carData) {
     let days = carInfoTab_app.days;//获取租车天数
     carData.forEach(function (cdata, index) {
-        cdata.carTotalPrice = cdata.carPrice * days
-        cdata.carTotalPackagePrice = cdata.carPackagePrice * days
+        cdata.carTotalPrice = (cdata.carPrice * days).toFixed(1)
+        cdata.carTotalPackagePrice = (cdata.carPackagePrice * days).toFixed(1)
     })
     carInfoTab_app.items = carData;
     carHandleData = carData;
