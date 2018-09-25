@@ -22,7 +22,7 @@ const carInfoTab_data ={
     menu: [],
     items: [],
     carBrands:[],
-    days:2
+    days:1
 }
 //filter
 const filter_carInfoTab = {
@@ -124,8 +124,23 @@ function evenMenus() {
     })
 }
 //下单
-function doCarOrder() {
+function doCarOrder(data) {
+console.log("------------------")
+    console.log(data)
+    console.log("------------------")
 
+    let orderData = {
+         getCarPlace:"租车派",
+         getCarPlaceId:"1",
+         returnCarPlace:"租车派",
+         returnCarPlaceId:"1",
+         getCarTime:$("#fromDate").val(),
+         returnCarTime:$("#toDate").val(),
+         days:carInfoTab_app.days,
+         packageId:currentPackageId,
+         carId:""
+    }
+    window.location.href="/tenancy/p/beginReserve?orderData="+encodeURIComponent(orderData)
 }
 //处理汽车品牌
 function doHandelCarBrand(data) {
@@ -349,7 +364,7 @@ function formatDate(date) {
 function  doHandelDate() {
     let daysMin
     let daysMax
-    if(currentPackageId == "carDay" ){
+    if(currentPackageId == basePackageId ){
         daysMin = 1
         daysMax = 999
     }
@@ -366,7 +381,7 @@ function  doHandelDate() {
         carInfoTab_app.days = daysMin
         let fromDate  = $("#fromDate").val()
         let fDate = (new Date(fromDate)).getTime()
-        let toDate = formatDate(new Date(fDate+(daysMin-1)*oneDay))
+        let toDate = formatDate(new Date(fDate+(daysMin)*oneDay))
         $("#toDate").val(toDate)
     }
     if(carInfoTab_app.days > daysMax){
@@ -376,7 +391,7 @@ function  doHandelDate() {
         let oneDay = 86400000
         let fromDate  = $("#fromDate").val()
         let fDate = (new Date(fromDate)).getTime()
-        let toDate = formatDate(new Date(fDate+(daysMax-1)*oneDay))
+        let toDate = formatDate(new Date(fDate+(daysMax)*oneDay))
         $("#toDate").val(toDate)
     }
 
