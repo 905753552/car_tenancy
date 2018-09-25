@@ -99,7 +99,7 @@ var ob =new Vue({
         var psw = $("#xpasstext").val();
         var data={
             phone:phone,
-            password: psw,
+            input: psw,
             loginType:'password'
         };
         console.log(data);
@@ -114,6 +114,13 @@ var ob =new Vue({
             },
             success: function(res) {
                 console.log(res);
+                if (res.code == 0 ) {
+                    window.location.href="/";
+                }else{
+                    showlogintips(-29, 30, "#error_tips", "密码或账号错误");
+                    $("#loginBt").removeAttr("disabled"),
+                        $("#loginBt").val("登录");
+                }
             },
             fail:function (res) {
                 showlogintips(-29, 30, "#error_tips", "网络异常，请稍后重试");
@@ -124,11 +131,16 @@ var ob =new Vue({
     }
     /*短信登录请求*/
     function doPhoneLogin() {
-        var data={};
+        var phone = $("#phone_id").val();
+        var psw = $("#idtmVal").val();
+        var data={
+            phone:phone,
+            input:psw,
+            loginType:'phone'
+        };
         $.ajax({
             type: "post",
             url: ob.loginUrl,
-            dataType: "json",
             data: data,
             error: function() {
                 showlogintips(-29, 30, "#error_tips", "网络异常，请稍后重试"),
@@ -137,6 +149,13 @@ var ob =new Vue({
             },
             success: function(res) {
                 console.log(res);
+                if (res.code == 0 ) {
+                    window.location.href="/";
+                }else{
+                    handleAjax(res);
+                    // showlogintips(-29, 30, "#error_tips", "密码或账号错误");
+                    $("#loginBt").removeAttr("disabled"), $("#loginBt").val("登录");
+                }
             },
             fail:function (res) {
                 showlogintips(-29, 30, "#error_tips", "网络异常，请稍后重试");
@@ -254,7 +273,7 @@ var ob =new Vue({
                 winxintipsDialog("网络问题未获取到，请稍后重试");
             },
             success: function(res) {
-                    if(res.code == 200){
+                if(res.code == 0){
                         // console.log(res);
                         // alert("验证通过，请输入短信验证码");
                         changeBacktoLongin();
@@ -262,7 +281,7 @@ var ob =new Vue({
                         showlogintips(17, 30, "#error_tips", "验证码已发送到您的手机！");
                         //超时重发时间，先默认60秒
                         countdown(60);
-
+                        doSendPhoneCode();
                     }else{
                         console.log(res);
                         showlogintips(10, 30, "#error_tips_float", "验证码错误，请重新输入");
@@ -276,6 +295,19 @@ var ob =new Vue({
             }
     })
 }
+    /**
+     * 发送短信验证码
+     * */
+    function doSendPhoneCode() {
+        var phone = $("#phone_id").val();
+        $.ajax({
+            url:'/api/alisms/'+phone,
+            success:function (res) {
+                console.log(res);
+            }
+        })
+
+    }
     /*返回手机号输入面*/
     function changeBacktoLongin() {
         $(".boxremove").animate({left: "0px"}, "slow");

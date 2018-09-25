@@ -177,7 +177,7 @@
         }
         console.log(data);
         $.ajax({
-            method:"POST",
+            type:"POST",
             url: "/api/user/register",
             data:JSON.stringify(data),
             // dataType:"json",
