@@ -44,7 +44,7 @@ public class CarServiceImpl implements ICarService {
            listA.add(carList.get(i).getId());
        }
        for(int i=0;i<carIds.size();i++){
-           listB.add(carIds.get(i).getId());
+           listB.add(carIds.get(i).getCarId());
         }
         Collection a = new ArrayList<Long>(listA);
         Collection b = new ArrayList<Long>(listB);
@@ -80,20 +80,24 @@ public class CarServiceImpl implements ICarService {
 
             }
         }
-        System.out.println(listVo);
+
         for(int i=0;i<listVo.size();i++){
+
             Long lid = listVo.get(i).getCarId();
             System.out.println("lid==="+lid);
             for(int j=0;j<carIds.size();j++){
                 System.out.println((carIds.get(j).getCarId()));
                 if (lid.equals(carIds.get(j).getCarId())){
+//                    System.out.println("----------");
+                   // System.out.println(carIds.get(j).getBasePrice());
                     listVo.get(i).setCarPrice(carIds.get(j).getBasePrice());
                     BigDecimal bd = carIds.get(j).getBasePrice().multiply( carIds.get(j).getDiscount());
                     listVo.get(i).setCarPackagePrice(bd);
+                    listVo.get(i).setPriceId(carIds.get(j).getId());
                 }
             }
         }
-       // System.out.println(listVo);
+        System.out.println(listVo);
         return listVo;
     }
 

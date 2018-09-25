@@ -17,6 +17,8 @@ public class TncCarDataVo {
     private Long carHot;
     private String carType;
 
+    private Long priceId;
+
     public TncCarDataVo(long carId, String carImg, String carName, String carVer, String carVan, String carPower, Integer carSeat, BigDecimal carPrice, BigDecimal carTotalPrice, BigDecimal carPackagePrice, BigDecimal carTotalPackagePrice, Long carHot, String carType) {
         this.carId = carId;
         this.carImg = carImg;
@@ -140,6 +142,14 @@ public class TncCarDataVo {
         this.carType = carType;
     }
 
+    public Long getPriceId() {
+        return priceId;
+    }
+
+    public void setPriceId(Long priceId) {
+        this.priceId = priceId;
+    }
+
     @Override
     public String toString() {
         return "TncCarDataVo{" +
@@ -149,13 +159,14 @@ public class TncCarDataVo {
                 ", carVer='" + carVer + '\'' +
                 ", carVan='" + carVan + '\'' +
                 ", carPower='" + carPower + '\'' +
-                ", carSeat='" + carSeat + '\'' +
+                ", carSeat=" + carSeat +
                 ", carPrice=" + carPrice +
                 ", carTotalPrice=" + carTotalPrice +
                 ", carPackagePrice=" + carPackagePrice +
                 ", carTotalPackagePrice=" + carTotalPackagePrice +
                 ", carHot=" + carHot +
                 ", carType='" + carType + '\'' +
+                ", priceId=" + priceId +
                 '}';
     }
 }

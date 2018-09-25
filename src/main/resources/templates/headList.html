@@ -335,11 +335,11 @@
                         <div class="tab-pane active bg-define" id="pane_1">
 
                             <ul class="nav navbar-nav" id="car_day">
-                                <li v-if="items.length>0" v-for="item in items" class="list-unstyled">
+                                <li v-if="items.length>0" v-for="(item,index) in items" class="list-unstyled">
                                     <div class="col-md-12 column">
                                         <div class="row clearfix dev_underline">
                                             <div class="col-md-4 column pic">
-                                                <a :href="'#/url?carId='+item.carId"><img :src="item.carImg" alt="图片" width="230px" height="130px"></a>
+                                                <a :href="'./cardetail?carId='+item.carId"><img :src="item.carImg" alt="图片" width="230px" height="130px"></a>
                                             </div>
                                             <div class="col-md-3 column info">
                                                 <div class="info_block">
@@ -369,7 +369,7 @@
 	                               </span>
                                                         </div>
                                                     </div>
-                                                    <span class="dev_od_btn"><a href='#' @click="doCarOrder(item)"  class="btn zc_btn_size tnc_btn_green">租车</a></span>
+                                                    <span class="dev_od_btn"><a href='#' @click="doCarOrder(index)"  class="btn zc_btn_size tnc_btn_green">租车</a></span>
                                                 </div>
 
                                             </div>
@@ -385,11 +385,11 @@
 
                         <div class="tab-pane bg-define"  v-for="carMenuP in evenMenus" :id="'pane_'+carMenuP.id">
                             <ul class="nav navbar-nav">
-                                <li v-if="items.length>0" v-for="item in items" class="list-unstyled">
+                                <li v-if="items.length>0" v-for="(item,index) in items" class="list-unstyled">
                                     <div class="col-md-12 column">
                                         <div class="row clearfix dev_underline">
                                             <div class="col-md-4 column pic">
-                                                <a :href="'#/url?carId='+item.carId"><img :src="item.carImg" alt="图片" width="230px" height="130px"></a>
+                                                <a :href="'./cardetail?carId='+item.carId"><img :src="item.carImg" alt="图片" width="230px" height="130px"></a>
                                             </div>
                                             <div class="col-md-3 column info">
                                                 <div class="info_block">
@@ -421,7 +421,7 @@
 	                               </span>
 
                                                         </div>
-                                                        <span class="dev_od_btn"> <a href='#' @click="doCarOrder(item)" class="btn tnc_btn_green">套餐预订</a></span>
+                                                        <span class="dev_od_btn"> <a href='#' @click="doCarOrder(index)" class="btn tnc_btn_green">套餐预订</a></span>
                                                     </div>
                                                     <!---->
                                                 </div>

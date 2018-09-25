@@ -124,24 +124,23 @@ function evenMenus() {
     })
 }
 //下单
-function doCarOrder(data) {
-console.log("------------------")
-    console.log(data)
-    console.log("------------------")
-
+function doCarOrder(index) {
     let orderData = {
          getCarPlace:"租车派",
          getCarPlaceId:"1",
          returnCarPlace:"租车派",
          returnCarPlaceId:"1",
-         getCarTime:$("#fromDate").val(),
-         returnCarTime:$("#toDate").val(),
+         getCarDate:$("#fromDate").val(),
+         getCarTime:$("#fromHourMinute").val(),
+         returnCarDate:$("#toDate").val(),
+         returnCarTime:$("#toHourMinute").val(),
          days:carInfoTab_app.days,
          packageId:currentPackageId,
-         carId:1
+         carId:carInfoTab_app.items[index].carId,
+         priceId:carInfoTab_app.items[index].priceId
     }
     let cData = encodeURIComponent(JSON.stringify(orderData))
-    window.location.href="/tenancy/p/beginReserve?orderData="+cData
+    window.location.href="/tenancy/p/beginReserve?"+cData
 }
 //处理汽车品牌
 function doHandelCarBrand(data) {
