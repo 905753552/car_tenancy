@@ -533,32 +533,136 @@
 <script src="/js/tenancy/leftList_ch.js"></script>
 <script src="/js/tenancy/car_tabs.js"></script>
 <script>
-    layui.use(['laydate', 'layer'], function () {
-        var laydate = layui.laydate;
+    //定义一个全局标记变量，用来判断超时后的天数是否+1
+    var f = true;
 
+    layui.use(['laydate', 'jquery', 'layer'], function () {
+        var laydate = layui.laydate;
+        var $ = jQuery = layui.$;
         //执行一个laydate实例
 
-        laydate.render({
+        //取车日期
+        var start = laydate.render({
             elem: '#fromDate' //指定元素
-            ,btns:['now', 'confirm']
-            ,theme:'#00c189'
-            ,min:0
-            ,max:89
-            ,change: function(value){
-                console.log(value);
+            , btns: ['confirm']
+            , type: 'date'
+            , theme: '#00c189'
+            , calendar: true
+            , min: 1
+            , max: 10
+            , done: function (value, date, endDate) {
+                //开始日选好后，重置结束日的最小日期
+                end.config.min = {
+                    year: date.year,
+                    month: date.month - 1,
+                    date: date.date + 1
+                };
+                //将结束日的初始值设定为开始日
+                var OneDay = 86400000;
+                var fromDate = $("#fromDate").val();
+                var fday = new Date(fromDate).getTime() / OneDay;
+                var fday2 = formatDate(new Date(fday + 1) * OneDay);
+                f = true;
+                $('#toDate').val(fday2);
+
+                //重置初始日
+                carInfoTab_app.days = 1;
+
+                //判断时间是否超时
+                f = true;
+                OutToTime();
+
+                // console.log(value); //得到日期生成的值，如：2017-08-18
+                // console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
             }
-            ,format: 'yyyy-MM-dd'
         });
-        laydate.render({
+        //还车日期
+        var end = laydate.render({
             elem: '#toDate' //指定元素
-            ,btns:['now', 'confirm']
-            ,theme:'#00c189'
-            ,min:0
-            ,max:89
-            ,format: 'yyyy-MM-dd'
+            , btns: ['confirm']
+            , type: 'date'
+            , theme: '#00c189'
+            , calendar: true
+            , value: ''
+            , min: 2
+            , max: 89
+            , done: function (value, date, endDate) {
+                var OneDay = 86400000;
+                var fromDate = $("#fromDate").val();
+                var toDate = $("#toDate").val();
+                var a = (new Date(toDate).getTime() - new Date(fromDate).getTime()) / OneDay;
+                carInfoTab_app.days = a;
+
+                //判断时间是否超时
+                f = true;
+                OutToTime();
+            }
+        });
+        //取车时间
+        laydate.render({
+            elem: '#fromHourMinute' //指定元素
+            , btns: ['confirm']
+            , type: 'time'
+            , format: 'HH:mm'
+            , theme: '#00c189'
+            , min: '08:30:00'
+            , max: '21:30:00'
+            , done: function (value, date, endDate) {
+                $("#toHourMinute").val(value);
+                f = true;
+            }
+        });
+        //还车时间
+        laydate.render({
+            elem: '#toHourMinute' //指定元素
+            , btns: ['confirm']
+            , type: 'time'
+            , format: 'HH:mm'
+            , theme: '#00c189'
+            , min: '08:30:00'
+            , max: '21:30:00'
+            , done: function (value, date, endDate) {
+                $("#toHourMinute").val(value);
+
+                //判断时间是否超时
+                OutToTime();
+            }
         });
 
     });
+
+    //判断时间是否超时
+    var OutToTime = function () {
+        var value1 = $("#fromHourMinute").val();
+        var h1 = value1.substring(0, 2) * 3600;
+        var m1 = value1.substring(3, 5) * 60;
+        var fromTime = h1 + m1 + 14400;
+        var fromTime2 = h1 + m1;
+        var value2 = $("#toHourMinute").val();
+        var h2 = value2.substring(0, 2) * 3600;
+        var m2 = value2.substring(3, 5) * 60;
+        var toTime = h2 + m2;
+        if (toTime > fromTime) {
+            layer.msg("超过4小时按1天租期计费。");
+            if (f) {
+                carInfoTab_app.days += 1;
+                f = false;
+            }
+        } else if (toTime < fromTime2) {
+            layer.msg("超过4小时按1天租期计费。");
+            if (!f) {
+                carInfoTab_app.days -= 1;
+                f = true;
+            }
+        } else if (toTime > fromTime2 && toTime <= fromTime) {
+            layer.msg("每小时加收超时费￥30元。");
+            if (!f) {
+                carInfoTab_app.days -= 1;
+                f = true;
+            }
+        }
+    };
+
     layui.use(['laypage', 'layer'], function() {
         var laypage = layui.laypage
             , layer = layui.layer;

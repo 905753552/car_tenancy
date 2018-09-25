@@ -1,21 +1,10 @@
 $(document).ready(function () {
-    var year = new Date().getFullYear();
-    var month = new Date().getMonth() + 1;
-    if (month < 10) {
-        month = "0" + month;
-    }
-    var day = new Date().getDate();
-    var day2 = day + 1;
-    if (day < 10) {
-        day = "0" + day;
-    }
-    if (day2 < 10) {
-        day = "0" + day;
-    }
-    var dayTime1 = year + "-" + month + "-" + day;
-    var dayTime2 = year + "-" + month + "-" + day2;
-    $("input[id='fromDate']").val(dayTime1);
-    $("input[id='toDate']").val(dayTime2);
+    var OneDay = 86400000;
+    var date = new Date().getTime() / OneDay;
+    var fromDate = formatDate(new Date(date + 1) * OneDay);
+    var toDate = formatDate(new Date(date + 2) * OneDay);
+    $("#fromDate").val(fromDate);
+    $("#toDate").val(toDate);
 });
 
 $(function () {
@@ -64,3 +53,4 @@ $(function () {
     });
 
 });
+
