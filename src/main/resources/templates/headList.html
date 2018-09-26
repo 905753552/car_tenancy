@@ -283,7 +283,7 @@
                                     <div class="col-md-12 column">
                                         <div class="row clearfix dev_underline">
                                             <div class="col-md-4 column pic">
-                                                <a :href="'./cardetail?carId='+item.carId"><img :src="item.carImg" alt="图片" width="230px" height="130px"></a>
+                                                <a :href="'./cardetail?carId='+item.carId" target="_blank"><img :src="item.carImg" alt="图片" width="230px" height="130px"></a>
                                             </div>
                                             <div class="col-md-3 column info">
                                                 <div class="info_block">
@@ -333,7 +333,7 @@
                                     <div class="col-md-12 column">
                                         <div class="row clearfix dev_underline">
                                             <div class="col-md-4 column pic">
-                                                <a :href="'./cardetail?carId='+item.carId"><img :src="item.carImg" alt="图片" width="230px" height="130px"></a>
+                                                <a :href="'./cardetail?carId='+item.carId" target="_blank"><img :src="item.carImg" alt="图片" width="230px" height="130px"></a>
                                             </div>
                                             <div class="col-md-3 column info">
                                                 <div class="info_block">
@@ -537,7 +537,7 @@
                 var toDate = $("#toDate").val();
                 var a = (new Date(toDate).getTime() - new Date(fromDate).getTime()) / OneDay;
                 carInfoTab_app.days = a;
-
+                doHandelDate()
                 //判断时间是否超时
                 f = true;
                 OutToTime();

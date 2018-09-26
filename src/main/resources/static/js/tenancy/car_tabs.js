@@ -399,7 +399,7 @@ function  doHandelDate() {
     }
     if(carInfoTab_app.days > daysMax){
         // layui.open("该套餐最大天数为"+daysMax+"天")
-        layer.confirm('租车天数大于该套餐的最小天数，请换套餐或者减少天数!!!', {btn: ['确定'],icon: 2, title:'提示'}, function(index){
+        layer.confirm('租车天数大于该套餐的最大天数，请换套餐或者减少天数!!!', {btn: ['确定'],icon: 2, title:'提示'}, function(index){
             //do something
 
             layer.close(index);
