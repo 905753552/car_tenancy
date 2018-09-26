@@ -130,7 +130,7 @@
                     </div>
                     <div class="" style="display:inline-block;margin-top: 15px;margin-bottom: 15px;text-align: center">
                         <div style=""><i>租期:<em class="tnc_bred"><label>{{days}}</label>天</em>，不限里程</i></div>
-                        <input type="button" value="立即选车" class="tnc2_btn tnc_btn_green">
+                        <input type="button" @click="doHandelDate();doSearchByAllType()" value="立即选车" class="tnc2_btn tnc_btn_green">
                     </div>
                 </div>
             </div>
@@ -229,43 +229,6 @@
                         <ul class="car_brand" id="ch_brand">
                             <li class="orderlevelcheck filter_brand all"><a class="checked ppdefault" id="cbx" @click="doChangeBrand('CBX')">不限</a></li>
                             <li class="orderlevelcheck filter_brand brandname" v-for="item in carBrands"><a href="#" @click="doChangeBrand(item.name)">{{item.name}}</a></li>
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="11" onclick="doChangeBrand('宝马')">宝马</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="20" onclick="doChangeBrand('奔驰')">奔驰</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="10" onclick="doChangeBrand('本田')">本田</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="2" onclick="doChangeBrand('标致')">标致</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="3" onclick="doChangeBrand('别克')">别克</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="16" onclick="doChangeBrand('比亚迪')">比亚迪</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="21" onclick="doChangeBrand('长城')">长城</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="8" onclick="doChangeBrand('大众')">大众</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="7" onclick="doChangeBrand('丰田')">丰田</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="9" onclick="doChangeBrand('福特')">福特</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="22" onclick="doChangeBrand('金杯')">金杯</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="18" onclick="doChangeBrand('凯迪拉克')">凯迪拉克</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="17" onclick="doChangeBrand('铃木')">铃木</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="14" onclick="doChangeBrand('马自达')">马自达</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="15" onclick="doChangeBrand('奇瑞')">奇瑞</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="6" onclick="doChangeBrand('起亚')">起亚</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="13" onclick="doChangeBrand('斯柯达')">斯柯达</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="5" onclick="doChangeBrand('现代')">现代</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="4" onclick="doChangeBrand('雪佛兰')">雪佛兰</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="1" onclick="doChangeBrand('雪铁龙')">雪铁龙</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="23" onclick="doChangeBrand('猎豹')">猎豹</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="24" onclick="doChangeBrand('日产')">日产</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="25" onclick="doChangeBrand('沃尔沃')">沃尔沃</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="28" onclick="doChangeBrand('依维柯')">依维柯</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="29" onclick="doChangeBrand('华泰')">华泰</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="30" onclick="doChangeBrand('野马')">野马</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="31" onclick="doChangeBrand('三菱')">三菱</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="32" onclick="doChangeBrand('MINI')">MINI</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="33" onclick="doChangeBrand('雪铁龙DS')">雪铁龙DS</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="34" onclick="doChangeBrand('北京汽车')">北京汽车</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="35" onclick="doChangeBrand('菲亚特')">菲亚特</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="36" onclick="doChangeBrand('江淮')">江淮</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="37" onclick="doChangeBrand('奥迪')">江铃</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="38" onclick="doChangeBrand('奥迪')">上汽大通</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="39" onclick="doChangeBrand('奥迪')">华颂</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="40" onclick="doChangeBrand('奥迪')">风行</a></li>-->
-                            <!--<li class="orderlevelcheck filter_brand brandname"><a href="#" data="41" onclick="doChangeBrand('奥迪')">广汽</a></li>-->
                         </ul>
                     </div>
                 </div>
@@ -274,26 +237,6 @@
 
         <div class="col-md-12 col-lg-8 pad-define1">
             <!--<button onclick="doSeachByAllType()">查车</button>-->
-            <!--
-            <button class="btn" onclick="doSearchByAllType()">查车</button>
-            <button class="btn" onclick="doChangeType('SD')">手动紧凑型</button>
-            <button class="btn" onclick="doChangeType('JJ')">经济型</button>
-            <button class="btn" onclick="doChangeType('SW')">商务型</button>
-            <button class="btn" onclick="doChangeType('HH')">豪华型</button>
-            <button class="btn" onclick="doChangeType('SUV')">SUV</button>
-            <button class="btn" onclick="doChangeType('GX')">个性车</button>
-            <button class="btn" onclick="doCheckByType()">类型</button>
-            <br>
-            <br>
-            <button class="btn" onclick="doChangePrice(0)">0</button>
-            <button class="btn" onclick="doChangePrice(150)">150</button>
-            <button class="btn" onclick="doChangePrice(300)">300</button>
-            <button class="btn" onclick="doChangePrice(500)">500</button>
-            <button class="btn" onclick="doChangePrice(501)">500+</button>
-            <br><br>
-            <button class="btn" onclick="doChangeBrand('奥迪')">奥迪</button>
-            <button class="btn" onclick="doChangeBrand('奔驰')">奔驰</button>
-            <button class="btn" onclick="doChangeBrand('宝马')">宝马</button>-->
             <!--row start-->
             <div class="row clearfix">
                 <!--col start-->
@@ -303,13 +246,14 @@
                     <ul class="nav nav-tabs  bg-define" id="mycarInfoListTab">
 
                         <!--日租  必有套餐  tabHeader start-->
-                        <li class=" nav-item wid-define" disabled="true" >
-                            <a class="nav-link active pad-define2 text-secondary" :id="1" @click="doSearchByPackage(1)" data-toggle="tab" href="#pane_1">日租自驾</a>
+
+                        <li class=" nav-item wid-define " disabled="true" >
+                            <a class="nav-link active pad-define2 text-secondary " :id="1" @click="doSearchByPackage(1)"  data-toggle="tab"  href="#pane_1">日租自驾(不限)</a>
                         </li>
                         <!--日租  必有套餐 tabHeader end-->
                         <!--其他套餐 tabHeader start-->
-                        <li class="nav-item wid-define" v-for="carMenu in evenMenus">
-                            <a class="nav-link pad-define2 text-secondary" :id="carMenu.id" @click="doSearchByPackage(carMenu.id)" data-toggle="tab" :href="'#pane_'+carMenu.id">{{carMenu.name}}</a>
+                        <li class="nav-item wid-define " v-for="carMenu in evenMenus" disabled="true">
+                            <a class="nav-link pad-define2 text-secondary" :id="carMenu.id" @click="doSearchByPackage(carMenu.id)" data-toggle="tab"   :href="'#pane_'+carMenu.id">{{carMenu.name}}</a>
                         </li>
                         <!--其他套餐 tabHeader end-->
                         <!--按价格排序 tabHeader start-->
@@ -383,7 +327,7 @@
                         <!--日租 end-->
 
 
-                        <div class="tab-pane bg-define"  v-for="carMenuP in evenMenus" :id="'pane_'+carMenuP.id">
+                        <div class="tab-pane bg-define "  v-for="carMenuP in evenMenus" :id="'pane_'+carMenuP.id">
                             <ul class="nav navbar-nav">
                                 <li v-if="items.length>0" v-for="(item,index) in items" class="list-unstyled">
                                     <div class="col-md-12 column">
@@ -533,6 +477,7 @@
 <script src="/js/tenancy/leftList_ch.js"></script>
 <script src="/js/tenancy/car_tabs.js"></script>
 <script>
+
     //定义一个全局标记变量，用来判断超时后的天数是否+1
     var f = true;
 

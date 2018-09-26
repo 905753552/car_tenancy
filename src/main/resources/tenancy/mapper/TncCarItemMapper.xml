@@ -114,4 +114,12 @@
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="countUnusedCar" resultType="Integer" parameterType="java.lang.Long">
+    select count(*)
+    FROM tnc_car_item
+    where  car_id = #{i}
+    AND `status` =0
+    AND is_deleted =0
+  </select>
 </mapper>

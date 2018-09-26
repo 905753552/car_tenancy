@@ -168,5 +168,6 @@
     <include refid="Base_Column_List" />
     from tnc_price_scheme
     where package_id = #{Pid,jdbcType=BIGINT}
+    and is_deleted = 0
   </select>
 </mapper>

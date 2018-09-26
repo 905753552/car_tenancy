@@ -14,4 +14,11 @@ public interface TncCarItemMapper {
     int updateByPrimaryKeySelective(TncCarItem record);
 
     int updateByPrimaryKey(TncCarItem record);
+
+    /**
+     * 统计某系列车可出租数量
+     * @param i 车系列ID
+     * @return
+     */
+    int countUnusedCar(Long i);
 }

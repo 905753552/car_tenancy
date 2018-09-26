@@ -157,5 +157,6 @@
     select id from tnc_store
     where
     name = #{xxoo}
+    and is_deleted = 0
   </select>
 </mapper>

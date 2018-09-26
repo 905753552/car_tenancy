@@ -119,6 +119,8 @@
   <select id="selectPathByCid" resultType="String" parameterType="java.lang.Long">
     select path
     from tnc_car_pic
-    where car_id = #{cid,jdbcType=BIGINT} and is_cover = 1
+    where car_id = #{cid,jdbcType=BIGINT}
+    and is_cover = 1
+    and is_deleted = 0
   </select>
 </mapper>

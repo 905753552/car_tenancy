@@ -408,5 +408,7 @@
     from tnc_car
     where
     store_id = #{id,jdbcType=BIGINT}
+    and is_deleted = 0
+    and status = 1
   </select>
 </mapper>

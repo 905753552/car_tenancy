@@ -239,9 +239,14 @@ dev_sort_btn .nav-link2{
 }
 
 .wid-define{
-    width:100px;
+    width:120px;
     text-align: center;
 }
 .price-lo{
     text-align: center;
+}
+img:hover{
+    animation-delay: 3s;
+    width: 245px;
+    height: 145px;
 }
