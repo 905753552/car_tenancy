@@ -2,6 +2,8 @@ package com.dev.main.tenancy.dao;
 
 import com.dev.main.tenancy.domain.TncCarPic;
 
+import java.util.List;
+
 public interface TncCarPicMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -16,4 +18,6 @@ public interface TncCarPicMapper {
     int updateByPrimaryKey(TncCarPic record);
 
     String selectPathByCid(Long cid);
+
+    List<TncCarPic> listPathByCid(Long id);
 }

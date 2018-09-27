@@ -1,5 +1,6 @@
 package com.dev.main.tenancy.service.impl;
 
+import com.dev.main.common.util.ResultMap;
 import com.dev.main.tenancy.dao.*;
 import com.dev.main.tenancy.domain.*;
 import com.dev.main.tenancy.service.ICarService;
@@ -125,5 +126,21 @@ public class CarServiceImpl implements ICarService {
     @Override
     public List<TncPackageScheme> listPackageScheme() {
         return tncPackageSchemeMapper.listPackageScheme();
+    }
+
+    /**
+     * LYH
+     * 根据id查车辆详情
+     * @param id
+     * @return
+     */
+    @Override
+    public ResultMap TncCardetail(Long id) {
+        ResultMap rm = new ResultMap();
+        TncCar tncCar =  tncCarMapper.selectByPrimaryKey(id);
+        rm.put("carDetail",tncCar);
+        rm.put("carPic",tncCarPicMapper.listPathByCid(id));
+        System.out.println(rm);
+        return rm;
     }
 }

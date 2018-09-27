@@ -121,6 +121,11 @@ input[type=password], input[type=text] {
     color: #fff;
     background-color: #00c189;
 }
+.layui-tab-title  li:hover{
+    text-decoration: none;
+    color: #fff;
+    background-color: #00c189;
+}
 .layui-tab-title  li{
     display: block;
     position: relative;
