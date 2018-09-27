@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>乘风租车————全球租车领导品牌</title>
+    <link rel="stylesheet" href="/layui-v2.4.3/css/layui.css"  media="all">
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/fonts/font-awesome-4.7.0/css/font-awesome.css">
@@ -51,26 +52,26 @@
     <div class="printBody">
 
         <div class="printdiv">
-            <div class="Wbanner980">
+            <div class="Wbanner980" id="orderDetails">
 
 
                 <div class="bluebgbd sz_succeedB">
                     <div class="succeedinfo p10_0 sz_bluebbb">
-                        <span class="sz_suc_font colorBlue">预订成功</span>
+                        <span class="sz_suc_font colorBlue">等待付款</span>
                         <span class="f14">&nbsp;合计:</span>
                         <span class="sz_priceOrange">
 	<em class="rmb">¥</em>
 	<em class="num">
-		496
+		{{order_detail.order_detail.totalAmount}}
 	</em>
 </span>
                     </div>
                     <div class="f14 p10_0">
-                        <span>订单号：15362794554761</span>
+                        <span>订单号：{{order_detail.order_detail.id}}</span>
                         <a>|</a>
-                        <span>租车人：林盛丰</span>
+                        <span>租车人：{{order_detail.order_detail.name}}</span>
                         <a>|</a>
-                        <span>租期：2天</span>
+                        <span>租期：{{order_detail.days}}天</span>
                     </div>
                 </div>
 
@@ -91,11 +92,11 @@
                                 <input type="button" class="tnc_btn tnc_btn_green config-btn" value="配置信息">
                             </td>
                             <td width="240" align="center" class="borderBlueR borderBlueBda" rowspan="2">
-                                <strong>取车时间</strong>：2018-09-08 10:00:00
+                                <strong>取车时间</strong>：{{order_detail.order_detail.startDate}}
                             </td>
                             <td width="78" align="right" class="borderBlueBda " rowspan="2"><strong>取车地点</strong>：</td>
                             <td rowspan="2" height="66" class="borderBlueBda" width="260">
-                                肇庆[加盟]&nbsp;星湖大道店
+                                {{order_detail.getCity}}[加盟]&nbsp;{{order_detail.getStore}}
                             </td>
                         </tr>
                         <tr>
@@ -104,18 +105,19 @@
                         <tr>
                             <td class="borderBlueB">&nbsp;</td>
                             <td rowspan="2" align="center" valign="middle" class="borderBlueR borderBlueB" height="66">
-                                <strong>还车时间</strong>：2018-09-10 10:00:00
+                                <strong>还车时间</strong>：{{order_detail.order_detail.returnDate}}
                             </td>
                             <td rowspan="2" align="right" class="borderBlueB"><strong>还车地点</strong>：</td>
                             <td rowspan="2" align="left" valign="middle" class="borderBlueB">
-                                肇庆[加盟]&nbsp;星湖大道店
+                                {{order_detail.returnCity}}[加盟]&nbsp;{{order_detail.returnStore}}
                             </td>
                         </tr>
                         <tr class="f16 borderBlueB" style="font-family:'微软雅黑';">
                             <td>&nbsp;</td>
-                            <td height="33" align="center" valign="middle" class="borderBlueR">起亚K2</td>
-                            <td align="center" valign="middle" class="borderBlueR">三厢/1.4自动</td>
-                            <td align="center" valign="middle" class="borderBlueR">乘坐5人</td>
+                            <td height="33" align="center" valign="middle" class="borderBlueR">{{order_detail.car_info.tncBrand.name}}{{order_detail.car_info.series}}</td>
+                            <td align="center" valign="middle" class="borderBlueR" v-if="order_detail.car_info.transmissionType=='MT'">{{order_detail.car_info.boxQuantity}}厢/{{order_detail.car_info.displacement/1000}}手动</td>
+                            <td align="center" valign="middle" class="borderBlueR" v-else>{{order_detail.car_info.boxQuantity}}厢/{{order_detail.car_info.displacement/1000}}自动</td>
+                            <td align="center" valign="middle" class="borderBlueR">乘坐{{order_detail.car_info.seatQuantity}}人</td>
                         </tr>
                         </tbody>
                     </table>
@@ -124,14 +126,18 @@
                     <div class="orderFeeDetails">
                         <div class="feeItem borderBlueBda">
                             <div class="feePrice">
+                            <span class="sz_OrderpOrangeM">
+	                            <em class="rmb_gray">¥</em>
+	                            <em class="num_gray">{{order_detail.total_base_price}}</em>
+	                        </span>
 	                    	<span class="sz_OrderpOrangeM">
 	                            <em class="rmb">¥</em>
-	                            <em class="num">396</em>
+	                            <em class="num">{{order_detail.discount_total_base}}</em>
 	                        </span>
                             </div>
                             <div class="calculate">
 		                        <span class="sz_priceGraySmall">
-		                            <em class="num">198x2</em>
+		                            <em class="num">{{order_detail.base_price}}x{{order_detail.days}}</em>
 		                            <em class="unit">=</em>	
 		                        </span>
                             </div>
@@ -140,14 +146,18 @@
 
                         <div class="feeItem borderBlueBda">
                             <div class="feePrice">
+                            <span class="sz_OrderpOrangeM">
+	                            <em class="rmb_gray">¥</em>
+	                            <em class="num_gray">{{order_detail.total_service_price}}</em>
+	                        </span>
 	                    	<span class="sz_OrderpOrangeM">
 	                            <em class="rmb">¥</em>
-	                            <em class="num">80</em>
+	                            <em class="num">{{order_detail.discount_total_service}}</em>
 	                        </span>
                             </div>
                             <div class="calculate">
 		                        <span class="sz_priceGraySmall">
-		                            <em class="num">40x2</em>
+		                            <em class="num">{{order_detail.service_price}}x{{order_detail.days}}</em>
 		                            <em class="unit">=</em>	
 		                        </span>
                             </div>
@@ -170,22 +180,23 @@
                                                                                                     style="display: block;"> </b></span>
                         </div>
 
-                        <div class="feeline50 discount borderBlueBda sttwrap " style="display: none;">
+                        <div class="feeline50 discount borderBlueBda sttwrap " v-for="(item,key) in description" style="display: none;">
                             <div class="feePrice">
 		                    <span class="sz_OrderpOrangeM">
 		                        <em class="rmb"></em>
 		                        <em class="rmb">¥</em>
-		                        <em class="num">20</em>
+		                        <em class="num">{{item}}</em>
 		                    </span>
                             </div>
-                            <span class="feeName bold">车辆整备费</span>
+                            <span class="feeName bold">{{key}}</span>
                         </div>
+
 
                         <div class="feeItem borderBlueBda">
                             <div class="feePrice">
 	                    	<span class="sz_OrderpOrangeM">
 	                            <em class="rmb">¥</em>
-	                            <em class="num">200</em>
+	                            <em class="num">{{order_detail.order_detail.deposit}}</em>
 	                        </span>
                             </div>
                             <div class="calculate">
@@ -200,7 +211,7 @@
                             <div class="feePrice">
 	                    	<span class="sz_OrderpOrangeM">
 	                            <em class="rmb">¥</em>
-	                            <em class="num">200</em>
+	                            <em class="num">{{order_detail.coupon}}</em>
 	                        </span>
                             </div>
                             <div class="calculate">
@@ -222,7 +233,7 @@
                             <span class="yjtotal">需支付：</span>
                             <span class="sz_OrderpOrangeB">
             <em class="rmb">¥</em>
-            <em class="num">496</em>
+            <em class="num">{{order_detail.order_detail.totalAmount}}</em>
         </span>
                         </div>
                     </div>
@@ -230,7 +241,7 @@
                 <div class="ac">
 
 
-                    <input id="orderCancel" type="button" onclick="cancelOrderTrip();" value="取消订单"
+                    <input id="orderCancel" type="button" value="取消订单"
                            class="tnc_btn btn_graywauto gray f16">&nbsp;&nbsp;
 
                     <div id="orderModifyDiv" class="top_new_tip_btn">
@@ -243,7 +254,7 @@
                            class="tnc_btn btn_graywauto gray f16">&nbsp;&nbsp;
                     <input id="printPage" type="button" value="打印订单" onclick="window.print()"
                            class="tnc_btn btn_graywauto gray f16">&nbsp;&nbsp;
-                    <input id="toPay" type="button" value="去支付" onclick="javascript:window.location.href='payPage.html'"
+                    <input id="toPay" type="button" value="去支付" @click="goToPay"
                            class="tnc_btn btn_graywauto gray f16" style="background-color: #1e9f75;color:white;">&nbsp;&nbsp;
                 </div>
 
@@ -267,69 +278,6 @@
                 </div>
             </div>
 
-
-            <div id="dialogSE" class="orderDialog popup_block d_none" mask-data="#?w=540">
-                <h3 class="f14 bold ac gray">取消订单</h3>
-                <div class="p20_0">
-                    <span style="padding-left:30px;" class="cancelMsg d_none"><font color="red"></font></span>
-                    <ul>
-                        <li class="pb2 gray_666 pt10 " style="padding-left:30px">
-                            <strong>订单号：15362794554761可以取消</strong><br>
-                            取消订单的原因：
-                        </li>
-                        <li class="pt10 ac">
-                            <table width="400" align="center">
-                                <tbody>
-                                <tr>
-                                    <td height="26" class="al pl20" nowrap="">
-                                        <div name="__monitorCancel1"><input type="radio" value="3" name="cancelReason"
-                                                                            id="monitor_cancel1" onclick=""> 行程发生变更
-                                        </div>
-                                    </td>
-                                    <td class="al pl20" nowrap="">
-                                        <div name="__monitorCancel2"><input onclick="" id="monitor_cancel2" type="radio"
-                                                                            name="cancelReason" value="7"> 不满意价格
-                                        </div>
-                                    </td>
-                                    <td class="al pl20" nowrap="">
-                                        <div name="__monitorCancel3"><input onclick="" id="monitor_cancel3" type="radio"
-                                                                            name="cancelReason" value="23"> 选择其他租车公司
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td height="26" class="al pl20" nowrap="">
-                                        <div name="__monitorCancel4"><input onclick="" id="monitor_cancel4" type="radio"
-                                                                            name="cancelReason" value="24"> 其它出行替代
-                                        </div>
-                                    </td>
-                                    <td class="al pl20" nowrap="">
-                                        <div name="__monitorCancel5"><input onclick="" id="monitor_cancel5" type="radio"
-                                                                            name="cancelReason" value="9"> 天气原因
-                                        </div>
-                                    </td>
-                                    <td class="al pl20" nowrap="">
-                                        <div name="__monitorCancel6"><input onclick="" id="monitor_cancel6" type="radio"
-                                                                            name="cancelReason" value="10"> 其它
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </li>
-                        <li class="ac pt15">
-                            <br>
-                            <input type="button" value="取消并提交原因" data-id="31972774" data-mobile="" id="cancelOrder"
-                                   class="btn_orgwauto white f14">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="button" value="不取消订单" id="closeBg_Button" class="btn_orgwauto white f14">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <input type="hidden" id="stateName" name="stateName" value="预订成功">
 
             <div class="cffade" style="display: none;"></div>
             <div class="configbox" style="display: none;">
@@ -438,11 +386,11 @@
                 </div>
             </div>
         </div>
-        <div class="order-success-alertbox" style="display: none;">
+        <div class="order-success-alertbox" style="display: block;">
             <div class="s-aboxin">
                 <a href="javascript:void(0);" class="close"></a>
                 <p><span>恭喜您</span><br>订单提交成功</p>
-                <a class="zc-btn btn-know">我知道了</a>
+                <input type="button" class="tnc_btn tnc_btn_green zc-btn btn-know" value="确定">
             </div>
         </div>
 

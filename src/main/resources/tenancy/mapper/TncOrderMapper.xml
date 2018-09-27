@@ -32,6 +32,17 @@
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
     <result column="car_item_id" property="carItemId" jdbcType="BIGINT" />
   </resultMap>
+  <resultMap id="CouponResultMap" type="com.dev.main.tenancy.domain.TncCoupon" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="begin_date" property="beginDate" jdbcType="TIMESTAMP" />
+    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
   <sql id="Base_Column_List" >
     id, name, credentials_type, credentials_number, email, phone, total_amount, order_amount, 
     base_amount, service_amount, other_amount, coupon_id, description, discount, deposit, 
@@ -49,7 +60,7 @@
     delete from tnc_order
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.dev.main.tenancy.domain.TncOrder" >
+  <insert id="insert" useGeneratedKeys="true"  keyProperty="id" parameterType="com.dev.main.tenancy.domain.TncOrder" >
     insert into tnc_order (id, name, credentials_type, 
       credentials_number, email, phone, 
       total_amount, order_amount, base_amount, 
@@ -372,6 +383,30 @@
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       car_item_id = #{carItemId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectCouponsByCid" resultMap="CouponResultMap" parameterType="java.lang.Long">
+    select
+    id, amount, description, status, begin_date, end_date, customer_id, gmt_create, gmt_modified
+    from tnc_coupon
+    where customer_id = #{id,jdbcType=BIGINT}
+  </select>
+  <update id="updateCustomerInfo" parameterType="com.dev.main.tenancy.domain.TncCustomer">
+    update tnc_customer
+    <set>
+      <if test="name!=null and name!=''">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email!=null and email!=''">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone!=null and phone!=''">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard!=null and idCard!=''">
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+    </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

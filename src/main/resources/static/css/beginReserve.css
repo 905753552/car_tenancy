@@ -27,7 +27,7 @@
     justify-content:center;
 }
 .order-proce{
-    margin-bottom:40px;
+    margin-bottom:30px;
     display:block;
 }
 .car-info{
@@ -162,7 +162,7 @@
 .newpg-con{
     margin-top: 25px;
     background: #fff;
-    padding: 0 20px 60px;
+    padding: 20px 20px 60px;
     width: 1000px;
 }
 .newpg-conf h3{
@@ -383,7 +383,7 @@ input[type=text]{
     color: #1e9f75;
     line-height: 40px;
     margin: 0;
-    padding-top: 20px;
+    padding-top: 0;
     border-bottom: 2px solid #c8c8ce;
 }
 /* 费用明细具体 */
@@ -398,10 +398,8 @@ input[type=text]{
 }
 .newpg-conf .feeul > li .fee-txt {
     display: inline-block;
-    float: left;
     color: #60606c;
     font-size: 16px;
-    margin-right: 5px;
 }
 .newpg-conf .feeul > li .fee-res {
     display: inline-block;
@@ -410,6 +408,12 @@ input[type=text]{
     text-align: right;
     font-size: 16px;
     color: #fabe00;
+}
+.newpg-conf .feeul > li .fee-res .fee-txt {
+    display: inline-block;
+    text-align: left;
+    color: #9F9F9F;
+    text-decoration: line-through;
 }
 .newpg-conf .feeul > li .fee-pro {
     display: inline-block;
@@ -585,7 +589,7 @@ input[type=text]{
     vertical-align: middle;
 }
 .newpg-conf .feeul > li .fee-res > i {
-    font-size: 12px;
+    font-size: 16px;
     font-style: normal;
 }
 .newpg-conf .feeul>li.bluelist .otherul {
@@ -697,7 +701,6 @@ input[type=text]{
 }
 ol, ul {
     list-style: none;
-    margin: 0;
     padding: 0;
 }
 .cflist ul {
@@ -876,7 +879,6 @@ fieldset, img {
     display: inline-block;
     width: 100px;
     height: 30px;
-    border: 1px solid #fabe00;
     float: left;
     margin-left: 10px;
     line-height: 30px;
@@ -887,4 +889,7 @@ fieldset, img {
     outline: 0;
     border-radius: 3px;
     cursor: pointer;
+}
+[v-cloak] {
+    display: none !important;
 }

@@ -47,7 +47,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="orderDetails">
+	<div class="orderDetails" v-cloak>
 		<div class="order-block">
 			<div class="order-inner">
 				<img class="order-proce" src="https://image.zuchecdn.com/newversion/news/ordernew/order_proce.png">
@@ -57,8 +57,9 @@
 							<image src="https://fimg.zuchecdn.com/upload/web/modepic/480.jpg" width="180" height="105"></image>
 						</div>
 						<div class="lin">
-							<p class="lp1">起亚K2</p>
-							<p class="lp2">三厢/1.4自动 | 乘坐5人</p>
+							<p class="lp1">{{carInfo.tncBrand.name}}{{carInfo.series}}</p>
+							<p class="lp2" v-if="carInfo.transmissionType=='MT'">{{carInfo.boxQuantity}}厢/{{carInfo.displacement/1000}}手动 | 乘坐{{carInfo.seatQuantity}}人</p>
+							<p class="lp2" v-else>{{carInfo.boxQuantity}}厢/{{carInfo.displacement/1000}}自动 | 乘坐{{carInfo.seatQuantity}}人</p>
 							<div class="base-btn">
 								<!-- <a class="look-config" href="#" data-toggle="modal" data-target="#car-details">查看配置信息</a> -->
 								<input class="tnc_btn tnc_btn_green look-config" value="查看配置信息" type="button" data-toggle="modal" data-target="#car-details">
@@ -72,7 +73,7 @@
 
                                     <!-- 模态框头部 -->
                                     <div class="modal-header">
-                                        <h4 class="modal-title">起亚K2配置信息</h4>
+                                        <h4 class="modal-title">{{carInfo.tncBrand.name}}{{carInfo.series}}配置信息</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
 
@@ -83,95 +84,104 @@
                                                 <li>
                                                     <b class="zws">&nbsp;</b>座 位 数：
                                                     <span>
-										5
+										{{carInfo.seatQuantity}}
 								</span>
                                                 </li>
                                                 <li>
                                                     <b class="cms">&nbsp;</b>车 门 数：
                                                     <span>
-										4
+										{{carInfo.doorQuantity}}
 								</span>
                                                 </li>
                                                 <li>
                                                     <b class="rllx">&nbsp;</b>燃料类型：
                                                     <span>
-										汽油
+										{{carInfo.fuelType}}
 								</span>
                                                 </li>
                                                 <li>
                                                     <b class="bsxlx">&nbsp;</b>变速箱类型：
                                                     <span>
-										AT
+										{{carInfo.transmissionType}}
 								</span>
                                                 </li>
                                                 <li>
                                                     <b class="pl">&nbsp;</b>排　　量：
-                                                    <span>1396</span>
+                                                    <span>{{carInfo.displacement}}</span>
                                                 </li>
                                                 <li>
                                                     <b class="rybh">&nbsp;</b>燃油标号：
                                                     <span>
-										92-93汽油
+										{{carInfo.octaneRating}}
 								</span>
                                                 </li>
                                                 <li>
                                                     <b class="qdfs">&nbsp;</b>驱动方式：
                                                     <span>
-										前驱
+										{{carInfo.drivenMethod}}
 								</span>
                                                 </li>
                                                 <li>
                                                     <b class="fdjjqxs">&nbsp;</b>发动机进气形式：
                                                     <span>
-										自然吸气
+										{{carInfo.enItkForm}}
 								</span>
                                                 </li>
                                                 <li>
                                                     <b class="tc">&nbsp;</b>天　　窗：
-                                                    <span>
+                                                    <span v-if="carInfo.skylight==0">
 										无
+								</span>
+													<span v-else>
+										有
 								</span>
                                                 </li>
                                                 <li>
                                                     <b class="yxrl">&nbsp;</b>油箱容量：
                                                     <span>
-										43
+										{{carInfo.tankCapacity}}
 								</span>
                                                 </li>
                                                 <li>
                                                     <b class="yx">&nbsp;</b>音　　箱：
                                                     <span>
-										4
+										{{carInfo.speaker}}
 								</span>
                                                 </li>
                                                 <li>
                                                     <b class="zy">&nbsp;</b>座　　椅：
                                                     <span>
-										织物座椅
+										{{carInfo.seat}}
 								</span>
                                                 </li>
                                                 <li>
                                                     <b class="dcld">&nbsp;</b>倒车雷达：
-                                                    <span>
+                                                    <span v-if="carInfo.reversingRadar==0">
 										无
+								</span>
+													<span v-else>
+										有
 								</span>
                                                 </li>
                                                 <li>
                                                     <b class="qin">&nbsp;</b>气　　囊：
                                                     <span>
-										2
+										{{carInfo.airbag}}
 								</span>
                                                 </li>
                                                 <li class="nonebd">
                                                     <b class="dvd">&nbsp;</b>DVD / CD：
                                                     <span>
-										CD
+										{{carInfo.dvdCd}}
 								</span>
                                                 </li>
                                                 <li class="nonebd">
                                                     <b class="gps">&nbsp;</b>GPS导航：
-                                                    <span>
+                                                    <span v-if="carInfo.gps==0">
 										无
+								</span>
+													<span v-else>
+										有
 								</span>
                                                 </li>
                                             </ul>
@@ -192,11 +202,11 @@
 									</p>
 									<p class="line2">
 										<i class="ifr-time"></i>
-										<span style="font-size:16px;color:#93939e;">2018-09-04 10:00</span>
+										<span style="font-size:16px;color:#93939e;">{{baseInfo.getDate}} {{baseInfo.getTime}}</span>
 									</p>
 									<p class="line3">
 										<i class="ifr-local"></i>
-										<span style="font-size:16px;color:#93939e;">肇庆 星湖大道店</span>
+										<span style="font-size:16px;color:#93939e;">{{baseInfo.getCity}}[加盟]&nbsp;{{baseInfo.getStore}}</span>
 									</p>
 								</li>
 							</ul>
@@ -210,11 +220,11 @@
 									</p>
 									<p class="line2">
 										<i class="ifr-time"></i>
-										<span style="font-size:16px;color:#93939e;">2018-09-06 10:00</span>
+										<span style="font-size:16px;color:#93939e;">{{baseInfo.returnDate}} {{baseInfo.returnTime}}</span>
 									</p>
 									<p class="line3">
 										<i class="ifr-local"></i>
-										<span style="font-size:16px;color:#93939e;">肇庆 星湖大道店</span>
+										<span style="font-size:16px;color:#93939e;">{{baseInfo.returnCity}}[加盟]&nbsp;{{baseInfo.returnStore}}</span>
 									</p>
 								</li>
 							</ul>
@@ -224,8 +234,9 @@
 			</div>
 		</div>
 		<div class="newpg-conf">
-			<div class="newpg-con">
-				<div class="memberInfo">
+			<div class="newpg-con" id="orderInfo">
+				<!--判断个人中心中这些信息是否已填写-->
+				<div class="memberInfo" v-if="customerInfo.email==''||customerInfo.idCard==''">
 					<h3>租车人信息<span class="ifred">请认真填写一下信息，取车时需要现场核对！</span></h3>
 					<div class="partInfo">
 						<form class="form-info">
@@ -244,10 +255,10 @@
 							<div class="formGrop">
 								<div class="name-label"><i style="color:red;">*&nbsp&nbsp</i>证件类型</div>
 								<select class="tnc_input" style="width:240px;height:30px;margin-left:15px;padding: 0 2%;" id="xcardtype" default-value="请选择证件类型">
-									<option class="op" type-id="10">身份证</option>
-									<option class="op" type-id="11">台湾居民来往大陆通行证</option>
-									<option class="op" type-id="12">港澳居民来往内地通行证</option>
-									<option class="op" type-id="13">外籍护照</option>
+									<option class="op" value="1">身份证</option>
+									<option class="op" value="2">台湾居民来往大陆通行证</option>
+									<option class="op" value="3">港澳居民来往内地通行证</option>
+									<option class="op" value="4">外籍护照</option>
 								</select>
 							</div>
 							<div class="formGrop" style="position:relative;">
@@ -281,7 +292,7 @@
 				</div>
 				<div class="info-msg">
 					<p>下单成功后，提醒信息会发送至手机
-						<i id="mmid">178****3431</i>
+						<i id="mmid">{{phoneCopy}}</i>
 						<a href="javascript:void(0)" data-toggle="modal" data-target="#modifyModel" onclick="changeImageVerifyCode()">[修改]</a>
 					</p>
 				</div>
@@ -293,8 +304,8 @@
 					<ul class="h3h feeul">
 						<li style="list-style:none">
 							<span class="fee-txt">车辆租赁及服务费</span>
-							<span class="fee-res">¥356</span>
-							<span class="fee-pro">178x2</span>
+							<span class="fee-res"><span class="fee-txt">¥{{baseInfo.total_base_price}}</span>¥{{baseInfo.discount_total_base}}</span>
+							<span class="fee-pro">{{baseInfo.base_price}}x{{baseInfo.days}}</span>
 							<div class="clear"></div>
 						</li>
 						<li style="position:relative;z-index:10;list-style:none">
@@ -311,53 +322,64 @@
 											</div>
 										</i>
 									</span>
-							<span class="fee-res">¥80</span>
-							<span class="fee-pro">40x2</span>
+							<span class="fee-res"><span class="fee-txt">¥{{baseInfo.total_service_price}}</span>¥{{baseInfo.discount_total_service}}</span>
+							<span class="fee-pro">{{baseInfo.service_price}}x{{baseInfo.days}}</span>
 							<div class="clear"></div>
 						</li>
 						<li class="opcl" style="list-style:none" @click="showOtherCost">
 							<span class="fee-txt">其他费用<i class="blue-downarr"></i></span>
-							<span class="fee-res"><i id="otherPriceTotal" total="20">￥20</i></span>
+							<span class="fee-res"><i id="otherPriceTotal" total="20">¥{{baseInfo.other_cost}}</i></span>
 							<span class="fee-pro">合计</span>
 							<div class="clear"></div>
 						</li>
 						<li class="bluelist">
 							<ul class="otherul">
 								<li class="discount defaultFeeItem2000">
-									<span class="fee-txt">车辆整备费</span>
-									<span class="fee-res">¥20</span>
+									<span class="fee-txt" style="font-size: 12px;">车辆整备费</span>
+									<span class="fee-res">¥{{baseInfo.prepare_cost}}</span>
+									<div class="clear"></div>
+								</li>
+							</ul>
+							<ul class="otherul" v-if="baseInfo.foreign_store_cost>0">
+								<li class="discount defaultFeeItem2000">
+									<span class="fee-txt" style="font-size: 12px;">异店还车费</span>
+									<span class="fee-res">¥{{baseInfo.foreign_store_cost}}</span>
+									<div class="clear"></div>
+								</li>
+							</ul>
+							<ul class="otherul" v-if="baseInfo.foreign_land_cost>0">
+								<li class="discount defaultFeeItem2000">
+									<span class="fee-txt" style="font-size: 12px;">异地还车费</span>
+									<span class="fee-res">¥{{baseInfo.foreign_land_cost}}</span>
 									<div class="clear"></div>
 								</li>
 							</ul>
 						</li>
 						<li style="list-style:none">
 							<span class="fee-txt">押金</span>
-							<span class="fee-res">¥200</span>
+							<span class="fee-res">¥{{baseInfo.deposit}}</span>
 							<span class="fee-pro"></span>
 							<div class="clear"></div>
 						</li>
-						<li class="opcl1" style="list-style:none" @click="showCoupon">
+						<li class="opcl1" style="list-style:none" v-if="coupons.length>0" @click="showCoupon">
 							<span class="fee-txt">优惠券<i class="blue-downarr"></i></span>
-							<span class="fee-res" style="color:red;">-¥200</span>
+							<span class="fee-res" style="color:red;">-¥{{baseInfo.coupon}}</span>
+							<div class="clear"></div>
+						</li>
+						<li class="opcl1" style="list-style:none" v-else>
+							<span class="fee-txt" style="color:#9F9F9F;">优惠券<i class="blue-downarr"></i></span>
+							<span class="fee-res" style="color:#9F9F9F;">无可用</span>
 							<div class="clear"></div>
 						</li>
 						<li class="zc_query-condition_list p-re">
 							<ul style="display: flex;flex-wrap: wrap;" id="coupons">
-								<li class="coupon-ok">
+								<li class="coupon-ok" v-for="coupon in coupons" v-bind:title="coupon.description">
 									<div class="amount">
-										<span class="moneyamount"><em>¥</em>100</span>
+										<span class="moneyamount"><em>¥</em>{{coupon.amount}}</span>
+										<span class="moneyid" hidden="hidden">{{coupon.id}}</span>
 									</div>
 									<div class="time">
-										<i class="zc_time_icon"></i>　有效期 : 2018.08.30-2019.02.26
-									</div>
-									<span class="zc-sprite zc-coupon-checked"></span>
-								</li>
-								<li class="coupon-ok">
-									<div class="amount">
-										<span class="moneyamount"><em>¥</em>100</span>
-									</div>
-									<div class="time">
-										<i class="zc_time_icon"></i>　有效期 : 2018.08.30-2019.02.26
+										<i class="zc_time_icon"></i>　有效期 : {{coupon.beginDate}}~{{coupon.endDate}}
 									</div>
 									<span class="zc-sprite zc-coupon-checked"></span>
 								</li>
@@ -370,10 +392,10 @@
 					<span class="ddzj">
 							订单总价
 						</span>
-						<span class="ddall"><i>¥</i><i class="orderTotalPrice all">656</i></span>
+						<span class="ddall"><i>¥</i><i class="orderTotalPrice all">{{baseInfo.order_price_sum}}</i></span>
 					</div>
 					<!-- <a href="javascript:void(0);" onclick="goFourthStep()" id="monitor_fourth_next" class="gopay-blue">提交订单</a> -->
-					<input class="tnc_btn tnc_btn_green gopay-blue" value="提交订单" id="monitor_fourth_next" type="button" onclick="javascript:window.location.href='myOrder.html'">
+					<input class="tnc_btn tnc_btn_green gopay-blue" value="提交订单" id="monitor_fourth_next" type="button" @click="submitOrder">
 				</div>
 			</div>
 		</div>
@@ -461,7 +483,6 @@
 <script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 <script src="/vue-2.5.17/vue.min.js"></script>
 <script src="/js/common/common.js"></script>
-<script src="/js/tenancy/getParam.js"></script>
 <script src="/js/tenancy/beginReserve.js"></script>
 <script src="/js/tenancy/header.js"></script>
 </body>

@@ -313,8 +313,8 @@ input[type=text].wservice {
 .sz_OrderpOrangeM {
     display: inline-block;
     overflow: hidden;
-    *zoom:1}
-
+    *zoom:1;
+}
 .sz_OrderpOrangeM em.rmb {
     width: 10px;
     height: 13px;
@@ -331,6 +331,25 @@ input[type=text].wservice {
     font: bold 24px/24px arial;
     color: #f60;
     float: left;
+    margin-right: 2px
+}
+.sz_OrderpOrangeM em.rmb_gray {
+    width: 10px;
+    height: 13px;
+    display: inline-block;
+    font: bold 16px/16px "微软雅黑";
+    color: #9F9F9F;
+    float: left;
+    margin: 5px 5px 0 0;
+    _margin-right: -1px
+}
+
+.sz_OrderpOrangeM em.num_gray {
+    display: inline-block;
+    font: 24px/24px arial;
+    color: #9F9F9F;
+    float: left;
+    text-decoration: line-through;
     margin-right: 2px
 }
 
@@ -6208,14 +6227,13 @@ td.pre {
 
 .order-success-alertbox .s-aboxin p span {
     font-size: 20px;
-    color: #fabe00
+    color: #1e9f75;
 }
 
 .order-success-alertbox .s-aboxin .zc-btn {
     display: block;
     height: 50px;
     line-height: 50px;
-    background-color: #fabe00;
     border-radius: 5px;
     color: #fff;
     font-size: 16px;

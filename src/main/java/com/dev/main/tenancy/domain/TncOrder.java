@@ -323,4 +323,39 @@ public class TncOrder extends BaseDomain {
     public void setCarItemId(Long carItemId) {
         this.carItemId = carItemId;
     }
+
+    @Override
+    public String toString() {
+        return "TncOrder{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", credentialsType=" + credentialsType +
+                ", credentialsNumber='" + credentialsNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", totalAmount=" + totalAmount +
+                ", orderAmount=" + orderAmount +
+                ", baseAmount=" + baseAmount +
+                ", serviceAmount=" + serviceAmount +
+                ", otherAmount=" + otherAmount +
+                ", couponId=" + couponId +
+                ", description='" + description + '\'' +
+                ", discount=" + discount +
+                ", deposit=" + deposit +
+                ", returnDeposit=" + returnDeposit +
+                ", isDepositReturned=" + isDepositReturned +
+                ", packageName='" + packageName + '\'' +
+                ", getStoreId=" + getStoreId +
+                ", returnStoreId=" + returnStoreId +
+                ", startDate=" + startDate +
+                ", returnDate=" + returnDate +
+                ", realReturnDate=" + realReturnDate +
+                ", payTime=" + payTime +
+                ", status=" + status +
+                ", isDeleted=" + isDeleted +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                ", carItemId=" + carItemId +
+                '}';
+    }
 }
