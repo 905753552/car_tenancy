@@ -195,9 +195,9 @@ function doSearchByAllType() {
      * @param place 地点
      * @param currentPackageId 套餐id
      */
-    let carPlace = "租车派"
+    let carPlaceId = 1
     const data ={
-        carPlace:carPlace,
+        carPlace:carPlaceId,
         carPID:currentPackageId
     }
    // console.log(JSON.stringify(data))
@@ -240,6 +240,17 @@ function doHandelCarInfo(carData) {
         cdata.carTotalPrice = (cdata.carPrice * days).toFixed(1)
         cdata.carTotalPackagePrice = (cdata.carPackagePrice * days).toFixed(1)
     })
+    if(carData==""){
+        console.log("没车")
+        layer.open({
+            title: '温馨提示'
+            ,content: '这套餐没车啊，换一个套餐试试？'
+            , yes: function(index, layero){
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    }
+
     carInfoTab_app.items = carData;
     carHandleData = carData;
 }
@@ -383,12 +394,13 @@ function  doHandelDate() {
     })
     if(carInfoTab_app.days < daysMin){
         //layui.open("该套餐最低天数为"+daysMin+"天")
+if(carInfoTab_app.items.length>0) {
+    layer.confirm('租车天数小于该套餐的最小天数，请换套餐或者添加天数!!!', {btn: ['确定'], icon: 2, title: '提示'}, function (index) {
+        //do something
 
-        layer.confirm('租车天数小于该套餐的最小天数，请换套餐或者添加天数!!!', {btn: ['确定'],icon: 2, title:'提示'}, function(index){
-            //do something
-
-            layer.close(index);
-        });
+        layer.close(index);
+    });
+}
         //该套餐最小天数
         let oneDay = 86400000
         carInfoTab_app.days = daysMin
@@ -399,11 +411,11 @@ function  doHandelDate() {
     }
     if(carInfoTab_app.days > daysMax){
         // layui.open("该套餐最大天数为"+daysMax+"天")
-        layer.confirm('租车天数大于该套餐的最大天数，请换套餐或者减少天数!!!', {btn: ['确定'],icon: 2, title:'提示'}, function(index){
-            //do something
-
-            layer.close(index);
-        });
+        if(carInfoTab_app.items.length>0) {
+            layer.confirm('租车天数大于该套餐的最大天数，请换套餐或者减少天数!!!', {btn: ['确定'], icon: 2, title: '提示'}, function (index) {
+                layer.close(index);
+            });
+        }
         //该套餐最大天数
         carInfoTab_app.days = daysMax
         let oneDay = 86400000
