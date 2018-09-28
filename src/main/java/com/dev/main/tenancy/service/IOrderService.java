@@ -25,4 +25,9 @@ public interface IOrderService {
     ResultMap insertOrder(TncOrder tncOrder);
 
     ResultMap savePay(Long id);
+
+    ResultMap cancelOrder(Long id);
+
+    ResultMap getOrder(Long id);
+
 }

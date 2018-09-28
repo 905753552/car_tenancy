@@ -108,10 +108,41 @@ public class OrderService implements IOrderService {
         tncOrder.setPayTime(new Date());
         tncOrder.setStatus(status);
         int res = tncOrderMapper.updateByPrimaryKey(tncOrder);
+        List<TncCarItem> tncCarItems = tncOrderMapper.selectCarItemByPrimaryKey(tncOrder.getCarItemId());
         if(res>0){
-            return ResultMap.success("支付订单成功").put("order",tncOrder);
+            if(tncCarItems.size()>0){
+                ResultMap resultMap = ResultMap.success("支付订单成功");
+                resultMap.put("order",tncOrder);
+                resultMap.put("carItem",tncCarItems.get(0));
+                return resultMap;
+            }else{
+                throw new CommonException("无可租车辆");
+            }
         }else{
             throw new CommonException("支付订单失败");
+        }
+    }
+
+    @Override
+    public ResultMap cancelOrder(Long id) {
+        Byte status = 3;
+        TncOrder tncOrder = tncOrderMapper.selectByPrimaryKey(id);
+        tncOrder.setStatus(status);
+        int res = tncOrderMapper.updateByPrimaryKey(tncOrder);
+        if (res>0){
+            return ResultMap.success("取消订单成功");
+        }else{
+            throw new CommonException("取消订单失败");
+        }
+    }
+
+    @Override
+    public ResultMap getOrder(Long id) {
+        TncOrder order = tncOrderMapper.selectByPrimaryKey(id);
+        if(order!=null){
+            return  ResultMap.success("获取订单成功").put("order",order);
+        }else{
+            throw new CommonException("获取订单失败");
         }
     }
 }

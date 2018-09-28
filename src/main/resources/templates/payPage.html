@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/css/payPage.css">
 </head>
 <body class="zc-body zc-pay" style="background-color:#f2f3f5;">
-<div class="container-fluid tnc_container tnc_header myPay">
+<div class="container-fluid tnc_container tnc_header">
     <div v-cloak id="header-app" class="row tnc_head"
          style="height:61px;background-color: #ffffff;border-bottom: 1px solid #e8e9ea">
         <div class="tnc_head_bd">
@@ -48,20 +48,21 @@
             </div>
         </div>
     </div>
+    <div class="mytotal" id="total">
     <div class="zc-card order-state-editable">
-        <div class="zc-card-inner myPayPage">
+        <div class="zc-card-inner myPayPage" v-cloak>
             <div class="zc-card-content layout">
                 <div class="layout-left">
                     <p><span class="zc-yellow order-state-title">等待支付</span>
-                        <a href="https://order.zuche.com/order/QueryOrderDetailControl.do?orderId=32012911"
-                           target="_blank" class="zc-blue order-detail-link">订单详情 &gt;</a></p>
+                        <a href="" class="zc-blue order-detail-link" id="orderDetail">订单详情 &gt;</a>
+                    </p>
                     <p class="zc-light-gray order-state-tip ltip">请在取车前完成租金支付，否则订单无法取车</p>
                 </div>
                 <div class="layout-right">
                     <div class="order-settlement-editable">
                         <p class="zc-gray order-settlement-txt"><span id="payItemShow"> 合计</span>
                             <span class="zc-yellow order-settlement-symbol">¥<i id="payMoneyShow"
-                                                                                class="order-settlement-money">12</i></span>
+                                                                                class="order-settlement-money">{{order_detail.order_detail.totalAmount}}</i></span>
                         </p>
                         <p class="zc-warn order-state-tip"></p>
                     </div>
@@ -72,7 +73,7 @@
     </div>
 
     <div class="zc-card zc-card-pay">
-        <div class="zc-card-inner payType">
+        <div class="zc-card-inner payType" v-cloak>
             <div class="zc-card-content">
 
                 <div class="pay-items">
@@ -86,7 +87,7 @@
                             <div class="layout-right">
                                 <span class="zc-light-gray">支付</span>
                                 <span class="zc-yellow money">¥<i id="otherCardSum"
-                                                                  class="money-number">12</i></span>
+                                                                  class="money-number">{{order_detail.order_detail.totalAmount}}</i></span>
                             </div>
                         </div>
                         <div class="pay-item-content">
@@ -119,6 +120,7 @@
 
             </div>
         </div>
+    </div>
     </div>
 </div>
 

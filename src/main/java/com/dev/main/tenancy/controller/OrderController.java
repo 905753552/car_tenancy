@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 //@GlobalExceptionResolver
 @RestController
-@RequestMapping("/tnc/order")
+@RequestMapping("/api/order")
 @GlobalExceptionResolver
 public class OrderController {
     @Autowired
@@ -51,8 +51,6 @@ public class OrderController {
     @RequiresUser
     public ResultMap getUserCoupons(){
         ResultMap resultMap = orderService.getCustomerCoupons();
-        System.out.println(resultMap.get("customer"));
-        System.out.println("---------");
         return resultMap;
     }
     @GetMapping("/updCusInfo")
@@ -69,6 +67,16 @@ public class OrderController {
     @RequiresUser
     public ResultMap savePay(@PathVariable("oid") Long id){
         return orderService.savePay(id);
+    }
+    @GetMapping("/cancel/{oid}")
+    @RequiresUser
+    public ResultMap cancelOrder(@PathVariable("oid") Long id){
+        return orderService.cancelOrder(id);
+    }
+    @GetMapping("/getOrder/{oid}")
+    @RequiresUser
+    public ResultMap getOrder(@PathVariable("oid") Long id){
+        return orderService.getOrder(id);
     }
 
 }
