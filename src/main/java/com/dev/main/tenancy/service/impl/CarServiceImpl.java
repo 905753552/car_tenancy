@@ -34,9 +34,9 @@ public class CarServiceImpl implements ICarService {
     private TncCarItemMapper tncCarItemMapper;
 
     @Override
-    public List<TncCarDataVo> listCarData(String storeName, Long Pid) {
-        Long id = tncStoreMapper.selectPrimaryKeyByName(storeName);
-
+    public List<TncCarDataVo> listCarData(Long storeId, Long Pid) {
+        //Long id = tncStoreMapper.selectPrimaryKeyByName(storeName);
+        Long id =storeId;
         //符合套餐的车型
         List<TncPriceScheme> carIds = tncPriceSchemeMapper.listCarIdByPid(Pid);
 
@@ -60,7 +60,7 @@ public class CarServiceImpl implements ICarService {
         for (int i = 0; i < a.size(); i++) {
             Long commId = Long.valueOf(((ArrayList) a).get(i).toString());
             if(tncCarItemMapper.countUnusedCar(commId)>0){
-                System.out.println("------有可用车辆------");
+               // System.out.println("------有可用车辆------");
                 for (int j = 0; j < carList.size(); j++) {
                     Long bid = carList.get(j).getBrandId();
                     Long cid = carList.get(j).getId();
@@ -94,9 +94,9 @@ public class CarServiceImpl implements ICarService {
 
         for (int i = 0; i < listVo.size(); i++) {
             Long lid = listVo.get(i).getCarId();
-            System.out.println("lid===" + lid);
+         //   System.out.println("lid===" + lid);
             for (int j = 0; j < carIds.size(); j++) {
-                System.out.println((carIds.get(j).getCarId()));
+               // System.out.println((carIds.get(j).getCarId()));
                 if (lid.equals(carIds.get(j).getCarId())) {
 //                    System.out.println("----------");
                     // System.out.println(carIds.get(j).getBasePrice());
@@ -109,7 +109,7 @@ public class CarServiceImpl implements ICarService {
         }
 
 
-        System.out.println(listVo);
+        //System.out.println(listVo);
         return listVo;
     }
 
@@ -140,7 +140,7 @@ public class CarServiceImpl implements ICarService {
         TncCar tncCar =  tncCarMapper.selectByPrimaryKey(id);
         rm.put("carDetail",tncCar);
         rm.put("carPic",tncCarPicMapper.listPathByCid(id));
-        System.out.println(rm);
+        //System.out.println(rm);
         return rm;
     }
 }

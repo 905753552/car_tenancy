@@ -23,7 +23,7 @@
         }
     </style>
 </head>
-<body>
+<body onbeforeunload="Sx()">
 <div class="container-fluid tnc_container tnc_header" v-cloak id="carInfoTab-app">
     <div class="row tnc_head">
         <div class="tnc_head_bd">
@@ -625,12 +625,13 @@
 
     function stickUp(){
         let windowWidth = $(this).width();
+        const footHeight =  $(".tnc_footer_background").height()+$(".tnc_footer_link").height()
+
         if (windowWidth < 1173) {
-            $(".tnc_lchoose_box").css("position", 'relative')
-            $(".tnc_lchoose_box").css("top",'0px')
+            $(".tnc_lchoose_box").css('position', 'relative')
+            $(".tnc_lchoose_box").css('top','0px')
         }else {
-            console.log("====")
-            $(".tnc_lchoose_box").css("position", 'fixed')
+            $(".tnc_lchoose_box").css('position', 'fixed')
             $(window).scroll(function () {
                 let y = 189 - window.scrollY;
                 if (y < 10) {
@@ -643,7 +644,7 @@
                 let div = "";
                 if ($(document).scrollTop() + 100 >= $(document).height() - $(window).height()) {
 
-                    y = -220
+                    y = $(this).height()-footHeight - 430
                     console.log(y)
                 }
 
@@ -655,7 +656,10 @@
     $(window).resize(function () {
         stickUp()
     })
+     function Sx() {
+       window.scrollTo(0,0)
 
+    };
     $(document).ready(function(){
         stickUp()
     });

@@ -13,11 +13,11 @@ import java.util.List;
 public interface ICarService {
     /**
      * 查询汽车信息
-     * @param storeName 门店名
+     * @param storeId 门店ID
      * @param Pid 套餐 ID
      * @return
      */
-    List<TncCarDataVo> listCarData(String storeName,Long Pid);
+    List<TncCarDataVo> listCarData(Long storeId,Long Pid);
 
     List<TncPackageScheme> listPackageScheme();
 

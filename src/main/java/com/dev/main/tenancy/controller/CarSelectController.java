@@ -34,7 +34,7 @@ public class CarSelectController {
 
     @PostMapping("/listCar")
     public ResultMap listCar(@RequestBody String data){
-        String cp = JSONObject.parseObject(data).get("carPlace").toString();
+        Long cp = Long.valueOf(JSONObject.parseObject(data).get("carPlace").toString());
         Long pid =Long.valueOf(JSONObject.parseObject(data).get("carPID").toString());
         ResultMap resultMap = new ResultMap();
         List<TncCarDataVo> li = iCarService.listCarData(cp, pid);
