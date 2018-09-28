@@ -43,4 +43,19 @@ public class PageController {
         return "headList";
     }
 
+    @GetMapping("/storesMap")
+    public String storesMapPage() {
+        return "storesMap";
+    }
+
+    @GetMapping("/myOrderList")
+    public String myOrderListPage() {
+        return "myOrderList";
+    }
+
+    @GetMapping("/personInfo")
+    public String personInfoPage() {
+        return "personInfo";
+    }
+
 }

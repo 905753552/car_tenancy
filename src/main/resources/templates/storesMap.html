@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>门店</title>
+    <style type="text/css">
+        body, html{width: 100%;height: 100%;margin:0;padding: 0px;}
+        #allmap {height: 800px;width:100%;overflow: hidden;}
+        #result {width:100%;font-size:12px;}
+        dl,dt,dd,ul,li{
+            margin:0;
+            padding:0;
+            list-style:none;
+            border-bottom: none !important;
+        }
+        dt{
+            font-size:14px;
+            font-family:"微软雅黑";
+            font-weight:bold;
+            border-bottom:1px dotted #000;
+            padding:5px 0 5px 5px;
+            margin:5px 0;
+        }
+        dd{
+            padding:5px 0 0 5px;
+        }
+        li{
+            line-height:28px;
+        }
+    </style>
+    <title>地址标识</title>
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fonts/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/index.css">
+
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script></head>
+<body>
+<div class="container-fluid tnc_container tnc_header">
+    <div v-cloak id="header-app" class="row tnc_head">
+        <div class="tnc_head_bd">
+            <div><a class="tnc_head_brand tnc_logo" href="/"></a></div>
+            <div class="tnc_head_menu" >
+                <ul class="">
+                    <li class="tnc_head_menu_item">
+                        <a class="" href="/">首页 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="tnc_head_menu_item">
+                        <a class="" href="/headList">选车</a>
+                    </li>
+                    <li class="tnc_head_menu_item">
+                        <a class="tnc_head_menu_active" href="#">门店</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tnc_head_right">
+                <div v-show="!customer.id" class="tnc_head_login tnc_header_active" style="display: none">
+                    <a href="login" class="">登录</a> / <a href="/register" class="">注册</a>
+                </div>
+                <div v-show="customer.id" class="tnc_head_login" >
+                    <h1 class="tnc_head_welcome">您好，{{customer.name}}</h1>
+                    <div id="tnc_toggle_area" class="tnc_head_dropdown">
+                        <a id="tnc_toggle_area_btn" href="#">个人中心&nbsp;<i class="fa fa-caret-down"></i></a>
+                        <div id="tnc_toggle_menu" style="display: none">
+                            <div class="triangle_border_up"></div>
+                            <div class="tnc_collapse_list" >
+                                <a href="#" class="bhpr reddot">我的订单</a>
+                                <a href="#">我的资产</a>
+                                <a href="#">我的账户</a>
+                                <a href="javascript:;" @click="logout">退出登录</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tnc_head_tel">
+                    <div class="">
+                            <span class="">
+                                <i class="fa fa-phone"></i>
+                                <span>408-666-666</span>
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2" style="padding: 0px;">
+            <div v-for=""></div>
+        </div>
+        <div class="col-md-10" style="padding: 0px;">
+            <div id="allmap"></div>
+        </div>
+    </div>
+    <div class="row tnc_footer_background">
+        <div class="col-sm-12 col-md-10 offset-md-1 tnc_footer_help">
+            <dl class="tnc_footer_help_item">
+                <dt>租车预订说明</dt>
+                <dd>
+                    <a target="_blank" href="#">服务时间</a>
+                    <a target="_blank" href="#">待租车况</a>
+                    <a target="_blank" href="#">服务预订</a>
+                    <a target="_blank" href="#">短租产品</a>
+                    <a target="_blank" href="#">租车资格</a>
+                    <a target="_blank" href="#">取还车说明</a>
+                </dd>
+            </dl>
+            <dl class="tnc_footer_help_item">
+                <dt>会员管理</dt>
+                <dd>
+                    <a target="_blank" href="#">会员章程</a>
+                    <a target="_blank" href="#">会员细则</a>
+                    <a target="_blank" href="#">定级积分</a>
+                </dd>
+            </dl>
+            <dl class="tnc_footer_help_item">
+                <dt>紧急事务处理</dt>
+                <dd>
+                    <a target="_blank" href="#">保险责任</a>
+                    <a target="_blank" href="#">理赔说明</a>
+                    <a target="_blank" href="#">事故处理</a>
+                    <a target="_blank" href="#">救援及备用车</a>
+                </dd>
+            </dl>
+            <dl class="tnc_footer_help_item">
+                <dt>租车费用及结算</dt>
+                <dd>
+                    <a target="_blank" href="#">价格说明</a>
+                    <a target="_blank" href="#">结算流程</a>
+                    <a target="_blank" href="#">储值卡</a>
+                    <a target="_blank" href="#">积分</a>
+                </dd>
+            </dl>
+            <dl class="tnc_footer_help_item">
+                <dt>帮助中心</dt>
+                <dd>
+                    <a target="_blank" href="#">常见问题</a>
+                    <a target="_blank" href="#">新手上路</a>
+                    <a target="_blank" href="#">服务规则 </a>
+                </dd>
+            </dl>
+            </dl>
+        </div>
+    </div>
+    <div class="row tnc_footer_link" style="background-color: #1b2b3b;">
+        <div class="col col-10 offset-md-1 tnc_fri_link">
+            <span style="margin-bottom: 10px;display: block;">友情链接:</span>
+            <div class="tnc_fri_list">
+                <a href="http://www.maimaiche.com/cn/" target="_blank">神州买买车</a>
+                <a href="http://www.carbank.cn/" target="_blank">神州闪贷</a>
+                <a href="http://bj.tuniu.com" target="_blank">北粤旅游网</a>
+                <a href="http://z.mafengwo.cn" target="_blank">旅游指南</a>
+                <a href="http://www.ynet.com/" target="_blank">北青网</a>
+                <a href="http://wan.cncn.com/" target="_blank">欣欣旅游商城</a>
+                <a href="http://www.mianfeiwucan.org/" target="_blank">免费午餐网</a>
+                <a href="http://www.city8.com" target="_blank">中国街景地图</a>
+                <a href="http://www.ctcnn.com" target="_blank">劲旅网</a>
+                <a href="http://www.fhlyou.com" target="_blank">凤凰古城</a>
+                <a href="http://www.taoche.com" target="_blank">二手车交易</a>
+                <a href="http://www.ilvping.com" target="_blank">旅评网</a>
+                <a href="http://www.lavago.com" target="_blank">拉拉勾旅游网</a>
+                <a href="http://www.caissa.com.cn" target="_blank">凯撒旅游网</a>
+                <a href="http://www.17u.cn" target="_blank">同程网</a>
+                <a href="http://travel.sina.com.cn" target="_blank">新浪旅游</a>
+                <a href="http://www.ufenghuang.com" target="_blank">游凤凰网</a>
+                <a href="http://www.cits.cn/" target="_blank">国旅在线</a>
+                <a href="http://www.qyer.com/" target="_blank">穷游出境游</a>
+                <a href="http://www.jdair.net/" target="_blank">首都航空</a>
+            </div>
+        </div>
+        <div class="col col-10 offset-md-1 tnc_about_link">
+            <a title="关于我们" href="https://huodong.zuche.com/gywm/" rel="nofollow">关于我们</a>
+            <a title="投资者关系" target="_blank" href="https://ir.zuche.com" rel="nofollow">投资者关系</a>
+            <a target="_parent" title="新闻中心" href="https://news.zuche.com/">新闻中心</a>
+            <a title="加盟合作" target="_blank" href="https://jiameng.zuche.com">加盟合作</a>
+            <a title="隐私保护" target="_parent" href="https://huodong.zuche.com/ysbh/" rel="nofollow">隐私保护</a>
+            <a title="网站导航" target="_parent" href="https://help.zuche.com/sitemap/">网站导航</a>
+            <a title="联系我们" target="_parent" href="https://huodong.zuche.com/lxwm/" rel="nofollow">联系我们</a>
+            <a title="招贤纳士" target="_blank" href="http://hr.ucarinc.com/" rel="nofollow">招贤纳士</a>
+            <a target="_blank" href="https://en.zuche.com" class="eng_wz">English<i class="eng_icon"></i></a>
+        </div>
+        <div class="col col-10 offset-md-1 tnc_copyright">
+            <span class="">Copyright©20xx-20xx www.wind.zuche.com All Rights Reserved.　肇庆乘风汽车租赁有限公司 粤ICP备10000518号   粤公网安备号 11010502020518</span>
+            <span class="">如果您对乘风租车网站有任何意见，欢迎发送邮件到 <a href="Mailto:web@wind.com" class="">web@wind.com</a></span>
+            <span class="">
+                    <a target="_blank" href="https://ss.knet.cn/verifyseal.dll?sn=2011091400100014977&amp;ct=df&amp;pa=294005" rel="nofollow" tabindex="-1" id="urlknet" class="sz_k"></a>
+                    <a target="_blank" id="___szfw_logo___" href="https://search.szfw.org/cert/l/CX20121016001772002081" rel="nofollow" title="诚信网站" class="sz_c"></a>
+                </span>
+        </div>
+    </div>
+</div>
+</div>
+    <!--<div id="result">
+        <input type="button" value="默认样式" onclick="searchInfoWindow.open(marker);"/>
+        <input type="button" value="样式1" onclick="openInfoWindow1()"/>
+        <input type="button" value="样式2" onclick="openInfoWindow2()"/>
+        <input type="button" value="样式3" onclick="openInfoWindow3()"/>
+    </div>-->
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/layui-v2.4.3/lay/modules/layer.js"></script>
+    <script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+    <script src="/vue-2.5.17/vue.min.js"></script>
+    <script src="/js/common/common.js"></script>
+    <script src="/js/tenancy/header.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/getscript?v=2.0&ak=DD279b2a90afdf0ae7a3796787a0742e"></script>
+    <!--<script type="text/javascript" src="http://api.map.baidu.com/getscript?v=3.0&ak=4IU3oIAMpZhfWZsMu7xzqBBAf6vMHcoa"></script>-->
+    <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+    <script type="text/javascript">
+        // 初始化坐标
+        let lng = 113.2708136740;
+        let lat = 23.1351666766;
+        let stores = [];
+
+        let geolocation = new BMap.Geolocation();
+        geolocation.getCurrentPosition(function(r){
+            if(this.getStatus() == BMAP_STATUS_SUCCESS){
+                lng = r.point.lng;
+                lat = r.point.lat;
+                map.panTo(r.point);
+            }
+            else {
+                console.error('failed：'+this.getStatus());
+            }
+        },{enableHighAccuracy: true})
+
+        // 百度地图API功能
+        let map = new BMap.Map('allmap');
+        let poi = new BMap.Point(lng, lat);
+        map.centerAndZoom(poi, 10);
+        map.enableScrollWheelZoom();
+        map.addEventListener("click",function(e){
+            console.log(e.point.lng + "," + e.point.lat);
+        });
+        function loadStores() {
+            $.ajax({
+                url: '/api/store/vo',
+                success: (res)=>{
+                    if(res.code == 0) {
+                        stores = res.data;
+
+                        for(let i=0;i < stores.length; i++) {
+                            let item = stores[i];
+                            let content = '<div style="margin:0;line-height:20px;padding:2px;">' +
+                                '<img src="/img/car_icon.jpg" alt="" style="float:right;zoom:1;overflow:hidden;width:95px;height:95px;margin-left:3px;"/>' +
+                                '地址：'+item.province+item.city+item.area+item.detail+'<br/>电话：'+item.serviceTel +
+                                '</div>';
+
+                            //创建检索信息窗口对象
+                            let searchInfoWindow = null;
+                            searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
+                                title  : item.name,      //标题
+                                width  : 290,             //宽度
+                                height : 105,              //高度
+                                panel  : "panel",         //检索结果面板
+                                enableAutoPan : true,     //自动平移
+                                searchTypes   :[
+                                    BMAPLIB_TAB_SEARCH,   //周边检索
+                                    BMAPLIB_TAB_TO_HERE,  //到这里去
+                                    BMAPLIB_TAB_FROM_HERE //从这里出发
+                                ]
+                            });
+                            let poi = new BMap.Point(item.longitude, item.latitude);
+                            let marker = new BMap.Marker(poi); //创建marker对象
+                            marker.addEventListener("click", function(e){
+                                searchInfoWindow.open(marker);
+                            });
+                            map.addOverlay(marker); //在地图中添加marker
+                        }
+                    } else {
+                        handleAjax(res);
+                    }
+                }
+            })
+        }
+
+        loadStores();
+
+    </script>
+</body>
+</html>

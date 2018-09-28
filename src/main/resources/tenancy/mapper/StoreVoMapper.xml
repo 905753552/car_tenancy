@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dev.main.tenancy.dao.StoreVoMapper" >
+    <resultMap id="BaseResultMap" type="com.dev.main.tenancy.vo.TncStoreVo" >
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="service_tel" property="serviceTel" jdbcType="VARCHAR" />
+        <result column="province" property="province" jdbcType="VARCHAR" />
+        <result column="city" property="city" jdbcType="VARCHAR" />
+        <result column="detail" property="detail" jdbcType="VARCHAR" />
+        <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+        <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="findStores" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select s.name `name`, s.service_tel `service_tel`,rp.name `province`, rc.name `city`, ra.name `area`, a.detail `detail`, a.longitude `longitude`, a.latitude `latitude`
+        from tnc_store s
+        join tnc_address a on s.addr_id = a.id
+        join address_region rp on rp.id = a.province_id
+        join address_region rc on rc.id = a.city_id
+        join address_region ra on ra.id = a.area_id
+        and s.status = 1 and s.is_deleted = 0
+    </select>
+
+</mapper>
