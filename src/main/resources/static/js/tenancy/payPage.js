@@ -11,6 +11,7 @@ var orderDetail = new Vue({
     },
     methods:{
         savePay:function(){
+            console.log(123);
             savePay();
 		},
         initialize:function(){
@@ -44,27 +45,33 @@ var orderDetail = new Vue({
 //     window.location.href="/tenancy/p/myOrder?"+data;
 // }
 function savePay(){
-    console.log(orderDetail.order_detail.order_detail.id);
-    $.ajax({
-        type: "GET",
-        url: "/api/order/pay/"+orderDetail.order_detail.order_detail.id,
-        dataType:'json',
-        success: function(res) {
-           if(res.code == 0) {
-               orderDetail.order_detail.order_detail = res.order;
-               var data = {
-                   car_info:orderDetail.order_detail.car_info,
-                   order_detail:orderDetail.order_detail.order_detail,
-                   car_number:res.carItem.number,
-                   days:orderDetail.order_detail.days
-               }
-               var order = encodeURIComponent(JSON.stringify(data));
-               window.location.href = '/tenancy/p/paySuccess?'+order;
-           } else {
-               handleAjax(res);
-           }
-        }
-    })
+    if($(".paymentTabUl").find("#p_alipay").hasClass("checked")
+        ||$(".paymentTabUl").find("#WECHAT").hasClass("checked")) {
+        $.ajax({
+            type: "GET",
+            url: "/api/order/pay/" + orderDetail.order_detail.order_detail.id,
+            dataType: 'json',
+            success: function (res) {
+                if (res.code == 0) {
+                    // 支付完成要删除id的cookie
+                    $.cookie("id", "", {expires: -1});
+                    orderDetail.order_detail.order_detail = res.order;
+                    var data = {
+                        car_info: orderDetail.order_detail.car_info,
+                        order_detail: orderDetail.order_detail.order_detail,
+                        car_number: res.carItem.number,
+                        days: orderDetail.order_detail.days
+                    }
+                    var order = encodeURIComponent(JSON.stringify(data));
+                    window.location.href = '/tenancy/p/paySuccess?' + order;
+                } else {
+                    handleAjax(res);
+                }
+            }
+        })
+    }else{
+        layer.msg("请选择一种支付方式！",{time:1200},function(){});
+    }
 }
 function initialize(self){
     console.log(self.order_detail.order_detail);
@@ -73,12 +80,13 @@ function initialize(self){
         url: "/api/order/getOrder/"+self.order_detail.order_detail,
         dataType:'json',
         success: function(res) {
-            self.order_detail.order_detail = res.order;
-            console.log(self.order_detail);
-            console.log("获取订单成功");
-        },
-        error:function (res) {
-            console.log("请求出错，错误："+res);
+            if(res.code == 0){
+                self.order_detail.order_detail = res.order;
+                console.log(self.order_detail);
+                console.log("获取订单成功");
+            }else{
+                handleAjax(res);
+            }
         }
     })
 }
@@ -94,7 +102,7 @@ $(document).ready(function(){
                     }
                 })
 })
-    $("#orderDetail").click(function(){
+$("#orderDetail").click(function(){
         orderDetail.order_detail.order_detail = orderDetail.order_detail.order_detail.id;
         var data = {
             order_detail:orderDetail.order_detail,

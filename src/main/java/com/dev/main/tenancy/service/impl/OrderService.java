@@ -145,4 +145,15 @@ public class OrderService implements IOrderService {
             throw new CommonException("获取订单失败");
         }
     }
+
+    @Override
+    public ResultMap updateOrder(TncOrder tncOrder) {
+        int res = tncOrderMapper.updateByPrimaryKeySelective(tncOrder);
+        if(res>0){
+            TncOrder tncOrder1 = tncOrderMapper.selectByPrimaryKey(tncOrder.getId());
+            return ResultMap.success("获取订单成功").put("order",tncOrder1);
+        }else{
+            throw new CommonException("获取订单失败");
+        }
+    }
 }

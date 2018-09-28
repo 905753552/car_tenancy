@@ -30,4 +30,6 @@ public interface IOrderService {
 
     ResultMap getOrder(Long id);
 
+    ResultMap updateOrder(TncOrder tncOrder);
+
 }

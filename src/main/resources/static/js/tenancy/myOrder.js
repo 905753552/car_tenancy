@@ -22,6 +22,15 @@ var orderDetail = new Vue({
         },
         showModel:function(){
             showModel(this);
+        },
+        cancelOrder:function(){
+            cancelOrder();
+        },
+        gotoOrderCenter:function(){
+            gotoOrderCenter();
+        },
+        updateOrder:function(){
+            updateOrder();
         }
     }
 });
@@ -49,22 +58,6 @@ $(document).ready(function() {
 			$(".cffade").hide()
 		})
     })
-    $('#orderCancel').click(function(){
-        layer.confirm('确定要取消订单？', function(index){
-            $.ajax({
-                type: "GET",
-                url: "/api/order/cancel/"+orderDetail.order_detail.order_detail.id,
-                dataType:'json',
-                success: function(res) {
-                    $('#orderDetails .colorBlue').text("已取消");
-                },
-                error:function (res) {
-                    console.log("请求出错，错误："+res);
-                }
-            })
-        });
-
-    })
 function readDesc(text){
     var data={},KeyAndName;
     var item = text.split(";");
@@ -88,11 +81,12 @@ function initialize(self){
         url: "/api/order/getOrder/"+self.order_detail.order_detail,
         dataType:'json',
         success: function(res) {
-            self.order_detail.order_detail = res.order;
-            console.log("获取订单成功");
-        },
-        error:function (res) {
-            console.log("请求出错，错误："+res);
+            if(res.code == 0){
+                self.order_detail.order_detail = res.order;
+                console.log("获取订单成功");
+            }else{
+                handleAjax(res);
+            }
         }
     })
 }
@@ -112,5 +106,41 @@ function goToPay(){
     var data = orderDetail.order_detail;
     var order_data = encodeURIComponent(JSON.stringify(data));
     window.location.href = '/tenancy/p/payPage?'+order_data;
+}
+function cancelOrder(){
+    layer.confirm('确定要取消订单？', function(index){
+        $.ajax({
+            type: "GET",
+            url: "/api/order/cancel/"+orderDetail.order_detail.order_detail.id,
+            dataType:'json',
+            success: function(res) {
+                if(res.code == 0){
+                    layer.close(index);
+                    //取消订单要删除id的cookie
+                    $.cookie("id","",{expires:-1});
+                    layer.msg(res.msg,{time:1200},function(){
+                        orderDetail.order_detail.order_detail = orderDetail.order_detail.order_detail.id;
+                        var data = {
+                            order_detail:orderDetail.order_detail,
+                            index:'myOrder'
+                        }
+                        var order = encodeURIComponent(JSON.stringify(data));
+                        window.location.href="/tenancy/p/myOrder?"+order;
+                    });
+                }
+                else{
+                    handleAjax(res);
+                }
+            }
+        })
+    });
+}
+function gotoOrderCenter(){
+    window.location.href = '/tenancy/p/myOrderList';
+}
+function updateOrder(){
+    // 将订单id存放在cookie中
+    $.cookie('id', JSON.stringify(orderDetail.order_detail.order_detail.id));
+    window.location.href = '/tenancy/p/headList';
 }
 

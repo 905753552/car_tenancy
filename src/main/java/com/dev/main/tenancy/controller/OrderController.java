@@ -61,7 +61,11 @@ public class OrderController {
     @GetMapping("/submitOrder")
     @RequiresUser
     public ResultMap beginReserve(TncOrder tncOrder){
-        return orderService.insertOrder(tncOrder);
+        if(tncOrder.getId()==null){
+            return orderService.insertOrder(tncOrder);
+        }else {
+            return orderService.updateOrder(tncOrder);
+        }
     }
     @GetMapping("/pay/{oid}")
     @RequiresUser
