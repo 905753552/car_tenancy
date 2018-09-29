@@ -28,6 +28,8 @@ const param = {
         description:'',
         coupon:0,
         order_detail:{
+            // 主键
+            id:'',
             // 姓名
             name:'',
             // 证件类型 1-身份证 2-台湾居民来往大陆通行证 3-港澳居民来往内地通行
@@ -106,6 +108,11 @@ var orderDetail = new Vue({
     created:function(){
         var self = this;
         param.order = JSON.parse(decodeURIComponent(window.location.search.slice(1)));
+        var id = $.cookie('id');
+        if(id != null){
+            var data = JSON.parse(id);
+            param.base_info.order_detail.id = data;
+        }
         self.getCarInfo();
         self.getPSchemeAndPName();
         self.getCustomerInfo();
@@ -176,43 +183,37 @@ var modifyModel = new Vue({
 function getCarInfo(self){
     $.ajax({
         type:'get',
-        url:'/tnc/order/car/'+param.order.carId,
+        url:'/api/order/car/'+param.order.carId,
         async: false,
         dataType:'json',
-        success:function(result){
-            if(result.code==0) {
-                self.carInfo = result.car;
-                param.base_info.car_info = result.car;
+        success:function(res){
+            if(res.code==0) {
+                self.carInfo = res.car;
+                param.base_info.car_info = res.car;
                 console.log("获取车辆信息成功");
             }
-            else
-                console.log("获取车辆信息失败");
-            // console.log(result);
-        },
-        error:function(msg){
-            console.log(msg);
+            else{
+                handleAjax(res);
+            }
         }
     })
 }
 function getPSchemeAndPName(self){
     $.ajax({
         type:'get',
-        url:'/tnc/order/pSchemeAndPName/'+param.order.priceId,
+        url:'/api/order/pSchemeAndPName/'+param.order.priceId,
         async: false,
         dataType:'json',
-        success:function(result){
-            if(result.code==0) {
-                self.priceSchemeInfo = result.priceScheme;
-                param.base_info.order_detail.packageName = result.packageScheme.name;
+        success:function(res){
+            if(res.code==0) {
+                self.priceSchemeInfo = res.priceScheme;
+                param.base_info.order_detail.packageName = res.packageScheme.name;
                 self.setBaseParam();
                 console.log("获取价格方案成功");
             }
-            else
-                console.log("获取价格方案失败");
-            // console.log(result);
-        },
-        error:function(msg){
-            console.log(msg);
+            else{
+                handleAjax(res);
+            }
         }
     })
 }
@@ -220,26 +221,22 @@ function getPSchemeAndPName(self){
 function getCustomerInfo(self){
     $.ajax({
         type:'get',
-        url:'/tnc/order/customer',
+        url:'/api/order/customer',
         //async: false,
         dataType:'json',
-        success:function(result){
-            if(result.code==0) {
-                self.coupons = result.list;
-                self.customerInfo = result.customer;
-                self.phoneCopy = result.customer.phone.substr(0,3)+'*****'+result.customer.phone.substr(7,11);
-                for(var i=0;i<result.list.length;i++){
-                    self.coupons[i].beginDate = result.list[i].beginDate.substr(0,10);
-                    self.coupons[i].endDate = result.list[i].endDate.substr(0,10);
+        success:function(res){
+            if(res.code==0) {
+                self.coupons = res.list;
+                self.customerInfo = res.customer;
+                self.phoneCopy = res.customer.phone.substr(0,3)+'*****'+res.customer.phone.substr(7,11);
+                for(var i=0;i<res.list.length;i++){
+                    self.coupons[i].beginDate = res.list[i].beginDate.substr(0,10);
+                    self.coupons[i].endDate = res.list[i].endDate.substr(0,10);
                 }
-                console.log("获取用户优惠券成功");
             }
-            else
-                console.log("获取用户优惠券失败");
-            // console.log(result);
-        },
-        error:function(msg){
-            console.log(msg);
+            else{
+                handleAjax(res);
+            }
         }
     })
 }
@@ -262,9 +259,9 @@ function setBaseParam(self){
     foreginCost();
     //计算超时服务费
     overtimeCost(self.priceSchemeInfo.baseHourPrice);
-    param.base_info.deposit = self.priceSchemeInfo.deposit;
     //计算其他费用
     otherCost();
+    param.base_info.deposit = self.priceSchemeInfo.deposit;
     param.base_info.order_price_sum = param.base_info.discount_total_base
                                        + param.base_info.discount_total_service
                                        + param.base_info.other_cost
@@ -311,7 +308,7 @@ function setOrderDetails(){
         // 折扣, 0<折扣<=1, 默认为1
         param.base_info.order_detail.discount = orderDetail.priceSchemeInfo.discount;
         // 已收押金
-        param.base_info.order_detail.deposit = param.base_info.deposit;
+        param.base_info.order_detail.deposit = 0;
         // 退还押金
         param.base_info.order_detail.returnDeposit = 0;
         // 是否已退押 0-未退 1-已退
@@ -338,19 +335,17 @@ function getCarAddress(){
     var getcaraddress;
     $.ajax({
         type:'get',
-        url:'/tnc/order/storeAddress/'+param.order.getCarPlaceId,
+        url:'/api/order/storeAddress/'+param.order.getCarPlaceId,
         async: false,
         dataType:'json',
-        success:function(result){
-            if(result.code==0) {
-                param.base_info.getCity = result.storeAddress.city.name;
-                getcaraddress =  result.storeAddress;
+        success:function(res){
+            if(res.code==0) {
+                param.base_info.getCity = res.storeAddress.city.name;
+                getcaraddress =  res.storeAddress;
             }
-            else
-                console.log("获取信息失败");
-        },
-        error:function(msg){
-            console.log(msg);
+            else{
+                handleAjax(res);
+            }
         }
     })
     return getcaraddress;
@@ -360,19 +355,17 @@ function returnCarAddress(){
     var returncaraddress;
     $.ajax({
         type:'get',
-        url:'/tnc/order/storeAddress/'+param.order.returnCarPlaceId,
+        url:'/api/order/storeAddress/'+param.order.returnCarPlaceId,
         async: false,
         dataType:'json',
-        success:function(result){
-            if(result.code==0) {
-                param.base_info.returnCity = result.storeAddress.city.name;
-                returncaraddress = result.storeAddress;
+        success:function(res){
+            if(res.code==0) {
+                param.base_info.returnCity = res.storeAddress.city.name;
+                returncaraddress = res.storeAddress;
             }
-            else
-                console.log("获取信息失败");
-        },
-        error:function(msg){
-            console.log(msg);
+            else{
+                handleAjax(res);
+            }
         }
     })
     return returncaraddress;
@@ -720,12 +713,11 @@ function getPhoneCode(){
             contentType: 'application/json',
             dataType: 'json',
             success: function (res) {
-                if (res.code == 0)
-                    flag = true,
-                    console.log("发送成功")
-            },
-            error: function (res) {
-                console.log("请求出错，错误：" + res.msg);
+                if (res.code == 0){
+                    flag = true;
+                }else{
+                    handleAjax(res);
+                }
             }
         });
     return flag;
@@ -782,7 +774,7 @@ function updateCustomerInfo(){
         email = $('#memberEmail').val();
     $.ajax({
         type:'get',
-        url:'/tnc/order/updCusInfo',
+        url:'/api/order/updCusInfo',
         data:{
             name:name,
             idCard:idCard,
@@ -790,19 +782,15 @@ function updateCustomerInfo(){
         },
         async: false,
         dataType:'json',
-        success:function(result){
-            if(result.code==0) {
+        success:function(res){
+            if(res.code==0) {
                 orderDetail.customerInfo.name = name;
                 orderDetail.customerInfo.email = email;
                 orderDetail.customerInfo.idCard = idCard;
-                console.log("修改顾客信息成功");
             }
-            else
-                console.log("修改顾客信息失败");
-            // console.log(result);
-        },
-        error:function(msg){
-            console.log(msg);
+            else{
+                handleAjax(res);
+            }
         }
     })
 
@@ -812,26 +800,22 @@ function updatePhoneInfo(){
     var phone = $("#newTel").val();
     $.ajax({
         type:'get',
-        url:'/tnc/order/updCusInfo',
+        url:'/api/order/updCusInfo',
         data:{
             phone:phone
         },
         async: false,
         dataType:'json',
-        success:function(result){
-            if(result.code==0) {
+        success:function(res){
+            if(res.code==0) {
                 orderDetail.phoneCopy = phone.substr(0,3)+'*****'+phone.substr(7,11);
                 orderDetail.customerInfo.phone = phone;
                 $('#modifyModel').modal('hide');
                 layer.msg("修改成功",{time:2000});
-                console.log("修改手机号成功");
             }
-            else
-                console.log("修改手机号失败");
-            // console.log(result);
-        },
-        error:function(msg){
-            console.log(msg);
+            else{
+                handleAjax(res);
+            }
         }
     })
 
@@ -845,13 +829,13 @@ function verifyPhoneCode(phoneCode,phone){
         dataType:'json',
         async:false,
         success: function(res) {
-            if(res.code!=0)
-            //提示手机验证码出错
+            if(res.code!=0){
+                //提示手机验证码出错
                 $("#mverifyid").text("手机验证码错误"),
                     $("#mverifyid").parents(".order-errorboxred").css("display", "block");
-        },
-        error:function (res) {
-            console.log("请求出错，错误："+res);
+            }else{
+                handleAjax(res);
+            }
         }
     })
 }
@@ -864,22 +848,21 @@ function send_VerifyCode(code){
         dataType:'json',
         async:false,
         success: function(res) {
-            if(res.code!=0)
+            if(res.code!=0){
                 //提示验证码出错
                 $("#myzm").text("验证码错误"),
                     $("#myzm").parents(".order-errorboxred").css("display", "block"),
                     //改变图片验证码
                     changeImageVerifyCode();
-        },
-        error:function (res) {
-            console.log("请求出错，错误："+res);
+            }else{
+                handleAjax(res);
+            }
         }
     })
 }
 // 提交订单
 function submitOrder(){
     var hasForm = $('.memberInfo').css('display');
-
     if(typeof hasForm != 'undefined'){
         checkMemberFormName();
         if ($("#nameInfo").parents(".order-errorbox").css('display') == 'none') {
@@ -894,19 +877,23 @@ function submitOrder(){
                     console.log(param.base_info.order_detail)
                     $.ajax({
                         type: "GET",
-                        url: "/tnc/order/submitOrder",
+                        url: "/api/order/submitOrder",
                         data:param.base_info.order_detail,
                         contentType:'application/json',
                         dataType:'json',
                         async:false,
                         success: function(res) {
-                            param.base_info.order_detail = res.order;
-                            console.log(res.order);
-                            var data = encodeURIComponent(JSON.stringify(param.base_info));
-                            window.location.href = '/tenancy/p/myOrder?'+data;
-                        },
-                        error:function (res) {
-                            console.log("请求出错，错误："+res);
+                            if(res.code == 0){
+                                param.base_info.order_detail = res.order.id;
+                                var data = {
+                                    order_detail:param.base_info,
+                                    index:'beginReserve'
+                                }
+                                var order = encodeURIComponent(JSON.stringify(data));
+                                window.location.href = '/tenancy/p/myOrder?'+order;
+                            }else{
+                                handleAjax(res);
+                            }
                         }
                     })
                 } else {
@@ -925,19 +912,23 @@ function submitOrder(){
         console.log(param.base_info.order_detail);
         $.ajax({
             type: "GET",
-            url: "/tnc/order/submitOrder",
+            url: "/api/order/submitOrder",
             data:param.base_info.order_detail,
             contentType:'application/json',
             dataType:'json',
             async:false,
             success: function(res) {
-                param.base_info.order_detail = res.order;
-                console.log(res.order);
-                var data = encodeURIComponent(JSON.stringify(param.base_info));
-                window.location.href = '/tenancy/p/myOrder?'+data;
-            },
-            error:function (res) {
-                console.log("请求出错，错误："+res);
+                if(res.code == 0){
+                    param.base_info.order_detail = res.order.id;
+                    var data = {
+                        order_detail:param.base_info,
+                        index:'beginReserve'
+                    }
+                    var order = encodeURIComponent(JSON.stringify(data));
+                    window.location.href = '/tenancy/p/myOrder?'+order;
+                }else{
+                    handleAjax(res);
+                }
             }
         })
     }
@@ -1005,64 +996,6 @@ function checkStr(str) {
             break
         }
     return flag
-}
-
-function checkIDCard(idcard) {
-    idcard = idcard.toUpperCase();
-    var Y, JYM, S, M, area = {
-        11: "北京",
-        12: "天津",
-        13: "河北",
-        14: "山西",
-        15: "内蒙古",
-        21: "辽宁",
-        22: "吉林",
-        23: "黑龙江",
-        31: "上海",
-        32: "江苏",
-        33: "浙江",
-        34: "安徽",
-        35: "福建",
-        36: "江西",
-        37: "山东",
-        41: "河南",
-        42: "湖北",
-        43: "湖南",
-        44: "广东",
-        45: "广西",
-        46: "海南",
-        50: "重庆",
-        51: "四川",
-        52: "贵州",
-        53: "云南",
-        54: "西藏",
-        61: "陕西",
-        62: "甘肃",
-        63: "青海",
-        64: "宁夏",
-        65: "新疆",
-        71: "台湾",
-        81: "香港",
-        82: "澳门"
-    }, idcard_array = [];
-    if (idcard_array = idcard.split(""),
-        !area[parseInt(idcard.substr(0, 2))])
-        return 1;
-    switch (idcard.length) {
-        case 15:
-            return (parseInt(idcard.substr(6, 2)) + 1900) % 4 == "0" || (parseInt(idcard.substr(6, 2)) + 1900) % 100 == "0" && (parseInt(idcard.substr(6, 2)) + 1900) % 4 == "0" ? ereg = /^[1-9][0-9]{5}[0-9]{2}((01|03|05|07|08|10|12)(0[1-9]|[1-2][0-9]|3[0-1])|(04|06|09|11)(0[1-9]|[1-2][0-9]|30)|02(0[1-9]|[1-2][0-9]))[0-9]{3}$/ : ereg = /^[1-9][0-9]{5}[0-9]{2}((01|03|05|07|08|10|12)(0[1-9]|[1-2][0-9]|3[0-1])|(04|06|09|11)(0[1-9]|[1-2][0-9]|30)|02(0[1-9]|1[0-9]|2[0-8]))[0-9]{3}$/,
-                ereg.test(idcard) ? 0 : 1;
-        case 18:
-            return parseInt(idcard.substr(6, 4)) % 4 == "0" || parseInt(idcard.substr(6, 4)) % 100 == "0" && parseInt(idcard.substr(6, 4)) % 4 == "0" ? ereg = /^[1-9][0-9]{5}19[0-9]{2}((01|03|05|07|08|10|12)(0[1-9]|[1-2][0-9]|3[0-1])|(04|06|09|11)(0[1-9]|[1-2][0-9]|30)|02(0[1-9]|[1-2][0-9]))[0-9]{3}[0-9Xx]$/ : ereg = /^[1-9][0-9]{5}19[0-9]{2}((01|03|05|07|08|10|12)(0[1-9]|[1-2][0-9]|3[0-1])|(04|06|09|11)(0[1-9]|[1-2][0-9]|30)|02(0[1-9]|1[0-9]|2[0-8]))[0-9]{3}[0-9Xx]$/,
-                ereg.test(idcard) ? (S = 7 * (parseInt(idcard_array[0]) + parseInt(idcard_array[10])) + 9 * (parseInt(idcard_array[1]) + parseInt(idcard_array[11])) + 10 * (parseInt(idcard_array[2]) + parseInt(idcard_array[12])) + 5 * (parseInt(idcard_array[3]) + parseInt(idcard_array[13])) + 8 * (parseInt(idcard_array[4]) + parseInt(idcard_array[14])) + 4 * (parseInt(idcard_array[5]) + parseInt(idcard_array[15])) + 2 * (parseInt(idcard_array[6]) + parseInt(idcard_array[16])) + 1 * parseInt(idcard_array[7]) + 6 * parseInt(idcard_array[8]) + 3 * parseInt(idcard_array[9]),
-                    Y = S % 11,
-                    M = "F",
-                    JYM = "10X98765432",
-                    M = JYM.substr(Y, 1),
-                    M == idcard_array[17] ? 0 : 1) : 1;
-        default:
-            return 1
-    }
 }
 $(document).ready(function(){
     $("#coupons li").each(function(i) {

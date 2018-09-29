@@ -43,6 +43,15 @@
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="carItemResultMap" type="com.dev.main.tenancy.domain.TncCarItem" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="car_id" property="carId" jdbcType="BIGINT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
   <sql id="Base_Column_List" >
     id, name, credentials_type, credentials_number, email, phone, total_amount, order_amount, 
     base_amount, service_amount, other_amount, coupon_id, description, discount, deposit, 
@@ -409,4 +418,13 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <sql id="carItem_Column_List" >
+    id, number, status, car_id, is_deleted, gmt_create, gmt_modified
+  </sql>
+  <select id="selectCarItemByPrimaryKey" resultMap="carItemResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="carItem_Column_List" />
+    from tnc_car_item
+    where id = #{id,jdbcType=BIGINT}
+  </select>
 </mapper>

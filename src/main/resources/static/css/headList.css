@@ -85,6 +85,10 @@
     background: url(../img/input_down.png) no-repeat center right;
 }
 
+.tnc_input_citySD2 {
+    background: url(../img/input_up.png) no-repeat center right;
+}
+
 .tnc_input_text {
     border-radius: 0;
     padding: 10px 10px;

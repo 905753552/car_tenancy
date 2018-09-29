@@ -1,5 +1,6 @@
 package com.dev.main.tenancy.dao;
 
+import com.dev.main.tenancy.domain.TncCarItem;
 import com.dev.main.tenancy.domain.TncCoupon;
 import com.dev.main.tenancy.domain.TncCustomer;
 import com.dev.main.tenancy.domain.TncOrder;
@@ -22,4 +23,6 @@ public interface TncOrderMapper {
     List<TncCoupon> selectCouponsByCid(Long id);
 
     int updateCustomerInfo(TncCustomer tncCustomer);
+
+    List<TncCarItem> selectCarItemByPrimaryKey(Long id);
 }
