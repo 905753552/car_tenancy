@@ -1,12 +1,9 @@
 package com.dev.main.tenancy.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.dev.main.common.util.JsonUtils;
 import com.dev.main.common.util.ResultMap;
-import com.dev.main.tenancy.dao.TncBrandMapper;
-import com.dev.main.tenancy.dao.TncPackageSchemeMapper;
 import com.dev.main.tenancy.domain.TncBrand;
-import com.dev.main.tenancy.domain.TncCarDataVo;
+import com.dev.main.tenancy.vo.TncCarDataVo;
 import com.dev.main.tenancy.domain.TncPackageScheme;
 import com.dev.main.tenancy.service.ICarService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -259,7 +259,7 @@ dev_sort_btn .nav-link2{
 .price-lo{
     text-align: center;
 }
-img:hover{
+.pic img:hover{
     animation-delay: 3s;
     width: 245px;
     height: 145px;

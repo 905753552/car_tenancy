@@ -1,3 +1,4 @@
+// bian288640卡密：dubanzz
 var carHandleData
 var lastCarHandleData
 var carMenuData
@@ -22,7 +23,8 @@ const carInfoTab_data ={
     menu: [],
     items: [],
     carBrands:[],
-    days:1
+    days:1,
+    isEmpty:false
 }
 //filter
 const filter_carInfoTab = {
@@ -180,13 +182,18 @@ function doSearchByPackage(pid) {
     $("#cbx").addClass('checked');
     $('#typebx').addClass("checked")
 
+    //筛选值初始化
     carType = carBaseType
     carMinPrice =0;
     carMaxPrice =9999;
     carBrand = allCarBrand
     currentPackageId = pid
+    //筛选值初始化
     doHandelDate()
     doSearchByAllType()
+
+
+
 }
 
 //查询车辆信息
@@ -206,10 +213,18 @@ function doSearchByAllType() {
         url:"/api/CarSelect/listCar",
         contentType: "application/json",
         data:JSON.stringify(data),
+        //async:false,
         success: function (data) {
             if (data.code == 0) {
                 console.log(data.carData)
-                console.log(data.carData.length)
+                if(data.carData.length>0){
+                    carInfoTab_app.isEmpty = false;
+                    console.log(carInfoTab_app.isEmpty)
+
+                }else{
+                    carInfoTab_app.isEmpty = true;
+                    console.log(carInfoTab_app.isEmpty)
+                }
                 doHandelCarInfo(data.carData)
             } else {
                 handleAjax(data);
@@ -240,16 +255,16 @@ function doHandelCarInfo(carData) {
         cdata.carTotalPrice = (cdata.carPrice * days).toFixed(1)
         cdata.carTotalPackagePrice = (cdata.carPackagePrice * days).toFixed(1)
     })
-    if(carData==""){
-        console.log("没车")
-        layer.open({
-            title: '温馨提示'
-            ,content: '这套餐没车啊，换一个套餐试试？'
-            , yes: function(index, layero){
-                layer.close(index); //如果设定了yes回调，需进行手工关闭
-            }
-        });
-    }
+    // if(carData.length){
+    //     console.log("没车")
+    //     layer.open({
+    //         title: '温馨提示'
+    //         ,content: '这套餐没车啊，换一个套餐试试？'
+    //         , yes: function(index, layero){
+    //             layer.close(index); //如果设定了yes回调，需进行手工关闭
+    //         }
+    //     });
+    // }
 
     carInfoTab_app.items = carData;
     carHandleData = carData;
@@ -392,15 +407,16 @@ function  doHandelDate() {
            daysMax = item.daysMax
        }
     })
+
     if(carInfoTab_app.days < daysMin){
         //layui.open("该套餐最低天数为"+daysMin+"天")
-if(carInfoTab_app.items.length>0) {
+
     layer.confirm('租车天数小于该套餐的最小天数，请换套餐或者添加天数!!!', {btn: ['确定'], icon: 2, title: '提示'}, function (index) {
         //do something
 
         layer.close(index);
+       // doSearchByAllType()
     });
-}
         //该套餐最小天数
         let oneDay = 86400000
         carInfoTab_app.days = daysMin
@@ -409,13 +425,15 @@ if(carInfoTab_app.items.length>0) {
         let toDate = formatDate(new Date(fDate+(daysMin)*oneDay))
         $("#toDate").val(toDate)
     }
+
     if(carInfoTab_app.days > daysMax){
         // layui.open("该套餐最大天数为"+daysMax+"天")
-        if(carInfoTab_app.items.length>0) {
+
             layer.confirm('租车天数大于该套餐的最大天数，请换套餐或者减少天数!!!', {btn: ['确定'], icon: 2, title: '提示'}, function (index) {
                 layer.close(index);
+              //  doSearchByAllType()
             });
-        }
+
         //该套餐最大天数
         carInfoTab_app.days = daysMax
         let oneDay = 86400000
@@ -424,6 +442,7 @@ if(carInfoTab_app.items.length>0) {
         let toDate = formatDate(new Date(fDate+(daysMax)*oneDay))
         $("#toDate").val(toDate)
     }
+
 
 }
 //没结果提示

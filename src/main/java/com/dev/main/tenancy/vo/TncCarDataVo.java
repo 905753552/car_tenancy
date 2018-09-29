@@ -1,4 +1,4 @@
-package com.dev.main.tenancy.domain;
+package com.dev.main.tenancy.vo;
 
 import java.math.BigDecimal;
 

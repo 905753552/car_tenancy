@@ -277,7 +277,7 @@
 
                         <!--日租 start-->
                         <div class="tab-pane active bg-define" id="pane_1">
-
+                          <!--暂无数据-->
                             <ul class="nav navbar-nav" id="car_day">
                                 <li v-if="items.length>0" v-for="(item,index) in items" class="list-unstyled">
                                     <div class="col-md-12 column">
@@ -377,11 +377,8 @@
                             </ul>
 
                         </div>
-                        <!--<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">-->
-                            <!--<legend>自定义首页、尾页、上一页、下一页文本</legend>-->
-                        <!--</fieldset>-->
-                        <!--<div id="demo3"></div>-->
-
+                        <!--<h3 v-if="isEmpty">暂无数据</h3>-->
+                        <div style="text-align: center;margin-top: 50px"><img style="display: inline-block" class="NoData"  v-if="isEmpty" src="/img/NoData.png"></div>
                     </div>
                     <!--tabContent end-->
                 </div>
@@ -656,9 +653,8 @@
     $(window).resize(function () {
         stickUp()
     })
-     function Sx() {
+      const Sx = ()=> {
        window.scrollTo(0,0)
-
     };
     $(document).ready(function(){
         stickUp()

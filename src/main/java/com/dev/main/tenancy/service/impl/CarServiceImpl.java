@@ -4,6 +4,7 @@ import com.dev.main.common.util.ResultMap;
 import com.dev.main.tenancy.dao.*;
 import com.dev.main.tenancy.domain.*;
 import com.dev.main.tenancy.service.ICarService;
+import com.dev.main.tenancy.vo.TncCarDataVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
