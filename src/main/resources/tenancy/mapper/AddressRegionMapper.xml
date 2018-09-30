@@ -103,4 +103,15 @@
       level = #{level,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="searchAddress" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from address_region
+    <trim prefix="where "  suffixOverrides="and" >
+      <if test="id != 0">
+        parent_id= #{id,jdbcType=BIGINT} and
+      </if>
+      level = #{level,jdbcType=TINYINT}
+    </trim>
+  </select>
 </mapper>

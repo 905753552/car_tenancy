@@ -15,6 +15,17 @@
   <sql id="Base_Column_List" >
     id, amount, description, status, begin_date, end_date, customer_id, gmt_create, gmt_modified
   </sql>
+  <select id="selectByUserKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from tnc_coupon
+    where customer_id = #{uid,jdbcType=BIGINT} order by status ASC ,end_date DESC
+  </select>
+  <select id="countUnuse" resultType="java.lang.Integer"  parameterType="java.lang.Long" >
+    select count(*)
+    from tnc_coupon
+    where customer_id = #{uid,jdbcType=BIGINT} and status = 0
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

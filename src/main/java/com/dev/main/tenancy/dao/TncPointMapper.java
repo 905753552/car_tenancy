@@ -14,4 +14,6 @@ public interface TncPointMapper {
     int updateByPrimaryKeySelective(TncPoint record);
 
     int updateByPrimaryKey(TncPoint record);
+    /**根据用户id查找积分*/
+    TncPoint selectByUserId(Long uid);
 }

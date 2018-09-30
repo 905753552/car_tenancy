@@ -12,6 +12,12 @@
   <sql id="Base_Column_List" >
     id, uid, point, is_deleted, gmt_create, gmt_modified
   </sql>
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from tnc_point
+    where uid = #{uid,jdbcType=BIGINT}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

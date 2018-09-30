@@ -23,6 +23,59 @@
     id, phone, id_card, password, salt, last_access_time, gender, name, email, addr_id,
     emergency_name, emergency_phone, status, is_deleted, gmt_create, gmt_modified
   </sql>
+    <resultMap id="MapWithRelation" type="com.dev.main.tenancy.vo.TncCustomerVo" >
+        <id column="cid" property="id" jdbcType="BIGINT" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+        <result column="last_access_time" property="lastAccessTime" jdbcType="TIMESTAMP" />
+        <result column="gender" property="gender" jdbcType="TINYINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="emergency_name" property="emergencyName" jdbcType="VARCHAR" />
+        <result column="emergency_phone" property="emergencyPhone" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="TINYINT" />
+        <result column="deleted" property="isDeleted" jdbcType="TINYINT" />
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <association property="tncAddress" column="addr_id" select="com.dev.main.tenancy.dao.TncAddressMapper.selectByPrimaryKey" javaType="com.dev.main.tenancy.domain.TncAddress"></association>
+        <association property="tncPoint" javaType="com.dev.main.tenancy.domain.TncPoint" >
+            <id property="id" column="p.id"></id>
+            <result property="point" column="point"></result>
+        </association>
+    </resultMap>
+    <select id="queryVo" resultMap="MapWithRelation">
+        SELECT
+        c.id cid, phone, id_card, last_access_time, gender, name, email, addr_id,
+        emergency_name, emergency_phone, c.status, c.is_deleted deleted, c.gmt_create, c.gmt_modified,
+        p.point point
+        FROM tnc_customer c LEFT JOIN tnc_point p ON p.uid = c.id
+        <where>
+            AND (
+            c.is_deleted = 0
+            )
+            <if test="search!=null">AND (
+                c.name LIKE CONCAT('%',#{search},'%')
+                OR c.phone LIKE CONCAT('%',#{search},'%')
+                )
+            </if>
+        </where>
+    </select>
+    <select id="findVo"  resultMap="MapWithRelation" parameterType="java.lang.Long">
+        SELECT
+        c.id cid, phone, id_card, last_access_time, gender, name, email, addr_id,
+        emergency_name, emergency_phone, c.status, c.is_deleted deleted, c.gmt_create, c.gmt_modified,
+        p.point point
+        FROM tnc_customer c LEFT JOIN tnc_point p ON p.uid = c.id
+        <where>
+            AND (
+            c.id = #{id,jdbcType=BIGINT}
+            )AND (
+            c.is_deleted = 0
+            )
+        </where>
+    </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />

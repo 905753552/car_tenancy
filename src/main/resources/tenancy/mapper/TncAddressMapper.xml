@@ -3,25 +3,22 @@
 <mapper namespace="com.dev.main.tenancy.dao.TncAddressMapper" >
   <resultMap id="BaseResultMap" type="com.dev.main.tenancy.domain.TncAddress" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="province_id" property="provinceId" jdbcType="BIGINT" />
-    <result column="city_id" property="cityId" jdbcType="BIGINT" />
-    <result column="area_id" property="areaId" jdbcType="BIGINT" />
     <result column="detail" property="detail" jdbcType="VARCHAR" />
     <result column="store_or_user" property="storeOrUser" jdbcType="TINYINT" />
     <result column="longitude" property="longitude" jdbcType="DECIMAL" />
     <result column="latitude" property="latitude" jdbcType="DECIMAL" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
-    <association property="province" column="province_id" select="com.dev.main.tenancy.dao.AddressRegionMapper.selectByPrimaryKey" javaType="com.dev.main.tenancy.domain.AddressRegion"/>
-    <association property="city" column="city_id" select="com.dev.main.tenancy.dao.AddressRegionMapper.selectByPrimaryKey" javaType="com.dev.main.tenancy.domain.AddressRegion"/>
-    <association property="area" column="area_id" select="com.dev.main.tenancy.dao.AddressRegionMapper.selectByPrimaryKey" javaType="com.dev.main.tenancy.domain.AddressRegion"/>
+    <association column="province_id" property="province" select="com.dev.main.tenancy.dao.AddressRegionMapper.selectByPrimaryKey" javaType="com.dev.main.tenancy.domain.AddressRegion" />
+    <association column="city_id" property="city" select="com.dev.main.tenancy.dao.AddressRegionMapper.selectByPrimaryKey" javaType="com.dev.main.tenancy.domain.AddressRegion" />
+    <association column="area_id" property="area" select="com.dev.main.tenancy.dao.AddressRegionMapper.selectByPrimaryKey" javaType="com.dev.main.tenancy.domain.AddressRegion" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, province_id, city_id, area_id, detail, store_or_user, longitude, latitude, gmt_create, 
+    id, province_id, city_id, area_id, detail, store_or_user, longitude, latitude, gmt_create,
     gmt_modified
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from tnc_address
     where id = #{id,jdbcType=BIGINT}
@@ -31,28 +28,28 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.dev.main.tenancy.domain.TncAddress" >
-    insert into tnc_address (id, province_id, city_id, 
-      area_id, detail, store_or_user, 
-      longitude, latitude, gmt_create, 
+    insert into tnc_address (id, province_id, city_id,
+      area_id, detail, store_or_user,
+      longitude, latitude, gmt_create,
       gmt_modified)
-    values (#{id,jdbcType=BIGINT}, #{provinceId,jdbcType=BIGINT}, #{cityId,jdbcType=BIGINT}, 
-      #{areaId,jdbcType=BIGINT}, #{detail,jdbcType=VARCHAR}, #{storeOrUser,jdbcType=TINYINT}, 
-      #{longitude,jdbcType=DECIMAL}, #{latitude,jdbcType=DECIMAL}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=BIGINT}, #{province.id,jdbcType=BIGINT}, #{city.id,jdbcType=BIGINT},
+      #{area.id,jdbcType=BIGINT}, #{detail,jdbcType=VARCHAR}, #{storeOrUser,jdbcType=TINYINT},
+      #{longitude,jdbcType=DECIMAL}, #{latitude,jdbcType=DECIMAL}, #{gmtCreate,jdbcType=TIMESTAMP},
       #{gmtModified,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.dev.main.tenancy.domain.TncAddress" >
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.dev.main.tenancy.domain.TncAddress" >
     insert into tnc_address
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="provinceId != null" >
+      <if test="province.id != null" >
         province_id,
       </if>
-      <if test="cityId != null" >
+      <if test="city.id != null" >
         city_id,
       </if>
-      <if test="areaId != null" >
+      <if test="area.id != null" >
         area_id,
       </if>
       <if test="detail != null" >
@@ -78,14 +75,14 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="provinceId != null" >
-        #{provinceId,jdbcType=BIGINT},
+      <if test="province.id != null" >
+        #{province.id,jdbcType=BIGINT},
       </if>
-      <if test="cityId != null" >
-        #{cityId,jdbcType=BIGINT},
+      <if test="city.id != null" >
+        #{city.id,jdbcType=BIGINT},
       </if>
-      <if test="areaId != null" >
-        #{areaId,jdbcType=BIGINT},
+      <if test="area.id != null" >
+        #{area.id,jdbcType=BIGINT},
       </if>
       <if test="detail != null" >
         #{detail,jdbcType=VARCHAR},
@@ -110,14 +107,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.dev.main.tenancy.domain.TncAddress" >
     update tnc_address
     <set >
-      <if test="provinceId != null" >
-        province_id = #{provinceId,jdbcType=BIGINT},
+      <if test="province.id != null" >
+        province_id = #{province.id,jdbcType=BIGINT},
       </if>
-      <if test="cityId != null" >
-        city_id = #{cityId,jdbcType=BIGINT},
+      <if test="city.id != null" >
+        city_id = #{city.id,jdbcType=BIGINT},
       </if>
-      <if test="areaId != null" >
-        area_id = #{areaId,jdbcType=BIGINT},
+      <if test="area.id != null" >
+        area_id = #{area.id,jdbcType=BIGINT},
       </if>
       <if test="detail != null" >
         detail = #{detail,jdbcType=VARCHAR},
@@ -142,9 +139,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dev.main.tenancy.domain.TncAddress" >
     update tnc_address
-    set province_id = #{provinceId,jdbcType=BIGINT},
-      city_id = #{cityId,jdbcType=BIGINT},
-      area_id = #{areaId,jdbcType=BIGINT},
+    set province_id = #{province.id,jdbcType=BIGINT},
+      city_id = #{city.id,jdbcType=BIGINT},
+      area_id = #{area.id,jdbcType=BIGINT},
       detail = #{detail,jdbcType=VARCHAR},
       store_or_user = #{storeOrUser,jdbcType=TINYINT},
       longitude = #{longitude,jdbcType=DECIMAL},

@@ -54,10 +54,6 @@ body {
     width: 100%;
     margin-bottom: -2px;
 }
-.info_select_address {
-    width: 47.422%;
-    margin-bottom: -2px;
-}
 .info_input:focus {
     color: rgb(96, 96, 108);
 }
@@ -176,7 +172,7 @@ body {
     text-align: center;
     margin-left: -5px;
 }
-.coupon_hd a:hover {
+.coupon_hd span:hover {
     background-color: #92eaa1;
     border: 1px solid #92eaa1;
     color: #ffffff;
@@ -186,11 +182,88 @@ body {
     border: 1px solid #92eaa1 !important;
     color: #ffffff !important;
 }
-.coupon_hd a{
+.coupon_hd span{
     display: block;
     border: 1px solid #e9ebee;
     background-color: #f8f8fa;
     width: 100%;
     height: 100%;
     color: #93939e;
+}
+.zc-safepsw {
+    padding-top: 20px;
+}
+
+.zc-safepsw span {
+    float: left;
+    width: 31%;
+    height: 20px;
+    line-height: 20px;
+    background-color: #f2f3f5;
+    text-align: center;
+    font-size: 12px;
+    color: #93939e;
+    border: 1px solid #e9ebee;
+    border-right: none;
+}
+.zc-safepsw .safe_3 {
+    border-right: 1px solid #e9ebee
+}
+.zc-safepsw_1 .safe_1 {
+    background-color: #e42437d9;
+    border: 1px solid #e42437d9;
+    color: #f8f9fa
+}
+
+.zc-safepsw_1 .safe_2 {
+    border-left: none
+}
+
+.zc-safepsw_2 .safe_1 {
+    background-color: #e42437d9;
+    border: 1px solid #e42437d9;
+    color: #f8f9fa
+}
+
+.zc-safepsw_2 .safe_2 {
+    background-color: #fdb811;
+    border: 1px solid #fdb811;
+    border-left: none;
+    color: #f8f9fa
+}
+
+.zc-safepsw_2 .safe_3 {
+    border-left: none
+}
+
+.zc-safepsw_3 .safe_1 {
+    background-color: #e42437d9;
+    border: 1px solid #e42437d9;
+    color: #f8f9fa
+}
+
+.zc-safepsw_3 .safe_2 {
+    background-color: #fdb811;
+    border: 1px solid #fdb811;
+    border-left: none;
+    color: #f8f9fa
+}
+
+.zc-safepsw_3 .safe_3 {
+    background-color: #00c189;
+    border: 1px solid #00c189;
+    border-left: none;
+    color: #f8f9fa
+}
+
+.safetybg_1 span.safety_1 {
+    background: #fdb811
+}
+
+.safetybg_2 span.safety_1,.safetybg_2 span.safety_2 {
+    background: #fdb811
+}
+
+.safetybg_3 span.safety_1,.safetybg_3 span.safety_2,.safetybg_3 span.safety_3 {
+    background: #fdb811
 }
