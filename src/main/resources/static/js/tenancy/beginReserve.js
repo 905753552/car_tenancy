@@ -105,6 +105,12 @@ var orderDetail = new Vue({
         // 手机号副本
         phoneCopy:''
     },
+    computed:{
+        // 计算年租每个月的费用
+        annualCost:function(){
+            return this.baseInfo.base_price*30+this.baseInfo.service_price*30
+        }
+    },
     created:function(){
         var self = this;
         param.order = JSON.parse(decodeURIComponent(window.location.search.slice(1)));
@@ -113,7 +119,9 @@ var orderDetail = new Vue({
             var data = JSON.parse(id);
             param.base_info.order_detail.id = data;
         }
+        console.log(self.order_detail);
         self.getCarInfo();
+        self.getCarItemInfo();
         self.getPSchemeAndPName();
         self.getCustomerInfo();
     },
@@ -129,6 +137,9 @@ var orderDetail = new Vue({
         },
         getCustomerInfo:function(){
             getCustomerInfo(this);
+        },
+        getCarItemInfo:function(){
+            getCarItemInfo();
         },
         showOtherCost:function(){
             showOtherCost();
@@ -198,6 +209,25 @@ function getCarInfo(self){
         }
     })
 }
+// 获取车辆
+function getCarItemInfo(){
+    $.ajax({
+        type:'get',
+        url:'/api/order/carItem/'+param.order.carId,
+        async: false,
+        dataType:'json',
+        success:function(res){
+            if(res.code==0) {
+                param.base_info.order_detail.carItemId = res.carItem.id;
+                console.log("获取车辆成功");
+            }
+            else{
+                handleAjax(res);
+            }
+        }
+    })
+}
+// 获取套餐和价格方案
 function getPSchemeAndPName(self){
     $.ajax({
         type:'get',
@@ -221,7 +251,7 @@ function getPSchemeAndPName(self){
 function getCustomerInfo(self){
     $.ajax({
         type:'get',
-        url:'/api/order/customer',
+        url:'/api/order/coupons',
         //async: false,
         dataType:'json',
         success:function(res){
@@ -255,7 +285,7 @@ function setBaseParam(self){
     param.base_info.total_service_price = self.priceSchemeInfo.servicePrice * param.order.days;
     param.base_info.discount_total_base = param.base_info.total_base_price * self.priceSchemeInfo.discount;
     param.base_info.discount_total_service = param.base_info.total_service_price * self.priceSchemeInfo.discount;
-    //计算异地费用
+    //计算异店或异地费用
     foreginCost();
     //计算超时服务费
     overtimeCost(self.priceSchemeInfo.baseHourPrice);
@@ -297,8 +327,7 @@ function setOrderDetails(){
         // 其它费用(租赁过程中产生的额外收费)
         param.base_info.order_detail.otherAmount = param.base_info.other_cost;
         // 总价 = (下单时)订单价格 + 其它费用
-        param.base_info.order_detail.totalAmount = param.base_info.order_detail.orderAmount
-                                                 + param.base_info.order_detail.otherAmount;
+        param.base_info.order_detail.totalAmount = param.base_info.order_price_sum;
         // 租赁费用 天数*基础价
         param.base_info.order_detail.baseAmount = param.base_info.total_base_price;
         // 服务费用 天数*服务费
@@ -327,8 +356,6 @@ function setOrderDetails(){
         param.base_info.order_detail.status = 0;
         // 是否删除 1-删除
         param.base_info.order_detail.isDeleted = 0;
-        // 车item 外键
-        param.base_info.order_detail.carItemId = param.order.carId;
 }
 //获取取车地点
 function getCarAddress(){
@@ -808,10 +835,11 @@ function updatePhoneInfo(){
         dataType:'json',
         success:function(res){
             if(res.code==0) {
-                orderDetail.phoneCopy = phone.substr(0,3)+'*****'+phone.substr(7,11);
-                orderDetail.customerInfo.phone = phone;
-                $('#modifyModel').modal('hide');
-                layer.msg("修改成功",{time:2000});
+                layer.msg(res.msg,{time:1200},function(){
+                    orderDetail.phoneCopy = phone.substr(0,3)+'*****'+phone.substr(7,11);
+                    orderDetail.customerInfo.phone = phone;
+                    $('#modifyModel').modal('hide');
+                });
             }
             else{
                 handleAjax(res);
@@ -1007,10 +1035,8 @@ $(document).ready(function(){
             param.base_info.order_detail.couponId = id;
             param.base_info.coupon = count;
             self.baseInfo = param.base_info;
-            param.base_info.order_price_sum = param.base_info.discount_total_base
-                + param.base_info.discount_total_service
-                + param.base_info.other_cost
-                - param.base_info.coupon;
+            param.base_info.order_price_sum = (param.base_info.order_price_sum - param.base_info.coupon)>0
+                                            ? (param.base_info.order_price_sum - param.base_info.coupon):0;
             var $nextLi = $(".opcl1").next(".zc_query-condition_list");
             $nextLi.removeClass("show"), $(".opcl1").find(".blue-downarr").removeClass("open");
         })

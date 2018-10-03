@@ -77,7 +77,7 @@
                         <span>租车人：{{order_detail.order_detail.name}}</span>
                         <a>|</a>
                         <span>租期：{{order_detail.days}}天</span>
-                        <span style="float: right;color: red;">请在15分钟内完成付款，否则将自动取消订单</span>
+                        <span style="float: right;color: red;" v-if="order_detail.order_detail.status==0">请在1小时内完成付款，否则将自动取消订单</span>
                     </div>
                 </div>
 
@@ -143,7 +143,7 @@
                             </div>
                             <div class="calculate">
 		                        <span class="sz_priceGraySmall">
-		                            <em class="num">{{order_detail.base_price}}x{{order_detail.days}}</em>
+		                            <em class="num">¥{{order_detail.base_price}}x{{order_detail.days}}天</em>
 		                            <em class="unit">=</em>	
 		                        </span>
                             </div>
@@ -163,7 +163,7 @@
                             </div>
                             <div class="calculate">
 		                        <span class="sz_priceGraySmall">
-		                            <em class="num">{{order_detail.service_price}}x{{order_detail.days}}</em>
+		                            <em class="num">¥{{order_detail.service_price}}x{{order_detail.days}}天</em>
 		                            <em class="unit">=</em>	
 		                        </span>
                             </div>
@@ -198,22 +198,22 @@
                         </div>
 
 
-                        <div class="feeItem borderBlueBda">
-                            <div class="feePrice">
-	                    	<span class="sz_OrderpOrangeM">
-	                            <em class="rmb">¥</em>
-	                            <em class="num">{{order_detail.order_detail.deposit}}</em>
-	                        </span>
-                            </div>
-                            <div class="calculate">
-		                        <span class="sz_priceGraySmall">
-		                            <em class="num"></em>
-		                            <em class="unit"></em>
-		                        </span>
-                            </div>
-                            <span class="feeName">押金</span>
-                        </div>
-                        <div class="feeItem borderBlueBda">
+                        <!--<div class="feeItem borderBlueBda">-->
+                            <!--<div class="feePrice">-->
+	                    	<!--<span class="sz_OrderpOrangeM">-->
+	                            <!--<em class="rmb">¥</em>-->
+	                            <!--<em class="num">{{order_detail.order_detail.deposit}}</em>-->
+	                        <!--</span>-->
+                            <!--</div>-->
+                            <!--<div class="calculate">-->
+		                        <!--<span class="sz_priceGraySmall">-->
+		                            <!--<em class="num"></em>-->
+		                            <!--<em class="unit"></em>-->
+		                        <!--</span>-->
+                            <!--</div>-->
+                            <!--<span class="feeName">押金</span>-->
+                        <!--</div>-->
+                        <div class="feeItem borderBlueBda" v-if="order_detail.coupon>0">
                             <div class="feePrice">
 	                    	<span class="sz_OrderpOrangeM">
 	                            <em class="rmb">¥</em>
@@ -282,115 +282,229 @@
                     &nbsp;<font class="gray">（小贴士：如果您修改订单或取消订单重新预订，价格可能会发生变化。）</font><br>
 
                 </div>
+                <div class="configbox" style="display: none;">
+                    <div class="cftitle">
+		<span>
+		{{order_detail.car_info.tncBrand.name}}{{order_detail.car_info.series}}配置信息</span>
+                        <i class="cfclose"></i>
+                    </div>
+                    <div class="cflist">
+                        <ul>
+                            <li>
+                                <b class="zws">&nbsp;</b>座 位 数：
+                                <span>
+										{{order_detail.car_info.seatQuantity}}
+								</span>
+                            </li>
+                            <li>
+                                <b class="cms">&nbsp;</b>车 门 数：
+                                <span>
+										{{order_detail.car_info.doorQuantity}}
+								</span>
+                            </li>
+                            <li>
+                                <b class="rllx">&nbsp;</b>燃料类型：
+                                <span>
+										{{order_detail.car_info.fuelType}}
+								</span>
+                            </li>
+                            <li>
+                                <b class="bsxlx">&nbsp;</b>变速箱类型：
+                                <span>
+										{{order_detail.car_info.transmissionType}}
+								</span>
+                            </li>
+                            <li>
+                                <b class="pl">&nbsp;</b>排　　量：
+                                <span>{{order_detail.car_info.displacement}}</span>
+                            </li>
+                            <li>
+                                <b class="rybh">&nbsp;</b>燃油标号：
+                                <span>
+										{{order_detail.car_info.octaneRating}}
+								</span>
+                            </li>
+                            <li>
+                                <b class="qdfs">&nbsp;</b>驱动方式：
+                                <span>
+										{{order_detail.car_info.drivenMethod}}
+								</span>
+                            </li>
+                            <li>
+                                <b class="fdjjqxs">&nbsp;</b>发动机进气形式：
+                                <span>
+										{{order_detail.car_info.enItkForm}}
+								</span>
+                            </li>
+                            <li>
+                                <b class="tc">&nbsp;</b>天　　窗：
+                                <span v-if="order_detail.car_info.skylight==0">
+										无
+								</span>
+                                <span v-else>
+										有
+								</span>
+                            </li>
+                            <li>
+                                <b class="yxrl">&nbsp;</b>油箱容量：
+                                <span>
+										{{order_detail.car_info.tankCapacity}}
+								</span>
+                            </li>
+                            <li>
+                                <b class="yx">&nbsp;</b>音　　箱：
+                                <span>
+										{{order_detail.car_info.speaker}}
+								</span>
+                            </li>
+                            <li>
+                                <b class="zy">&nbsp;</b>座　　椅：
+                                <span>
+										{{order_detail.car_info.seat}}
+								</span>
+                            </li>
+                            <li>
+                                <b class="dcld">&nbsp;</b>倒车雷达：
+                                <span v-if="order_detail.car_info.reversingRadar==0">
+										无
+								</span>
+                                <span v-else>
+										有
+								</span>
+                            </li>
+                            <li>
+                                <b class="qin">&nbsp;</b>气　　囊：
+                                <span>
+										{{order_detail.car_info.airbag}}
+								</span>
+                            </li>
+                            <li class="nonebd">
+                                <b class="dvd">&nbsp;</b>DVD / CD：
+                                <span>
+										{{order_detail.car_info.dvdCd}}
+								</span>
+                            </li>
+                            <li class="nonebd">
+                                <b class="gps">&nbsp;</b>GPS导航：
+                                <span v-if="order_detail.car_info.gps==0">
+										无
+								</span>
+                                <span v-else>
+										有
+								</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
 
             <div class="cffade" style="display: none;"></div>
-            <div class="configbox" style="display: none;">
-                <div class="cftitle">
-		<span>
-		起亚K2配置信息</span>
-                    <i class="cfclose"></i>
-                </div>
-                <div class="cflist">
-                    <ul>
-                        <li>
-                            <b class="zws">&nbsp;</b>座 位 数：
-                            <span>
-						5
-				</span>
-                        </li>
-                        <li>
-                            <b class="cms">&nbsp;</b>车 门 数：
-                            <span>
-						4
-				</span>
-                        </li>
-                        <li>
-                            <b class="rllx">&nbsp;</b>燃料类型：
-                            <span>
-						汽油
-				</span>
-                        </li>
-                        <li>
-                            <b class="bsxlx">&nbsp;</b>变速箱类型：
-                            <span>
-						AT
-				</span>
-                        </li>
-                        <li>
-                            <b class="pl">&nbsp;</b>排　　量：
-                            <span>1396</span>
-                        </li>
-                        <li>
-                            <b class="rybh">&nbsp;</b>燃油标号：
-                            <span>
-						92-93汽油
-				</span>
-                        </li>
-                        <li>
-                            <b class="qdfs">&nbsp;</b>驱动方式：
-                            <span>
-						前驱
-				</span>
-                        </li>
-                        <li>
-                            <b class="fdjjqxs">&nbsp;</b>发动机进气形式：
-                            <span>
-						自然吸气
-				</span>
-                        </li>
-                        <li>
-                            <b class="tc">&nbsp;</b>天　　窗：
-                            <span>
-						无
-				</span>
-                        </li>
-                        <li>
-                            <b class="yxrl">&nbsp;</b>油箱容量：
-                            <span>
-						43
-				</span>
-                        </li>
-                        <li>
-                            <b class="yx">&nbsp;</b>音　　箱：
-                            <span>
-						4
-				</span>
-                        </li>
-                        <li>
-                            <b class="zy">&nbsp;</b>座　　椅：
-                            <span>
-						织物座椅
-				</span>
-                        </li>
-                        <li>
-                            <b class="dcld">&nbsp;</b>倒车雷达：
-                            <span>
-						无
-				</span>
-                        </li>
-                        <li>
-                            <b class="qin">&nbsp;</b>气　　囊：
-                            <span>
-						2
-				</span>
-                        </li>
-                        <li class="nonebd">
-                            <b class="dvd">&nbsp;</b>DVD / CD：
-                            <span>
-						CD
-				</span>
-                        </li>
-                        <li class="nonebd">
-                            <b class="gps">&nbsp;</b>GPS导航：
-                            <span>
-						无
-				</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <!--<div class="configbox" style="display: none;">-->
+                <!--<div class="cftitle">-->
+		<!--<span>-->
+		<!--{{order_detail.car_info.tncBrand.name}}{{order_detail.car_info.series}}配置信息</span>-->
+                    <!--<i class="cfclose"></i>-->
+                <!--</div>-->
+                <!--<div class="cflist">-->
+                    <!--<ul>-->
+                        <!--<li>-->
+                            <!--<b class="zws">&nbsp;</b>座 位 数：-->
+                            <!--<span>-->
+						<!--5-->
+				<!--</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<b class="cms">&nbsp;</b>车 门 数：-->
+                            <!--<span>-->
+						<!--4-->
+				<!--</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<b class="rllx">&nbsp;</b>燃料类型：-->
+                            <!--<span>-->
+						<!--汽油-->
+				<!--</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<b class="bsxlx">&nbsp;</b>变速箱类型：-->
+                            <!--<span>-->
+						<!--AT-->
+				<!--</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<b class="pl">&nbsp;</b>排　　量：-->
+                            <!--<span>1396</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<b class="rybh">&nbsp;</b>燃油标号：-->
+                            <!--<span>-->
+						<!--92-93汽油-->
+				<!--</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<b class="qdfs">&nbsp;</b>驱动方式：-->
+                            <!--<span>-->
+						<!--前驱-->
+				<!--</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<b class="fdjjqxs">&nbsp;</b>发动机进气形式：-->
+                            <!--<span>-->
+						<!--自然吸气-->
+				<!--</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<b class="tc">&nbsp;</b>天　　窗：-->
+                            <!--<span>-->
+						<!--无-->
+				<!--</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<b class="yxrl">&nbsp;</b>油箱容量：-->
+                            <!--<span>-->
+						<!--43-->
+				<!--</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<b class="yx">&nbsp;</b>音　　箱：-->
+                            <!--<span>-->
+						<!--4-->
+				<!--</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<b class="zy">&nbsp;</b>座　　椅：-->
+                            <!--<span>-->
+						<!--织物座椅-->
+				<!--</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<b class="dcld">&nbsp;</b>倒车雷达：-->
+                            <!--<span>-->
+						<!--无-->
+				<!--</span>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<b class="qin">&nbsp;</b>气　　囊：-->
+                            <!--<span>-->
+						<!--2-->
+				<!--</span>-->
+                        <!--</li>-->
+                        <!--<li class="nonebd">-->
+                            <!--<b class="dvd">&nbsp;</b>DVD / CD：-->
+                            <!--<span>-->
+						<!--CD-->
+				<!--</span>-->
+                        <!--</li>-->
+                        <!--<li class="nonebd">-->
+                            <!--<b class="gps">&nbsp;</b>GPS导航：-->
+                            <!--<span>-->
+						<!--无-->
+				<!--</span>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
         <div class="order-success-alertbox">
             <div class="s-aboxin">

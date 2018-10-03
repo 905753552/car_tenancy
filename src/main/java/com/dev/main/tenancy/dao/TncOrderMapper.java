@@ -1,9 +1,6 @@
 package com.dev.main.tenancy.dao;
 
-import com.dev.main.tenancy.domain.TncCarItem;
-import com.dev.main.tenancy.domain.TncCoupon;
-import com.dev.main.tenancy.domain.TncCustomer;
-import com.dev.main.tenancy.domain.TncOrder;
+import com.dev.main.tenancy.domain.*;
 
 import java.util.List;
 
@@ -24,5 +21,11 @@ public interface TncOrderMapper {
 
     int updateCustomerInfo(TncCustomer tncCustomer);
 
-    List<TncCarItem> selectCarItemByPrimaryKey(Long id);
+    TncCarItem selectCarItemByPrimaryKey(Long id);
+
+    List<TncCarItem> selectCarItemBycid(Long id);
+
+    int insertPointLog(TncPointLog tncPointLog);
+
+    int insertPoint(TncPoint tncPoint);
 }

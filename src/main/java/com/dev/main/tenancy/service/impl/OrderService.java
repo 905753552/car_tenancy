@@ -9,6 +9,7 @@ import com.dev.main.tenancy.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +32,10 @@ public class OrderService implements IOrderService {
     private TncCustomerMapper tncCustomerMapper;
     @Autowired
     private TncPackageSchemeMapper tncPackageSchemeMapper;
+    @Autowired
+    private TncPointMapper tncPointMapper;
+    @Autowired
+    private TncPointLogMapper tncPointLogMapper;
 
 
     @Override
@@ -82,9 +87,9 @@ public class OrderService implements IOrderService {
         tncCustomer.setId(tncCustomer1.getId());
         int result = tncOrderMapper.updateCustomerInfo(tncCustomer);
         if(result>0)
-            return ResultMap.success("修改顾客信息成功");
+            return ResultMap.success("修改成功");
         else
-            throw new CommonException("修改顾客信息失败");
+            throw new CommonException("修改失败");
     }
 
     @Override
@@ -92,6 +97,15 @@ public class OrderService implements IOrderService {
         tncOrder.setGmtCreate(new Date());
         tncOrder.setGmtModified(new Date());
         tncOrder.setPayTime(null);
+//        生成订单号
+        SimpleDateFormat sdf =   new SimpleDateFormat( "HHmmss" );
+        String phone = tncOrder.getPhone().substring(7);//电话号码后两位
+        String date = sdf.format(new Date());//日期时分秒
+       // String idcard = tncOrder.getCredentialsNumber().substring(10);//身份证后八位
+        int ran = (int) (Math.random()*99);
+        String str = phone + date + ran;
+        Long uid = Long.valueOf(str);
+        tncOrder.setId(uid);
         int num = tncOrderMapper.insert(tncOrder);
         if(num>0){
             ResultMap resultMap = ResultMap.success("添加订单成功");
@@ -103,17 +117,54 @@ public class OrderService implements IOrderService {
 
     @Override
     public ResultMap savePay(Long id) {
+        //更新订单
         Byte status = 2;
         TncOrder tncOrder = tncOrderMapper.selectByPrimaryKey(id);
         tncOrder.setPayTime(new Date());
         tncOrder.setStatus(status);
         int res = tncOrderMapper.updateByPrimaryKey(tncOrder);
-        List<TncCarItem> tncCarItems = tncOrderMapper.selectCarItemByPrimaryKey(tncOrder.getCarItemId());
+//        分配车辆
+        TncCarItem tncCarItem = tncOrderMapper.selectCarItemByPrimaryKey(tncOrder.getCarItemId());
         if(res>0){
-            if(tncCarItems.size()>0){
+            if(tncCarItem != null){
+//              车辆信息更新
+                TncCar tncCar = tncCarMapper.selectByPrimaryKey(tncCarItem.getCarId());
+                if (tncCar.getQuantity()>0){
+                    tncCar.setQuantity(tncCar.getQuantity()-1);
+                    tncCarMapper.updateByPrimaryKeySelective(tncCar);
+                }else{
+                    throw new CommonException("该车辆库存为0");
+                }
+//              积分
+                TncPoint tncPoint1 = tncPointMapper.selectByUserId(ShiroUtils.getUserId());
+                Byte isDeleted = 0;
+                if (tncPoint1 == null){
+//                  积分+10
+                    tncPoint1 = new TncPoint();
+                    tncPoint1.setUid(ShiroUtils.getUserId());
+                    tncPoint1.setPoint(10);
+                    tncPoint1.setIsDeleted(isDeleted);
+                    tncPoint1.setGmtCreate(new Date());
+                    tncPoint1.setGmtModified(new Date());
+                    tncOrderMapper.insertPoint(tncPoint1);
+                }else{
+                    tncPoint1.setPoint(tncPoint1.getPoint()+10);
+                    tncPointMapper.updateByPrimaryKeySelective(tncPoint1);
+                }
+//              更新积分记录表
+                System.out.println(tncPoint1.getId());
+                TncPointLog tncPointLog = new TncPointLog();
+                tncPointLog.setPid(tncPoint1.getId());
+                tncPointLog.setChange(+10);
+                tncPointLog.setResource("完成订单");
+                tncPointLog.setGmtCreate(new Date());
+                tncPointLog.setGmtModified(new Date());
+                tncPointLog.setIsDeleted(isDeleted);
+                tncOrderMapper.insertPointLog(tncPointLog);
+                //返回数据
                 ResultMap resultMap = ResultMap.success("支付订单成功");
                 resultMap.put("order",tncOrder);
-                resultMap.put("carItem",tncCarItems.get(0));
+                resultMap.put("carItem",tncCarItem);
                 return resultMap;
             }else{
                 throw new CommonException("无可租车辆");
@@ -154,6 +205,22 @@ public class OrderService implements IOrderService {
             return ResultMap.success("获取订单成功").put("order",tncOrder1);
         }else{
             throw new CommonException("获取订单失败");
+        }
+    }
+
+    @Override
+    public ResultMap getCarItemByCarId(Long id) {
+        List<TncCarItem> list = tncOrderMapper.selectCarItemBycid(id);
+        if(list.size()>0){
+            for (TncCarItem tncCarItem:list) {
+//                判断车辆是否可租用
+                if (tncCarItem.getStatus() == 0){
+                    return ResultMap.success("获取车辆成功").put("carItem",tncCarItem);
+                }
+            }
+            throw new CommonException("该车辆无可租用");
+        }else{
+            throw new CommonException("获取车辆失败");
         }
     }
 }

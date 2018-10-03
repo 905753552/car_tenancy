@@ -51,7 +51,7 @@
 	
 
 <div class="cffade"></div>
-	<div class="zc_intention orderDetails">
+	<div class="zc_intention orderDetails" v-cloak>
 		<div class="zc_yearLSC_wrap">
 			<div class="newpg-proce pre">
 				<div class="car-info">
@@ -201,11 +201,11 @@
 	                        </p>
 	                        <p class="le line2">
 	                            <i class="ifr-time"></i>
-	                            <span>2018-09-11</span>
+	                            <span>{{baseInfo.getDate}} {{baseInfo.getTime}}</span>
 	                        </p>
 	                        <p class="le line3">
 	                            <i class="ifr-local"></i>
-	                            <span>广州&nbsp;白云机场店</span>
+	                            <span>{{baseInfo.getCity}}[加盟]&nbsp;{{baseInfo.getStore}}</span>
 	                        </p>
 	                    </li>
 	                    <li>
@@ -215,11 +215,11 @@
 	                        </p>
 	                        <p class="le line2">
 	                            <i class="ifr-time"></i>
-	                            <span>2019-09-11</span>
+	                            <span>{{baseInfo.returnDate}} {{baseInfo.returnTime}}</span>
 	                        </p>
 	                        <p class="le line3">
 	                            <i class="ifr-local"></i>
-	                            <span>广州&nbsp;白云机场店</span>
+	                            <span>{{baseInfo.returnCity}}[加盟]&nbsp;{{baseInfo.returnStore}}</span>
 	                        </p>
 	                    </li>
 	                </ul>
@@ -228,7 +228,7 @@
 			<div class="newpg-conf">
 				<div class="newpg-con" id="orderInfo">
 					<!--判断个人中心中这些信息是否已填写-->
-	<div class="memberInfo">
+	<div class="memberInfo" v-if="customerInfo.email==''||customerInfo.idCard==''">
 		<h3>租车人信息<span class="ifred">请认真填写一下信息，取车时需要现场核对！</span></h3>
 		<div class="partInfo">
 						 <form class="form-info">
@@ -281,52 +281,62 @@
 						</form>
 					</div>
 	</div>
-						
+						<div class="info-msg">
+							<p>下单成功后，提醒信息会发送至手机
+								<i id="mmid">{{phoneCopy}}</i>
+								<a href="javascript:void(0)" data-toggle="modal" data-target="#modifyModel" @click="changeImageVerifyCode">[修改]</a>
+							</p>
+						</div>
+						<div class="papers-tip">
+							<p>取车时,出示以下证件的原件：本人二代身份证、本人国内有效驾驶证正副本、本人一张信用及可用额度均不低于3000元的国内有效信用卡，所有证件有效期须至少超过当次租期的两个月以上。</p>
+						</div>
 						<div>
 		                    <h3>费用明细</h3>
 		                    <ul class="b-warp">
-		                        <li><span class="pa">车型押金</span><span class="yell-col">¥6000</span></li>
-		                        <li class="pb10"><span class="pa">年租费用</span><span class="f14">约¥3217/月*12月 = </span><span class="yell-col f18">¥38604</span></li>
+		                        <li><span class="pa">车型押金</span><span class="yell-col">¥{{baseInfo.deposit}}</span></li>
 		                        <li>
 		                            <span class="pa">租金支付</span>
 		                            		<label class="l-t-w ltwcur" style="line-height:38px;">
 			                                	<input value="3" name="payment" id="one" checked="" type="radio">
 			                                	一次性支付
 			                            	</label>
-		                            		<label class="l-t-w ">
-			                                	<input value="2" name="payment" id="part" type="radio">
-			                                	按半年支付
-			                                	<br>约<em>19302</em><em>/期</em>
-			                            	</label>
-		                            		<label class="l-t-w ">
-			                                	<input value="1" name="payment" id="season" type="radio">
-			                                	按季度支付
-			                                	<br>约<em>9651</em><em>/期</em>
-			                            	</label>
+		                            		<!--<label class="l-t-w ">-->
+			                                	<!--<input value="2" name="payment" id="part" type="radio">-->
+			                                	<!--按半年支付-->
+			                                	<!--<br>约<em>{{baseInfo.order_price_sum/2}}</em><em>/期</em>-->
+			                            	<!--</label>-->
+		                            		<!--<label class="l-t-w ">-->
+			                                	<!--<input value="1" name="payment" id="season" type="radio">-->
+			                                	<!--按季度支付-->
+			                                	<!--<br>约<em>{{baseInfo.order_price_sum/4}}</em><em>/期</em>-->
+			                            	<!--</label>-->
 		                            <div class="clear"></div>
 		                        </li>
 								<li>
 									<span class="pa">优惠券</span>
-									<ul style="display: flex;flex-wrap: wrap;" id="coupons">
-										<li class="coupon-ok" style="padding-left: 0px">
+									<ul style="display: flex;flex-wrap: wrap;" id="coupons" v-if="coupons.length>0">
+										<li class="coupon-ok" style="padding-left: 0px" v-for="coupon in coupons" v-bind:title="coupon.description">
 											<div class="amount">
-												<span class="moneyamount"><em>¥</em>100</span>
+												<span class="moneyamount"><em>¥</em>{{coupon.amount}}</span>
+												<span class="moneyid" hidden="hidden">{{coupon.id}}</span>
 											</div>
 											<div class="time">
-												<i class="zc_time_icon"></i>　有效期 : 2018.08.30-2019.02.26
-											</div>
-											<span class="zc-sprite zc-coupon-checked"></span>
-										</li>
-										<li class="coupon-ok" style="padding-left: 0px">
-											<div class="amount">
-												<span class="moneyamount"><em>¥</em>100</span>
-											</div>
-											<div class="time">
-												<i class="zc_time_icon"></i>　有效期 : 2018.08.30-2019.02.26
+												<i class="zc_time_icon"></i>　有效期 : {{coupon.beginDate}}~{{coupon.endDate}}
 											</div>
 											<span class="zc-sprite zc-coupon-checked"></span>
 										</li>
 									</ul>
+									<span class="yell-col" style="color: #9F9F9F;" v-else>无可用</span>
+								</li>
+								<li><span class="pa">其他费用</span><span class="yell-col">整备费（¥20/辆）</span></li>
+								<li class="pb10"><span class="pa">年租费用</span>
+									<span class="f14">约¥
+										{{baseInfo.base_price*priceSchemeInfo.discount+baseInfo.service_price*priceSchemeInfo.discount}}
+										<span style="color:#9F9F9F;text-decoration:line-through;" v-if="priceSchemeInfo.discount<1">{{baseInfo.base_price+baseInfo.service_price}}</span>
+										/天*365天 </span>
+									<span class="f14"> + ¥{{baseInfo.prepare_cost}}</span>
+									<span class="f14" v-if="baseInfo.coupon>0"> - ¥	{{baseInfo.coupon}}</span>
+									<span class="yell-col f18"> = ¥{{baseInfo.order_price_sum}}</span>
 								</li>
 		                    </ul>
 		                </div>
@@ -359,6 +369,7 @@
 </div>
 
 <script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery.cookie.js"></script>
 <script src="/js/popper.min.js"></script>
 <script src="/layui-v2.4.3/lay/modules/layer.js"></script>
 <script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>

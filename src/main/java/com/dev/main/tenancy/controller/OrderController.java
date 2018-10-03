@@ -47,10 +47,16 @@ public class OrderController {
         ResultMap resultMap = orderService.selectAddressByStoreId(id);
         return resultMap;
     }
-    @GetMapping("/customer")
+    @GetMapping("/coupons")
     @RequiresUser
     public ResultMap getUserCoupons(){
         ResultMap resultMap = orderService.getCustomerCoupons();
+        return resultMap;
+    }
+    @GetMapping("/carItem/{cid}")
+    @RequiresUser
+    public ResultMap getCarItem(@PathVariable("cid") Long id){
+        ResultMap resultMap = orderService.getCarItemByCarId(id);
         return resultMap;
     }
     @GetMapping("/updCusInfo")

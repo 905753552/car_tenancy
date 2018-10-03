@@ -293,7 +293,7 @@
 				<div class="info-msg">
 					<p>下单成功后，提醒信息会发送至手机
 						<i id="mmid">{{phoneCopy}}</i>
-						<a href="javascript:void(0)" data-toggle="modal" data-target="#modifyModel" onclick="changeImageVerifyCode()">[修改]</a>
+						<a href="javascript:void(0)" data-toggle="modal" data-target="#modifyModel" @click="changeImageVerifyCode">[修改]</a>
 					</p>
 				</div>
 				<div class="papers-tip">
@@ -304,7 +304,7 @@
 					<ul class="h3h feeul">
 						<li style="list-style:none">
 							<span class="fee-txt">车辆租赁及服务费</span>
-							<span class="fee-res"><span class="fee-txt">¥{{baseInfo.total_base_price}}</span>¥{{baseInfo.discount_total_base}}</span>
+							<span class="fee-res"><span class="fee-txt" v-if="priceSchemeInfo.discount<1">¥{{baseInfo.total_base_price}}</span>¥{{baseInfo.discount_total_base}}</span>
 							<span class="fee-pro">{{baseInfo.base_price}}x{{baseInfo.days}}</span>
 							<div class="clear"></div>
 						</li>
@@ -322,7 +322,7 @@
 											</div>
 										</i>
 									</span>
-							<span class="fee-res"><span class="fee-txt">¥{{baseInfo.total_service_price}}</span>¥{{baseInfo.discount_total_service}}</span>
+							<span class="fee-res"><span class="fee-txt" v-if="priceSchemeInfo.discount<1">¥{{baseInfo.total_service_price}}</span>¥{{baseInfo.discount_total_service}}</span>
 							<span class="fee-pro">{{baseInfo.service_price}}x{{baseInfo.days}}</span>
 							<div class="clear"></div>
 						</li>
@@ -363,7 +363,7 @@
 						</li>
 						<li class="opcl1" style="list-style:none" v-if="coupons.length>0" @click="showCoupon">
 							<span class="fee-txt">优惠券<i class="blue-downarr"></i></span>
-							<span class="fee-res" style="color:red;">-¥{{baseInfo.coupon}}</span>
+							<span class="fee-res" style="color:red;" v-if="baseInfo.coupon>0">-¥{{baseInfo.coupon}}</span>
 							<div class="clear"></div>
 						</li>
 						<li class="opcl1" style="list-style:none" v-else>

@@ -2612,7 +2612,7 @@
 .newpg-conf .newpg-con {
     margin-top: 25px;
     background-color: #fff;
-    padding: 0 60px 60px
+    padding: 20px 60px 60px
 }
 
 .newpg-conf h3 {
@@ -2642,6 +2642,12 @@
 .newpg-conf .b-warp li span.yell-col {
     font-size: 18px;
     color: #1e9f75;
+}
+
+.newpg-conf .b-warp li span.fo {
+    font-size: 18px;
+    color: #9F9F9F;
+    text-decoration:line-through;
 }
 
 .newpg-conf .b-warp li span.pa {
@@ -6604,4 +6610,33 @@ strong, b {
     width:15px;
     height:15px;
     vertical-align: middle;
+}
+/* 下单后提示语 */
+.newpg-conf .info-msg p {
+    height: 36px;
+    line-height: 36px;
+    background-color: #f3fbfe;
+    padding-left: 30px;
+    color: #60606c;
+    font-size: 14px;
+}
+.newpg-conf .info-msg i {
+    font-style: normal;
+    color: #fabe00;
+}
+.newpg-conf .info-msg a {
+    cursor: pointer;
+    color: #1e9f75;
+}
+/* 警告 */
+.papers-tip {
+    margin: 20px 0;
+    padding: 12px 26px 0px 0;
+    font-size: 14px;
+    background: url(https://image.zuchecdn.com/newversion/news/ordernew/zc_papers_tip.gif) no-repeat 30px center #fdfce7;
+    background-size: 50px auto;
+}
+.papers-tip p {
+    display: inline-block;
+    margin-left: 90px;
 }

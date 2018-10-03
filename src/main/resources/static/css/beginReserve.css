@@ -539,7 +539,7 @@ input[type=text]{
     background-color: #fabe00;
 }
 .newpg-conf .feeul>li.zc_query-condition_list .amount {
-    width: 200px;
+    width: 195px;
     height: 80px;
     border-radius: 5px 5px 0 0;
     background: #ff8650 url(https://image.zuchecdn.com/newversion/news/common/mycoupon_orange.gif) left bottom repeat-x;
@@ -559,7 +559,7 @@ input[type=text]{
 .newpg-conf .feeul>li.zc_query-condition_list .time {
     height: 30px;
     line-height: 30px;
-    width: 200px;
+    width: 195px;
     padding-left: 10px;
     border: 1px solid #ffbc9e;
     border-top: 0 none;

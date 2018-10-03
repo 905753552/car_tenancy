@@ -91,6 +91,22 @@
       #{status,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT}, #{gmtCreate,jdbcType=TIMESTAMP}, 
       #{gmtModified,jdbcType=TIMESTAMP}, #{carItemId,jdbcType=BIGINT})
   </insert>
+  <insert id="insertPoint" useGeneratedKeys="true"  keyProperty="id" parameterType="com.dev.main.tenancy.domain.TncPoint" >
+    insert into tnc_point (id, uid, point,
+      is_deleted, gmt_create, gmt_modified
+      )
+    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{point,jdbcType=INTEGER},
+      #{isDeleted,jdbcType=TINYINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertPointLog" parameterType="com.dev.main.tenancy.domain.TncPointLog" >
+    insert into tnc_point_log (id, pid, resource,
+      `change`, is_deleted, gmt_create,
+      gmt_modified)
+    values (#{id,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT}, #{resource,jdbcType=VARCHAR},
+      #{change,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, #{gmtCreate,jdbcType=TIMESTAMP},
+      #{gmtModified,jdbcType=TIMESTAMP})
+  </insert>
   <insert id="insertSelective" parameterType="com.dev.main.tenancy.domain.TncOrder" >
     insert into tnc_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -395,10 +411,12 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectCouponsByCid" resultMap="CouponResultMap" parameterType="java.lang.Long">
+    <![CDATA[
     select
     id, amount, description, status, begin_date, end_date, customer_id, gmt_create, gmt_modified
     from tnc_coupon
-    where customer_id = #{id,jdbcType=BIGINT}
+    where customer_id = #{id,jdbcType=BIGINT} and status = 0 and begin_date<NOW()
+    ]]>
   </select>
   <update id="updateCustomerInfo" parameterType="com.dev.main.tenancy.domain.TncCustomer">
     update tnc_customer
@@ -426,5 +444,11 @@
     <include refid="carItem_Column_List" />
     from tnc_car_item
     where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectCarItemBycid" resultMap="carItemResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="carItem_Column_List" />
+    from tnc_car_item
+    where car_id = #{id,jdbcType=BIGINT}
   </select>
 </mapper>
