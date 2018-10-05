@@ -9,9 +9,12 @@ import com.dev.main.tenancy.service.ICustomerService;
 import com.dev.main.tenancy.vo.TncCustomerVo;
 import io.netty.util.internal.StringUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +32,8 @@ public class CustomerServiceImpl implements ICustomerService {
     private TncCouponMapper tncCouponMapper;
     @Autowired
     private TncPointMapper tncPointMapper;
+    @Autowired
+    private TncPointLogMapper tncPointLogMapper;
 
     @Override
     public TncCustomer findByPhone(String phone) {
@@ -147,6 +152,55 @@ public class CustomerServiceImpl implements ICustomerService {
     public TncPoint findUserPointById(Long uid) {
         TncPoint tncPoint = tncPointMapper.selectByUserId(uid);
         return tncPoint;
+    }
+
+    @Override
+    public void pointExchangCoupon(BigDecimal amount, Long pid, int usablePoint, int pointExchange, Long uid) {
+        TncPoint tncPoint = this.getTncPoint(usablePoint, pid);
+        TncCoupon tncCoupon = this.getTncCoupon(amount, uid);
+        TncPointLog tncPointLog = this.getTncPointLog(pid, pointExchange, amount);
+        tncPointLogMapper.insertSelective(tncPointLog);
+        tncPointMapper.updateByPrimaryKeySelective(tncPoint);
+        tncCouponMapper.insertSelective(tncCoupon);
+    }
+
+    @Override
+    public List<TncPointLog> getPointLogByPid(Long pid) {
+        List<TncPointLog> tncPointLogs = tncPointLogMapper.selectByPid(pid);
+        return tncPointLogs;
+    }
+
+    public TncPoint getTncPoint(int usablePoint, Long pid) {
+        TncPoint tncPoint = new TncPoint();
+        tncPoint.setId(pid);
+        tncPoint.setPoint(usablePoint);
+        tncPoint.setIsDeleted((byte)0);
+        tncPoint.setGmtModified(new Date());
+        tncPoint.setGmtCreate(new Date());
+        return tncPoint;
+    }
+    public TncCoupon getTncCoupon(BigDecimal amount, Long uid) {
+        TncCoupon tncCoupon = new TncCoupon();
+
+        tncCoupon.setCustomerId(uid);
+        tncCoupon.setAmount(amount);
+        tncCoupon.setBeginDate(new Date());
+        tncCoupon.setEndDate(DateUtils.addDays(new Date(), 30));
+        tncCoupon.setStatus((byte)0);
+        tncCoupon.setGmtCreate(new Date());
+        tncCoupon.setGmtModified(new Date());
+        return tncCoupon;
+    }
+    public TncPointLog getTncPointLog(Long pid, int pointExchange, BigDecimal amount) {
+        TncPointLog tncPointLog = new TncPointLog();
+
+        tncPointLog.setChange(pointExchange);
+        tncPointLog.setPid(pid);
+        tncPointLog.setResource("兑换"+amount+"元租车券");
+        tncPointLog.setGmtModified(new Date());
+        tncPointLog.setGmtCreate(new Date());
+        tncPointLog.setIsDeleted((byte)0);
+        return tncPointLog;
     }
 
     public void setTncCustomerMapper(TncCustomerMapper tncCustomerMapper) {

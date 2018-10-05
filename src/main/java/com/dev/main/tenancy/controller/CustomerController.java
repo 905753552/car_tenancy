@@ -6,6 +6,7 @@ import com.dev.main.shiro.util.ShiroUtils;
 import com.dev.main.tenancy.domain.TncCoupon;
 import com.dev.main.tenancy.domain.TncCustomer;
 import com.dev.main.tenancy.domain.TncPoint;
+import com.dev.main.tenancy.domain.TncPointLog;
 import com.dev.main.tenancy.service.ICustomerService;
 import com.dev.main.tenancy.vo.TncCustomerVo;
 import org.apache.shiro.subject.Subject;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -69,12 +71,42 @@ public class CustomerController {
         int count = customerService.countUnuse(tncCustomer.getId());
         TncPoint tncPoint = customerService.findUserPointById(tncCustomer.getId());
         int point = 0;
+        Long pid = null;
         if(tncPoint!=null) {
             point = tncPoint.getPoint();
+            pid = tncPoint.getId();
         }
         ResultMap result = new ResultMap();
         result.put("count", count);
         result.put("point", point);
+        result.put("pid", pid);
+        return result;
+    }
+    /***
+     * @param  usablePoint 用户目前积分
+     * @param  pointValue 积分变动，这里要转为负值
+     * @param  amount 优惠券面值
+     * @param  pid 积分表id
+     */
+    @GetMapping("/exchange")
+    public ResultMap exchange(int usablePoint, Long pid, int pointValue, BigDecimal amount) {
+        TncCustomer tncCustomer = ShiroUtils.getUserEntity();
+        Long uid = tncCustomer.getId();
+        usablePoint = usablePoint - pointValue;
+        pointValue = 0 - pointValue;
+        customerService.pointExchangCoupon(amount, pid, usablePoint, pointValue, uid);
+        return ResultMap.success();
+    }
+
+    @GetMapping("/getPointLog")
+    public ResultMap getPointLog() {
+        TncCustomer tncCustomer = ShiroUtils.getUserEntity();
+        int count = customerService.countUnuse(tncCustomer.getId());
+        TncPoint tncPoint = customerService.findUserPointById(tncCustomer.getId());
+        Long pid = tncPoint.getId();
+        ResultMap result = new ResultMap();
+        List<TncPointLog> tncPointLogs = customerService.getPointLogByPid(pid);
+        result.put("pointLogs", tncPointLogs);
         return result;
     }
 }

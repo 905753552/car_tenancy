@@ -11,117 +11,6 @@
 <link rel="stylesheet" href="/css/footer.css">
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/personInfo.css">
-<style type="text/css">
-
-    .coupon_bd {
-        display: flex; min-height: 200px; justify-content: flex-start; flex-wrap: wrap;
-    }
-    .zc_coupon_simulation {
-        width: 100%;
-        height: 198px;
-    }
-
-    .coupon {
-        height: 178px;
-        width: 46.96%;
-        min-width: 320px;
-        margin: 0 1.24% 20px 1.24%;
-        position: relative;
-        background: url("/img/nullCoupon.png") no-repeat;
-        background-size:100% 198px;
-    }
-    .amount {
-        width: 100%;
-        height: 128px;
-        border-radius: 5px 5px 0 0;
-        background: #ff8650 url('/img/mycoupon_orange.gif') left bottom repeat-x;
-        position: relative;
-    }
-    .moneyamount {
-        font-size: 80px;
-        color: #fff;
-        display: block;
-        line-height: 128px;
-        padding-left: 30px;
-    }
-    .logo {
-        width: 80px;
-        height: 80px;
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        background: url("/img/icon.png") no-repeat;
-        background-position: -275px -230px;
-    }
-    .time {
-        width: 100%;
-        height: 50px;
-        line-height: 50px;
-        padding: 0 20px;
-        border: 1px solid #ffbc9e;
-        border-top: 0 none;
-        border-radius: 0 0 5px 5px;
-        background-color: #fff9eb;
-        font-size: 12px;
-        color: #93939e;
-    }
-    .zc_time_icon {
-        display: inline-block;
-        width: 15px;
-        height: 15px;
-        background-image: url("/img/icon.png");
-        background-position: -421px -100px;
-        vertical-align: middle;
-    }
-    .gbyhqexplain {
-        display: inline-block;
-        float: right;
-    }
-    .gbyhqexplain i {
-        display: inline-block;
-        width: 9px;
-        height: 6px;
-        background-image: url('/img/icon.png');
-        background-repeat: no-repeat;
-        background-position: -454px -100px;
-        margin-left: 6px;
-        vertical-align: middle;
-    }
-    .used {
-        width: 145px;
-        height: 145px;
-        position: absolute;
-        top: 20px;
-        right: 120px;
-        background: url(/img/icon.png) no-repeat;
-        background-position: -0px -300px;
-    }
-    .null_amount {
-        width: 100%;
-        height: 128px;
-        border-radius: 5px 5px 0 0;
-        position: relative;
-    }
-    .null_time {
-        width: 100%;
-        height: 50px;
-        line-height: 50px;
-        padding: 0 20px;
-        border-top: 0 none;
-        border-radius: 0 0 5px 5px;
-        font-size: 12px;
-        color: #93939e;
-    }
-    .overdue {
-        width: 145px;
-        height: 145px;
-        position: absolute;
-        top: 20px;
-        right: 120px;
-        background: url(/img/icon.png) no-repeat;
-        background-position: -145px -300px;
-    }
-</style>
 <body>
 <div class="container-fluid tnc_container tnc_header">
     <div v-cloak id="header-app" class="row tnc_head">
@@ -179,12 +68,16 @@
                 </dl>
                 <dl>
                     <dt class="info_h2">我的账户</dt>
-                    <dd><a href="javascript:void(0);" id="left_myInfo">我的信息</a></dd>
-                    <dd><a href="javascript:void(0);" id="left_updatePwd">修改密码</a></dd>
-                    <dd><a href="javascript:void(0);" id="left_coupon">优惠券
+                    <dd><a href="/tenancy/p/personInfo" id="left_myInfo">我的信息</a></dd>
+                    <dd><a href="/tenancy/p/updatePassword" id="left_updatePwd">修改密码</a></dd>
+                    <dd><a href="/tenancy/p/coupon" id="left_coupon">优惠券
                         <span id="couponCount"></span></a></dd>
-                    <dd><a href="javascript:void(0);" id="left_point">可用积分
+                    <dd><a href="/tenancy/p/usablePoint" id="left_point">可用积分
                         <span id="pointNum"></span></a></dd>
+                </dl>
+                <dl>
+                    <dt class="info_h2">积分商城</dt>
+                    <dd><a href="/tenancy/p/pointMall" id="left_pointMall">积分商城</a></dd>
                 </dl>
             </div>
         </div>
@@ -206,7 +99,7 @@
                     <!--body-->
                     <div class="coupon_bd">
                         <!--未使用-->
-                        <div class="coupon coupon_unuse" v-for="item in coupons" v-if="item.status==2" >
+                        <div class="coupon coupon_unuse" v-for="item in coupons" v-if="item.status==0" >
                             <div class="amount">
                                 <span class="moneyamount">
                                     <em>¥{{item.amount}}</em>
@@ -240,7 +133,7 @@
                             </div>
                         </div>
                         <!--已过期-->
-                        <div class="coupon coupon_overdue" v-for="item in coupons" v-if="item.status==0">
+                        <div class="coupon coupon_overdue" v-for="item in coupons" v-if="item.status==2">
                             <div class="null_amount">
                                 <span class="moneyamount" style="color: #60606c38">
                                     <em>¥{{item.amount}}</em>
@@ -342,21 +235,27 @@
     <div class="modal-dialog" style="margin: 6rem auto" role="document">
         <div class="modal-content">
             <div class="modal-header modal_hd_color">
-                <p class="modal-title" style="font-size: 16px">请输入以下验证码，获取手机动态码</p>
+                <p class="modal-title" style="font-size: 16px">详细说明</p>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span style="float: right" aria-hidden="true">&times;</span>
                 </button>
             </div>
 
-            <div class="modal-body vcodeinput" style="height: 200px">
-                <input id="verifyCode" class="tnc_input code_input" placeholder="请输入验证码">
-                <span class="pic-yzm fr">
-                        <img id="yzmImg_float" src="" width="108px" height="36px">
-                    <i id="fresh_float" class="zc-fresh" onclick="changeImageVerifyCode()"></i>
-                </span>
-            </div>
-            <div class="modal-footer" style="margin: 0 auto">
-                <button type="button" class="tnc_btn tnc_btn_green"  onclick="sub_verify_code()">确认</button>
+            <div class="modal-body vcodeinput" style="height: 230px">
+                使用规则
+                <br><br>
+                    1.实际租期2天及以上的订单可用，优惠券平日、周末、法定节假日均可使用;
+                <br>
+                    2.不与顺风车、预付特价、其他优惠活动、优惠类电子券同享;
+                <br>
+                    3.此优惠仅限每人享受1次,每单限用1张，限本人使用;
+                <br>
+                    4.代金券不可转让、不开发票、不找零、不兑换现金；
+                <br><br>
+                使用范围
+                <br><br>
+                    全国各城市直营门店、不限制车型;
+
             </div>
         </div>
     </div>
@@ -369,102 +268,11 @@
 <script src="/vue-2.5.17/vue.min.js"></script>
 <script src="/js/common/common.js"></script>
 <script src="/js/tenancy/header.js"></script>
+<script src="/js/tenancy/coupon.js"></script>
 <script>
     $(document).ready(function () {
         $("#coupon_a_all").addClass('coupon_a_stop');
         $("#left_coupon").addClass('infoleft_a');
-    });
-    /*左侧优惠券和积分数*/
-    function couponAndPoint() {
-        $.ajax({
-            type:"get",
-            url: "/api/customer/countCouponAndPoint",
-            success:function (res) {
-                if(res.code==0) {
-                    console.log(res);
-                    document.getElementById("pointNum").innerText="("+res.point+"分)";
-                    document.getElementById("couponCount").innerText="("+res.count+"张)";
-                } else {
-                    handleAjax(res);
-                }
-            }
-        })
-    }
-    function coupon_findCoupon() {
-        $.ajax({
-            type:"get",
-            url: "/api/customer/findCoupon",
-            success:function (res) {
-                if(res.code==0) {
-                    couponData.coupons = res.coupons;
-                    console.log(couponData.coupons);
-                } else {
-                    handleAjax(res);
-                }
-            }
-        })
-    }
-
-    function selectCoupon(select) {
-        //alert("梵蒂冈");
-        if(select==0) {
-            $(".coupon_used").css("display", "none");
-            $(".coupon_overdue").css("display", "none");
-            $(".coupon_unuse").css("display", "inline");
-            //$($("#coupon_a_unuse").parent().siblings().children().siblings("span")[0]).removeClass("coupon_a_stop");  // 删除其他兄弟元素的样
-            console.log($(this));
-            $("#coupon_a_all").removeClass('coupon_a_stop');  // 移除当前元素的样式
-            $("#coupon_a_used").removeClass('coupon_a_stop');  // 移除当前元素的样式
-            $("#coupon_a_overdue").removeClass('coupon_a_stop');  // 移除当前元素的样式
-            $("#coupon_a_unuse").addClass('coupon_a_stop');  // 添加当前元素的样式
-        }else if(select==1) {
-            $(".coupon_unuse").css("display", "none");
-            $(".coupon_overdue").css("display", "none");
-            $(".coupon_used").css("display", "inline");
-            //$($("#coupon_a_unuse").parent().siblings().children().siblings("span")[0]).removeClass("coupon_a_stop");  // 删除其他兄弟元素的样
-            $("#coupon_a_all").removeClass('coupon_a_stop');  // 移除当前元素的样式
-            $("#coupon_a_unuse").removeClass('coupon_a_stop');  // 移除当前元素的样式
-            $("#coupon_a_overdue").removeClass('coupon_a_stop');  // 移除当前元素的样式
-            $("#coupon_a_used").addClass('coupon_a_stop');
-        }else if(select==2) {
-            $(".coupon_unuse").css("display", "none");
-            $(".coupon_used").css("display", "none");
-            $(".coupon_overdue").css("display", "inline");
-            //$($("#coupon_a_unuse").parent().siblings().children().siblings("span")[0]).removeClass("coupon_a_stop");  // 删除其他兄弟元素的样
-            $("#coupon_a_all").removeClass('coupon_a_stop');  // 移除当前元素的样式
-            $("#coupon_a_unuse").removeClass('coupon_a_stop');  // 移除当前元素的样式
-            $("#coupon_a_used").removeClass('coupon_a_stop');  // 移除当前元素的样式
-            $("#coupon_a_overdue").addClass('coupon_a_stop');
-        }else{
-            $(".coupon_unuse").css("display", "inline");
-            $(".coupon_used").css("display", "inline");
-            $(".coupon_overdue").css("display", "inline");
-            $("#coupon_a_overdue").removeClass('coupon_a_stop');  // 移除当前元素的样式
-            $("#coupon_a_unuse").removeClass('coupon_a_stop');  // 移除当前元素的样式
-            $("#coupon_a_used").removeClass('coupon_a_stop');  // 移除当前元素的样式
-            $("#coupon_a_all").addClass('coupon_a_stop');
-        }
-    }
-
-    var couponData = {
-        coupons:[]
-    }
-
-    Vue.filter('monent', function (value) {
-        value = value.substring(0,11);
-        return value;
-    })
-
-    var couponInfo_app = new Vue({
-        el: "#couponInfo",
-        data: couponData,
-        methods:{
-            selectCoupon:selectCoupon,
-        },
-        created: ()=>{
-            coupon_findCoupon();
-            couponAndPoint();
-        },
     });
 </script>
 </html>

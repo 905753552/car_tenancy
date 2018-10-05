@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>修改密码页</title>
+    <title>积分商城</title>
 </head>
 <link rel="stylesheet" href="/css/reset.css">
 <link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap.min.css">
@@ -64,7 +64,7 @@
             <div class="infoleft_bd">
                 <dl>
                     <dt class="info_h2">订单中心</dt>
-                    <dd><a href="javascript:void(0);" id="left_myOrder">我的订单</a></dd>
+                    <dd><a href="#" id="left_myOrder">我的订单</a></dd>
                 </dl>
                 <dl>
                     <dt class="info_h2">我的账户</dt>
@@ -82,61 +82,42 @@
             </div>
         </div>
         <div class="col-md-8 col-sm-9 myright">
-            <div class="info_bd">
-                <h2 class="info_h2">修改密码</h2>
+            <div class="info_bd" id="pointMall">
                 <div>
-                    <form id="passwordInfo">
-                        <ul>
-                            <li>
-                                <div class="row">
-                                    <label class="info_label col-md-3 col-sm-2">原密码</label>
-                                    <span class="info_span col-md-6 col-sm-6">
-                                        <input type="password" class="tnc_input info_input" id="current_password" v-model="passwords.curPassword"
-                                               placeholder="输入原来密码">
-                                    </span>
-                                </div>
-                                <div class="clear"></div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <label class="info_label col-md-3 col-sm-2">新密码</label>
-                                    <span class="info_span col-md-6 col-sm-6">
-                                        <input type="password" class="tnc_input info_input" id="xpsw" v-model="passwords.newPassword" maxlength=18 onkeyup ="pswLevel()"
-                                       placeholder="建议6-18位数字、字母、符号的组合密码">
-                                    </span>
-                                    <div class="zc-safepsw col-md-3 col-sm-2" id="pwdLevelDiv">
-                                        <span class="safe_1">弱</span>
-                                        <span class="safe_2">中</span>
-                                        <span class="safe_3">强</span>
-                                    </div>
-                                </div>
-                                <div class="clear"></div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <label class="info_label col-md-3 col-sm-2">确认密码</label>
-                                    <span class="info_span col-md-6 col-sm-6">
-                                        <input type="password" class="tnc_input info_input" id="confirm_password"
-                                               value="" placeholder="再次输入密码">
-                                    </span>
-                                </div>
-                                <div class="clear"></div>
-                            </li>
-                            <li style="height: 100px">
-                                <div style="height: 100px; line-height: 100px; margin-left: 215px">
-                                    <button type="button" class="tnc_btn tnc_btn_green" id="save_btn" @click="savePassword()">保存</button>
-                                </div>
-                                <div class="clear"></div>
-                            </li>
-                        </ul>
-                    </form>
+                    <h2 class="info_h2" id="info_h2"></h2>
                 </div>
-                <div class="clear"></div>
+                <div style="clear: both"></div>
+                <div class="myborder-line" >
+                    <!--body-->
+                    <div class="coupon_bd">
+                        <!--未使用-->
+                        <div class="coupon coupon_unuse" v-for="item in coupons" >
+                            <div class="amount">
+                                <span class="moneyamount">
+                                    <em>¥{{item.amount}}</em>
+                                </span>
+                            </div>
+                            <div class="logo"></div>
+                            <div class="time">
+                                <a href="javascript:void(0);" class="adow"  style="color: #93939e;" data-toggle="modal" data-target="#detailDescripe">
+                                    查看详细说明
+                                    <i></i>
+                                </a>
+                                <!--有效期：{{item.beginDate | monent}}-{{item.endDate | monent}}-->
+                                <div class="gbyhqexplain">
+                                    <span class="sum"><em style="font-size: 22px">{{item.point}}</em>积分</span>
+                                    <span class="exchange1 closed" disabled v-show="usablePoint<item.point">积分不足</span>
+                                    <span class="exchange" @click="exchange(item.point,item.amount)" v-show="usablePoint>=item.point">兑换</span>
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <div class="clearfix"></div>
         </div>
     </div>
-
     <div class="row tnc_footer_background">
         <div class="col col-md-10 offset-md-1 tnc_footer_help">
             <dl class="tnc_footer_help_item">
@@ -203,12 +184,45 @@
             <span class="">Copyright©20xx-20xx www.wind.zuche.com All Rights Reserved.　肇庆乘风汽车租赁有限公司 粤ICP备10000518号   粤公网安备号 11010502020518</span>
             <span class="">如果您对乘风租车网站有任何意见，欢迎发送邮件到 <a href="Mailto:web@wind.com" class="">web@wind.com</a></span>
             <span class="">
-                <a target="_blank"
-                   href="https://ss.knet.cn/verifyseal.dll?sn=2011091400100014977&amp;ct=df&amp;pa=294005"
-                   rel="nofollow" tabindex="-1" id="urlknet" class="sz_k"></a>
-                <a target="_blank" id="___szfw_logo___" href="https://search.szfw.org/cert/l/CX20121016001772002081"
-                   rel="nofollow" title="诚信网站" class="sz_c"></a>
-            </span>
+                    <a target="_blank"
+                       href="https://ss.knet.cn/verifyseal.dll?sn=2011091400100014977&amp;ct=df&amp;pa=294005"
+                       rel="nofollow" tabindex="-1" id="urlknet" class="sz_k"></a>
+                    <a target="_blank" id="___szfw_logo___" href="https://search.szfw.org/cert/l/CX20121016001772002081"
+                       rel="nofollow" title="诚信网站" class="sz_c"></a>
+                </span>
+        </div>
+    </div>
+</div>
+<!--模态框-->
+<div class="modal fade" tabindex="-1" role="dialog" id="detailDescripe">
+    <div class="modal-dialog" style="margin: 6rem auto" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal_hd_color">
+                <p class="modal-title" style="font-size: 16px">详细说明</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span style="float: right" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body vcodeinput" style="height: 290px">
+                使用条件
+                <br><br>
+                关联日起30天完成取还车的日租订单，可在还车结算时使用此代金券；
+                <br><br>
+                使用规则
+                <br><br>
+                1.实际租期2天及以上的订单可用，优惠券平日、周末、法定节假日均可使用;
+                <br>
+                2.不与顺风车、预付特价、其他优惠活动、优惠类电子券同享;
+                <br>
+                3.此优惠仅限每人享受1次,每单限用1张，限本人使用;
+                <br>
+                4.代金券不可转让、不开发票、不找零、不兑换现金；
+                <br><br>
+                使用范围
+                <br><br>
+                全国各城市直营门店、不限制车型;
+            </div>
         </div>
     </div>
 </div>
@@ -217,18 +231,14 @@
 <script src="/js/popper.min.js"></script>
 <script src="/layui-v2.4.3/lay/modules/layer.js"></script>
 <script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>
-<script src="/vue-2.5.17/vue.min.js"></script>
+<script src="/vue-2.5.17/vue.js"></script>
 <script src="/js/common/common.js"></script>
 <script src="/js/tenancy/header.js"></script>
-<script src="/js/tenancy/updatePwd.js"></script>
+<script src="/js/tenancy/point.js"></script>
 <script>
     $(document).ready(function () {
-        $("#left_updatePwd").addClass('infoleft_a');
+        $("#left_pointMall").addClass('infoleft_a');
+        couponAndPoint();
     });
-    window.onkeydown = function(){
-        if (event.keyCode===13){  //回车键的键值为13
-           $("#save_btn").click();//模拟按下submit确认按钮
-        }
-    }
 </script>
 </html>

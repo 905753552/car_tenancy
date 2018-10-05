@@ -267,3 +267,188 @@ body {
 .safetybg_3 span.safety_1,.safetybg_3 span.safety_2,.safetybg_3 span.safety_3 {
     background: #fdb811
 }
+
+.coupon_bd {
+    display: flex; min-height: 200px; justify-content: flex-start; flex-wrap: wrap;
+}
+.zc_coupon_simulation {
+    width: 100%;
+    height: 198px;
+}
+
+.coupon {
+    height: 178px;
+    width: 46.96%;
+    min-width: 320px;
+    margin: 0 1.24% 20px 1.24%;
+    position: relative;
+    background: url("/img/nullCoupon.png") no-repeat;
+    background-size:100% 198px;
+}
+.amount {
+    width: 100%;
+    height: 128px;
+    border-radius: 5px 5px 0 0;
+    background: #ff8650 url('/img/mycoupon_orange.gif') left bottom repeat-x;
+    position: relative;
+}
+.moneyamount {
+    font-size: 80px;
+    color: #fff;
+    display: block;
+    line-height: 128px;
+    padding-left: 30px;
+}
+.logo {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: url("/img/icon.png") no-repeat;
+    background-position: -275px -230px;
+}
+.time {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    border: 1px solid #ffbc9e;
+    border-top: 0 none;
+    border-radius: 0 0 5px 5px;
+    background-color: #fff9eb;
+    font-size: 12px;
+    color: #93939e;
+}
+.zc_time_icon {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-image: url("/img/icon.png");
+    background-position: -421px -100px;
+    vertical-align: middle;
+}
+.gbyhqexplain {
+    display: inline-block;
+    float: right;
+}
+.gbyhqexplain i {
+    display: inline-block;
+    width: 9px;
+    height: 6px;
+    background-image: url('/img/icon.png');
+    background-repeat: no-repeat;
+    background-position: -454px -100px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+.used {
+    width: 145px;
+    height: 145px;
+    position: absolute;
+    top: 20px;
+    right: 120px;
+    background: url(/img/icon.png) no-repeat;
+    background-position: -0px -300px;
+}
+.null_amount {
+    width: 100%;
+    height: 128px;
+    border-radius: 5px 5px 0 0;
+    position: relative;
+}
+.null_time {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    border-top: 0 none;
+    border-radius: 0 0 5px 5px;
+    font-size: 12px;
+    color: #93939e;
+}
+.overdue {
+    width: 145px;
+    height: 145px;
+    position: absolute;
+    top: 20px;
+    right: 120px;
+    background: url(/img/icon.png) no-repeat;
+    background-position: -145px -300px;
+}
+img {
+    border: none;
+    vertical-align: middle;
+}
+.nullPoint {
+    min-height: 388px;
+    width: 100%;
+    padding-top: 8%;
+    text-align: center;
+}
+.nullPoint p {
+    display: block;
+    color: #60606c;
+    padding: 25px 0 20px 0;
+    font-size: 16px;
+}
+.nullPoint a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 0 10px;
+    min-width: 58px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 2px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #f3b900;
+    cursor: pointer;
+    border: none;
+}
+.nullPoint a:hover {
+    background-color: #ff8650;
+}
+.pointLog {
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #e9ebee;
+}
+.pointLogSpan {
+    margin: 0px 20px;
+    font-size: 20px;
+    color: #60606c
+}
+.pointChange {
+    margin-left: 200px;
+    font-size: 28px;
+    color: #60606c
+}
+.sum {
+    margin-right: 10px;
+    display: inline-block;
+    font-size: 14px;
+    color: #ff8650;
+}
+.exchange,.exchange1{
+    color: #fff;
+    border-radius: 3px;
+    background: #fabe00;
+    float: right;
+    width: 64px;
+    height: 32px;
+    line-height: 32px;
+    margin-top: 8px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+}
+.exchange:hover {
+    text-decoration: none;
+    background-color: #ff8650;
+}
+.closed {
+    background: #c3cad9;
+    cursor: auto;
+}

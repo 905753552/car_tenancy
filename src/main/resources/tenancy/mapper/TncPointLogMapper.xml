@@ -11,8 +11,14 @@
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, pid, resource, change, is_deleted, gmt_create, gmt_modified
+    id, pid, resource, `change`, is_deleted, gmt_create, gmt_modified
   </sql>
+  <select id="selectByPid" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from tnc_point_log
+    where pid = #{pid,jdbcType=BIGINT} and is_deleted = 0
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
@@ -44,7 +50,7 @@
         resource,
       </if>
       <if test="change != null" >
-        change,
+        `change`,
       </if>
       <if test="isDeleted != null" >
         is_deleted,

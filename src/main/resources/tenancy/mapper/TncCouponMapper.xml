@@ -19,7 +19,7 @@
     select
     <include refid="Base_Column_List" />
     from tnc_coupon
-    where customer_id = #{uid,jdbcType=BIGINT} order by status ASC ,end_date DESC
+    where customer_id = #{uid,jdbcType=BIGINT} order by status ASC ,end_date ASC
   </select>
   <select id="countUnuse" resultType="java.lang.Integer"  parameterType="java.lang.Long" >
     select count(*)

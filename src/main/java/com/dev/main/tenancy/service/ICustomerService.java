@@ -1,11 +1,9 @@
 package com.dev.main.tenancy.service;
 
-import com.dev.main.tenancy.domain.AddressRegion;
-import com.dev.main.tenancy.domain.TncCoupon;
-import com.dev.main.tenancy.domain.TncCustomer;
-import com.dev.main.tenancy.domain.TncPoint;
+import com.dev.main.tenancy.domain.*;
 import com.dev.main.tenancy.vo.TncCustomerVo;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -35,5 +33,10 @@ public interface ICustomerService {
 
     /**根据用户id查找积分*/
     TncPoint findUserPointById(Long uid);
+
+    /**用积分兑换优惠券*/
+    void pointExchangCoupon(BigDecimal amount, Long pid, int usablePoint, int pointExchange, Long uid);
+
+    List<TncPointLog> getPointLogByPid(Long pid);
 }
 
