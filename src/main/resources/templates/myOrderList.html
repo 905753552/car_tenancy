@@ -2,7 +2,7 @@
 <html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:border-top="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>个人信息页</title>
+    <title>我的订单</title>
 </head>
 <link rel="stylesheet" href="/css/reset.css">
 <link rel="stylesheet" href="/bootstrap-4.1.3/css/bootstrap.min.css">
@@ -67,17 +67,20 @@
             <div class="infoleft_bd">
                 <dl>
                     <dt class="info_h2">订单中心</dt>
-                    <dd><a href="javascript:void(0);" onclick="">我的订单
-                        <span>(0)</span></a></dd>
+                    <dd><a href="/tenancy/p/myOrderList" id="left_myOrder">我的订单</a></dd>
                 </dl>
                 <dl>
                     <dt class="info_h2">我的账户</dt>
-                    <dd><a href="javascript:void(0);" onclick="">我的信息</a></dd>
-                    <dd><a href="javascript:void(0);" onclick="">修改密码</a></dd>
-                    <dd><a href="javascript:void(0);" onclick="">优惠券
-                        <span>(0)</span></a></dd>
-                    <dd><a href="javascript:void(0);" onclick="">可用积分
-                        <span>(0)</span></a></dd>
+                    <dd><a href="/tenancy/p/personInfo" id="left_myInfo">我的信息</a></dd>
+                    <dd><a href="/tenancy/p/updatePassword" id="left_updatePwd">修改密码</a></dd>
+                    <dd><a href="/tenancy/p/coupon" id="left_coupon">优惠券
+                        <span id="couponCount"></span></a></dd>
+                    <dd><a href="/tenancy/p/usablePoint" id="left_point">可用积分
+                        <span id="pointNum"></span></a></dd>
+                </dl>
+                <dl>
+                    <dt class="info_h2">积分商城</dt>
+                    <dd><a href="/tenancy/p/pointMall" id="left_pointMall">积分商城</a></dd>
                 </dl>
             </div>
         </div>
@@ -102,23 +105,23 @@
                             </font>
                         </div>
                         <div class="fr">
-                            <input type="text" value="" class="w175 zc_iptcalendar"  id="toDate" autocomplete="on" readonly="readonly" style="box-sizing:unset"/>
+                            <input type="text"  value="" class="layui-input"  id="toDate" autocomplete="on" readonly="readonly" style="box-sizing:unset;width:130px"/>
                         </div>
                         <div class="fr">-</div>
-                        <div class="fr"><input type="text" value="" class="w175 zc_iptcalendar"  id="fromDate" autocomplete="on" readonly="readonly" style="box-sizing:unset"/></div>
+                        <div class="fr"><input type="text"  value="" class="layui-input" id="fromDate"   autocomplete="on" readonly="readonly" style="box-sizing:unset;width:130px"/></div>
                         <div class="clear"></div>
                     </div>
                 </div>
-                <button onclick="getCustomer()">45465654</button>
                 <!--<div class="h20"></div>-->
                 <!--<div class="subbox_m"></div>-->
 
                 <div id="orderlist_app" class="layui-tab" lay-filter="docDemoTabBrief">
                     <ul class="layui-tab-title" style="border-top:0px;height: 41px;">
                         <li class="layui-this">全部</li>
+                        <li>处理中</li>
                         <li>等待付款</li>
-                        <li>已失效</li>
                         <li>预定成功</li>
+                        <li>租赁中</li>
                         <li>已完成</li>
                         <li>已取消</li>
                     </ul>
@@ -138,33 +141,33 @@
                                     <tr v-for="(item, index) in orders">
                                         <td>
                                             {{ggg(index)}}
-                                            <img  :src="item.img"  width="166" height="97">
+                                            <img  :src="item.carVo.path"  width="166" height="97">
                                         </td>
                                         <td class="ol-carinfo">
                                             <b>
-                                                {{item.name}}{{item.series}}
+                                                {{item.carVo.bandname}}{{item.carVo.series}}
                                             </b>
                                             <p>
-                                                {{item.box_quantity}}厢/{{item.mymix}} |
-                                                乘坐{{item.seat_quantity}}人</p>
+                                                {{item.carVo.boxQuantity}}厢/{{item.mymix}} |
+                                                乘坐{{item.carVo.seatQuantity}}人</p>
                                             <p>订单号：{{item.id}}</p>
                                         </td>
                                         <td>
                                             <div class="ol-caraddress" style="cursor:default;">
                                                 <p class="qhicon zctooltip" >
                                                     <i class="zc_fetch_i"></i>
-                                                    {{item.get_store_name}}
+                                                    {{item.getStore.city}} - {{item.getStore.name}}
                                                 </p>
-                                                <p class="qhtime">{{item.start_date}}</p>
+                                                <p class="qhtime">{{item.startDate}}</p>
                                                 <p class="qhicon zctooltip" >
                                                     <i class="zc_giveback_i"></i>
-                                                    {{item.return_store_name}}
+                                                    {{item.returnStore.city}} - {{item.returnStore.name}}
                                                 </p>
-                                                <p class="qhtime">{{item.return_date}}</p>
+                                                <p class="qhtime">{{item.returnDate}}</p>
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="ol-aggregate">¥<span>{{item.total_amount}}</span>
+                                            <div class="ol-aggregate">¥<span>{{item.totalAmount}}</span>
                                             </div>
                                         </td>
                                         <td class="ac">
@@ -176,8 +179,59 @@
                                     </tbody>
                                 </table>
                             </div>
-                        <div class="layui-tab-item">
-                            等待支付
+                        <div class="layui-tab-item zc_myorder_info">
+                            <table class="zc_table_order" cellpadding="0" cellspacing="0" border="0">
+                                <thead>
+                                <tr>
+                                    <th class="al">订单信息</th>
+                                    <th width="197"></th>
+                                    <th class="al" width="263">取/还车信息</th>
+                                    <th class="ac" width="150">总计</th>
+                                    <th class="ac" width="150">订单状态</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="(item, index) in order_5">
+                                    <td>
+                                        {{ggg(index)}}
+                                        <img  :src="item.carVo.path"  width="166" height="97">
+                                    </td>
+                                    <td class="ol-carinfo">
+                                        <b>
+                                            {{item.carVo.bandname}}{{item.carVo.series}}
+                                        </b>
+                                        <p>
+                                            {{item.carVo.boxQuantity}}厢/{{item.mymix}} |
+                                            乘坐{{item.carVo.seatQuantity}}人</p>
+                                        <p>订单号：{{item.id}}</p>
+                                    </td>
+                                    <td>
+                                        <div class="ol-caraddress" style="cursor:default;">
+                                            <p class="qhicon zctooltip" >
+                                                <i class="zc_fetch_i"></i>
+                                                {{item.getStore.city}} - {{item.getStore.name}}
+                                            </p>
+                                            <p class="qhtime">{{item.startDate}}</p>
+                                            <p class="qhicon zctooltip" >
+                                                <i class="zc_giveback_i"></i>
+                                                {{item.returnStore.city}} - {{item.returnStore.name}}
+                                            </p>
+                                            <p class="qhtime">{{item.returnDate}}</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ol-aggregate">¥<span>{{item.totalAmount}}</span>
+                                        </div>
+                                    </td>
+                                    <td class="ac">
+                                        <span class="s-blue">{{item.orderstate}}</span>
+
+                                        <a href="javascript:void(0);" onclick="checkCost(15366353102763,1,32077597,null,'');" class="a-view">查看订单</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table></div>
+                        <div class="layui-tab-item zc_myorder_info">
                             <table class="zc_table_order" cellpadding="0" cellspacing="0" border="0">
                                 <thead>
                                 <tr>
@@ -192,33 +246,33 @@
                                 <tr v-for="(item, index) in order_0">
                                     <td>
                                         {{ggg(index)}}
-                                        <img  :src="item.img"  width="166" height="97">
+                                        <img  :src="item.carVo.path"  width="166" height="97">
                                     </td>
                                     <td class="ol-carinfo">
                                         <b>
-                                            {{item.name}}{{item.series}}
+                                            {{item.carVo.bandname}}{{item.carVo.series}}
                                         </b>
                                         <p>
-                                            {{item.box_quantity}}厢/{{item.mymix}} |
-                                            乘坐{{item.seat_quantity}}人</p>
+                                            {{item.carVo.boxQuantity}}厢/{{item.mymix}} |
+                                            乘坐{{item.carVo.seatQuantity}}人</p>
                                         <p>订单号：{{item.id}}</p>
                                     </td>
                                     <td>
                                         <div class="ol-caraddress" style="cursor:default;">
                                             <p class="qhicon zctooltip" >
                                                 <i class="zc_fetch_i"></i>
-                                                {{item.get_store_name}}
+                                                {{item.getStore.city}} - {{item.getStore.name}}
                                             </p>
-                                            <p class="qhtime">{{item.start_date}}</p>
+                                            <p class="qhtime">{{item.startDate}}</p>
                                             <p class="qhicon zctooltip" >
                                                 <i class="zc_giveback_i"></i>
-                                                {{item.return_store_name}}
+                                                {{item.returnStore.city}} - {{item.returnStore.name}}
                                             </p>
-                                            <p class="qhtime">{{item.return_date}}</p>
+                                            <p class="qhtime">{{item.returnDate}}</p>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="ol-aggregate">¥<span>{{item.total_amount}}</span>
+                                        <div class="ol-aggregate">¥<span>{{item.totalAmount}}</span>
                                         </div>
                                     </td>
                                     <td class="ac">
@@ -230,61 +284,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="layui-tab-item">
-                            已失效
-                            <table class="zc_table_order" cellpadding="0" cellspacing="0" border="0">
-                                <thead>
-                                <tr>
-                                    <th class="al">订单信息</th>
-                                    <th width="197"></th>
-                                    <th class="al" width="263">取/还车信息</th>
-                                    <th class="ac" width="150">总计</th>
-                                    <th class="ac" width="150">订单状态</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr v-for="(item, index) in order_1">
-                                    <td>
-                                        {{ggg(index)}}
-                                        <img  :src="item.img"  width="166" height="97">
-                                    </td>
-                                    <td class="ol-carinfo">
-                                        <b>
-                                            {{item.name}}{{item.series}}
-                                        </b>
-                                        <p>
-                                            {{item.box_quantity}}厢/{{item.mymix}} |
-                                            乘坐{{item.seat_quantity}}人</p>
-                                        <p>订单号：{{item.id}}</p>
-                                    </td>
-                                    <td>
-                                        <div class="ol-caraddress" style="cursor:default;">
-                                            <p class="qhicon zctooltip" >
-                                                <i class="zc_fetch_i"></i>
-                                                {{item.get_store_name}}
-                                            </p>
-                                            <p class="qhtime">{{item.start_date}}</p>
-                                            <p class="qhicon zctooltip" >
-                                                <i class="zc_giveback_i"></i>
-                                                {{item.return_store_name}}
-                                            </p>
-                                            <p class="qhtime">{{item.return_date}}</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="ol-aggregate">¥<span>{{item.total_amount}}</span>
-                                        </div>
-                                    </td>
-                                    <td class="ac">
-                                        <span class="s-gray">{{item.orderstate}}</span>
-
-                                        <a href="javascript:void(0);" onclick="checkCost(15366353102763,1,32077597,null,'');" class="a-view">查看订单</a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table></div>
-                        <div class="layui-tab-item">
-                            预定成功
+                        <div class="layui-tab-item zc_myorder_info">
                             <table class="zc_table_order" cellpadding="0" cellspacing="0" border="0">
                                 <thead>
                                 <tr>
@@ -299,33 +299,33 @@
                                 <tr v-for="(item, index) in order_2">
                                     <td>
                                         {{ggg(index)}}
-                                        <img  :src="item.img"  width="166" height="97">
+                                        <img  :src="item.carVo.path"  width="166" height="97">
                                     </td>
                                     <td class="ol-carinfo">
                                         <b>
-                                            {{item.name}}{{item.series}}
+                                            {{item.carVo.bandname}}{{item.carVo.series}}
                                         </b>
                                         <p>
-                                            {{item.box_quantity}}厢/{{item.mymix}} |
-                                            乘坐{{item.seat_quantity}}人</p>
+                                            {{item.carVo.boxQuantity}}厢/{{item.mymix}} |
+                                            乘坐{{item.carVo.seatQuantity}}人</p>
                                         <p>订单号：{{item.id}}</p>
                                     </td>
                                     <td>
                                         <div class="ol-caraddress" style="cursor:default;">
                                             <p class="qhicon zctooltip" >
                                                 <i class="zc_fetch_i"></i>
-                                                {{item.get_store_name}}
+                                                {{item.getStore.city}} - {{item.getStore.name}}
                                             </p>
-                                            <p class="qhtime">{{item.start_date}}</p>
+                                            <p class="qhtime">{{item.startDate}}</p>
                                             <p class="qhicon zctooltip" >
                                                 <i class="zc_giveback_i"></i>
-                                                {{item.return_store_name}}
+                                                {{item.returnStore.city}} - {{item.returnStore.name}}
                                             </p>
-                                            <p class="qhtime">{{item.return_date}}</p>
+                                            <p class="qhtime">{{item.returnDate}}</p>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="ol-aggregate">¥<span>{{item.total_amount}}</span>
+                                        <div class="ol-aggregate">¥<span>{{item.totalAmount}}</span>
                                         </div>
                                     </td>
                                     <td class="ac">
@@ -337,8 +337,59 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="layui-tab-item">
-                            已完成
+                        <div class="layui-tab-item zc_myorder_info">
+                            <table class="zc_table_order" cellpadding="0" cellspacing="0" border="0">
+                                <thead>
+                                <tr>
+                                    <th class="al">订单信息</th>
+                                    <th width="197"></th>
+                                    <th class="al" width="263">取/还车信息</th>
+                                    <th class="ac" width="150">总计</th>
+                                    <th class="ac" width="150">订单状态</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="(item, index) in order_1">
+                                    <td>
+                                        {{ggg(index)}}
+                                        <img  :src="item.carVo.path"  width="166" height="97">
+                                    </td>
+                                    <td class="ol-carinfo">
+                                        <b>
+                                            {{item.carVo.bandname}}{{item.carVo.series}}
+                                        </b>
+                                        <p>
+                                            {{item.carVo.boxQuantity}}厢/{{item.mymix}} |
+                                            乘坐{{item.carVo.seatQuantity}}人</p>
+                                        <p>订单号：{{item.id}}</p>
+                                    </td>
+                                    <td>
+                                        <div class="ol-caraddress" style="cursor:default;">
+                                            <p class="qhicon zctooltip" >
+                                                <i class="zc_fetch_i"></i>
+                                                {{item.getStore.city}} - {{item.getStore.name}}
+                                            </p>
+                                            <p class="qhtime">{{item.startDate}}</p>
+                                            <p class="qhicon zctooltip" >
+                                                <i class="zc_giveback_i"></i>
+                                                {{item.returnStore.city}} - {{item.returnStore.name}}
+                                            </p>
+                                            <p class="qhtime">{{item.returnDate}}</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ol-aggregate">¥<span>{{item.totalAmount}}</span>
+                                        </div>
+                                    </td>
+                                    <td class="ac">
+                                        <span class="s-blue">{{item.orderstate}}</span>
+
+                                        <a href="javascript:void(0);" onclick="checkCost(15366353102763,1,32077597,null,'');" class="a-view">查看订单</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table></div>
+                        <div class="layui-tab-item zc_myorder_info">
                             <table class="zc_table_order" cellpadding="0" cellspacing="0" border="0">
                                 <thead>
                                 <tr>
@@ -353,33 +404,33 @@
                                 <tr v-for="(item, index) in order_4">
                                     <td>
                                         {{ggg(index)}}
-                                        <img  :src="item.img"  width="166" height="97">
+                                        <img  :src="item.carVo.path"  width="166" height="97">
                                     </td>
                                     <td class="ol-carinfo">
                                         <b>
-                                            {{item.name}}{{item.series}}
+                                            {{item.carVo.bandname}}{{item.carVo.series}}
                                         </b>
                                         <p>
-                                            {{item.box_quantity}}厢/{{item.mymix}} |
-                                            乘坐{{item.seat_quantity}}人</p>
+                                            {{item.carVo.boxQuantity}}厢/{{item.mymix}} |
+                                            乘坐{{item.carVo.seatQuantity}}人</p>
                                         <p>订单号：{{item.id}}</p>
                                     </td>
                                     <td>
                                         <div class="ol-caraddress" style="cursor:default;">
                                             <p class="qhicon zctooltip" >
                                                 <i class="zc_fetch_i"></i>
-                                                {{item.get_store_name}}
+                                                {{item.getStore.city}} - {{item.getStore.name}}
                                             </p>
-                                            <p class="qhtime">{{item.start_date}}</p>
+                                            <p class="qhtime">{{item.startDate}}</p>
                                             <p class="qhicon zctooltip" >
                                                 <i class="zc_giveback_i"></i>
-                                                {{item.return_store_name}}
+                                                {{item.returnStore.city}} - {{item.returnStore.name}}
                                             </p>
-                                            <p class="qhtime">{{item.return_date}}</p>
+                                            <p class="qhtime">{{item.returnDate}}</p>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="ol-aggregate">¥<span>{{item.total_amount}}</span>
+                                        <div class="ol-aggregate">¥<span>{{item.totalAmount}}</span>
                                         </div>
                                     </td>
                                     <td class="ac">
@@ -391,8 +442,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="layui-tab-item">
-                            已取消
+                        <div class="layui-tab-item zc_myorder_info">
                             <table class="zc_table_order" cellpadding="0" cellspacing="0" border="0">
                                 <thead>
                                 <tr>
@@ -407,33 +457,33 @@
                                 <tr v-for="(item, index) in order_3">
                                     <td>
                                         {{ggg(index)}}
-                                        <img  :src="item.img"  width="166" height="97">
+                                        <img  :src="item.carVo.path"  width="166" height="97">
                                     </td>
                                     <td class="ol-carinfo">
                                         <b>
-                                            {{item.name}}{{item.series}}
+                                            {{item.carVo.bandname}}{{item.carVo.series}}
                                         </b>
                                         <p>
-                                            {{item.box_quantity}}厢/{{item.mymix}} |
-                                            乘坐{{item.seat_quantity}}人</p>
+                                            {{item.carVo.boxQuantity}}厢/{{item.mymix}} |
+                                            乘坐{{item.carVo.seatQuantity}}人</p>
                                         <p>订单号：{{item.id}}</p>
                                     </td>
                                     <td>
                                         <div class="ol-caraddress" style="cursor:default;">
                                             <p class="qhicon zctooltip" >
                                                 <i class="zc_fetch_i"></i>
-                                                {{item.get_store_name}}
+                                                {{item.getStore.city}} - {{item.getStore.name}}
                                             </p>
-                                            <p class="qhtime">{{item.start_date}}</p>
+                                            <p class="qhtime">{{item.startDate}}</p>
                                             <p class="qhicon zctooltip" >
                                                 <i class="zc_giveback_i"></i>
-                                                {{item.return_store_name}}
+                                                {{item.returnStore.city}} - {{item.returnStore.name}}
                                             </p>
-                                            <p class="qhtime">{{item.return_date}}</p>
+                                            <p class="qhtime">{{item.returnDate}}</p>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="ol-aggregate">¥<span>{{item.total_amount}}</span>
+                                        <div class="ol-aggregate">¥<span>{{item.totalAmount}}</span>
                                         </div>
                                     </td>
                                     <td class="ac">
@@ -580,11 +630,32 @@
 <script src="/js/popper.min.js"></script>
 <script src="/layui-v2.4.3/lay/modules/layer.js"></script>
 <script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+<script src="/layui-v2.4.3/layui.all.js"></script>
 <script src="/vue-2.5.17/vue.min.js"></script>
 <script src="/js/common/common.js"></script>
 <script src="/js/jquery.validate.min.js"></script>
 <script src="/js/tenancy/header.js"></script>
 <script src="/js/tenancy/myOrderList_show.js"></script>
-<script src="/layui-v2.4.3/layui.all.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#coupon_a_all").addClass('coupon_a_stop');
+        $("#left_myOrder").addClass('infoleft_a');
+    });
+    // function couponAndPoint() {
+    //     $.ajax({
+    //         type:"get",
+    //         url: "/api/customer/countCouponAndPoint",
+    //         success:function (res) {
+    //             if(res.code==0) {
+    //                 console.log(res);
+    //                 document.getElementById("pointNum").innerText="("+res.point+"分)";
+    //                 document.getElementById("couponCount").innerText="("+res.count+"张)";
+    //             } else {
+    //                 handleAjax(res);
+    //             }
+    //         }
+    //     })
+    // }
+</script>
 </body>
 </html>

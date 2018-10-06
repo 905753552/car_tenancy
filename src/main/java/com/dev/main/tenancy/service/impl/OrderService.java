@@ -14,9 +14,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *  * Description: main
- *  * Created by sf on 2018/9/25 8:37
- *  
+ *  * Description: main
+ *  * Created by sf on 2018/9/25 8:37
+ *
  */
 @Service
 public class OrderService implements IOrderService {
@@ -101,7 +101,7 @@ public class OrderService implements IOrderService {
         SimpleDateFormat sdf =   new SimpleDateFormat( "HHmmss" );
         String phone = tncOrder.getPhone().substring(7);//电话号码后两位
         String date = sdf.format(new Date());//日期时分秒
-       // String idcard = tncOrder.getCredentialsNumber().substring(10);//身份证后八位
+        // String idcard = tncOrder.getCredentialsNumber().substring(10);//身份证后八位
         int ran = (int) (Math.random()*99);
         String str = phone + date + ran;
         Long uid = Long.valueOf(str);

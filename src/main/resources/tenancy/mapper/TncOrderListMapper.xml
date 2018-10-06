@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dev.main.tenancy.dao.TncOrderListMapper" >
+  <resultMap id="selectOrderListrm" type="com.dev.main.tenancy.vo.TncOrderListVo">
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="total_amount" property="totalAmount" jdbcType="DECIMAL" />
+    <result column="get_store_id" property="getStoreId" jdbcType="BIGINT" />
+    <result column="return_store_id" property="returnStoreId" jdbcType="BIGINT" />
+    <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="return_date" property="returnDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="car_item_id" property="carItemId" jdbcType="BIGINT" />
+    <association property="getStore" column="get_store_id" select="selectStore" javaType="com.dev.main.tenancy.vo.TncStoreVo"/>
+    <association property="returnStore" column="return_store_id" select="selectStore" javaType="com.dev.main.tenancy.vo.TncStoreVo"/>
+    <association property="carVo" column="car_item_id" select="selectCarItem" javaType="com.dev.main.tenancy.vo.CarVo"/>
+  </resultMap>
+  <select id="selectOrderList" resultMap="selectOrderListrm" parameterType="java.lang.String">
+    select id, total_amount, get_store_id, return_store_id, start_date, return_date, status, car_item_id
+    from tnc_order
+    where ( phone = #{xxx} and is_deleted = 0)
+  </select>
+  <resultMap id="selectCarItemRm" type="com.dev.main.tenancy.vo.CarVo">
+    <result property="carId" column="carId" jdbcType="BIGINT"/>
+    <result property="series" column="series" jdbcType="VARCHAR"/>
+    <result property="bandname" column="bandname" jdbcType="VARCHAR"/>
+    <result property="boxQuantity" column="boxQuantity" jdbcType="INTEGER"/>
+    <result property="displacement" column="displacement" jdbcType="INTEGER"/>
+    <result property="seatQuantity" column="seatQuantity" jdbcType="INTEGER"/>
+    <result property="transmissionType" column="transmissionType" jdbcType="VARCHAR"/>
+    <association property="path" column="carId" select="com.dev.main.tenancy.dao.TncCarPicMapper.selectPathByCid"  javaType="String"/>
+  </resultMap>
+  <select id="selectCarItem" resultMap="selectCarItemRm" parameterType="java.lang.Long">
+    select b.series `series`,c.name `bandname`,b.box_quantity `boxQuantity`,b.displacement `displacement`,b.seat_quantity `seatQuantity`,b.transmission_type `transmissionType`,a.car_id `carId`
+    from tnc_car_item a
+    join tnc_car b on a.car_id = b.id
+    join tnc_brand c on b.brand_id = c.id
+    where a.id = #{xxx}
+  </select>
+
+  <resultMap id="selectStoreRm" type="com.dev.main.tenancy.vo.TncStoreVo">
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="detail" property="detail" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectStore" resultMap="selectStoreRm" parameterType="java.lang.Long">
+        select s.name `name`,rp.name `province`, rc.name `city`, ra.name `area`, a.detail `detail`
+        from tnc_store s
+        join tnc_address a on s.addr_id = a.id
+        join address_region rp on rp.id = a.province_id
+        join address_region rc on rc.id = a.city_id
+        join address_region ra on ra.id = a.area_id
+        where s.id = #{xxx}
+    </select>
+</mapper>
