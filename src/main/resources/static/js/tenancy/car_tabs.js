@@ -187,7 +187,11 @@ function doSearchByPackage(pid) {
     carMinPrice =0;
     carMaxPrice =9999;
     carBrand = allCarBrand
-    currentPackageId = pid
+    console.log(pid)
+    if(pid!= ""){
+        currentPackageId = pid
+    }
+
     //筛选值初始化
     doHandelDate()
     doSearchByAllType()

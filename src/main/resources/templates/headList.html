@@ -130,7 +130,7 @@
                     </div>
                     <div class="" style="display:inline-block;margin-top: 15px;margin-bottom: 15px;text-align: center">
                         <div style=""><i>租期:<em class="tnc_bred"><label>{{days}}</label>天</em>，不限里程</i></div>
-                        <input type="button" @click="doHandelDate();doSearchByAllType()" value="立即选车" class="tnc2_btn tnc_btn_green">
+                        <input type="button" @click="doHandelDate();doSearchByPackage('')" value="立即选车" class="tnc2_btn tnc_btn_green">
                     </div>
                 </div>
             </div>
@@ -657,7 +657,7 @@
     };
     $(document).ready(function(){
         stickUp()
-    });
+    })
 
 </script>
 </body>
