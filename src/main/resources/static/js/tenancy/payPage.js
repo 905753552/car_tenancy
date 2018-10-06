@@ -11,7 +11,6 @@ var orderDetail = new Vue({
     },
     methods:{
         savePay:function(){
-            console.log(123);
             savePay();
 		},
         initialize:function(){
@@ -45,7 +44,7 @@ var orderDetail = new Vue({
 //     window.location.href="/tenancy/p/myOrder?"+data;
 // }
 function savePay(){
-    if($(".paymentTabUl").find("#WECHAT").hasClass("checked")) {
+    if($(".paymentTabUl").find("#WECHAT").hasClass("checked") == true) {
         $.ajax({
             type: "GET",
             url: "/api/order/pay/" + orderDetail.order_detail.order_detail.id,
@@ -71,15 +70,10 @@ function savePay(){
     }else if($(".paymentTabUl").find("#p_alipay").hasClass("checked")){
         var orderData = {
             out_trade_no:orderDetail.order_detail.order_detail.id,//订单ID 必填 不能重复
-            total_amount:orderDetail.order_detail.order_detail.total_amount, //订单价格 必填
-            subject:orderDetail.order_detail.car_info.tncBrand.name,//订单名 必填
+            total_amount:orderDetail.order_detail.order_detail.totalAmount, //订单价格 必填
+            subject:orderDetail.order_detail.car_info.tncBrand.name+orderDetail.order_detail.car_info.series,//订单名 必填
             body:orderDetail.order_detail.order_detail.description,//订单描述
             product_code:"FAST_INSTANT_TRADE_PAY"
-            // out_trade_no:225,//订单ID 必填 不能重复
-            // total_amount:168, //订单价格 必填
-            // subject:'奥迪K2',//订单名 必填
-            // body:'车辆整备费:20',//订单描述
-            // product_code:"FAST_INSTANT_TRADE_PAY"
         }
         $.ajax({
             type:"POST",
