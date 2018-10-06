@@ -71,7 +71,6 @@ function usablePoint_couponAndPoint() {
         success:function (res) {
             if(res.code==0) {
                 $("#pointNum").text("("+res.point+"分)");
-
                 if(res.point===0) {
                     $("#noNullPoint").remove();
                 }else {
