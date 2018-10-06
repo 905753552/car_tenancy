@@ -409,6 +409,12 @@
     where
     store_id = #{id,jdbcType=BIGINT}
     and is_deleted = 0
-    and status = 1
+    and status = 1 order by access_times desc
   </select>
+
+  <update id="addCarAccessTimes" parameterType="java.lang.Long">
+    update tnc_car
+    set  access_times = access_times + #{accessTimes}
+    where id = #{cid}
+  </update>
 </mapper>

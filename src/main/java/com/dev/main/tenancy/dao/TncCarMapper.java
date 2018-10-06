@@ -1,6 +1,7 @@
 package com.dev.main.tenancy.dao;
 
 import com.dev.main.tenancy.domain.TncCar;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -23,4 +24,6 @@ public interface TncCarMapper {
      * @return
      */
     List<TncCar> listCarByStoreId(Long id);
+
+    void addCarAccessTimes(@Param("cid") Long cid,@Param("accessTimes") Long accessTimes);
 }

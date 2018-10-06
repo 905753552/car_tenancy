@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static com.dev.main.common.util.RandomUtil.random;
+
 @Service
 public class CarServiceImpl implements ICarService {
 
@@ -143,5 +145,16 @@ public class CarServiceImpl implements ICarService {
         rm.put("carPic",tncCarPicMapper.listPathByCid(id));
         //System.out.println(rm);
         return rm;
+    }
+
+    /**
+     * 增加车辆热度
+     * @param cid
+     */
+    @Override
+    public void addCarHot(Long cid) {
+        Long accessTimes = (long) random.nextInt(10)+1;
+        //System.out.println(accessTimes);
+        tncCarMapper.addCarAccessTimes(cid,accessTimes);
     }
 }

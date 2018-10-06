@@ -36,7 +36,8 @@ const carInfoTab_methods = {
     doCarOrder: doCarOrder,
     doSearchByPackage: doSearchByPackage,
     doCheckByType:doCheckByType,
-    doSearchByAllType:doSearchByAllType
+    doSearchByAllType:doSearchByAllType,
+    addCarHot:addCarHot
 }
 //Vue created 时触发的函数
 const init_carInfoTab = ()=>{
@@ -95,6 +96,7 @@ function loadCarMenuData() {
                 carInfoTab_app.menu = data.TncPackageScheme
                 doHandelCarBrand(data.TncBrand)
             } else {
+                //console.log("请求出错～")
                 handleAjax(data);
             }
         },
@@ -231,6 +233,7 @@ function doSearchByAllType() {
                 }
                 doHandelCarInfo(data.carData)
             } else {
+                console.log("请求出错～")
                 handleAjax(data);
             }
         }
@@ -468,6 +471,23 @@ function notFoundTips() {
             layer.close(index); //如果设定了yes回调，需进行手工关闭
         }
     });
+}
+
+function addCarHot(cid) {
+    $.ajax({
+        type:"POST",
+        url:"/api/CarSelect/addCarHot",
+        data:{
+            cid:cid
+        }
+        // success:function (data) {
+        //     if(data.code==0){
+        //
+        //     }else{
+        //         handleAjax(data);
+        //     }
+        // }
+    })
 }
 
 /*-------------------------------------function end-------------------------------------*/

@@ -51,5 +51,17 @@ public class CarSelectController {
         return resultMap;
     }
 
+    /**
+     * 增加车辆热度
+     * @param cid
+     */
+   @PostMapping("/addCarHot")
+    public ResultMap addCarHot(Long cid){
+       //System.out.println(cid);
+       ResultMap re = new ResultMap();
+        iCarService.addCarHot(cid);
+        return re.put("msg","success");
+    }
+
 
 }
