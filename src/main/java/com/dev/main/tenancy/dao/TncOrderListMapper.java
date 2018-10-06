@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface TncOrderListMapper {
     List<TncOrderListVo> selectOrderList(String phone);
+    TncOrderListVo selectOrderDetail(Long id);
+    TncPriceScheme selectPrice(Long carid);
 }

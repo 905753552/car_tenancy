@@ -19,6 +19,11 @@
     from tnc_order
     where ( phone = #{xxx} and is_deleted = 0)
   </select>
+  <select id="selectOrderDetail" resultMap="selectOrderListrm" parameterType="java.lang.Long">
+    select id, total_amount, get_store_id, return_store_id, start_date, return_date, status, car_item_id
+    from tnc_order
+    where ( id = #{xxx} and is_deleted = 0)
+  </select>
   <resultMap id="selectCarItemRm" type="com.dev.main.tenancy.vo.CarVo">
     <result property="carId" column="carId" jdbcType="BIGINT"/>
     <result property="series" column="series" jdbcType="VARCHAR"/>
@@ -52,4 +57,29 @@
         join address_region ra on ra.id = a.area_id
         where s.id = #{xxx}
     </select>
+
+
+  <resultMap id="selectPriceRm" type="com.dev.main.tenancy.domain.TncPriceScheme" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="base_price" property="basePrice" jdbcType="DECIMAL" />
+    <result column="base_hour_price" property="baseHourPrice" jdbcType="DECIMAL" />
+    <result column="service_price" property="servicePrice" jdbcType="DECIMAL" />
+    <result column="deposit" property="deposit" jdbcType="DECIMAL" />
+    <result column="discount" property="discount" jdbcType="DECIMAL" />
+    <result column="car_id" property="carId" jdbcType="BIGINT" />
+    <result column="package_id" property="packageId" jdbcType="BIGINT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
+<select id="selectPrice" resultMap="selectPriceRm" parameterType="java.lang.Long">
+  select *
+  from tnc_price_scheme
+  where car_id = #{xxx}
+</select>
+  <!--<select id="selectCar" resultType="com.dev.main.tenancy.domain.TncCar" parameterType="java.lang.Long">-->
+    <!--select *-->
+    <!--from tnc_car a,tnc_car_item b,tnc_order c-->
+    <!--where a.id = b.car_id and b.id = c.car_item_id and c.id = #{xxx}-->
+  <!--</select>-->
 </mapper>

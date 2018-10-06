@@ -57,27 +57,27 @@
 
                 <div class="bluebgbd sz_succeedB">
                     <div class="succeedinfo p10_0 sz_bluebbb">
-                        <span class="sz_suc_font colorBlue" v-if="order_detail.order_detail.status==0">已提交订单 等待付款</span>
-                        <span class="sz_suc_font colorBlue" v-if="order_detail.order_detail.status==1">租赁中</span>
-                        <span class="sz_suc_font colorBlue" v-if="order_detail.order_detail.status==2">预订成功</span>
-                        <span class="sz_suc_font colorBlue" style="color:#808080;" v-if="order_detail.order_detail.status==3">已取消</span>
-                        <span class="sz_suc_font colorBlue" v-if="order_detail.order_detail.status==4">已完成</span>
-                        <span class="sz_suc_font colorBlue" style="color:#808080;" v-if="order_detail.order_detail.status==5">处理中</span>
+                        <span class="sz_suc_font colorBlue" v-if="order.status==0">已提交订单 等待付款</span>
+                        <span class="sz_suc_font colorBlue" v-if="order.status==1">租赁中</span>
+                        <span class="sz_suc_font colorBlue" v-if="order.status==2">预订成功</span>
+                        <span class="sz_suc_font colorBlue" style="color:#808080;" v-if="order.status==3">已取消</span>
+                        <span class="sz_suc_font colorBlue" v-if="order.status==4">已完成</span>
+                        <span class="sz_suc_font colorBlue" style="color:#808080;" v-if="order.status==5">处理中</span>
                         <span class="f14">&nbsp;合计:</span>
                         <span class="sz_priceOrange">
 	<em class="rmb">¥</em>
 	<em class="num">
-		{{order_detail.order_detail.totalAmount}}
+		{{order.totalAmount}}
 	</em>
 </span>
                     </div>
                     <div class="f14 p10_0">
-                        <span>订单号：{{order_detail.order_detail.id}}</span>
+                        <span>订单号：{{order.id}}</span>
                         <a>|</a>
-                        <span>租车人：{{order_detail.order_detail.name}}</span>
+                        <span>租车人：{{order.name}}</span>
                         <a>|</a>
-                        <span>租期：{{order_detail.days}}天</span>
-                        <span style="float: right;color: red;" v-if="order_detail.order_detail.status==0">请在1小时内完成付款，否则将自动取消订单</span>
+                        <span>租期：{{days}}天</span>
+                        <span style="float: right;color: red;" v-if="order.status==0">请在1小时内完成付款，否则将自动取消订单</span>
                     </div>
                 </div>
 
@@ -93,16 +93,16 @@
                                 class="borderBlueB borderBlueR pre"
                                 height="99">
                                 <img src="https://image.zuchecdn.com/brand/order/kia.png">
-                                <img src="https://fimg.zuchecdn.com/upload/web/modepic/480.jpg" width="138" height="80">
+                                <img :src="carVo.path" width="138" height="80">
                                 <!--<span class="config-btn">配置信息</span>-->
                                 <input type="button" class="tnc_btn tnc_btn_green config-btn" value="配置信息">
                             </td>
                             <td width="240" align="center" class="borderBlueR borderBlueBda" rowspan="2">
-                                <strong>取车时间</strong>：{{order_detail.order_detail.startDate}}
+                                <strong>取车时间</strong>：{{order.startDate}}
                             </td>
                             <td width="78" align="right" class="borderBlueBda " rowspan="2"><strong>取车地点</strong>：</td>
                             <td rowspan="2" height="66" class="borderBlueBda" width="260">
-                                {{order_detail.getCity}}[加盟]&nbsp;{{order_detail.getStore}}
+                                {{getStore.city}}[加盟]&nbsp;{{getStore.name}}
                             </td>
                         </tr>
                         <tr>
@@ -111,19 +111,19 @@
                         <tr>
                             <td class="borderBlueB">&nbsp;</td>
                             <td rowspan="2" align="center" valign="middle" class="borderBlueR borderBlueB" height="66">
-                                <strong>还车时间</strong>：{{order_detail.order_detail.returnDate}}
+                                <strong>还车时间</strong>：{{order.returnDate}}
                             </td>
                             <td rowspan="2" align="right" class="borderBlueB"><strong>还车地点</strong>：</td>
                             <td rowspan="2" align="left" valign="middle" class="borderBlueB">
-                                {{order_detail.returnCity}}[加盟]&nbsp;{{order_detail.returnStore}}
+                                {{returnStore.city}}[加盟]&nbsp;{{returnStore.name}}
                             </td>
                         </tr>
                         <tr class="f16 borderBlueB" style="font-family:'微软雅黑';">
                             <td>&nbsp;</td>
-                            <td height="33" align="center" valign="middle" class="borderBlueR">{{order_detail.car_info.tncBrand.name}}{{order_detail.car_info.series}}</td>
-                            <td align="center" valign="middle" class="borderBlueR" v-if="order_detail.car_info.transmissionType=='MT'">{{order_detail.car_info.boxQuantity}}厢/{{order_detail.car_info.displacement/1000}}手动</td>
-                            <td align="center" valign="middle" class="borderBlueR" v-else>{{order_detail.car_info.boxQuantity}}厢/{{order_detail.car_info.displacement/1000}}自动</td>
-                            <td align="center" valign="middle" class="borderBlueR">乘坐{{order_detail.car_info.seatQuantity}}人</td>
+                            <td height="33" align="center" valign="middle" class="borderBlueR">{{carVo.bandname}}{{carVo.series}}</td>
+                            <td align="center" valign="middle" class="borderBlueR" v-if="carVo.transmissionType=='MT'">{{carVo.boxQuantity}}厢/{{carVo.displacement/1000}}手动</td>
+                            <td align="center" valign="middle" class="borderBlueR" v-else>{{carVo.boxQuantity}}厢/{{carVo.displacement/1000}}自动</td>
+                            <td align="center" valign="middle" class="borderBlueR">乘坐{{carVo.seatQuantity}}人</td>
                         </tr>
                         </tbody>
                     </table>
@@ -134,16 +134,16 @@
                             <div class="feePrice">
                             <span class="sz_OrderpOrangeM">
 	                            <em class="rmb_gray">¥</em>
-	                            <em class="num_gray">{{order_detail.total_base_price}}</em>
+	                            <em class="num_gray">{{order.baseAmount}}</em>
 	                        </span>
 	                    	<span class="sz_OrderpOrangeM">
 	                            <em class="rmb">¥</em>
-	                            <em class="num">{{order_detail.discount_total_base}}</em>
+	                            <em class="num">{{order.baseAmount*price.discount}}</em>
 	                        </span>
                             </div>
                             <div class="calculate">
 		                        <span class="sz_priceGraySmall">
-		                            <em class="num">¥{{order_detail.base_price}}x{{order_detail.days}}天</em>
+		                            <em class="num">¥{{price.baseHourPrice}}x{{days}}天</em>
 		                            <em class="unit">=</em>	
 		                        </span>
                             </div>
@@ -154,16 +154,16 @@
                             <div class="feePrice">
                             <span class="sz_OrderpOrangeM">
 	                            <em class="rmb_gray">¥</em>
-	                            <em class="num_gray">{{order_detail.total_service_price}}</em>
+	                            <em class="num_gray">{{order.serviceAmount}}</em>
 	                        </span>
 	                    	<span class="sz_OrderpOrangeM">
 	                            <em class="rmb">¥</em>
-	                            <em class="num">{{order_detail.discount_total_service}}</em>
+	                            <em class="num">{{order.serviceAmount*price.discount}}</em>
 	                        </span>
                             </div>
                             <div class="calculate">
 		                        <span class="sz_priceGraySmall">
-		                            <em class="num">¥{{order_detail.service_price}}x{{order_detail.days}}天</em>
+		                            <em class="num">¥{{price.servicePrice}}x{{days}}天</em>
 		                            <em class="unit">=</em>	
 		                        </span>
                             </div>
@@ -239,7 +239,7 @@
                             <span class="yjtotal">需支付：</span>
                             <span class="sz_OrderpOrangeB">
             <em class="rmb">¥</em>
-            <em class="num">{{order_detail.order_detail.totalAmount}}</em>
+            <em class="num">{{order.totalAmount}}</em>
         </span>
                         </div>
                     </div>
@@ -248,9 +248,9 @@
 
 
                     <input id="orderCancel" type="button" value="取消订单" @click="cancelOrder"
-                           class="tnc_btn btn_graywauto gray f16" v-if="order_detail.order_detail.status==0||order_detail.order_detail.status==2">&nbsp;&nbsp;
+                           class="tnc_btn btn_graywauto gray f16" v-if="order.status==0||order.status==2">&nbsp;&nbsp;
 
-                    <div id="orderModifyDiv" class="top_new_tip_btn" v-if="order_detail.order_detail.status==0">
+                    <div id="orderModifyDiv" class="top_new_tip_btn" v-if="order.status==0">
                         <img alt="new" src="https://image.zuchecdn.com/newversion/common/newRed.png">
                         <input id="orderModify" type="button"  value="修改订单"
                                class="tnc_btn btn_graywauto gray f16" @click="updateOrder">
@@ -261,7 +261,7 @@
                     <input id="printPage" type="button" value="打印订单" onclick="window.print()"
                            class="tnc_btn btn_graywauto gray f16">&nbsp;&nbsp;
                     <input id="toPay" type="button" value="去支付" @click="goToPay"
-                           class="tnc_btn btn_graywauto gray f16" style="background-color: #1e9f75;color:white;" v-if="order_detail.order_detail.status==0">&nbsp;&nbsp;
+                           class="tnc_btn btn_graywauto gray f16" style="background-color: #1e9f75;color:white;" v-if="order.status==0">&nbsp;&nbsp;
                 </div>
 
 
@@ -281,121 +281,121 @@
 
                     &nbsp;<font class="gray">（小贴士：如果您修改订单或取消订单重新预订，价格可能会发生变化。）</font><br>
 
-                </div>
-                <div class="configbox" style="display: none;">
-                    <div class="cftitle">
-		<span>
-		{{order_detail.car_info.tncBrand.name}}{{order_detail.car_info.series}}配置信息</span>
-                        <i class="cfclose"></i>
-                    </div>
-                    <div class="cflist">
-                        <ul>
-                            <li>
-                                <b class="zws">&nbsp;</b>座 位 数：
-                                <span>
-										{{order_detail.car_info.seatQuantity}}
-								</span>
-                            </li>
-                            <li>
-                                <b class="cms">&nbsp;</b>车 门 数：
-                                <span>
-										{{order_detail.car_info.doorQuantity}}
-								</span>
-                            </li>
-                            <li>
-                                <b class="rllx">&nbsp;</b>燃料类型：
-                                <span>
-										{{order_detail.car_info.fuelType}}
-								</span>
-                            </li>
-                            <li>
-                                <b class="bsxlx">&nbsp;</b>变速箱类型：
-                                <span>
-										{{order_detail.car_info.transmissionType}}
-								</span>
-                            </li>
-                            <li>
-                                <b class="pl">&nbsp;</b>排　　量：
-                                <span>{{order_detail.car_info.displacement}}</span>
-                            </li>
-                            <li>
-                                <b class="rybh">&nbsp;</b>燃油标号：
-                                <span>
-										{{order_detail.car_info.octaneRating}}
-								</span>
-                            </li>
-                            <li>
-                                <b class="qdfs">&nbsp;</b>驱动方式：
-                                <span>
-										{{order_detail.car_info.drivenMethod}}
-								</span>
-                            </li>
-                            <li>
-                                <b class="fdjjqxs">&nbsp;</b>发动机进气形式：
-                                <span>
-										{{order_detail.car_info.enItkForm}}
-								</span>
-                            </li>
-                            <li>
-                                <b class="tc">&nbsp;</b>天　　窗：
-                                <span v-if="order_detail.car_info.skylight==0">
-										无
-								</span>
-                                <span v-else>
-										有
-								</span>
-                            </li>
-                            <li>
-                                <b class="yxrl">&nbsp;</b>油箱容量：
-                                <span>
-										{{order_detail.car_info.tankCapacity}}
-								</span>
-                            </li>
-                            <li>
-                                <b class="yx">&nbsp;</b>音　　箱：
-                                <span>
-										{{order_detail.car_info.speaker}}
-								</span>
-                            </li>
-                            <li>
-                                <b class="zy">&nbsp;</b>座　　椅：
-                                <span>
-										{{order_detail.car_info.seat}}
-								</span>
-                            </li>
-                            <li>
-                                <b class="dcld">&nbsp;</b>倒车雷达：
-                                <span v-if="order_detail.car_info.reversingRadar==0">
-										无
-								</span>
-                                <span v-else>
-										有
-								</span>
-                            </li>
-                            <li>
-                                <b class="qin">&nbsp;</b>气　　囊：
-                                <span>
-										{{order_detail.car_info.airbag}}
-								</span>
-                            </li>
-                            <li class="nonebd">
-                                <b class="dvd">&nbsp;</b>DVD / CD：
-                                <span>
-										{{order_detail.car_info.dvdCd}}
-								</span>
-                            </li>
-                            <li class="nonebd">
-                                <b class="gps">&nbsp;</b>GPS导航：
-                                <span v-if="order_detail.car_info.gps==0">
-										无
-								</span>
-                                <span v-else>
-										有
-								</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <!--</div>-->
+                <!--<div class="configbox" style="display: none;">-->
+                    <!--<div class="cftitle">-->
+		<!--<span>-->
+		<!--{{order_detail.car_info.tncBrand.name}}{{order_detail.car_info.series}}配置信息</span>-->
+                        <!--<i class="cfclose"></i>-->
+                    <!--</div>-->
+                    <!--<div class="cflist">-->
+                        <!--<ul>-->
+                            <!--<li>-->
+                                <!--<b class="zws">&nbsp;</b>座 位 数：-->
+                                <!--<span>-->
+										<!--{{order_detail.car_info.seatQuantity}}-->
+								<!--</span>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<b class="cms">&nbsp;</b>车 门 数：-->
+                                <!--<span>-->
+										<!--{{order_detail.car_info.doorQuantity}}-->
+								<!--</span>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<b class="rllx">&nbsp;</b>燃料类型：-->
+                                <!--<span>-->
+										<!--{{order_detail.car_info.fuelType}}-->
+								<!--</span>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<b class="bsxlx">&nbsp;</b>变速箱类型：-->
+                                <!--<span>-->
+										<!--{{order_detail.car_info.transmissionType}}-->
+								<!--</span>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<b class="pl">&nbsp;</b>排　　量：-->
+                                <!--<span>{{order_detail.car_info.displacement}}</span>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<b class="rybh">&nbsp;</b>燃油标号：-->
+                                <!--<span>-->
+										<!--{{order_detail.car_info.octaneRating}}-->
+								<!--</span>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<b class="qdfs">&nbsp;</b>驱动方式：-->
+                                <!--<span>-->
+										<!--{{order_detail.car_info.drivenMethod}}-->
+								<!--</span>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<b class="fdjjqxs">&nbsp;</b>发动机进气形式：-->
+                                <!--<span>-->
+										<!--{{order_detail.car_info.enItkForm}}-->
+								<!--</span>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<b class="tc">&nbsp;</b>天　　窗：-->
+                                <!--<span v-if="order_detail.car_info.skylight==0">-->
+										<!--无-->
+								<!--</span>-->
+                                <!--<span v-else>-->
+										<!--有-->
+								<!--</span>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<b class="yxrl">&nbsp;</b>油箱容量：-->
+                                <!--<span>-->
+										<!--{{order_detail.car_info.tankCapacity}}-->
+								<!--</span>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<b class="yx">&nbsp;</b>音　　箱：-->
+                                <!--<span>-->
+										<!--{{order_detail.car_info.speaker}}-->
+								<!--</span>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<b class="zy">&nbsp;</b>座　　椅：-->
+                                <!--<span>-->
+										<!--{{order_detail.car_info.seat}}-->
+								<!--</span>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<b class="dcld">&nbsp;</b>倒车雷达：-->
+                                <!--<span v-if="order_detail.car_info.reversingRadar==0">-->
+										<!--无-->
+								<!--</span>-->
+                                <!--<span v-else>-->
+										<!--有-->
+								<!--</span>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<b class="qin">&nbsp;</b>气　　囊：-->
+                                <!--<span>-->
+										<!--{{order_detail.car_info.airbag}}-->
+								<!--</span>-->
+                            <!--</li>-->
+                            <!--<li class="nonebd">-->
+                                <!--<b class="dvd">&nbsp;</b>DVD / CD：-->
+                                <!--<span>-->
+										<!--{{order_detail.car_info.dvdCd}}-->
+								<!--</span>-->
+                            <!--</li>-->
+                            <!--<li class="nonebd">-->
+                                <!--<b class="gps">&nbsp;</b>GPS导航：-->
+                                <!--<span v-if="order_detail.car_info.gps==0">-->
+										<!--无-->
+								<!--</span>-->
+                                <!--<span v-else>-->
+										<!--有-->
+								<!--</span>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                <!--</div>-->
             </div>
 
 
@@ -525,7 +525,7 @@
 <script src="/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 <script src="/vue-2.5.17/vue.min.js"></script>
 <script src="/js/common/common.js"></script>
-<!--<script src="/js/tenancy/myOrderList_detail.js"></script>-->
+<script src="/js/tenancy/myOrderList_detail.js"></script>
 <script src="/js/tenancy/header.js"></script>
 </body>
 </html>

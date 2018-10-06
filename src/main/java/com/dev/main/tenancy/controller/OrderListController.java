@@ -23,4 +23,9 @@ public class OrderListController {
         //TncCustomer tncCustomer = ShiroUtils.getUserEntity();
         return orderListService.getOrderList("123");
     }
+    @GetMapping("/detail")
+    public ResultMap detail(@RequestParam Long id){
+        System.out.println(id);
+        return orderListService.getDetail(id);
+    }
 }
