@@ -5,6 +5,7 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.dev.main.alipay.config.AliPayConfig;
+import com.dev.main.common.util.ResultMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class PayController {
     @RequestMapping("/myPay")
     @ResponseBody
-    public String al(@RequestBody String orderData){
-        System.out.println(orderData);
+    public ResultMap al(@RequestBody String orderData){
+       // System.out.println(orderData);
+        ResultMap re = new ResultMap();
         //String orderId,String orderName,String orderAmount,String orderDes
         //获得初始化的AlipayClient
         AlipayClient alipayClient = new DefaultAlipayClient(AliPayConfig.gatewayUrl,AliPayConfig.app_id, AliPayConfig.merchant_private_key, "json", AliPayConfig.charset, AliPayConfig.alipay_public_key, AliPayConfig.sign_type);
@@ -40,6 +42,6 @@ public class PayController {
             }
 
         System.out.println(result);
-        return result;
+        return re.put("msg",result);
     }
 }

@@ -81,7 +81,12 @@ function savePay(){
             contentType:"application/json;charset=utf-8",
             data:JSON.stringify(orderData),
             success:function (data) {
-                $("body").html(data);
+                if(data.code==0){
+                    $("body").html(data.msg);
+                }else{
+                    handleAjax(data)
+                }
+
             }
         })
     }else{
