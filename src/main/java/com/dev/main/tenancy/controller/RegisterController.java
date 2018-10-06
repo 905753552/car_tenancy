@@ -17,8 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/api/user")
 public class RegisterController {
 
-
-
     @Autowired
     private IRegisterService registerService;
 

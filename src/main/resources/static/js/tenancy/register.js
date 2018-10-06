@@ -75,6 +75,7 @@
                     console.log(res);
                     // alert("验证通过，请输入短信验证码");
                     $("#getYzmBtn").attr("disabled","true");
+                    doSendPhoneCode();
                     //超时重发时间，先默认60秒
                     countdown(60);
                     $('#myModal').modal('hide');
@@ -90,6 +91,20 @@
                 $(".modal-title").text("网络问题未获取到，请稍后重试");
             }
         })
+    }
+
+    /**
+     * 发送短信验证码
+     * */
+    function doSendPhoneCode() {
+        var phone = $("#xphone").val();
+        $.ajax({
+            url:'/api/alisms/'+phone,
+            success:function (res) {
+                console.log(res);
+            }
+        })
+
     }
     /*重发短信验证码倒计时*/
     function countdown(overtime) {
