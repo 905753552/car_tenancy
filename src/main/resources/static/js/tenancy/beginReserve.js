@@ -1,32 +1,32 @@
 const param = {
     order:{},
     base_info:{
-        car_info:{},
-        returnDate:'',
-        returnTime:'',
-        returnStore:'',
-        returnCity:'',
-        getDate:'',
-        getTime:'',
-        getStore:'',
-        getCity:'',
-        days:'',
-        base_price:'',
-        service_price:'',
-        total_base_price:'',
-        total_service_price:'',
-        discount_total_base:'',
-        discount_total_service:'',
-        other_cost:'',
-        prepare_cost:20,
-        foreign_land_cost:0,
-        foreign_store_cost:0,
-        overtime_cost:'',
-        overtime_count:'',
-        deposit:'',
-        order_price_sum:'',
-        description:'',
-        coupon:0,
+        car_info:{},//汽车信息
+        returnDate:'',//还车年月日
+        returnTime:'',//还车时分秒
+        returnStore:'',//还车门店名字
+        returnCity:'',//还车城市
+        getDate:'',//取车年月日
+        getTime:'',//取车时分秒
+        getStore:'',//取车门店
+        getCity:'',//取车城市
+        days:'',//租车天数
+        base_price:'',//基础费（天）
+        service_price:'',//服务费（天）
+        total_base_price:'',//总的基础费
+        total_service_price:'',//总的服务费
+        discount_total_base:'',//打折后的总的基础费
+        discount_total_service:'',//打折后的总的服务费
+        other_cost:'',//总的其他费用
+        prepare_cost:20,//整备费
+        foreign_land_cost:0,//异地还车费
+        foreign_store_cost:0,//异店还车费
+        overtime_cost:'',//超时费用（总）
+        overtime_count:'',//超时数
+        deposit:'',//押金
+        order_price_sum:'',//订单总价ttam
+        description:'',//备注
+        coupon:0,//优惠券面值
         order_detail:{
             // 主键
             id:'',

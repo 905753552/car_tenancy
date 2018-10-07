@@ -2,16 +2,13 @@ package com.dev.main.tenancy.service.impl;
 
 import com.dev.main.common.util.ResultMap;
 import com.dev.main.tenancy.dao.*;
-import com.dev.main.tenancy.domain.TncCar;
-import com.dev.main.tenancy.domain.TncCarItem;
-import com.dev.main.tenancy.domain.TncOrder;
-import com.dev.main.tenancy.domain.TncPriceScheme;
+import com.dev.main.tenancy.domain.*;
 import com.dev.main.tenancy.service.IOrderListService;
-import com.dev.main.tenancy.vo.TncOrderData;
-import com.dev.main.tenancy.vo.TncOrderListVo;
+import com.dev.main.tenancy.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,6 +30,8 @@ public class OrderListServiceImpl implements IOrderListService {
     private  TncPackageSchemeMapper tncPackageSchemeMapper;
     @Autowired
     private TncStoreMapper tncStoreMapper;
+    @Autowired
+    private TncCouponMapper tncCouponMapper;
 
     @Override
     public ResultMap getOrderList(String phone) {
@@ -44,9 +43,86 @@ public class OrderListServiceImpl implements IOrderListService {
     }
 
     @Override
+    public ResultMap getOrderData(Long id) {
+        TncOrderDetailVo vo  = new TncOrderDetailVo();
+        //获取订单对象
+        TncOrder order = tncOrderMapper.selectByPrimaryKey(id);
+        BigDecimal discount = order.getDiscount();
+        BigDecimal baseAmount = order.getBaseAmount();
+        BigDecimal serviceAmount = order.getServiceAmount();
+        vo.setTotal_base_price(baseAmount);
+        vo.setTotal_service_price(serviceAmount);
+        vo.setDiscount_total_base(discount.multiply(baseAmount));
+        vo.setDiscount_total_service(discount.multiply(serviceAmount));
+        vo.setOther_cost(order.getOtherAmount());
+        vo.setOrder_price_sum(order.getTotalAmount());
+        vo.setOrder_detail(id);
+        String descript = order.getDescription();
+        vo.setDescription(descript);
+        String descri = "异地还车费:200;维修费:1000;整备费:20;异店还车费:50";
+        String[] des = descri.split(";");
+        for(int i = 0;i < des.length;i++){
+            String state = des[i].split(":")[0];
+            String money = des[i].split(":")[1];
+            if(state.trim().equals("异地还车费")) vo.setForeign_land_cost(Integer.parseInt(money));
+            if(state.trim().equals("整备费")) vo.setPrepare_cost(Integer.parseInt(money));
+            if(state.trim().equals("异店还车费")) vo.setForeign_store_cost(Integer.parseInt(money));
+        }
+        //获取优惠券面值
+        TncCoupon tncCoupon = tncCouponMapper.selectByPrimaryKey(order.getCouponId());
+        if(tncCoupon!=null) vo.setCoupon(tncCoupon.getAmount());
+        else vo.setCoupon(null);
+        //获取汽车对象
+        Long carId = tncOrderListMapper.selectCarItem(order.getCarItemId()).getCarId();
+        TncCar car = tncCarMapper.selectByPrimaryKey(carId);
+        vo.setCar_info(car);
+        //获取时间
+        Date getdate = order.getStartDate();
+        Date returndate = order.getReturnDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        String gd = DateFormat.getDateInstance().format(getdate);
+        String rd = DateFormat.getDateInstance().format(returndate);
+        String gd1 = dateFormat.format(getdate);
+        String rd1 = dateFormat.format(returndate);
+        int days = (int) ((returndate.getTime() - getdate.getTime()) / (1000*3600*24));
+        Long plus = (returndate.getTime() - getdate.getTime()) % (1000*3600*24);
+        int hour = 0;
+        if(plus>(1000*60*4)) days++;
+        else {
+            hour = (int) (plus / (1000*60)) + 1;
+        }
+        vo.setOvertime_count(hour);
+        vo.setDays(days);
+        vo.setGetDate(gd);
+        vo.setGetTime(gd1);
+        vo.setReturnDate(rd);
+        vo.setReturnTime(rd1);
+        //获取门店名，城市
+        TncStoreVo getStore = tncOrderListMapper.selectStore(order.getGetStoreId());
+        vo.setGetStore(getStore.getName());
+        vo.setGetCity(getStore.getCity());
+        TncStoreVo returnStore = tncOrderListMapper.selectStore(order.getReturnStoreId());
+        vo.setReturnStore(returnStore.getName());
+        vo.setReturnCity(returnStore.getCity());
+        //获取价格方案
+        TncPriceScheme tncPriceScheme = tncOrderListMapper.getPrice(carId);
+        vo.setBase_price(tncPriceScheme.getBasePrice());
+        vo.setService_price(tncPriceScheme.getServicePrice());
+        vo.setDeposit(tncPriceScheme.getDeposit());
+        BigDecimal hourprice = tncPriceScheme.getBaseHourPrice();
+        if(hour!=0&hourprice!=null) vo.setOvertime_cost(hourprice.multiply(new BigDecimal(hour)));
+        System.out.println(vo.toString());
+        return ResultMap.success("获取成功").put("order_detail",vo);
+    }
+
+    /*
+            获取myorderlist_detail页面的数据(已不用)
+        */
+    @Override
     public ResultMap getDetail(Long id) {
         TncOrderListVo base = tncOrderListMapper.selectOrderDetail(id);
         TncOrder ord = tncOrderMapper.selectByPrimaryKey(id);
+        System.out.println(ord.toString());
         TncCarItem cari = tncCarItemMapper.selectByPrimaryKey(ord.getCarItemId());
         TncCar car = tncCarMapper.selectByPrimaryKey(cari.getCarId());
         TncPriceScheme price = tncOrderListMapper.selectPrice(cari.getCarId());
@@ -56,6 +132,9 @@ public class OrderListServiceImpl implements IOrderListService {
         return rs;
     }
 
+    /*
+    传递凌兴的参数（已不用）
+     */
     @Override
     public ResultMap getOrderDetail(Long id) {
         TncOrder order = tncOrderMapper.selectByPrimaryKey(id);

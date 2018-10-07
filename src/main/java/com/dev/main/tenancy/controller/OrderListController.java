@@ -23,11 +23,21 @@ public class OrderListController {
         //TncCustomer tncCustomer = ShiroUtils.getUserEntity();
         return orderListService.getOrderList("123");
     }
+    @GetMapping("/getOrderData")
+    public ResultMap getOrderData(Long id){
+        return orderListService.getOrderData(id);
+    }
+    /*
+    获取myorderlist_detail页面的数据(已不用)
+     */
     @GetMapping("/detail")
     public ResultMap detail(@RequestParam Long id){
         System.out.println(id);
         return orderListService.getDetail(id);
     }
+    /*
+    传递凌兴的参数（已不用）
+     */
     @GetMapping("/orderData")
     public ResultMap orderData(@RequestParam Long id){
         System.out.println(id);
