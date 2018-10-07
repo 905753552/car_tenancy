@@ -6,4 +6,6 @@ public interface IOrderListService {
     ResultMap getOrderList(String phone);
 
     ResultMap getDetail(Long id);
+
+    ResultMap getOrderDetail(Long id);
 }

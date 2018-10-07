@@ -58,7 +58,11 @@
         where s.id = #{xxx}
     </select>
 
-
+<!--<select id="getCarId" resultType="java.lang.Long" parameterType="java.lang.Long">-->
+  <!--select b.id-->
+  <!--form tnc_car_item a ,tnc_car b-->
+  <!--where a.car_id = b.id-->
+<!--</select>-->
   <resultMap id="selectPriceRm" type="com.dev.main.tenancy.domain.TncPriceScheme" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="base_price" property="basePrice" jdbcType="DECIMAL" />

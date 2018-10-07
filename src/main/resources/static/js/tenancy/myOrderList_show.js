@@ -25,7 +25,25 @@ function getCustomer() {
         }
     })
 }
-
+//查看订单详情
+function godetail(id) {
+    //console.log(id);
+    $.ajax({
+        url:"/api/orderList/orderData?id="+id,
+        type:"get",
+        success:function (res) {
+            if(res.code == 0){
+                let orderData = res.orderData;
+                let cData = encodeURIComponent(JSON.stringify(orderData))
+                // let url = "/tenancy/p/annualRentOrder?"+cData;
+                let url = "/tenancy/p/beginReserve_gg?"+cData;
+                window.location.href = url
+            }else{
+                    handleAjax(res);
+            }
+        }
+    })
+}
 const orderlist_data = {
     orders:[]
     // orders: [{
@@ -66,6 +84,9 @@ const orderlist_methods = {
         if(this.orders[index].status==1) color="s-blue";if(this.orders[index].status==2) color="s-green";if(this.orders[index].status==0) color="s-orange";
         if(this.orders[index].status==4) color="s-yellow";if(this.orders[index].status==3) color="s-gray";if(this.orders[index].status==5) color="s-blue";
         return color;
+    },
+    godetail:function (index) {
+        godetail(this.orders[index].id);
     }
 };
 const getname = {

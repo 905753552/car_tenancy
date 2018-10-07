@@ -28,4 +28,9 @@ public class OrderListController {
         System.out.println(id);
         return orderListService.getDetail(id);
     }
+    @GetMapping("/orderData")
+    public ResultMap orderData(@RequestParam Long id){
+        System.out.println(id);
+        return orderListService.getOrderDetail(id);
+    }
 }

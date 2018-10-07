@@ -172,8 +172,7 @@
                                         </td>
                                         <td class="ac">
                                             <span :class="gggg(index)">{{item.orderstate}}</span>
-
-                                            <a :href="'./myOrderList_detail?orderId='+item.id" class="a-view">查看订单</a>
+                                            <a href="javascript:void(0);" @click="godetail(index)" class="a-view">查看订单</a>
                                         </td>
                                     </tr>
                                     </tbody>
