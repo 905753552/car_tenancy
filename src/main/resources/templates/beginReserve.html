@@ -349,21 +349,28 @@
 							<ul class="otherul">
 								<li class="discount defaultFeeItem2000">
 									<span class="fee-txt" style="font-size: 12px;">车辆整备费</span>
-									<span class="fee-res">¥{{baseInfo.prepare_cost}}</span>
+									<span class="fee-res" style="color:#9f9f9f;">¥{{baseInfo.prepare_cost}}</span>
+									<div class="clear"></div>
+								</li>
+							</ul>
+							<ul class="otherul" v-if="baseInfo.overtime_cost>0">
+								<li class="discount defaultFeeItem2000">
+									<span class="fee-txt" style="font-size: 12px;">超时服务费</span>
+									<span class="fee-res" style="color:#9f9f9f;">¥{{baseInfo.overtime_cost}}</span>
 									<div class="clear"></div>
 								</li>
 							</ul>
 							<ul class="otherul" v-if="baseInfo.foreign_store_cost>0">
 								<li class="discount defaultFeeItem2000">
 									<span class="fee-txt" style="font-size: 12px;">异店还车费</span>
-									<span class="fee-res">¥{{baseInfo.foreign_store_cost}}</span>
+									<span class="fee-res" style="color:#9f9f9f;">¥{{baseInfo.foreign_store_cost}}</span>
 									<div class="clear"></div>
 								</li>
 							</ul>
 							<ul class="otherul" v-if="baseInfo.foreign_land_cost>0">
 								<li class="discount defaultFeeItem2000">
 									<span class="fee-txt" style="font-size: 12px;">异地还车费</span>
-									<span class="fee-res">¥{{baseInfo.foreign_land_cost}}</span>
+									<span class="fee-res" style="color:#9f9f9f;">¥{{baseInfo.foreign_land_cost}}</span>
 									<div class="clear"></div>
 								</li>
 							</ul>

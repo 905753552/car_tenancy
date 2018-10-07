@@ -334,6 +334,7 @@ function setOrderDetails(){
         param.base_info.order_detail.serviceAmount = param.base_info.total_service_price;
         // 备注，用于说明扣费项及其它特殊状况
         param.base_info.order_detail.description = param.base_info.description;
+        console.log(param.base_info.order_detail.description);
         // 折扣, 0<折扣<=1, 默认为1
         param.base_info.order_detail.discount = orderDetail.priceSchemeInfo.discount;
         // 已收押金
@@ -440,13 +441,13 @@ function otherCost(){
                                   + param.base_info.foreign_land_cost;
     param.base_info.description = '车辆整备费:20';
     if(param.base_info.overtime_cost>0){
-        param.base_info.description.concat(';超时服务费:' + param.base_info.overtime_cost)
+        param.base_info.description += ';超时服务费:' + param.base_info.overtime_cost;
     }
     if(param.base_info.foreign_store_cost>0){
-        param.base_info.description.concat(';异店还车费:' + param.base_info.foreign_store_cost)
+        param.base_info.description += ';异店还车费:' + param.base_info.foreign_store_cost
     }
     if(param.base_info.foreign_land_cost>0){
-        param.base_info.description.concat(';异地还车费:' + param.base_info.foreign_land_cost)
+        param.base_info.description += ';异地还车费:' + param.base_info.foreign_land_cost
     }
 }
 // 检查姓名
