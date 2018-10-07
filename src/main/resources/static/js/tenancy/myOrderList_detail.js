@@ -55,20 +55,20 @@ function init() {
     var id = window.location.search.slice(9);
     console.log(id);
     $.ajax({
-        // url:"/api/orderList/detail?id="+id,
-        url:"/api/orderList/orderData?id="+id,
+         url:"/api/orderList/detail?id="+id,
+        //url:"/api/orderList/orderData?id="+id,
         type:"get",
         success: function(res) {
-            // if(res.code == 0){
-            //     orderDetail.base = res.base;
-            //     orderDetail.carVo = res.base.carVo;
-            //     orderDetail.returnStore = res.base.returnStore;
-            //     orderDetail.getStore = res.base.getStore;
-            //     orderDetail.order = res.order;
-            //     orderDetail.price = res.price;
-            // }else{
-            //     handleAjax(res);
-            // }
+            if(res.code == 0){
+                orderDetail.base = res.base;
+                orderDetail.carVo = res.base.carVo;
+                orderDetail.returnStore = res.base.returnStore;
+                orderDetail.getStore = res.base.getStore;
+                orderDetail.order = res.order;
+                orderDetail.price = res.price;
+            }else{
+                handleAjax(res);
+            }
         }
     })
 }

@@ -29,19 +29,33 @@ function getCustomer() {
 function godetail(id) {
     //console.log(id);
     $.ajax({
-        url:"/api/orderList/orderData?id="+id,
+        // url:"/api/orderList/orderData?id="+id,
+        url:"/api/orderList/getOrderData?id="+id,
         type:"get",
         success:function (res) {
             if(res.code == 0){
-                let orderData = res.orderData;
-                let cData = encodeURIComponent(JSON.stringify(orderData))
-                // let url = "/tenancy/p/annualRentOrder?"+cData;
-                let url = "/tenancy/p/beginReserve_gg?"+cData;
-                window.location.href = url
-            }else{
-                    handleAjax(res);
+                console.log(res);
+                var data = {
+                    order_detail:res.order_detail,
+                    index:'myOrderList_show'
+                }
+                var order = encodeURIComponent(JSON.stringify(data));
+                window.location.href = '/tenancy/p/myOrder?'+order;
+            } else {
+                handleAjax(res);
             }
         }
+        // success:function (res) {
+        //     if(res.code == 0){
+        //         let orderData = res.orderData;
+        //         let cData = encodeURIComponent(JSON.stringify(orderData))
+        //         // let url = "/tenancy/p/annualRentOrder?"+cData;
+        //         let url = "/tenancy/p/beginReserve?"+cData;
+        //         window.location.href = url
+        //     }else{
+        //             handleAjax(res);
+        //     }
+        // }
     })
 }
 const orderlist_data = {

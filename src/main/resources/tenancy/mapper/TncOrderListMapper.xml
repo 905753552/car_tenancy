@@ -34,6 +34,8 @@
     <result property="transmissionType" column="transmissionType" jdbcType="VARCHAR"/>
     <association property="path" column="carId" select="com.dev.main.tenancy.dao.TncCarPicMapper.selectPathByCid"  javaType="String"/>
   </resultMap>
+
+  <!--根据汽车item的id获取汽车车id,品牌,车系,图片,厢数,排量,座位数-->
   <select id="selectCarItem" resultMap="selectCarItemRm" parameterType="java.lang.Long">
     select b.series `series`,c.name `bandname`,b.box_quantity `boxQuantity`,b.displacement `displacement`,b.seat_quantity `seatQuantity`,b.transmission_type `transmissionType`,a.car_id `carId`
     from tnc_car_item a
@@ -48,6 +50,8 @@
     <result column="city" property="city" jdbcType="VARCHAR" />
     <result column="detail" property="detail" jdbcType="VARCHAR" />
   </resultMap>
+
+  <!--根据门店id获取门店名,门店省,市,区,具体地址-->
   <select id="selectStore" resultMap="selectStoreRm" parameterType="java.lang.Long">
         select s.name `name`,rp.name `province`, rc.name `city`, ra.name `area`, a.detail `detail`
         from tnc_store s
@@ -57,7 +61,12 @@
         join address_region ra on ra.id = a.area_id
         where s.id = #{xxx}
     </select>
-
+<!--根据汽车id获取价格方案-->
+  <select id="getPrice" resultType="com.dev.main.tenancy.domain.TncPriceScheme" parameterType="java.lang.Long">
+    select *
+    from tnc_price_scheme
+    where car_id = #{xxx}
+  </select>
 <!--<select id="getCarId" resultType="java.lang.Long" parameterType="java.lang.Long">-->
   <!--select b.id-->
   <!--form tnc_car_item a ,tnc_car b-->
