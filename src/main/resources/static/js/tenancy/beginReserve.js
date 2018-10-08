@@ -470,11 +470,18 @@ function overtimeCost(baseHourPrice){
         return_time = new Date(param.base_info.returnTime+':00 10/1/2018');
     var hours = accAdd( return_time.getTime(),(-1)*get_time.getTime());
     hours = accDiv(hours,3600000);
+    // 不够一个小时按一个小时算
+    if (hours%(parseInt(hours) == 0?1:parseInt(hours))>0){
+        hours = parseInt(hours) + 1;
+    }else{
+        hours = parseInt(hours);
+    }
     if(hours>4){
         param.base_info.overtime_count = hours;
         param.base_info.overtime_cost = 0;
     }else{
         param.base_info.overtime_cost = accMul(hours , baseHourPrice);
+        console.log(param.base_info.overtime_cost);
     }
 }
 //计算其他费用
