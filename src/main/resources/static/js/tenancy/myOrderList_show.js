@@ -99,9 +99,9 @@ const orderlist_methods = {
         if(this.orders[index].status==4) color="s-yellow";if(this.orders[index].status==3) color="s-gray";if(this.orders[index].status==5) color="s-blue";
         return color;
     },
-    godetail:function (index) {
-        godetail(this.orders[index].id);
-    }
+    // godetail:function (index) {
+    //     godetail(this.orders[index].id);
+    // }
 };
 const getname = {
    order_0 : function () {
