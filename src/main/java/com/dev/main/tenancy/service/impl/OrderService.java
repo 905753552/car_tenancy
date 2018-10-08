@@ -36,13 +36,22 @@ public class OrderService implements IOrderService {
     private TncPointMapper tncPointMapper;
     @Autowired
     private TncPointLogMapper tncPointLogMapper;
+    @Autowired
+    private TncCarPicMapper tncCarPicMapper;
+    @Autowired
+    private TncCarItemMapper tncCarItemMapper;
 
 
     @Override
     public ResultMap selectByPrimaryKey(Long id) {
         TncCar tncCar = tncCarMapper.selectByPrimaryKey(id);
-        if(tncCar!=null)
-            return ResultMap.success("获取车辆信息成功").put("car",tncCar);
+       // String carPicPath = tncCarPicMapper.selectPathByCid(id);
+        if(tncCar!=null){
+            ResultMap resultMap = ResultMap.success("获取车辆信息成功");
+            resultMap.put("car",tncCar);
+            //resultMap.put("path",carPicPath);
+            return resultMap;
+        }
         else
             throw new CommonException("获取车辆信息失败");
     }
@@ -117,20 +126,21 @@ public class OrderService implements IOrderService {
 
     @Override
     public ResultMap savePay(Long id) {
-        //更新订单
-        Byte status = 2;
         TncOrder tncOrder = tncOrderMapper.selectByPrimaryKey(id);
-        tncOrder.setPayTime(new Date());
-        tncOrder.setStatus(status);
-        int res = tncOrderMapper.updateByPrimaryKey(tncOrder);
 //        分配车辆
         TncCarItem tncCarItem = tncOrderMapper.selectCarItemByPrimaryKey(tncOrder.getCarItemId());
-        if(res>0){
+
             if(tncCarItem != null){
+                //更新订单
+                Byte status = 2;
+                tncOrder.setPayTime(new Date());
+                tncOrder.setStatus(status);
+                int res = tncOrderMapper.updateByPrimaryKey(tncOrder);
+                if(res>0){
 //              车辆信息更新
                 TncCar tncCar = tncCarMapper.selectByPrimaryKey(tncCarItem.getCarId());
-                if (tncCar.getQuantity()>0){
-                    tncCar.setQuantity(tncCar.getQuantity()-1);
+                if (tncCar.getResidual()>0){
+                    tncCar.setResidual(tncCar.getResidual()-1);
                     tncCarMapper.updateByPrimaryKeySelective(tncCar);
                 }else{
                     throw new CommonException("该车辆库存为0");
@@ -142,20 +152,19 @@ public class OrderService implements IOrderService {
 //                  积分+10
                     tncPoint1 = new TncPoint();
                     tncPoint1.setUid(ShiroUtils.getUserId());
-                    tncPoint1.setPoint(10);
+                    tncPoint1.setPoint(tncOrder.getTotalAmount().intValue()/100);
                     tncPoint1.setIsDeleted(isDeleted);
                     tncPoint1.setGmtCreate(new Date());
                     tncPoint1.setGmtModified(new Date());
                     tncOrderMapper.insertPoint(tncPoint1);
                 }else{
-                    tncPoint1.setPoint(tncPoint1.getPoint()+10);
+                    tncPoint1.setPoint(tncPoint1.getPoint()+tncOrder.getTotalAmount().intValue()/100);
                     tncPointMapper.updateByPrimaryKeySelective(tncPoint1);
                 }
 //              更新积分记录表
-                System.out.println(tncPoint1.getId());
                 TncPointLog tncPointLog = new TncPointLog();
                 tncPointLog.setPid(tncPoint1.getId());
-                tncPointLog.setChange(+10);
+                tncPointLog.setChange(+(tncOrder.getTotalAmount().intValue()/100));
                 tncPointLog.setResource("完成订单");
                 tncPointLog.setGmtCreate(new Date());
                 tncPointLog.setGmtModified(new Date());
@@ -166,18 +175,23 @@ public class OrderService implements IOrderService {
                 resultMap.put("order",tncOrder);
                 resultMap.put("carItem",tncCarItem);
                 return resultMap;
-            }else{
-                throw new CommonException("无可租车辆");
-            }
+                }else{
+                    throw new CommonException("支付订单失败");
+                }
+
         }else{
-            throw new CommonException("支付订单失败");
+            throw new CommonException("无可租车辆");
         }
     }
 
     @Override
     public ResultMap cancelOrder(Long id) {
-        Byte status = 3;
+        Byte status ;
         TncOrder tncOrder = tncOrderMapper.selectByPrimaryKey(id);
+        if(tncOrder.getStatus() == 2)
+            status = 5;
+        else
+            status = 3;
         tncOrder.setStatus(status);
         int res = tncOrderMapper.updateByPrimaryKey(tncOrder);
         if (res>0){
@@ -215,6 +229,9 @@ public class OrderService implements IOrderService {
             for (TncCarItem tncCarItem:list) {
 //                判断车辆是否可租用
                 if (tncCarItem.getStatus() == 0){
+                    Byte status = 1;
+                    tncCarItem.setStatus(status);
+                    tncCarItemMapper.updateByPrimaryKeySelective(tncCarItem);
                     return ResultMap.success("获取车辆成功").put("carItem",tncCarItem);
                 }
             }

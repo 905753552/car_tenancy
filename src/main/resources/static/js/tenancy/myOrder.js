@@ -10,7 +10,6 @@ var orderDetail = new Vue({
         self.order_detail = JSON.parse(decodeURIComponent(window.location.search.slice(1))).order_detail;
         self.index = JSON.parse(decodeURIComponent(window.location.search.slice(1))).index;
         self.description = readDesc(self.order_detail.description);
-        console.log(self.order_detail.order_detail);
         self.initialize();
         self.showModel();
     },
@@ -84,7 +83,9 @@ function initialize(self){
         success: function(res) {
             if(res.code == 0){
                 self.order_detail.order_detail = res.order;
-                console.log(res.order);
+                console.log("----------------------");
+                console.log(self.order_detail.order_detail);
+                console.log("----------------------");
                 console.log("获取订单成功");
             }else{
                 handleAjax(res);

@@ -89,6 +89,8 @@
                         <span>租车人：{{order_detail.order_detail.name}}</span>
                         <a>|</a>
                         <span>租期：{{order_detail.days}}天</span>
+                        <a>|</a>
+                        <span>取车时需交押金: ¥ <span style="color: red">{{order_detail.deposit}}</span></span>
                         <span style="float: right;color: red;" v-if="order_detail.order_detail.status==0">请在1小时内完成付款，否则将自动取消订单</span>
                     </div>
                 </div>
@@ -104,8 +106,8 @@
                             <td colspan="3" rowspan="3" align="center" valign="middle"
                                 class="borderBlueB borderBlueR pre"
                                 height="99">
-                                <img src="https://image.zuchecdn.com/brand/order/kia.png">
-                                <img src="https://fimg.zuchecdn.com/upload/web/modepic/480.jpg" width="138" height="80">
+                                <!--<img src="https://image.zuchecdn.com/brand/order/kia.png">-->
+                                <img src="carPicPath" width="138" height="80">
                                 <!--<span class="config-btn">配置信息</span>-->
                                 <input type="button" class="tnc_btn tnc_btn_green config-btn" value="配置信息">
                             </td>

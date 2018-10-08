@@ -27,6 +27,7 @@ const param = {
         order_price_sum:'',//订单总价ttam
         description:'',//备注
         coupon:0,//优惠券面值
+        //carPicPath:'',//汽车封面
         order_detail:{
             // 主键
             id:'',
@@ -96,6 +97,8 @@ var orderDetail = new Vue({
         priceSchemeInfo:{},
         // 车辆信息
         carInfo:{},
+        // 车辆封面
+       // carPicPath:'',
         // 订单显示参数
         baseInfo:{},
         // 优惠券信息
@@ -119,7 +122,6 @@ var orderDetail = new Vue({
             var data = JSON.parse(id);
             param.base_info.order_detail.id = data;
         }
-        console.log(self.order_detail);
         self.getCarInfo();
         self.getCarItemInfo();
         self.getPSchemeAndPName();
@@ -200,7 +202,9 @@ function getCarInfo(self){
         success:function(res){
             if(res.code==0) {
                 self.carInfo = res.car;
+               // self.carPicPath = res.path;
                 param.base_info.car_info = res.car;
+             //   param.base_info.carPicPath = res.path;
                 console.log("获取车辆信息成功");
             }
             else{
@@ -237,6 +241,7 @@ function getPSchemeAndPName(self){
         success:function(res){
             if(res.code==0) {
                 self.priceSchemeInfo = res.priceScheme;
+                console.log(res.priceScheme);
                 param.base_info.order_detail.packageName = res.packageScheme.name;
                 self.setBaseParam();
                 console.log("获取价格方案成功");
@@ -292,10 +297,14 @@ function setBaseParam(self){
     //计算其他费用
     otherCost();
     param.base_info.deposit = self.priceSchemeInfo.deposit;
-    param.base_info.order_price_sum = param.base_info.discount_total_base
+    var total =  param.base_info.discount_total_base
                                        + param.base_info.discount_total_service
                                        + param.base_info.other_cost
                                        - param.base_info.coupon;
+    if (total>0)
+        param.base_info.order_price_sum = total;
+    else
+        param.base_info.order_price_sum = 0;
     self.baseInfo = param.base_info;
 }
 //-------------页面初始化--------------end
@@ -338,7 +347,7 @@ function setOrderDetails(){
         // 折扣, 0<折扣<=1, 默认为1
         param.base_info.order_detail.discount = orderDetail.priceSchemeInfo.discount;
         // 已收押金
-        param.base_info.order_detail.deposit = 0;
+        param.base_info.order_detail.deposit = param.base_info.deposit;
         // 退还押金
         param.base_info.order_detail.returnDeposit = 0;
         // 是否已退押 0-未退 1-已退
@@ -1035,9 +1044,7 @@ $(document).ready(function(){
             var id = $("#coupons").find("li").eq(i).find(".moneyid").text().substr(0);
             param.base_info.order_detail.couponId = id;
             param.base_info.coupon = count;
-            self.baseInfo = param.base_info;
-            param.base_info.order_price_sum = (param.base_info.order_price_sum - param.base_info.coupon)>0
-                                            ? (param.base_info.order_price_sum - param.base_info.coupon):0;
+            setBaseParam(orderDetail);
             var $nextLi = $(".opcl1").next(".zc_query-condition_list");
             $nextLi.removeClass("show"), $(".opcl1").find(".blue-downarr").removeClass("open");
         })
