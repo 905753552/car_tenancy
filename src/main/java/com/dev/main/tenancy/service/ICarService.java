@@ -21,6 +21,12 @@ public interface ICarService {
 
     List<TncBrand> listTncBrand();
 
+    /**
+     * LYH
+     * @param id
+     * @return
+     */
+
     ResultMap TncCardetail(Long id);
 
     void addCarHot(Long cid);

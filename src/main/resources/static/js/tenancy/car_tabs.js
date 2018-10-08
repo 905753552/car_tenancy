@@ -485,20 +485,20 @@ function notFoundTips() {
 }
 
 function addCarHot(cid) {
-    $.ajax({
-        type:"POST",
-        url:"/api/CarSelect/addCarHot",
-        data:{
-            cid:cid
-        }
-        // success:function (data) {
-        //     if(data.code==0){
-        //
-        //     }else{
-        //         handleAjax(data);
-        //     }
-        // }
-    })
+    // $.ajax({
+    //     type:"POST",
+    //     url:"/api/CarSelect/addCarHot",
+    //     data:{
+    //         cid:cid
+    //     }
+    //     // success:function (data) {
+    //     //     if(data.code==0){
+    //     //
+    //     //     }else{
+    //     //         handleAjax(data);
+    //     //     }
+    //     // }
+    // })
 }
 
 function fromStoreDetail(id) {
