@@ -17,6 +17,7 @@ function getCustomer() {
         dataType:'json',
         success: function(res) {
             if(res.code == 0){
+
                 orderlist_data.orders = res.order;
                  console.log(orderlist_data.orders);
             }else{

@@ -64,6 +64,7 @@ public class OrderListServiceImpl implements IOrderListService {
             if(state.trim().equals("异地还车费")) vo.setForeign_land_cost(Integer.parseInt(money));
             if(state.trim().equals("整备费")) vo.setPrepare_cost(Integer.parseInt(money));
             if(state.trim().equals("异店还车费")) vo.setForeign_store_cost(Integer.parseInt(money));
+            if(state.trim().equals("超时服务费")) vo.setOvertime_cost(Integer.parseInt(money));
         }
         //获取优惠券面值
         TncCoupon tncCoupon = tncCouponMapper.selectByPrimaryKey(order.getCouponId());
@@ -84,9 +85,10 @@ public class OrderListServiceImpl implements IOrderListService {
         int days = (int) ((returndate.getTime() - getdate.getTime()) / (1000*3600*24));
         Long plus = (returndate.getTime() - getdate.getTime()) % (1000*3600*24);
         int hour = 0;
-        if(plus>(1000*60*4)) days++;
-        else {
-            hour = (int) (plus / (1000*60)) + 1;
+        if(plus>(1000*3600*4)) days++;
+        else if(plus!=0){
+            hour = (int) (plus / (1000*3600));
+            if(hour==0||(plus%(1000*3600))>0) hour++;
         }
         vo.setOvertime_count(hour);
         vo.setDays(days);
@@ -101,21 +103,30 @@ public class OrderListServiceImpl implements IOrderListService {
         TncStoreVo returnStore = tncOrderListMapper.selectStore(order.getReturnStoreId());
         vo.setReturnStore(returnStore.getName());
         vo.setReturnCity(returnStore.getCity());
-        //获取价格方案
-       // System.out.println("carid"+carId);
-        TncPriceScheme tncPriceScheme = tncOrderListMapper.getPrice(carId);
-        //System.out.println(tncPriceScheme);
-        BigDecimal discount = tncPriceScheme.getDiscount();//折扣
+
+
+        BigDecimal discount = order.getDiscount();
         vo.setDiscount_total_base(discount.multiply(baseAmount));//折扣基础总价
         vo.setDiscount_total_service(discount.multiply(serviceAmount));//折扣基础服务费总价
-        vo.setBase_price(tncPriceScheme.getBasePrice());//基础单价
-        //System.out.println("baseprice"+tncPriceScheme.getBasePrice());
-        vo.setService_price(tncPriceScheme.getServicePrice());//服务单价
-       // System.out.println("serviceprice"+tncPriceScheme.getServicePrice());
-        vo.setDeposit(tncPriceScheme.getDeposit());//押金
+        int base = (baseAmount.divideToIntegralValue(new BigDecimal(days))).intValue();
+        int service = (serviceAmount.divideToIntegralValue(new BigDecimal(days))).intValue();
+        vo.setBase_price(base);
+        vo.setService_price(service);
+        vo.setDeposit(order.getDeposit());
 
-        BigDecimal hourprice = tncPriceScheme.getBaseHourPrice();//小时单价
-        if(hour!=0&hourprice!=null) vo.setOvertime_cost(hourprice.multiply(new BigDecimal(hour)));
+
+//        //获取价格方案
+//        TncPriceScheme tncPriceScheme = tncOrderListMapper.getPrice(carId);
+//        BigDecimal discount = tncPriceScheme.getDiscount();//折扣
+//        vo.setDiscount_total_base(discount.multiply(baseAmount));//折扣基础总价
+//        vo.setDiscount_total_service(discount.multiply(serviceAmount));//折扣基础服务费总价
+//        vo.setBase_price(tncPriceScheme.getBasePrice());//基础单价
+//        vo.setService_price(tncPriceScheme.getServicePrice());//服务单价
+//        vo.setDeposit(tncPriceScheme.getDeposit());//押金
+//        BigDecimal hourprice = tncPriceScheme.getBaseHourPrice();//小时单价
+//        if(hour!=0&hourprice!=null) vo.setOvertime_cost(hourprice.multiply(new BigDecimal(hour)));
+
+
         //获取图片
         vo.setCarPicPath(tncOrderListMapper.selectCarItem(order.getCarItemId()).getPath());
         System.out.println(vo.toString());

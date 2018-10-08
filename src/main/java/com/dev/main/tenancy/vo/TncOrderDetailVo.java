@@ -15,8 +15,8 @@ public class TncOrderDetailVo {
     private String getStore;//取车门店  -----
     private String getCity;//取车城市   -----
     private int days;//租车天数  ------
-    private BigDecimal base_price;//基础费（天） -----
-    private BigDecimal service_price;//服务费（天） ------
+    private int base_price;//基础费（天） -----
+    private int service_price;//服务费（天） ------
     private BigDecimal total_base_price;//总的基础费 -----
     private BigDecimal total_service_price;//总的服务费  -----
     private BigDecimal discount_total_base;//打折后的总的基础费  ------
@@ -25,7 +25,7 @@ public class TncOrderDetailVo {
     private int prepare_cost;//整备费  -----
     private int foreign_land_cost;//异地还车费  -----
     private int foreign_store_cost;//异店还车费   ----
-    private BigDecimal overtime_cost;//超时费用（总）  -----
+    private int overtime_cost;//超时费用（总）  -----
     private int overtime_count;//超时数   -----
     private BigDecimal deposit;//押金  -----
     private BigDecimal order_price_sum;//订单总价ttam  -----
@@ -158,19 +158,19 @@ public class TncOrderDetailVo {
         this.days = days;
     }
 
-    public BigDecimal getBase_price() {
+    public int getBase_price() {
         return base_price;
     }
 
-    public void setBase_price(BigDecimal base_price) {
+    public void setBase_price(int base_price) {
         this.base_price = base_price;
     }
 
-    public BigDecimal getService_price() {
+    public int getService_price() {
         return service_price;
     }
 
-    public void setService_price(BigDecimal service_price) {
+    public void setService_price(int service_price) {
         this.service_price = service_price;
     }
 
@@ -238,11 +238,11 @@ public class TncOrderDetailVo {
         this.foreign_store_cost = foreign_store_cost;
     }
 
-    public BigDecimal getOvertime_cost() {
+    public int getOvertime_cost() {
         return overtime_cost;
     }
 
-    public void setOvertime_cost(BigDecimal overtime_cost) {
+    public void setOvertime_cost(int overtime_cost) {
         this.overtime_cost = overtime_cost;
     }
 
