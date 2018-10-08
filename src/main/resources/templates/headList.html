@@ -24,7 +24,7 @@
     </style>
 </head>
 <body onbeforeunload="Sx()">
-<div class="container-fluid tnc_container tnc_header" v-cloak id="carInfoTab-app">
+<div class="container-fluid tnc_container tnc_header" >
     <div v-cloak id="header-app" class="row tnc_head">
         <div class="tnc_head_bd">
             <div><a class="tnc_head_brand tnc_logo" href="/"></a></div>
@@ -71,9 +71,10 @@
             </div>
         </div>
     </div>
+    <div v-cloak id="carInfoTab-app">
     <from id="firstOrderInfo" >
         <div class="row bo_bg">
-            <div class="col-md-12 col-lg-10 offset-lg-1 col-sm-12">
+            <div class="col-md-12 col-lg-10 offset-lg-1 col-sm-12" >
                 <div class="menu-left">
                     <div class="menu-input-group">
                         <div class="row top-menu">
@@ -658,7 +659,7 @@
                                     <div class="col-md-12 column">
                                         <div class="row clearfix dev_underline">
                                             <div class="col-md-4 column pic">
-                                                <a :href="'./cardetail?carId='+item.carId" @click="addCarHot(item.carId)" target="_blank"><img :src="item.carImg" alt="图片" width="230px" height="130px"></a>
+                                                <a :href="'./cardetail?carId='+item.carId" @click="addCarHot(item.carId)" target="_blank"><img :src="'/api/pic/item?imagePath='+item.carImg" alt="图片" width="230px" height="130px"></a>
                                             </div>
                                             <div class="col-md-3 column info">
                                                 <div class="info_block">
@@ -708,7 +709,7 @@
                                     <div class="col-md-12 column">
                                         <div class="row clearfix dev_underline">
                                             <div class="col-md-4 column pic">
-                                                <a :href="'./cardetail?carId='+item.carId" @click="addCarHot(item.id)" target="_blank"><img :src="item.carImg" alt="图片" width="230px" height="130px"></a>
+                                                <a :href="'./cardetail?carId='+item.carId" @click="addCarHot(item.id)" target="_blank"><img :src="'/api/pic/item?imagePath='+item.carImg" alt="图片" width="230px" height="130px"></a>
                                             </div>
                                             <div class="col-md-3 column info">
                                                 <div class="info_block">
@@ -766,7 +767,7 @@
         </div>
 
     </div>
-
+    </div>
         <div class="row tnc_footer_background">
         <div class="col-sm-12 col-md-10 offset-md-1 tnc_footer_help">
             <dl class="tnc_footer_help_item">

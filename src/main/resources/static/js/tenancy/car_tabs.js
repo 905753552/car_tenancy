@@ -155,10 +155,13 @@ function doCarOrder(index) {
     let cData = encodeURIComponent(JSON.stringify(orderData))
     let url = "/tenancy/p/beginReserve?"+cData;
     carInfoTab_app.menu.forEach(function (item) {
-        if(item.name == "年租套餐" && item.id == currentPackageId){
+        if(item.name.indexOf("年租套餐")>=0 && item.id==currentPackageId){
+            //console.log(item.name)
             url = "/tenancy/p/annualRentOrder?"+cData;
         }
+        //console.log(item.name)
     })
+    //console.log(url)
     window.location.href = url
 }
 //处理汽车品牌
