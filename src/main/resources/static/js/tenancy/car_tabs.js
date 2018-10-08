@@ -22,9 +22,13 @@ var carMaxPrice =9999;
 const carInfoTab_data ={
     menu: [],
     items: [],
+    city: [],
+    area:[],
+    storeName:[],
     carBrands:[],
     days:1,
-    isEmpty:false
+    isEmpty:false,
+    idClick:"",
 }
 //filter
 const filter_carInfoTab = {
@@ -37,7 +41,10 @@ const carInfoTab_methods = {
     doSearchByPackage: doSearchByPackage,
     doCheckByType:doCheckByType,
     doSearchByAllType:doSearchByAllType,
-    addCarHot:addCarHot
+    addCarHot:addCarHot,
+
+    fromStoreDetail:fromStoreDetail,
+    toStoreDetail:toStoreDetail
 }
 //Vue created 时触发的函数
 const init_carInfoTab = ()=>{
@@ -45,6 +52,7 @@ const init_carInfoTab = ()=>{
     loadCarMenuData()//加载套餐数据
     doSearchByAllType()//加载车数据
    // loadCarBrandData()//加载汽车品牌
+    addrLoad();  // 加载市级地址
 }
 
 //Vue app
@@ -490,4 +498,51 @@ function addCarHot(cid) {
     })
 }
 
+function fromStoreDetail(id) {
+    carInfoTab_app.idClick = id;
+    $(this).siblings("span").removeClass("cur-city");
+    $(this).addClass("cur-city");
+    $("#fromStore_Detail").css("display","block");
+    $("#fromStore_Name span").on({
+        mouseenter: function(){
+            $(this).siblings("span").removeClass("cur-city");
+            $(this).addClass("cur-city");
+        },
+        mouseleave: function(){
+            $(this).siblings("span").removeClass("cur-city");
+            $(this).addClass("cur-city");
+        },
+        click: function () {
+            $("#fromStoreName").val($(this).text().trim());
+            $("#fromStore_panel span").removeClass("cur-city");
+            $("#fromStore_Detail").css("display","none");
+            $("#fromStore_Name").css("display","none");
+            $("#fromStore").css("display","none");
+        }
+    });
+}
+
+function toStoreDetail(id) {
+    carInfoTab_app.idClick = id;
+    $(this).siblings("span").removeClass("cur-city");
+    $(this).addClass("cur-city");
+    $("#toStore_Detail").css("display","block");
+    $("#toStore_Name span").on({
+        mouseenter: function(){
+            $(this).siblings("span").removeClass("cur-city");
+            $(this).addClass("cur-city");
+        },
+        mouseleave: function(){
+            $(this).siblings("span").removeClass("cur-city");
+            $(this).addClass("cur-city");
+        },
+        click: function () {
+            $("#toStoreName").val($(this).text().trim());
+            $("#toStore_panel span").removeClass("cur-city");
+            $("#toStore_Detail").css("display","none");
+            $("#toStore_Name").css("display","none");
+            $("#toStore").css("display","none");
+        }
+    });
+}
 /*-------------------------------------function end-------------------------------------*/

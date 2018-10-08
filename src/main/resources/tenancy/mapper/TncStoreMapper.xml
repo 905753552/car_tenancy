@@ -15,8 +15,11 @@
     <association property="tncAddress" column="addr_id" select="com.dev.main.tenancy.dao.TncAddressMapper.selectByPrimaryKey" javaType="com.dev.main.tenancy.domain.TncAddress"/>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, addr_id, service_tel, manager_phone, manager_name, status, is_deleted, 
+    id, name, addr_id, service_tel, manager_phone, manager_name, status, is_deleted,
     gmt_create, gmt_modified
+  </sql>
+  <sql id="Base_Column_List2">
+    tnc_store.id , name, addr_id, service_tel, manager_phone, manager_name
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -159,4 +162,11 @@
     name = #{xxoo}
     and is_deleted = 0
   </select>
+  <select id="selectStoreByAreaId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List2"/>
+    from tnc_store,tnc_address
+    where area_id = #{id} and status = 1 and is_deleted = 0 and tnc_store.addr_id = tnc_address.id
+  </select>
+
 </mapper>

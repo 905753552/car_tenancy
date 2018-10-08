@@ -150,4 +150,16 @@
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <!--查找门店市级-->
+  <select id="selectAllStoreCity" resultMap="BaseResultMap">
+    select distinct city_id
+    from tnc_address
+    where store_or_user = 0
+  </select>
+  <!--查找门店区-->
+  <select id="selectAllStoreArea" resultMap="BaseResultMap">
+    select distinct area_id
+    from tnc_address
+    where store_or_user = 0 and city_id = #{id}
+  </select>
 </mapper>

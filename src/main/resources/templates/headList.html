@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="/css/car_tabs.css">
 <head>
     <meta charset="UTF-8">
-    <title>头部列表</title>
+    <title>乘风租车</title>
     <style>
         body {
             background-color: #f2f3f5;
@@ -25,37 +25,37 @@
 </head>
 <body onbeforeunload="Sx()">
 <div class="container-fluid tnc_container tnc_header" v-cloak id="carInfoTab-app">
-    <div class="row tnc_head">
+    <div v-cloak id="header-app" class="row tnc_head">
         <div class="tnc_head_bd">
             <div><a class="tnc_head_brand tnc_logo" href="/"></a></div>
-            <div class="tnc_head_menu">
+            <div class="tnc_head_menu" >
                 <ul class="">
                     <li class="tnc_head_menu_item">
                         <a class="tnc_head_menu_active" href="/">首页 <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="tnc_head_menu_item">
-                        <a class="" href="#">选车</a>
+                        <a class="" href="/headList">选车</a>
                     </li>
                     <li class="tnc_head_menu_item">
-                        <a class="" href="#">门店</a>
+                        <a class="" href="/storesMap">门店</a>
                     </li>
                 </ul>
             </div>
             <div class="tnc_head_right">
-                <div class="tnc_head_login tnc_header_active" style="display: none">
-                    <a href="#" class="">登录</a> / <a href="#" class="">注册</a>
+                <div v-show="!customer.id" class="tnc_head_login tnc_header_active" style="display: none">
+                    <a href="login" class="">登录</a> / <a href="/register" class="">注册</a>
                 </div>
-                <div class="tnc_head_login">
-                    <h1 class="tnc_head_welcome">您好，梁***</h1>
+                <div v-show="customer.id" class="tnc_head_login" >
+                    <h1 class="tnc_head_welcome">您好，{{customer.name}}</h1>
                     <div id="tnc_toggle_area" class="tnc_head_dropdown">
-                        <a id="tnc_toggle_area_btn" href="#">个人中心&nbsp;<i class="fa fa-caret-down"></i></a>
+                        <a id="tnc_toggle_area_btn" href="/tenancy/p/myOrderList">个人中心&nbsp;<i class="fa fa-caret-down"></i></a>
                         <div id="tnc_toggle_menu" style="display: none">
                             <div class="triangle_border_up"></div>
-                            <div class="tnc_collapse_list">
-                                <a href="#" class="bhpr reddot">我的订单</a>
-                                <a href="#">我的资产</a>
-                                <a href="#">我的账户</a>
-                                <a href="#">退出登录</a>
+                            <div class="tnc_collapse_list" >
+                                <a href="/tenancy/p/myOrderList" class="bhpr reddot">我的订单</a>
+                                <a href="/tenancy/p/coupon">我的资产</a>
+                                <a href="/tenancy/p/personInfo">我的账户</a>
+                                <a href="javascript:;" @click="logout">退出登录</a>
                             </div>
                         </div>
                     </div>
@@ -80,13 +80,201 @@
                             <label class="tnc_c_car">&emsp;取车&emsp;</label>
                             <input type="text" home-flag value="肇庆" maxlength="10"
                                    default-value="选择城市" link-input="fromCityId"
-                                   class="tnc_inpcity tnc_input_citySD tnc_input_text"
+                                   class="tnc_inpcity tnc_input_citySD tnc_input_text" @click="choose()"
                                    name="fromCity" id="fromCity2" t_popup="0">
+                            <input type="hidden" value="" name="fromCityId" id="fromCityId">
+                            <div id="city" class="ch_city">
+                                <div id="popup_pane_head">
+                                    <ul id="popup_title" class="popup_title">
+                                        <li value="1" class="cur">ABCD</li>
+                                        <li value="2">EFGHI</li>
+                                        <li value="3">JKLMN</li>
+                                        <li value="4">OPQRS</li>
+                                        <li value="5">TUVW</li>
+                                        <li value="6">XYZ</li>
+                                    </ul>
+                                    <ul id="popup_content">
+                                        <li class="cur">
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">A</b>
+                                                <span v-for="item in city">
+                                                    <input :cid="item.city.id" style="display: none">
+                                                    {{item.city.name}}</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">B</b>
+                                                <span>北京市</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">C</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">D</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">E</b>
+                                                <span>肇庆</span>
+                                                <span>中山</span>
+                                                <span>广州</span>
+                                                <span>佛山</span>
+                                                <span>大连</span>
+                                                <span>罗浮</span>
+                                                <span>东莞</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">F</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">G</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">H</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">I</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">J</b>
+                                                <span>肇庆</span>
+                                                <span>中山</span>
+                                                <span>广州</span>
+                                                <span>佛山</span>
+                                                <span>大连</span>
+                                                <span>罗浮</span>
+                                                <span>东莞</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">K</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">L</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">M</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">N</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">O</b>
+                                                <span>肇庆</span>
+                                                <span>中山</span>
+                                                <span>广州</span>
+                                                <span>佛山</span>
+                                                <span>大连</span>
+                                                <span>罗浮</span>
+                                                <span>东莞</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">P</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">Q</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">R</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">S</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">T</b>
+                                                <span>肇庆</span>
+                                                <span>中山</span>
+                                                <span>广州</span>
+                                                <span>佛山</span>
+                                                <span>大连</span>
+                                                <span>罗浮</span>
+                                                <span>东莞</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">U</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">V</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">W</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">X</b>
+                                                <span>肇庆</span>
+                                                <span>中山</span>
+                                                <span>广州</span>
+                                                <span>佛山</span>
+                                                <span>大连</span>
+                                                <span>罗浮</span>
+                                                <span>东莞</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">Y</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">Z</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                             <input type="text" home-flag value="星湖大道店" maxlength="30"
                                    default-value="请选择取车门店" link-input="fromStoreId"
-                                   class="tnc_inpstore tnc_input_citySD tnc_input_text"
+                                   class="tnc_inpstore tnc_input_citySD tnc_input_text" @click="choose()"
                                    name="fromStoreName" id="fromStoreName" t_popup="0" ischain="1">
-                            <input type="hidden" value="2432" name="fromStoreId" id="fromStoreId">
+                            <input type="hidden" value="" name="fromStoreId" id="fromStoreId">
+                            <div id="fromStore" class="ch_store1" >
+                                <div style="margin: 0px 5px 0px 10px">
+                                    <div class="store_mes">请选择取车门店</div>
+                                    <div id="fromStore_panel" class="store_panel">
+                                        <span v-for="item in area">
+                                            <input :aid="item.area.id" style="display: none">
+                                            {{item.area.name}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div id="fromStore_Name" style="display:none;margin: 0px 5px 0px 10px;padding-top: 5px;border-top: 1px solid #00c189;" >
+                                    <span v-for="item in storeName" @mouseenter="storeDetail(item.id)">
+                                        <input style="display: none">
+                                        {{item.name}}
+                                    </span>
+                                </div>
+                                <div id="fromStore_Detail" style="display:none;margin: 0px 5px 0px 10px;padding-top: 5px;border-top: 1px solid #00c189;" >
+                                    <label v-for="item in storeName" v-show="item.id == idClick">
+                                        <div>门店地址：{{item.tncAddress.province.name}}{{item.tncAddress.city.name}}{{item.tncAddress.area.name}}{{item.tncAddress.detail}}</div>
+                                        <div>门店电话：{{item.managerPhone}}</div>
+                                        <div>营业时间：8:30-21:30</div>
+                                        <div>客服电话：{{item.serviceTel}}</div>
+                                    </label>
+                                </div>
+                            </div>
                             <input type="hidden" class="" for="showsentAddress_span1" value="送车上门">
                             <span class="" id="showsentAddress_span1" disabled="disabled"
                                   style="display: none"></span>
@@ -95,14 +283,201 @@
                             <label class="tnc_c_car">&emsp;还车&emsp;</label>
                             <input type="text" home-flag value="肇庆" maxlength="10"
                                    default-value="选择城市" link-input="toCityId"
-                                   class="tnc_inpcity tnc_input_citySD tnc_input_text"
+                                   class="tnc_inpcity tnc_input_citySD tnc_input_text"  @click="choose()"
                                    name="toCity" id="toCity" t_popup="0">
-                            <input type="hidden" id="toCityId" name="toCityId" value="338">
+                            <input type="hidden" id="toCityId" name="toCityId" value="">
+                            <div id="city2" class="ch_city2">
+                                <div id="popup_pane_head2">
+                                    <ul id="popup_title2" class="popup_title">
+                                        <li value="1" class="cur">ABCD</li>
+                                        <li value="2">EFGHI</li>
+                                        <li value="3">JKLMN</li>
+                                        <li value="4">OPQRS</li>
+                                        <li value="5">TUVW</li>
+                                        <li value="6">XYZ</li>
+                                    </ul>
+                                    <ul id="popup_content2">
+                                        <li class="cur">
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">A</b>
+                                                <span v-for="item in city">
+                                                     <input :cid="item.city.id" style="display: none">
+                                                    {{item.city.name}}</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">B</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">C</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">D</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">E</b>
+                                                <span>肇庆</span>
+                                                <span>中山</span>
+                                                <span>广州</span>
+                                                <span>佛山</span>
+                                                <span>大连</span>
+                                                <span>罗浮</span>
+                                                <span>东莞</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">F</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">G</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">H</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">I</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">J</b>
+                                                <span>肇庆</span>
+                                                <span>中山</span>
+                                                <span>广州</span>
+                                                <span>佛山</span>
+                                                <span>大连</span>
+                                                <span>罗浮</span>
+                                                <span>东莞</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">K</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">L</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">M</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">N</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">O</b>
+                                                <span>肇庆</span>
+                                                <span>中山</span>
+                                                <span>广州</span>
+                                                <span>佛山</span>
+                                                <span>大连</span>
+                                                <span>罗浮</span>
+                                                <span>东莞</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">P</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">Q</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">R</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">S</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">T</b>
+                                                <span>肇庆</span>
+                                                <span>中山</span>
+                                                <span>广州</span>
+                                                <span>佛山</span>
+                                                <span>大连</span>
+                                                <span>罗浮</span>
+                                                <span>东莞</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">U</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">V</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">W</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">X</b>
+                                                <span>肇庆</span>
+                                                <span>中山</span>
+                                                <span>广州</span>
+                                                <span>佛山</span>
+                                                <span>大连</span>
+                                                <span>罗浮</span>
+                                                <span>东莞</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">Y</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                            <div class="letterbox">
+                                                <b class="cityzmletter">Z</b>
+                                                <span>肇庆</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                             <input type="text" home-flag value="星湖大道店" maxlength="30"
                                    default-value="请选择取车门店" link-input="toStoreId"
-                                   class="tnc_inpstore tnc_input_citySD tnc_input_text"
+                                   class="tnc_inpstore tnc_input_citySD tnc_input_text"  @click="choose()"
                                    name="toStoreName" id="toStoreName" t_popup="0" ischain="1">
-                            <input type="hidden" value="2432" name="toStoreId" id="toStoreId">
+                            <input type="hidden" value="" name="toStoreId" id="toStoreId">
+                            <div id="toStore" class="ch_store2" >
+                                <div style="margin: 0px 5px 0px 10px">
+                                    <div class="store_mes">请选择取车门店</div>
+                                    <div id="toStore_panel" class="store_panel">
+                                        <span v-for="item in area">
+                                            <input :aid="item.area.id" style="display: none">
+                                            {{item.area.name}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div id="toStore_Name" style="display:none;margin: 0px 5px 0px 10px;padding-top: 5px;border-top: 1px solid #00c189;" >
+                                    <span v-for="item in storeName" @mouseenter="storeDetail(item.id)">
+                                        <input style="display: none">
+                                        {{item.name}}
+                                    </span>
+                                </div>
+                                <div id="toStore_Detail" style="display:none;margin: 0px 5px 0px 10px;padding-top: 5px;border-top: 1px solid #00c189;" >
+                                    <label v-for="item in storeName" v-show="item.id == idClick">
+                                        <div>门店地址：{{item.tncAddress.province.name}}{{item.tncAddress.city.name}}{{item.tncAddress.area.name}}{{item.tncAddress.detail}}</div>
+                                        <div>门店电话：{{item.managerPhone}}</div>
+                                        <div>营业时间：8:30-21:30</div>
+                                        <div>客服电话：{{item.serviceTel}}</div>
+                                    </label>
+                                </div>
+                            </div>
                             <input type="hidden" class="" for="showpickAddress_span2" value="上门取车">
                             <span class="" id="showpickAddress_span2" disabled="disabled"
                                   style="display: none"></span>
@@ -471,7 +846,9 @@
 <script src="/layui-v2.4.3/layui.all.js"></script>
 <script src="/vue-2.5.17/vue.min.js"></script>
 <script src="/js/common/common.js"></script>
+<script src="/js/tenancy/header.js"></script>
 <script src="/js/tenancy/leftList_ch.js"></script>
+<script src="/js/tenancy/headList.js"></script>
 <script src="/js/tenancy/car_tabs.js"></script>
 <script>
 

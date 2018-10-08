@@ -7,26 +7,6 @@ $(document).ready(function () {
     $("#toDate").val(toDate);
 });
 
-// $(function () {
-//     //选择时间时图标切换
-//     $("#fromHourMinute").focus(function () {
-//         $(this).removeClass("tnc_input_citySD");
-//         $(this).addClass("tnc_input_citySD2");
-//         $(this).blur(function () {
-//             $(this).removeClass("tnc_input_citySD2");
-//             $(this).addClass("tnc_input_citySD");
-//         });
-//     });
-//     $("#toHourMinute").focus(function () {
-//         $(this).removeClass("tnc_input_citySD");
-//         $(this).addClass("tnc_input_citySD2");
-//         $(this).blur(function () {
-//             $(this).removeClass("tnc_input_citySD2");
-//             $(this).addClass("tnc_input_citySD");
-//         });
-//     });
-// });
-
 $(function () {
     // 类型checked切换
     $("#ch_type li a").click(function () {

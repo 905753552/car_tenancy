@@ -101,6 +101,11 @@
     background-color: #fff;
 }
 
+.tnc_input_text:focus{
+    border: 1px solid #00c189;
+    color: #606060;
+}
+
 .tnc_label{
     border: none;
     height: 40px;
@@ -221,10 +226,270 @@
     border: 1px solid var(--tnc_green);
 }
 
-
 .tnc_btn_green:hover {
     border: 1px solid #1e9f75;
     background-color: #1e9f75;
     color: #fff !important;
     text-decoration: none;
+}
+
+/*取车地址*/
+.ch_city{
+    position: absolute;
+    left: 83px;
+    top: 54px;
+    /*height: 200px;*/
+    width: 353px;
+    z-index: 100000;
+    display: none;
+    border: 1px solid #00c189;
+    background-color: #fff;
+}
+#popup_pane_head{
+    background: #fff;
+    padding-bottom: 9px;
+    /*height: 198px;*/
+    position: relative;
+    padding-top: 33px;
+}
+.popup_title {
+    height: 34px;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    margin: 5px 10px 5px 10px;
+    z-index: 10;
+}
+.popup_title li {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 7px;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    width: auto;
+    color: #939a9f;
+}
+.popup_title li.cur {
+    color: #00c189;
+    border-bottom: 2px solid #00c189;
+}
+#popup_content {
+    padding: 5px 0 5px 5px;
+    overflow: hidden;
+    border-top: 2px solid #f2f3f5;
+    margin: 0 10px 0 10px;
+}
+#popup_content .cur {
+    display: block;
+    overflow: hidden;
+}
+#popup_content li {
+    display: none;
+}
+#popup_content li div.letterbox {
+    position: relative;
+    overflow: hidden;
+    zoom: 1;
+    padding-left: 40px;
+}
+#popup_content li b.cityzmletter {
+    width: 30px;
+    color: #00c189;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    display: block;
+    float: left;
+    line-height: 25px;
+    font-weight: 400;
+    font-size: 14px;
+}
+#popup_content li span {
+    float: left;
+    width: 60px;
+    border: 1px solid #fff;
+    overflow: hidden;
+    line-height: 22px;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    color: #60606c;
+    margin: 5px;
+    position: relative;
+    border-radius: 3px;
+    background-color: #f2f3f5;
+}
+#popup_content li span:hover{
+    color:#fff;
+    background-color: #00c189;
+}
+#popup_content li span.cur-city{
+    color:#fff;
+    background-color: #00c189;
+}
+
+/*取车门店*/
+.ch_store1{
+    position: absolute;
+    left: 233px;
+    top: 54px;
+    width: 400px;
+    z-index: 100000;
+    display: none;
+    border: 1px solid #00c189;
+    background-color: #fff;
+}
+.store_panel{
+    font-size: 12px;
+    background: #fff;
+    /*height: 198px;*/
+}
+.store_mes{
+    color: #939a9f;
+    margin: 10px;
+}
+
+#fromStore span{
+    display: inline-block;
+    margin:5px;
+    padding: 0px 10px;
+    white-space: nowrap;
+    border: 1px solid #fff;
+    overflow: hidden;
+    line-height: 22px;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    color: #60606c;
+    border-radius: 3px;
+    background-color: #f2f3f5;
+}
+
+#fromStore span:hover {
+    color:#fff;
+    background-color: #00c189;
+}
+
+#fromStore span.cur-city{
+    color:#fff;
+    background-color: #00c189;
+}
+
+/*还车地址*/
+.ch_city2{
+    position: absolute;
+    left: 83px;
+    top: 102px;
+    /*height: 200px;*/
+    width: 353px;
+    z-index: 100000;
+    display: none;
+    border: 1px solid #00c189;
+    background-color: #fff;
+}
+#popup_pane_head2{
+    background: #fff;
+    padding-bottom: 9px;
+    /*height: 198px;*/
+    position: relative;
+    padding-top: 33px;
+}
+
+#popup_content2 {
+    padding: 5px 0 5px 5px;
+    overflow: hidden;
+    border-top: 2px solid #f2f3f5;
+    margin: 0 10px 0 10px;
+}
+#popup_content2 .cur {
+    display: block;
+    overflow: hidden;
+}
+#popup_content2 li {
+    display: none;
+}
+#popup_content2 li div.letterbox {
+    position: relative;
+    overflow: hidden;
+    zoom: 1;
+    padding-left: 40px;
+}
+#popup_content2 li b.cityzmletter {
+    width: 30px;
+    color: #00c189;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    display: block;
+    float: left;
+    line-height: 25px;
+    font-weight: 400;
+    font-size: 14px;
+}
+#popup_content2 li span {
+    float: left;
+    width: 60px;
+    border: 1px solid #fff;
+    overflow: hidden;
+    line-height: 22px;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    color: #60606c;
+    margin: 5px;
+    position: relative;
+    border-radius: 3px;
+    background-color: #f2f3f5;
+}
+
+#popup_content2 li span:hover{
+    color:#fff;
+    background-color: #00c189;
+}
+
+#popup_content2 li span.cur-city{
+    color:#fff;
+    background-color: #00c189;
+}
+
+/*还车门店*/
+.ch_store2{
+    position: absolute;
+    left: 233px;
+    top: 102px;
+    width: 400px;
+    z-index: 100000;
+    display: none;
+    border: 1px solid #00c189;
+    background-color: #fff;
+}
+
+#toStore span{
+    display: inline-block;
+    margin:5px;
+    padding: 0px 10px;
+    white-space: nowrap;
+    border: 1px solid #fff;
+    overflow: hidden;
+    line-height: 22px;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    color: #60606c;
+    border-radius: 3px;
+    background-color: #f2f3f5;
+}
+
+#toStore span:hover {
+    color:#fff;
+    background-color: #00c189;
+}
+
+#toStore span.cur-city{
+    color:#fff;
+    background-color: #00c189;
 }
