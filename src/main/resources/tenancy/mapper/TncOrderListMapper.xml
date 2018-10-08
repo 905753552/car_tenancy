@@ -15,9 +15,10 @@
     <association property="carVo" column="car_item_id" select="selectCarItem" javaType="com.dev.main.tenancy.vo.CarVo"/>
   </resultMap>
   <select id="selectOrderList" resultMap="selectOrderListrm" parameterType="java.lang.String">
-    select id, total_amount, get_store_id, return_store_id, start_date, return_date, status, car_item_id
+    select id, total_amount, get_store_id, return_store_id, start_date, return_date, status, car_item_id, gmt_create
     from tnc_order
     where ( phone = #{xxx} and is_deleted = 0)
+    order by gmt_create DESC
   </select>
   <select id="selectOrderDetail" resultMap="selectOrderListrm" parameterType="java.lang.Long">
     select id, total_amount, get_store_id, return_store_id, start_date, return_date, status, car_item_id
