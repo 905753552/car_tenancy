@@ -1,45 +1,40 @@
 
-$(function () {
-    //取车
-    $("#fromCity2").focus(function () {
-        $("#city").css("display", "block");
-    });
-    $("#city").blur(function () {
-        $(this).css("display", "none");
-    });
-    $("#fromStoreName").click(function () {
-        $("#fromStore").css("display", "block");
-    });
-    $("#fromStore").hover(function () {
-        $(this).toggle();
-    });
-
-
-
-    //还车
-    $("#toCity").focus(function () {
-        $("#city2").css("display", "block");
-    });
-    $("#city2").blur(function () {
-        $(this).css("display", "none");
-    });
-    $("#toStoreName").focus(function () {
-        $("#toStore").css("display", "block");
-    });
-    $("#toStore").blur(function () {
-        $(this).css("display", "none");
-    });
-});
-
-$(function () {
-    $("#fromStoreName").focus(function () {
-        $("#store1").css("display", "block");
-    });
-    $("#fromStoreName").blur(function () {
-        $("#store1").css("display", "none");
+//门店市区地址样式
+$(function() {
+    $("body").click(function(e) {
+        var target = $(e.target);
+        $("#city").css("display","none");
+        $("#city2").css("display","none");
+        $("#fromStore").css("display","none");
+        $("#toStore").css("display","none");
+        $("#fromCity2").removeClass("tnc_border");
+        $("#toCity").removeClass("tnc_border");
+        $("#fromStoreName").removeClass("tnc_border");
+        $("#toStoreName").removeClass("tnc_border");
+        if( target.is('#fromCity2') || target.is('#city *') && !(target.is("#city span")) ){
+            $("#fromCity2").addClass("tnc_border");
+            $("#fromCity2").removeClass("tnc_input_citySD");
+            $("#fromCity2").addClass("tnc_input_citySD2");
+            $("#city").css("display", "block");
+        }
+        if( target.is('#fromStoreName') || target.is('#fromStore *') && !(target.is("#fromStore_Name span"))) {
+            $("#fromStoreName").addClass("tnc_border");
+            $("#fromStore").css("display", "block");
+        }
+        if( target.is('#toCity') || target.is('#city2 *') && !(target.is("#city2 span")) ){
+            $("#toCity").addClass("tnc_border");
+            $("#toCity").removeClass("tnc_input_citySD");
+            $("#toCity").addClass("tnc_input_citySD2");
+            $("#city2").css("display", "block");
+        }
+        if( target.is('#toStoreName') || target.is('#toStore *') && !(target.is("#toStore_Name span"))) {
+            $("#toStoreName").addClass("tnc_border");
+            $("#toStore").css("display", "block");
+        }
     });
 });
 
+//门店市级英文字母样式
 $(function () {
     //26个英文字符点击事件的颜色切换
     $("#popup_title li").click(function () {
@@ -85,65 +80,13 @@ $(function () {
     });
 });
 
-// $(function () {
-//     $("#popup_content li div span").on({
-//         mouseover: function () {
-//             $(this).addClass("cur-city");
-//         },
-//         mouseout: function () {
-//             $(this).removeClass("cur-city");
-//         },
-//         click: function () {
-//             $("#fromCity2").val($(this).text().trim());
-//             $("#city").css("display", "none");
-//             $("#fromCityId").val($(this).find("input").attr("cid"));
-//             areaLoad($(this).find("input").attr("cid"));
-//         }
-//     });
-//     $("#popup_content2 li div span").on({
-//         mouseover: function () {
-//             $(this).addClass("cur-city");
-//         },
-//         mouseout: function () {
-//             $(this).removeClass("cur-city");
-//         },
-//         click: function () {
-//             $("#toCity").val($(this).text().trim());
-//             $("#city2").css("display", "none");
-//             $("#toCityId").val($(this).find("input").attr("cid"));
-//             areaLoad($(this).find("input").attr("cid"));
-//         }
-//     });
-//     $("#store1 div span").on({
-//         mouseover: function () {
-//             $(this).addClass("cur-city");
-//         },
-//         mouseout: function () {
-//             $(this).removeClass("cur-city");
-//         },
-//         click: function () {
-//             console.log($(this).find("input").attr("aid"));
-//         }
-//     });
-//     // $("#store2 div span").on({
-//     //     mouseover: function () {
-//     //         $(this).addClass("cur-city");
-//     //     },
-//     //     mouseout: function () {
-//     //         $(this).removeClass("cur-city");
-//     //     },
-//     //     click: function () {
-//     //         $("#toCity").val($(this).text().trim());
-//     //         $("#city2").css("display", "none");
-//     //         $("#toCityId").val($(this).find("input").attr("cid"));
-//     //         areaLoad($(this).find("input").attr("cid"));
-//     //     }
-//     // });
-// });
-
+//选择门店地址后的val赋值及样式修改
 function choose() {
     $("#popup_content li div span").click(function () {
             $("#fromCity2").val($(this).text().trim());
+            $("#fromStoreName").val("请选择取车门店");
+            $("#toCity").val($(this).text().trim());
+            $("#toStoreName").val("请选择取车门店");
             $("#city").css("display", "none");
             $("#fromCityId").val($(this).find("input").attr("cid"));
             areaLoad($(this).find("input").attr("cid"));
@@ -172,14 +115,14 @@ function choose() {
     });
 }
 
-//加载省级地址
+//加载市级地址
 function addrLoad () {
     $.ajax({
         type: "get",
         url: "/api/storeAddress/list",
         success: function (res) {
             carInfoTab_app.city = res.data;
-            console.log(carInfoTab_app.city);
+            console.log(carInfoTab_app.city);   //拿到相应的市级地址
         }
     })
 }
@@ -208,7 +151,7 @@ var storeLoad = function (sid) {
             id:sid
         },
         success: function (res) {
-            console.log(res.data);
+            console.log(res.data);      //拿到相应门店信息
             carInfoTab_app.storeName = res.data;
         }
     })
