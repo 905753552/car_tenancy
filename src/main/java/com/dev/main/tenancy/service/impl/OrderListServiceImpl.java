@@ -47,13 +47,10 @@ public class OrderListServiceImpl implements IOrderListService {
         TncOrderDetailVo vo  = new TncOrderDetailVo();
         //获取订单对象
         TncOrder order = tncOrderMapper.selectByPrimaryKey(id);
-        BigDecimal discount = order.getDiscount();
         BigDecimal baseAmount = order.getBaseAmount();
         BigDecimal serviceAmount = order.getServiceAmount();
         vo.setTotal_base_price(baseAmount);
         vo.setTotal_service_price(serviceAmount);
-        vo.setDiscount_total_base(discount.multiply(baseAmount));
-        vo.setDiscount_total_service(discount.multiply(serviceAmount));
         vo.setOther_cost(order.getOtherAmount());
         vo.setOrder_price_sum(order.getTotalAmount());
         vo.setOrder_detail(id);
@@ -105,10 +102,18 @@ public class OrderListServiceImpl implements IOrderListService {
         vo.setReturnStore(returnStore.getName());
         vo.setReturnCity(returnStore.getCity());
         //获取价格方案
+       // System.out.println("carid"+carId);
         TncPriceScheme tncPriceScheme = tncOrderListMapper.getPrice(carId);
+        //System.out.println(tncPriceScheme);
+        BigDecimal discount = tncPriceScheme.getDiscount();
+        vo.setDiscount_total_base(discount.multiply(baseAmount));
+        vo.setDiscount_total_service(discount.multiply(serviceAmount));
         vo.setBase_price(tncPriceScheme.getBasePrice());
+        //System.out.println("baseprice"+tncPriceScheme.getBasePrice());
         vo.setService_price(tncPriceScheme.getServicePrice());
+       // System.out.println("serviceprice"+tncPriceScheme.getServicePrice());
         vo.setDeposit(tncPriceScheme.getDeposit());
+
         BigDecimal hourprice = tncPriceScheme.getBaseHourPrice();
         if(hour!=0&hourprice!=null) vo.setOvertime_cost(hourprice.multiply(new BigDecimal(hour)));
         System.out.println(vo.toString());

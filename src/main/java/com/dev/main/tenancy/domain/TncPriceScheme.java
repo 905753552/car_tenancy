@@ -37,6 +37,23 @@ public class TncPriceScheme extends BaseDomain {
     // 修改时间
     private Date gmtModified;
 
+    @Override
+    public String toString() {
+        return "TncPriceScheme{" +
+                "id=" + id +
+                ", basePrice=" + basePrice +
+                ", baseHourPrice=" + baseHourPrice +
+                ", servicePrice=" + servicePrice +
+                ", deposit=" + deposit +
+                ", discount=" + discount +
+                ", carId=" + carId +
+                ", packageId=" + packageId +
+                ", isDeleted=" + isDeleted +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }

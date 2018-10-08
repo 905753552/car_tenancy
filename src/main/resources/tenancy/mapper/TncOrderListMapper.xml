@@ -62,10 +62,28 @@
         where s.id = #{xxx}
     </select>
 <!--根据汽车id获取价格方案-->
-  <select id="getPrice" resultType="com.dev.main.tenancy.domain.TncPriceScheme" parameterType="java.lang.Long">
-    select *
+  <resultMap id="PriceRm" type="com.dev.main.tenancy.domain.TncPriceScheme" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="base_price" property="basePrice" jdbcType="DECIMAL" />
+    <result column="base_hour_price" property="baseHourPrice" jdbcType="DECIMAL" />
+    <result column="service_price" property="servicePrice" jdbcType="DECIMAL" />
+    <result column="deposit" property="deposit" jdbcType="DECIMAL" />
+    <result column="discount" property="discount" jdbcType="DECIMAL" />
+    <result column="car_id" property="carId" jdbcType="BIGINT" />
+    <result column="package_id" property="packageId" jdbcType="BIGINT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="BasePrice" >
+    id, base_price,base_hour_price, service_price, deposit, discount, car_id, package_id, is_deleted,
+    gmt_create, gmt_modified
+  </sql>
+  <select id="getPrice" resultMap="PriceRm" parameterType="java.lang.Long">
+    select
+    <include refid="BasePrice" />
     from tnc_price_scheme
-    where car_id = #{xxx}
+    where car_id = #{xxx}git
   </select>
 <!--<select id="getCarId" resultType="java.lang.Long" parameterType="java.lang.Long">-->
   <!--select b.id-->
