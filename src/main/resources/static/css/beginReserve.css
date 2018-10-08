@@ -404,7 +404,6 @@ input[type=text]{
 .newpg-conf .feeul > li .fee-res {
     display: inline-block;
     float: right;
-    width: 80px;
     text-align: right;
     font-size: 16px;
     color: #fabe00;

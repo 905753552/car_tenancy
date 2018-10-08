@@ -45,11 +45,11 @@ public class OrderService implements IOrderService {
     @Override
     public ResultMap selectByPrimaryKey(Long id) {
         TncCar tncCar = tncCarMapper.selectByPrimaryKey(id);
-       // String carPicPath = tncCarPicMapper.selectPathByCid(id);
+        String carPicPath = "/api/pic/item?imagePath=" + tncCarPicMapper.selectPathByCid(id);
         if(tncCar!=null){
             ResultMap resultMap = ResultMap.success("获取车辆信息成功");
             resultMap.put("car",tncCar);
-            //resultMap.put("path",carPicPath);
+            resultMap.put("path",carPicPath);
             return resultMap;
         }
         else
@@ -127,7 +127,7 @@ public class OrderService implements IOrderService {
     @Override
     public ResultMap savePay(Long id) {
         TncOrder tncOrder = tncOrderMapper.selectByPrimaryKey(id);
-//        分配车辆
+//      查看分配的车辆
         TncCarItem tncCarItem = tncOrderMapper.selectCarItemByPrimaryKey(tncOrder.getCarItemId());
 
             if(tncCarItem != null){
@@ -223,8 +223,8 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public ResultMap getCarItemByCarId(Long id) {
-        List<TncCarItem> list = tncOrderMapper.selectCarItemBycid(id);
+    public ResultMap setCarItemByOid(Long car_id,Long order_id) {
+        List<TncCarItem> list = tncOrderMapper.selectCarItemBycid(car_id);
         if(list.size()>0){
             for (TncCarItem tncCarItem:list) {
 //                判断车辆是否可租用
@@ -232,6 +232,9 @@ public class OrderService implements IOrderService {
                     Byte status = 1;
                     tncCarItem.setStatus(status);
                     tncCarItemMapper.updateByPrimaryKeySelective(tncCarItem);
+                    TncOrder tncOrder = tncOrderMapper.selectByPrimaryKey(order_id);
+                    tncOrder.setCarItemId(tncCarItem.getId());
+                    tncOrderMapper.updateByPrimaryKeySelective(tncOrder);
                     return ResultMap.success("获取车辆成功").put("carItem",tncCarItem);
                 }
             }

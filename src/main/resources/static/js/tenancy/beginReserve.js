@@ -27,7 +27,7 @@ const param = {
         order_price_sum:'',//订单总价ttam
         description:'',//备注
         coupon:0,//优惠券面值
-        //carPicPath:'',//汽车封面
+        carPicPath:'',//汽车封面
         order_detail:{
             // 主键
             id:'',
@@ -98,7 +98,7 @@ var orderDetail = new Vue({
         // 车辆信息
         carInfo:{},
         // 车辆封面
-       // carPicPath:'',
+        carPicPath:'',
         // 订单显示参数
         baseInfo:{},
         // 优惠券信息
@@ -123,7 +123,7 @@ var orderDetail = new Vue({
             param.base_info.order_detail.id = data;
         }
         self.getCarInfo();
-        self.getCarItemInfo();
+       // self.getCarItemInfo();
         self.getPSchemeAndPName();
         self.getCustomerInfo();
     },
@@ -202,9 +202,10 @@ function getCarInfo(self){
         success:function(res){
             if(res.code==0) {
                 self.carInfo = res.car;
-               // self.carPicPath = res.path;
+                self.carPicPath = res.path;
                 param.base_info.car_info = res.car;
-             //   param.base_info.carPicPath = res.path;
+                param.base_info.carPicPath = res.path;
+                console.log(res.path);
                 console.log("获取车辆信息成功");
             }
             else{
@@ -214,23 +215,23 @@ function getCarInfo(self){
     })
 }
 // 获取车辆
-function getCarItemInfo(){
-    $.ajax({
-        type:'get',
-        url:'/api/order/carItem/'+param.order.carId,
-        async: false,
-        dataType:'json',
-        success:function(res){
-            if(res.code==0) {
-                param.base_info.order_detail.carItemId = res.carItem.id;
-                console.log("获取车辆成功");
-            }
-            else{
-                handleAjax(res);
-            }
-        }
-    })
-}
+// function getCarItemInfo(){
+//     $.ajax({
+//         type:'get',
+//         url:'/api/order/carItem/'+param.order.carId,
+//         async: false,
+//         dataType:'json',
+//         success:function(res){
+//             if(res.code==0) {
+//                 param.base_info.order_detail.carItemId = res.carItem.id;
+//                 console.log("获取车辆成功");
+//             }
+//             else{
+//                 handleAjax(res);
+//             }
+//         }
+//     })
+// }
 // 获取套餐和价格方案
 function getPSchemeAndPName(self){
     $.ajax({
@@ -297,15 +298,24 @@ function setBaseParam(self){
     //计算其他费用
     otherCost();
     param.base_info.deposit = self.priceSchemeInfo.deposit;
-    var total =  param.base_info.discount_total_base
-                                       + param.base_info.discount_total_service
-                                       + param.base_info.other_cost
-                                       - param.base_info.coupon;
+    var total =  accAdd(param.base_info.discount_total_base,param.base_info.discount_total_service);
+     total =  accAdd(total,param.base_info.other_cost);
+     total =  accAdd(total,(-1)*param.base_info.coupon);
     if (total>0)
         param.base_info.order_price_sum = total;
     else
         param.base_info.order_price_sum = 0;
     self.baseInfo = param.base_info;
+}
+// js计算加法
+function accAdd(arg1,arg2){
+    var r1,r2,m;
+    try{
+        r1=arg1.toString().split(".")[1].length
+    }catch(e){
+        r1=0} try{
+        r2=arg2.toString().split(".")[1].length}catch(e){r2=0} m=Math.pow(10,Math.max(r1,r2))
+    return (arg1*m+arg2*m)/m
 }
 //-------------页面初始化--------------end
 // 订单页面基本参数设置

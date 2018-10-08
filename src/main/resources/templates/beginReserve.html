@@ -67,7 +67,7 @@
 				<div class="car-info">
 					<div class="ifl">
 						<div class="img">
-							<image src="" width="180" height="105"></image>
+							<image v-bind:src="carPicPath" width="180" height="105"></image>
 						</div>
 						<div class="lin">
 							<p class="lp1">{{carInfo.tncBrand.name}}{{carInfo.series}}</p>
@@ -317,7 +317,7 @@
 						<li style="list-style:none">
 							<span class="fee-txt">车辆租赁及服务费</span>
 							<span class="fee-res"><span class="fee-txt" v-if="priceSchemeInfo.discount<1">¥{{baseInfo.total_base_price}}</span>¥{{baseInfo.discount_total_base}}</span>
-							<span class="fee-pro">{{baseInfo.base_price}}x{{baseInfo.days}}</span>
+							<span class="fee-pro">{{baseInfo.base_price}}x{{baseInfo.days}}=</span>
 							<div class="clear"></div>
 						</li>
 						<li style="position:relative;z-index:10;list-style:none">
@@ -335,7 +335,7 @@
 										</i>
 									</span>
 							<span class="fee-res"><span class="fee-txt" v-if="priceSchemeInfo.discount<1">¥{{baseInfo.total_service_price}}</span>¥{{baseInfo.discount_total_service}}</span>
-							<span class="fee-pro">{{baseInfo.service_price}}x{{baseInfo.days}}</span>
+							<span class="fee-pro">{{baseInfo.service_price}}x{{baseInfo.days}}=</span>
 							<div class="clear"></div>
 						</li>
 						<li class="opcl" style="list-style:none" @click="showOtherCost">

@@ -44,6 +44,8 @@ var orderDetail = new Vue({
 //     window.location.href="/tenancy/p/myOrder?"+data;
 // }
 function savePay(){
+    // 分配车辆
+    setCarItem();
     if($(".paymentTabUl").find("#WECHAT").hasClass("checked") == true) {
         $.ajax({
             type: "GET",
@@ -93,6 +95,27 @@ function savePay(){
     }else{
         layer.msg("请选择一种支付方式！",{time:1200},function(){});
     }
+}
+function setCarItem(){
+    console.log(orderDetail.order_detail.car_info);
+    $.ajax({
+        type:'get',
+        url:'/api/order/carItem',
+        data:{
+          car_id: orderDetail.order_detail.car_info.id,
+          order_id:  orderDetail.order_detail.order_detail.id
+        },
+        async: false,
+        dataType:'json',
+        success:function(res){
+            if(res.code==0) {
+                console.log("分配车辆成功");
+            }
+            else{
+                handleAjax(res);
+            }
+        }
+    })
 }
 function initialize(self){
     console.log(self.order_detail.order_detail);

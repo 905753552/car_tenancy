@@ -20,7 +20,7 @@ public interface IOrderService {
 
     ResultMap getCustomerCoupons();
 
-    ResultMap getCarItemByCarId(Long id);
+    ResultMap setCarItemByOid(Long carid,Long orderid);
 
     ResultMap updateCustomerInfo(TncCustomer tncCustomer);
 
