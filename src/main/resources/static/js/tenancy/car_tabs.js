@@ -28,7 +28,8 @@ const carInfoTab_data ={
     carBrands:[],
     days:1,
     isEmpty:false,
-    idClick:"",
+    idClick:-1,
+    idClick2:-1
 }
 //filter
 const filter_carInfoTab = {
@@ -47,10 +48,10 @@ const carInfoTab_methods = {
     toStoreDetail:toStoreDetail
 }
 //Vue created 时触发的函数
-const init_carInfoTab = ()=>{
+const init_carInfoTab = function() {
 
     loadCarMenuData()//加载套餐数据
-    doSearchByAllType()//加载车数据
+    doSearchByAllType(this)//加载车数据
    // loadCarBrandData()//加载汽车品牌
     addrLoad();  // 加载市级地址
 }
@@ -59,7 +60,7 @@ const init_carInfoTab = ()=>{
 const carInfoTab_app = new Vue({
     el: "#carInfoTab-app",
     data:carInfoTab_data,
-    created: init_carInfoTab(),
+    created: init_carInfoTab,
     methods: carInfoTab_methods,
     computed: filter_carInfoTab
 
@@ -138,11 +139,12 @@ function evenMenus() {
 }
 //下单
 function doCarOrder(index) {
+
     let orderData = {
-         getCarPlace:"租车派",
-         getCarPlaceId:"1",
-         returnCarPlace:"租车派",
-         returnCarPlaceId:"1",
+         getCarPlace:$("#fromStoreName").val(),
+         getCarPlaceId:carInfoTab_app.idClick,
+         returnCarPlace:$("#toStoreName").val(),
+         returnCarPlaceId:carInfoTab_app.idClick2,
          getCarDate:$("#fromDate").val(),
          getCarTime:$("#fromHourMinute").val(),
          returnCarDate:$("#toDate").val(),
@@ -207,23 +209,30 @@ function doSearchByPackage(pid) {
 
     //筛选值初始化
     doHandelDate()
-    doSearchByAllType()
+    doSearchByAllType(carInfoTab_app)
 
 
 
 }
 
 //查询车辆信息
-function doSearchByAllType() {
+function doSearchByAllType(app) {
     /**
      * @param place 地点
      * @param currentPackageId 套餐id
      */
     let carPlaceId = 1
+    if(app.idClick > 0){
+        carPlaceId = app.idClick
+    }else{
+        app.idClick = carPlaceId
+        app.idClick2 = carPlaceId
+    }
     const data ={
         carPlace:carPlaceId,
         carPID:currentPackageId
     }
+    console.log(app.idClick)
    // console.log(JSON.stringify(data))
     $.ajax({
         type:"POST",
@@ -503,6 +512,7 @@ function addCarHot(cid) {
 
 function fromStoreDetail(id) {
     carInfoTab_app.idClick = id;
+    console.log(id)
     $(this).siblings("span").removeClass("cur-city");
     $(this).addClass("cur-city");
     $("#fromStore_Detail").css("display","block");
@@ -526,7 +536,7 @@ function fromStoreDetail(id) {
 }
 
 function toStoreDetail(id) {
-    carInfoTab_app.idClick = id;
+    carInfoTab_app.idClick2 = id;
     $(this).siblings("span").removeClass("cur-city");
     $(this).addClass("cur-city");
     $("#toStore_Detail").css("display","block");
