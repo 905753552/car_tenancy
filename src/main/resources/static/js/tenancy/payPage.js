@@ -44,7 +44,7 @@ var orderDetail = new Vue({
 //     window.location.href="/tenancy/p/myOrder?"+data;
 // }
 function savePay(){
-    // 分配车辆
+    // 设置分配的车辆状态
     setCarItem();
     if($(".paymentTabUl").find("#WECHAT").hasClass("checked") == true) {
         $.ajax({
@@ -100,7 +100,7 @@ function setCarItem(){
     console.log(orderDetail.order_detail.car_info);
     $.ajax({
         type:'get',
-        url:'/api/order/carItem',
+        url:'/api/order/setCarItem',
         data:{
           car_id: orderDetail.order_detail.car_info.id,
           order_id:  orderDetail.order_detail.order_detail.id

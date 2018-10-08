@@ -127,24 +127,13 @@ public class OrderService implements IOrderService {
     @Override
     public ResultMap savePay(Long id) {
         TncOrder tncOrder = tncOrderMapper.selectByPrimaryKey(id);
-//      查看分配的车辆
-        TncCarItem tncCarItem = tncOrderMapper.selectCarItemByPrimaryKey(tncOrder.getCarItemId());
 
-            if(tncCarItem != null){
                 //更新订单
                 Byte status = 2;
                 tncOrder.setPayTime(new Date());
                 tncOrder.setStatus(status);
                 int res = tncOrderMapper.updateByPrimaryKey(tncOrder);
                 if(res>0){
-//              车辆信息更新
-                TncCar tncCar = tncCarMapper.selectByPrimaryKey(tncCarItem.getCarId());
-                if (tncCar.getResidual()>0){
-                    tncCar.setResidual(tncCar.getResidual()-1);
-                    tncCarMapper.updateByPrimaryKeySelective(tncCar);
-                }else{
-                    throw new CommonException("该车辆库存为0");
-                }
 //              积分
                 TncPoint tncPoint1 = tncPointMapper.selectByUserId(ShiroUtils.getUserId());
                 Byte isDeleted = 0;
@@ -173,15 +162,12 @@ public class OrderService implements IOrderService {
                 //返回数据
                 ResultMap resultMap = ResultMap.success("支付订单成功");
                 resultMap.put("order",tncOrder);
-                resultMap.put("carItem",tncCarItem);
+                resultMap.put("carItem",tncCarItemMapper.selectByPrimaryKey(tncOrder.getCarItemId()));
                 return resultMap;
                 }else{
                     throw new CommonException("支付订单失败");
                 }
 
-        }else{
-            throw new CommonException("无可租车辆");
-        }
     }
 
     @Override
@@ -224,41 +210,67 @@ public class OrderService implements IOrderService {
 
     @Override
     public ResultMap setCarItemByOid(Long car_id,Long order_id) {
-        List<TncCarItem> list = tncOrderMapper.selectCarItemBycid(car_id);
-        if(list.size()>0){
-            for (TncCarItem tncCarItem:list) {
-//                判断车辆是否可租用
-                if (tncCarItem.getStatus() == 0){
-                    Byte status = 1;
-                    tncCarItem.setStatus(status);
-                    tncCarItemMapper.updateByPrimaryKeySelective(tncCarItem);
-                    TncOrder tncOrder = tncOrderMapper.selectByPrimaryKey(order_id);
-                    tncOrder.setCarItemId(tncCarItem.getId());
-                    tncOrderMapper.updateByPrimaryKeySelective(tncOrder);
-                    return ResultMap.success("获取车辆成功").put("carItem",tncCarItem);
-                }
+        Byte status = 1;
+        TncOrder tncOrder = tncOrderMapper.selectByPrimaryKey(order_id);
+        TncCarItem tncCarItem = tncCarItemMapper.selectByPrimaryKey(tncOrder.getCarItemId());
+        if (tncCarItem.getStatus() == 0 && tncCarItem.getIsDeleted() == 0){
+            tncCarItem.setStatus(status);
+            tncCarItemMapper.updateByPrimaryKeySelective(tncCarItem);
+            //              车辆信息更新
+            TncCar tncCar = tncCarMapper.selectByPrimaryKey(car_id);
+            if (tncCar.getResidual()>0){
+                tncCar.setResidual(tncCar.getResidual()-1);
+                tncCarMapper.updateByPrimaryKeySelective(tncCar);
+            }else{
+                throw new CommonException("该车辆库存为0");
             }
-            throw new CommonException("该车辆无可租用");
+            return ResultMap.success("获取车辆成功");
         }else{
-            throw new CommonException("获取车辆失败");
+            List<TncCarItem> list = tncOrderMapper.selectCarItemBycid(car_id);
+            if(list.size()>0){
+                for (TncCarItem tncCarItem1:list) {
+//                判断车辆是否可租用
+                    if (tncCarItem1.getStatus() == 0 && tncCarItem1.getIsDeleted() == 0){
+                        tncCarItem1.setStatus(status);
+                        tncCarItemMapper.updateByPrimaryKeySelective(tncCarItem1);
+                        TncOrder tncOrder1 = tncOrderMapper.selectByPrimaryKey(order_id);
+                        tncOrder1.setCarItemId(tncCarItem1.getId());
+                        tncOrderMapper.updateByPrimaryKeySelective(tncOrder1);
+                        //              车辆信息更新
+                        TncCar tncCar = tncCarMapper.selectByPrimaryKey(car_id);
+                        if (tncCar.getResidual()>0){
+                            tncCar.setResidual(tncCar.getResidual()-1);
+                            tncCarMapper.updateByPrimaryKeySelective(tncCar);
+                        }else{
+                            throw new CommonException("该车辆库存为0");
+                        }
+                        return ResultMap.success("获取车辆成功");
+                    }
+                }
+                throw new CommonException("该车辆无可租用");
+            }else{
+                throw new CommonException("获取车辆失败");
+            }
         }
     }
     @Override
     public ResultMap getCarItemByCarid(Long id) {
         List<TncCarItem> list = tncOrderMapper.selectCarItemBycid(id);
-        if(list.size()>0){
-            for (TncCarItem tncCarItem:list) {
+        TncCar tncCar = tncCarMapper.selectByPrimaryKey(id);
+        if (tncCar.getResidual()>0){
+            if(list.size()>0){
+                for (TncCarItem tncCarItem:list) {
 //                判断车辆是否可租用
-                if (tncCarItem.getStatus() == 0){
-//                    Byte status = 1;
-//                    tncCarItem.setStatus(status);
-//                    tncCarItemMapper.updateByPrimaryKeySelective(tncCarItem);
-                    return ResultMap.success("获取车辆成功").put("carItem",tncCarItem);
+                    if (tncCarItem.getStatus() == 0 && tncCarItem.getIsDeleted() == 0){
+                        return ResultMap.success("获取车辆成功").put("carItem",tncCarItem);
+                    }
                 }
+                throw new CommonException("该车辆无可租用");
+            }else{
+                throw new CommonException("获取车辆失败");
             }
-            throw new CommonException("该车辆无可租用");
         }else{
-            throw new CommonException("获取车辆失败");
+            throw new CommonException("车辆库存为0");
         }
     }
 }
