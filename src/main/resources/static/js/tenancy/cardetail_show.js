@@ -19,12 +19,14 @@ function init() {
         success:function(data){
             console.log(data);
             cardetail_app.car = data.carDetail;
-            var imgs = []
+            var imgs = [];
             $.each(data.carPic,function () {
-                imgs.push(this.path);
+                imgs.push("/api/pic/item?imagePath="+this.path);
             })
+            imgs = imgs.slice(1, 5);
             cardetail_app.Brand = data.carDetail.tncBrand.name;
             cardetail_app.imgs = imgs;
+            //console.log(imgs);
         },error:function () {
             console.log("no");
         }
