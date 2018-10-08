@@ -105,17 +105,19 @@ public class OrderListServiceImpl implements IOrderListService {
        // System.out.println("carid"+carId);
         TncPriceScheme tncPriceScheme = tncOrderListMapper.getPrice(carId);
         //System.out.println(tncPriceScheme);
-        BigDecimal discount = tncPriceScheme.getDiscount();
-        vo.setDiscount_total_base(discount.multiply(baseAmount));
-        vo.setDiscount_total_service(discount.multiply(serviceAmount));
-        vo.setBase_price(tncPriceScheme.getBasePrice());
+        BigDecimal discount = tncPriceScheme.getDiscount();//折扣
+        vo.setDiscount_total_base(discount.multiply(baseAmount));//折扣基础总价
+        vo.setDiscount_total_service(discount.multiply(serviceAmount));//折扣基础服务费总价
+        vo.setBase_price(tncPriceScheme.getBasePrice());//基础单价
         //System.out.println("baseprice"+tncPriceScheme.getBasePrice());
-        vo.setService_price(tncPriceScheme.getServicePrice());
+        vo.setService_price(tncPriceScheme.getServicePrice());//服务单价
        // System.out.println("serviceprice"+tncPriceScheme.getServicePrice());
-        vo.setDeposit(tncPriceScheme.getDeposit());
+        vo.setDeposit(tncPriceScheme.getDeposit());//押金
 
-        BigDecimal hourprice = tncPriceScheme.getBaseHourPrice();
+        BigDecimal hourprice = tncPriceScheme.getBaseHourPrice();//小时单价
         if(hour!=0&hourprice!=null) vo.setOvertime_cost(hourprice.multiply(new BigDecimal(hour)));
+        //获取图片
+        vo.setCarPicPath(tncOrderListMapper.selectCarItem(order.getCarItemId()).getPath());
         System.out.println(vo.toString());
         return ResultMap.success("获取成功").put("order_detail",vo);
     }

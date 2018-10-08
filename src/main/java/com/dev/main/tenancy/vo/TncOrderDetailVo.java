@@ -33,6 +33,9 @@ public class TncOrderDetailVo {
     private BigDecimal coupon;//优惠券面值  -------
     private Long order_detail;//订单id  -----
 
+    private String carPicPath;
+
+
     @Override
     public String toString() {
         return "TncOrderDetailVo{" +
@@ -46,7 +49,7 @@ public class TncOrderDetailVo {
                 ", getStore='" + getStore + '\'' +
                 ", getCity='" + getCity + '\'' +
                 ", days=" + days +
-                ", base_price='" + base_price + '\'' +
+                ", base_price=" + base_price +
                 ", service_price=" + service_price +
                 ", total_base_price=" + total_base_price +
                 ", total_service_price=" + total_service_price +
@@ -63,7 +66,16 @@ public class TncOrderDetailVo {
                 ", description='" + description + '\'' +
                 ", coupon=" + coupon +
                 ", order_detail=" + order_detail +
+                ", carPicPath='" + carPicPath + '\'' +
                 '}';
+    }
+
+    public String getCarPicPath() {
+        return carPicPath;
+    }
+
+    public void setCarPicPath(String carPicPath) {
+        this.carPicPath = carPicPath;
     }
 
     public TncCar getCar_info() {

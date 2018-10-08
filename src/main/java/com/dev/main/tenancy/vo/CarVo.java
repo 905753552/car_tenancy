@@ -37,7 +37,7 @@ public class CarVo {
     }
 
     public void setPath(String path) {
-        this.path = path;
+        this.path = "/api/pic/item?imagePath="+path;
     }
 
     public Long getCarId() {
