@@ -56,7 +56,7 @@ public class PictureController {
         FileInputStream fis = null;
 
         if (!file.exists()) { // 如果文件不存在,读取备选封面
-            String imgPath = "/static/statics/img/tenancy_phone.png";
+            String imgPath = "/static/img/defaultNull.jpg";
             String defaultImg = ResourceUtils.getURL("classpath:").getPath() +imgPath;
             file = new File(defaultImg);
         }
