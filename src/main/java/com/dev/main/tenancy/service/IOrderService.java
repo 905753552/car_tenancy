@@ -22,6 +22,8 @@ public interface IOrderService {
 
     ResultMap setCarItemByOid(Long carid,Long orderid);
 
+    ResultMap getCarItemByCarid(Long id);
+
     ResultMap updateCustomerInfo(TncCustomer tncCustomer);
 
     ResultMap insertOrder(TncOrder tncOrder);

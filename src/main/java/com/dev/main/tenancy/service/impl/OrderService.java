@@ -243,4 +243,22 @@ public class OrderService implements IOrderService {
             throw new CommonException("获取车辆失败");
         }
     }
+    @Override
+    public ResultMap getCarItemByCarid(Long id) {
+        List<TncCarItem> list = tncOrderMapper.selectCarItemBycid(id);
+        if(list.size()>0){
+            for (TncCarItem tncCarItem:list) {
+//                判断车辆是否可租用
+                if (tncCarItem.getStatus() == 0){
+//                    Byte status = 1;
+//                    tncCarItem.setStatus(status);
+//                    tncCarItemMapper.updateByPrimaryKeySelective(tncCarItem);
+                    return ResultMap.success("获取车辆成功").put("carItem",tncCarItem);
+                }
+            }
+            throw new CommonException("该车辆无可租用");
+        }else{
+            throw new CommonException("获取车辆失败");
+        }
+    }
 }

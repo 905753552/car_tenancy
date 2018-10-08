@@ -123,7 +123,7 @@ var orderDetail = new Vue({
             param.base_info.order_detail.id = data;
         }
         self.getCarInfo();
-       // self.getCarItemInfo();
+        self.getCarItemInfo();
         self.getPSchemeAndPName();
         self.getCustomerInfo();
     },
@@ -215,23 +215,23 @@ function getCarInfo(self){
     })
 }
 // 获取车辆
-// function getCarItemInfo(){
-//     $.ajax({
-//         type:'get',
-//         url:'/api/order/carItem/'+param.order.carId,
-//         async: false,
-//         dataType:'json',
-//         success:function(res){
-//             if(res.code==0) {
-//                 param.base_info.order_detail.carItemId = res.carItem.id;
-//                 console.log("获取车辆成功");
-//             }
-//             else{
-//                 handleAjax(res);
-//             }
-//         }
-//     })
-// }
+function getCarItemInfo(){
+    $.ajax({
+        type:'get',
+        url:'/api/order/carItem/'+param.order.carId,
+        async: false,
+        dataType:'json',
+        success:function(res){
+            if(res.code==0) {
+                param.base_info.order_detail.carItemId = res.carItem.id;
+                console.log("获取车辆成功");
+            }
+            else{
+                handleAjax(res);
+            }
+        }
+    })
+}
 // 获取套餐和价格方案
 function getPSchemeAndPName(self){
     $.ajax({
@@ -287,10 +287,10 @@ function setBaseParam(self){
     param.base_info.days = param.order.days;
     param.base_info.base_price = self.priceSchemeInfo.basePrice;
     param.base_info.service_price = self.priceSchemeInfo.servicePrice;
-    param.base_info.total_base_price = self.priceSchemeInfo.basePrice * param.order.days;
-    param.base_info.total_service_price = self.priceSchemeInfo.servicePrice * param.order.days;
-    param.base_info.discount_total_base = param.base_info.total_base_price * self.priceSchemeInfo.discount;
-    param.base_info.discount_total_service = param.base_info.total_service_price * self.priceSchemeInfo.discount;
+    param.base_info.total_base_price = accMul(self.priceSchemeInfo.basePrice, param.order.days);
+    param.base_info.total_service_price = accMul(self.priceSchemeInfo.servicePrice , param.order.days);
+    param.base_info.discount_total_base = accMul(param.base_info.total_base_price , self.priceSchemeInfo.discount);
+    param.base_info.discount_total_service = accMul(param.base_info.total_service_price , self.priceSchemeInfo.discount);
     //计算异店或异地费用
     foreginCost();
     //计算超时服务费
@@ -307,7 +307,7 @@ function setBaseParam(self){
         param.base_info.order_price_sum = 0;
     self.baseInfo = param.base_info;
 }
-// js计算加法
+// 加法运算
 function accAdd(arg1,arg2){
     var r1,r2,m;
     try{
@@ -317,6 +317,29 @@ function accAdd(arg1,arg2){
         r2=arg2.toString().split(".")[1].length}catch(e){r2=0} m=Math.pow(10,Math.max(r1,r2))
     return (arg1*m+arg2*m)/m
 }
+// 除法运算
+function accDiv(arg1,arg2){
+    var t1=0,t2=0,r1,r2;
+    try{
+        t1=arg1.toString().split(".")[1].length}catch(e){
+    }try{
+        t2=arg2.toString().split(".")[1].length}catch(e){}
+    with(Math){
+        r1=Number(arg1.toString().replace(".",""))
+        r2=Number(arg2.toString().replace(".",""))
+        return (r1/r2)*pow(10,t2-t1);
+    }
+}
+// 乘法运算
+function accMul(arg1,arg2){
+    var m=0,s1=arg1.toString(),
+        s2=arg2.toString();
+    try{
+        m+=s1.split(".")[1].length}catch(e){}
+    try{
+        m+=s2.split(".")[1].length}catch(e){}
+    return Number(s1.replace(".",""))*Number(s2.replace(".",""))/Math.pow(10,m
+    )}
 //-------------页面初始化--------------end
 // 订单页面基本参数设置
 function setOrderDetails(){
@@ -340,9 +363,10 @@ function setOrderDetails(){
         // 手机号
         param.base_info.order_detail.phone = orderDetail.customerInfo.phone;
         // (下单时)订单价格=天数*(基础价 + 服务费)*折扣-优惠券面值
-        param.base_info.order_detail.orderAmount = param.base_info.discount_total_base
-            + param.base_info.discount_total_service
-            - param.base_info.coupon;
+        param.base_info.order_detail.orderAmount = accAdd(param.base_info.discount_total_base
+            , param.base_info.discount_total_service);
+        param.base_info.order_detail.orderAmount = accAdd(param.base_info.order_detail.orderAmount
+            , (-1) * param.base_info.coupon);
         // 其它费用(租赁过程中产生的额外收费)
         param.base_info.order_detail.otherAmount = param.base_info.other_cost;
         // 总价 = (下单时)订单价格 + 其它费用
@@ -444,20 +468,20 @@ function foreginCost(){
 function overtimeCost(baseHourPrice){
     var get_time = new Date(param.base_info.getTime+':00 10/1/2018'),
         return_time = new Date(param.base_info.returnTime+':00 10/1/2018');
-    var hours = ( return_time.getTime() - get_time.getTime() ) / 3600000;
+    var hours = accAdd( return_time.getTime(),(-1)*get_time.getTime());
+    hours = accDiv(hours,3600000);
     if(hours>4){
         param.base_info.overtime_count = hours;
         param.base_info.overtime_cost = 0;
     }else{
-        param.base_info.overtime_cost = hours * baseHourPrice;
+        param.base_info.overtime_cost = accMul(hours , baseHourPrice);
     }
 }
 //计算其他费用
 function otherCost(){
-    param.base_info.other_cost = param.base_info.prepare_cost
-                                  + param.base_info.overtime_cost
-                                  + param.base_info.foreign_store_cost
-                                  + param.base_info.foreign_land_cost;
+    param.base_info.other_cost = accAdd(param.base_info.prepare_cost , param.base_info.overtime_cost);
+    param.base_info.other_cost = accAdd(param.base_info.other_cost , param.base_info.foreign_store_cost);
+    param.base_info.other_cost = accAdd(param.base_info.other_cost , param.base_info.foreign_land_cost);
     param.base_info.description = '车辆整备费:20';
     if(param.base_info.overtime_cost>0){
         param.base_info.description += ';超时服务费:' + param.base_info.overtime_cost;

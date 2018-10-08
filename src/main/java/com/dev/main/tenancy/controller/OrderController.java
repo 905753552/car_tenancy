@@ -53,10 +53,16 @@ public class OrderController {
         ResultMap resultMap = orderService.getCustomerCoupons();
         return resultMap;
     }
-    @GetMapping("/carItem")
+//    @GetMapping("/carItem")
+//    @RequiresUser
+//    public ResultMap getCarItem(Long car_id,Long order_id){
+//        ResultMap resultMap = orderService.setCarItemByOid(car_id, order_id);
+//        return resultMap;
+//    }
+    @GetMapping("/carItem/{cid}")
     @RequiresUser
-    public ResultMap getCarItem(Long car_id,Long order_id){
-        ResultMap resultMap = orderService.setCarItemByOid(car_id, order_id);
+    public ResultMap getCarItem(@PathVariable("cid") Long id){
+        ResultMap resultMap = orderService.getCarItemByCarid(id);
         return resultMap;
     }
     @GetMapping("/updCusInfo")
