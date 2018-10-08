@@ -83,7 +83,7 @@
     select
     <include refid="BasePrice" />
     from tnc_price_scheme
-    where car_id = #{xxx}git
+    where car_id = #{xxx}
   </select>
 <!--<select id="getCarId" resultType="java.lang.Long" parameterType="java.lang.Long">-->
   <!--select b.id-->

@@ -35,7 +35,7 @@ public class OrderListServiceImpl implements IOrderListService {
 
     @Override
     public ResultMap getOrderList(String phone) {
-        List<TncOrderListVo> list = tncOrderListMapper.selectOrderList("13824865025");
+        List<TncOrderListVo> list = tncOrderListMapper.selectOrderList(phone);
 //        for (TncOrderListVo vo: list) {
 //            System.out.println(vo.toString());
 //        }

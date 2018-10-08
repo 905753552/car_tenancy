@@ -20,8 +20,8 @@ public class OrderListController {
     private IOrderListService orderListService ;
     @GetMapping("/getOrderList")
     public ResultMap getOrderList(){
-        //TncCustomer tncCustomer = ShiroUtils.getUserEntity();
-        return orderListService.getOrderList("123");
+        TncCustomer tncCustomer = ShiroUtils.getUserEntity();
+        return orderListService.getOrderList(tncCustomer.getPhone());
     }
     @GetMapping("/getOrderData")
     public ResultMap getOrderData(Long id){
