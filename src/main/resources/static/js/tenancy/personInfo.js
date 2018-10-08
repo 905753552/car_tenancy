@@ -22,6 +22,7 @@ function saveInfo() {
     vData.customer.phone = tempphone;
     vData.customer.gender = $("input[type='radio']:checked").val();
     var data = JSON.stringify(vData.customer);
+    console.log(data);
     $.ajax({
         type: "POST",
         contentType: "application/json",
@@ -251,6 +252,14 @@ function doShowTips(tip) {
             return false;
         }
     }*/
+     var emergencyUser_phone = $("#emergencyUserPhone").val().trim();
+     if(emergencyUser_phone!="") {
+         if(!checkMobile(emergencyUser_phone)) {
+             doShowTips("手机号格式不对");
+             $("#emergencyUserPhone").focus();
+             return false;
+         }
+     }
     return true;
 }
 /*验证手机*/
