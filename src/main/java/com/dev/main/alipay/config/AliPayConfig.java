@@ -24,10 +24,10 @@ public class AliPayConfig {
 
     // 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
 //    public static String notify_url = "http://localhost:8080/alipay.trade.page.pay-JAVA-UTF-8/notify_url.jsp";
-    public static String notify_url = "http://localhost:8080/tenancy/p/paySuccess";
+    public static String notify_url = "http://localhost:8080/tenancy/p/alipaySuccess";
     // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
 //    public static String return_url = "http://localhost:8080/alipay.trade.page.pay-JAVA-UTF-8/return_url.jsp";
-    public static String return_url = "http://localhost:8080/tenancy/p/paySuccess";
+    public static String return_url = "http://localhost:8080/tenancy/p/alipaySuccess";
 
     // 签名方式
     public static String sign_type = "RSA2";
