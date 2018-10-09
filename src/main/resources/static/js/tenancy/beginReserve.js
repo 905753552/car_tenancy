@@ -122,7 +122,6 @@ var orderDetail = new Vue({
             var data = JSON.parse(id);
             param.base_info.order_detail.id = data;
         }
-        console.log(param.order)
         self.getCarInfo();
         self.getCarItemInfo();
         self.getPSchemeAndPName();
@@ -446,10 +445,12 @@ function returnCarAddress(){
 function foreginCost(){
     var getcaraddress = getCarAddress();
     var returncaraddress = returnCarAddress();
+    // console.log(getcaraddress);
+    // console.log(returncaraddress);
     //判断取车地点和还车地点同不同省
-    if(getcaraddress.provinceId==returncaraddress.provinceId){
+    if(getcaraddress.province.id==returncaraddress.province.id){
         //判断取车地点和还车地点同不同市
-        if (getcaraddress.cityId==returncaraddress.cityId) {
+        if (getcaraddress.city.id==returncaraddress.city.id) {
             //判断取车地点和还车地点同不同店
             if (param.order.getCarPlaceId!=param.order.returnCarPlaceId) {
                 param.base_info.foreign_store_cost = 200;

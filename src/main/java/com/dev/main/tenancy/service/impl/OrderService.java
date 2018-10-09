@@ -195,15 +195,20 @@ public class OrderService implements IOrderService {
     @Override
     public ResultMap cancelOrder(Long id) {
         Byte status ;
+        String msg;
         TncOrder tncOrder = tncOrderMapper.selectByPrimaryKey(id);
-        if(tncOrder.getStatus() == 2)
+        if(tncOrder.getStatus() == 2){
             status = 5;
-        else
+            msg = "已提交申请";
+        }
+        else{
             status = 3;
+            msg = "取消订单成功";
+        }
         tncOrder.setStatus(status);
         int res = tncOrderMapper.updateByPrimaryKey(tncOrder);
         if (res>0){
-            return ResultMap.success("取消订单成功");
+            return ResultMap.success(msg);
         }else{
             throw new CommonException("取消订单失败");
         }
