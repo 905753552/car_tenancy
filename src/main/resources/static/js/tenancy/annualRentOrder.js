@@ -6,10 +6,10 @@ $(document).click(function(){
         $(this).parent().addClass("ltwcur").siblings().removeClass("ltwcur")
     })
     //选择优惠券
-    $("#coupons li").each(function(i) {
-        $(this).click(function() {
-            $("#coupons").find("li").eq(i).siblings().removeClass("checked"),
-                $("#coupons").find("li").eq(i).addClass("checked");
-        })
-    })
+    // $("#coupons li").each(function(i) {
+    //     $(this).click(function() {
+    //         $("#coupons").find("li").eq(i).siblings().removeClass("checked"),
+    //             $("#coupons").find("li").eq(i).addClass("checked");
+    //     })
+    // })
 })

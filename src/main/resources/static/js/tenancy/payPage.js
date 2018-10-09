@@ -84,7 +84,6 @@ function savePay(){
             data:JSON.stringify(orderData),
             success:function (data) {
                 if(data.code==0){
-                    console.log(123123)
                     $("body").html(data.msg);
                 }else{
                     handleAjax(data)

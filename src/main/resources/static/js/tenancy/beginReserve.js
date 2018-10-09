@@ -304,7 +304,7 @@ function setBaseParam(self){
     if (total>0)
         param.base_info.order_price_sum = total;
     else
-        param.base_info.order_price_sum = 0;
+        param.base_info.order_price_sum = 0.1;
     self.baseInfo = param.base_info;
 }
 // 加法运算

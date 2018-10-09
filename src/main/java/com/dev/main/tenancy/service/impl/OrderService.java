@@ -40,6 +40,8 @@ public class OrderService implements IOrderService {
     private TncCarPicMapper tncCarPicMapper;
     @Autowired
     private TncCarItemMapper tncCarItemMapper;
+    @Autowired
+    private TncCouponMapper tncCouponMapper;
 
 
     @Override
@@ -84,10 +86,14 @@ public class OrderService implements IOrderService {
     public ResultMap getCustomerCoupons() {
         TncCustomer tncCustomer = tncCustomerMapper.selectByPrimaryKey(ShiroUtils.getUserId());
         List<TncCoupon> list = tncOrderMapper.selectCouponsByCid(tncCustomer.getId());
-        ResultMap resultMap = ResultMap.success("获取顾客优惠券成功");
-        resultMap.put("list",list);
-        resultMap.put("customer",tncCustomer);
-        return resultMap;
+        if (tncCustomer != null ){
+            ResultMap resultMap = ResultMap.success("获取顾客优惠券成功");
+            resultMap.put("list",list);
+            resultMap.put("customer",tncCustomer);
+            return resultMap;
+        }else{
+            throw new CommonException("对不去！您还没登录");
+        }
     }
 
     @Override
@@ -134,6 +140,13 @@ public class OrderService implements IOrderService {
                 tncOrder.setStatus(status);
                 int res = tncOrderMapper.updateByPrimaryKey(tncOrder);
                 if(res>0){
+//                    优惠券
+                    if (tncOrder.getCouponId() != null){
+                        Byte status1 = 1;
+                        TncCoupon tncCoupon = tncCouponMapper.selectByPrimaryKey(tncOrder.getCouponId());
+                        tncCoupon.setStatus(status1);
+                        tncCouponMapper.updateByPrimaryKeySelective(tncCoupon);
+                    }
 //              积分
                 TncPoint tncPoint1 = tncPointMapper.selectByUserId(ShiroUtils.getUserId());
                 Byte isDeleted = 0;
@@ -145,20 +158,29 @@ public class OrderService implements IOrderService {
                     tncPoint1.setIsDeleted(isDeleted);
                     tncPoint1.setGmtCreate(new Date());
                     tncPoint1.setGmtModified(new Date());
-                    tncOrderMapper.insertPoint(tncPoint1);
+                    int point = tncOrderMapper.insertPoint(tncPoint1);
+                    if (point <= 0){
+                        throw new CommonException("创建积分失败");
+                    }
                 }else{
                     tncPoint1.setPoint(tncPoint1.getPoint()+tncOrder.getTotalAmount().intValue()/100);
-                    tncPointMapper.updateByPrimaryKeySelective(tncPoint1);
+                    int point = tncPointMapper.updateByPrimaryKeySelective(tncPoint1);
+                    if (point <= 0){
+                        throw new CommonException("更新积分失败");
+                    }
                 }
 //              更新积分记录表
                 TncPointLog tncPointLog = new TncPointLog();
                 tncPointLog.setPid(tncPoint1.getId());
                 tncPointLog.setChange(+(tncOrder.getTotalAmount().intValue()/100));
-                tncPointLog.setResource("完成订单");
+                tncPointLog.setResource("消费 "+tncOrder.getTotalAmount()+" 元");
                 tncPointLog.setGmtCreate(new Date());
                 tncPointLog.setGmtModified(new Date());
                 tncPointLog.setIsDeleted(isDeleted);
-                tncOrderMapper.insertPointLog(tncPointLog);
+                int point = tncOrderMapper.insertPointLog(tncPointLog);
+                if (point <= 0){
+                    throw new CommonException("更新积分记录失败");
+                }
                 //返回数据
                 ResultMap resultMap = ResultMap.success("支付订单成功");
                 resultMap.put("order",tncOrder);
@@ -226,6 +248,7 @@ public class OrderService implements IOrderService {
             }
             return ResultMap.success("获取车辆成功");
         }else{
+//            重新分配车辆
             List<TncCarItem> list = tncOrderMapper.selectCarItemBycid(car_id);
             if(list.size()>0){
                 for (TncCarItem tncCarItem1:list) {
