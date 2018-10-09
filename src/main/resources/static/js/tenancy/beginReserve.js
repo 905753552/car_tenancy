@@ -84,7 +84,7 @@ const param = {
             // 创建时间
             gmtCreate:new Date(),
             // 修改时间
-            gmtModified:new Date(),
+            //gmtModified:new Date(),
             // 车item 外键
             carItemId:'',
         }

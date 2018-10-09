@@ -110,7 +110,7 @@ public class OrderService implements IOrderService {
     @Override
     public ResultMap insertOrder(TncOrder tncOrder) {
         tncOrder.setGmtCreate(new Date());
-        tncOrder.setGmtModified(new Date());
+        //tncOrder.setGmtModified(new Date());
         tncOrder.setPayTime(null);
 //        生成订单号
         SimpleDateFormat sdf =   new SimpleDateFormat( "HHmmss" );
@@ -226,13 +226,14 @@ public class OrderService implements IOrderService {
 
     @Override
     public ResultMap updateOrder(TncOrder tncOrder) {
-        tncOrder.setGmtModified(new Date());
-        int res = tncOrderMapper.updateByPrimaryKeySelective(tncOrder);
-        if(res>0){
-            return ResultMap.success("修改订单成功").put("order",tncOrder);
-        }else{
-            throw new CommonException("修改订单失败");
-        }
+//        tncOrder.setGmtModified(new Date());
+//        int res = tncOrderMapper.updateByPrimaryKeySelective(tncOrder);
+//        if(res>0){
+//            return ResultMap.success("修改订单成功").put("order",tncOrder);
+//        }else{
+//            throw new CommonException("修改订单失败");
+//        }
+        return ResultMap.success("修改订单成功").put("order",tncOrder);
     }
 
     @Override
