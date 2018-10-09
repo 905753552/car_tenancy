@@ -11,6 +11,22 @@ $(function() {
         $("#toCity").removeClass("tnc_border");
         $("#fromStoreName").removeClass("tnc_border");
         $("#toStoreName").removeClass("tnc_border");
+        if( $("#fromCity2").hasClass("tnc_input_citySD2") && !($("#fromCity2").hasClass("tnc_input_citySD")) ){
+            $("#fromCity2").removeClass("tnc_input_citySD2");
+            $("#fromCity2").addClass("tnc_input_citySD");
+        }
+        if( $("#toCity").hasClass("tnc_input_citySD2") && !($("#toCity").hasClass("tnc_input_citySD")) ){
+            $("#toCity").removeClass("tnc_input_citySD2");
+            $("#toCity").addClass("tnc_input_citySD");
+        }
+        if( $("#fromStoreName").hasClass("tnc_input_citySD2") && !($("#fromStoreName").hasClass("tnc_input_citySD")) ){
+            $("#fromStoreName").removeClass("tnc_input_citySD2");
+            $("#fromStoreName").addClass("tnc_input_citySD");
+        }
+        if( $("#toStoreName").hasClass("tnc_input_citySD2") && !($("#toStoreName").hasClass("tnc_input_citySD")) ){
+            $("#toStoreName").removeClass("tnc_input_citySD2");
+            $("#toStoreName").addClass("tnc_input_citySD");
+        }
         if( target.is('#fromCity2') || target.is('#city *') && !(target.is("#city span")) ){
             $("#fromCity2").addClass("tnc_border");
             $("#fromCity2").removeClass("tnc_input_citySD");
@@ -19,6 +35,8 @@ $(function() {
         }
         if( target.is('#fromStoreName') || target.is('#fromStore *') && !(target.is("#fromStore_Name span"))) {
             $("#fromStoreName").addClass("tnc_border");
+            $("#fromStoreName").removeClass("tnc_input_citySD");
+            $("#fromStoreName").addClass("tnc_input_citySD2");
             $("#fromStore").css("display", "block");
         }
         if( target.is('#toCity') || target.is('#city2 *') && !(target.is("#city2 span")) ){
@@ -29,6 +47,8 @@ $(function() {
         }
         if( target.is('#toStoreName') || target.is('#toStore *') && !(target.is("#toStore_Name span"))) {
             $("#toStoreName").addClass("tnc_border");
+            $("#toStoreName").removeClass("tnc_input_citySD");
+            $("#toStoreName").addClass("tnc_input_citySD2");
             $("#toStore").css("display", "block");
         }
     });
@@ -55,6 +75,8 @@ $(function () {
             $(this).parent().siblings().children().eq(4).addClass("cur");
         } else if ($(this).val() === 6) {
             $(this).parent().siblings().children().eq(5).addClass("cur");
+        } else if ($(this).val() === 7) {
+            $(this).parent().siblings().children().eq(6).addClass("cur");
         }
     });
     //26个英文字符点击事件的颜色切换
@@ -76,6 +98,8 @@ $(function () {
             $(this).parent().siblings().children().eq(4).addClass("cur");
         } else if ($(this).val() === 6) {
             $(this).parent().siblings().children().eq(5).addClass("cur");
+        } else if ($(this).val() === 7) {
+            $(this).parent().siblings().children().eq(6).addClass("cur");
         }
     });
 });
@@ -122,7 +146,6 @@ function addrLoad () {
         url: "/api/storeAddress/list",
         success: function (res) {
             carInfoTab_app.city = res.data;
-            console.log(carInfoTab_app.city);   //拿到相应的市级地址
         }
     })
 }

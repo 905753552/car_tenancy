@@ -23,7 +23,7 @@ public class AddressControl {
     @GetMapping("list")
     public ResultMap list(){
         ResultMap result = new ResultMap();
-        List<TncAddress> tncAddressList = iAddressService.findAllStoreCity();
+        List<TncAddress> tncAddressList = iAddressService.findAllCity();
         result.put("data",tncAddressList);
         return  result;
     }

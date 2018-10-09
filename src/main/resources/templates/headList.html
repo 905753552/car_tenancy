@@ -88,159 +88,158 @@
                                 <div id="popup_pane_head">
                                     <ul id="popup_title" class="popup_title">
                                         <li value="1" class="cur">ABCD</li>
-                                        <li value="2">EFGHI</li>
-                                        <li value="3">JKLMN</li>
-                                        <li value="4">OPQRS</li>
-                                        <li value="5">TUVW</li>
-                                        <li value="6">XYZ</li>
+                                        <li value="2">EFG</li>
+                                        <li value="3">HJK</li>
+                                        <li value="4">LMN</li>
+                                        <li value="5">PQR</li>
+                                        <li value="6">STW</li>
+                                        <li value="7">XYZ</li>
                                     </ul>
                                     <ul id="popup_content">
                                         <li class="cur">
                                             <div class="letterbox">
                                                 <b class="cityzmletter">A</b>
-                                                <span v-for="item in city">
-                                                    <input :cid="item.city.id" style="display: none">
-                                                    {{item.city.name}}</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'A'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">B</b>
-                                                <span>北京市</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'B'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">C</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'C'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">D</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'D'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">E</b>
-                                                <span>肇庆</span>
-                                                <span>中山</span>
-                                                <span>广州</span>
-                                                <span>佛山</span>
-                                                <span>大连</span>
-                                                <span>罗浮</span>
-                                                <span>东莞</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'E'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">F</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'F'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">G</b>
-                                                <span>肇庆</span>
-                                            </div>
-                                            <div class="letterbox">
-                                                <b class="cityzmletter">H</b>
-                                                <span>肇庆</span>
-                                            </div>
-                                            <div class="letterbox">
-                                                <b class="cityzmletter">I</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'G'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
+                                                <b class="cityzmletter">H</b>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'H'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
+                                            </div>
+                                            <div class="letterbox">
                                                 <b class="cityzmletter">J</b>
-                                                <span>肇庆</span>
-                                                <span>中山</span>
-                                                <span>广州</span>
-                                                <span>佛山</span>
-                                                <span>大连</span>
-                                                <span>罗浮</span>
-                                                <span>东莞</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'J'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">K</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'K'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
+                                        </li>
+                                        <li>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">L</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'L'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">M</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'M'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">N</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'N'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
-                                                <b class="cityzmletter">O</b>
-                                                <span>肇庆</span>
-                                                <span>中山</span>
-                                                <span>广州</span>
-                                                <span>佛山</span>
-                                                <span>大连</span>
-                                                <span>罗浮</span>
-                                                <span>东莞</span>
-                                            </div>
-                                            <div class="letterbox">
                                                 <b class="cityzmletter">P</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'P'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">Q</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'Q'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">R</b>
-                                                <span>肇庆</span>
-                                            </div>
-                                            <div class="letterbox">
-                                                <b class="cityzmletter">S</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'R'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
+                                                <b class="cityzmletter">S</b>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'S'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
+                                            </div>
+                                            <div class="letterbox">
                                                 <b class="cityzmletter">T</b>
-                                                <span>肇庆</span>
-                                                <span>中山</span>
-                                                <span>广州</span>
-                                                <span>佛山</span>
-                                                <span>大连</span>
-                                                <span>罗浮</span>
-                                                <span>东莞</span>
-                                            </div>
-                                            <div class="letterbox">
-                                                <b class="cityzmletter">U</b>
-                                                <span>肇庆</span>
-                                            </div>
-                                            <div class="letterbox">
-                                                <b class="cityzmletter">V</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'T'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">W</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'W'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">X</b>
-                                                <span>肇庆</span>
-                                                <span>中山</span>
-                                                <span>广州</span>
-                                                <span>佛山</span>
-                                                <span>大连</span>
-                                                <span>罗浮</span>
-                                                <span>东莞</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'X'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">Y</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'Y'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">Z</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'Z'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                         </li>
                                     </ul>
@@ -291,159 +290,158 @@
                                 <div id="popup_pane_head2">
                                     <ul id="popup_title2" class="popup_title">
                                         <li value="1" class="cur">ABCD</li>
-                                        <li value="2">EFGHI</li>
-                                        <li value="3">JKLMN</li>
-                                        <li value="4">OPQRS</li>
-                                        <li value="5">TUVW</li>
-                                        <li value="6">XYZ</li>
+                                        <li value="2">EFG</li>
+                                        <li value="3">HJK</li>
+                                        <li value="4">LMN</li>
+                                        <li value="5">PQR</li>
+                                        <li value="6">STW</li>
+                                        <li value="7">XYZ</li>
                                     </ul>
                                     <ul id="popup_content2">
                                         <li class="cur">
                                             <div class="letterbox">
                                                 <b class="cityzmletter">A</b>
-                                                <span v-for="item in city">
-                                                     <input :cid="item.city.id" style="display: none">
-                                                    {{item.city.name}}</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'A'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">B</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'B'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">C</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'C'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">D</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'D'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">E</b>
-                                                <span>肇庆</span>
-                                                <span>中山</span>
-                                                <span>广州</span>
-                                                <span>佛山</span>
-                                                <span>大连</span>
-                                                <span>罗浮</span>
-                                                <span>东莞</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'E'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">F</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'F'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">G</b>
-                                                <span>肇庆</span>
-                                            </div>
-                                            <div class="letterbox">
-                                                <b class="cityzmletter">H</b>
-                                                <span>肇庆</span>
-                                            </div>
-                                            <div class="letterbox">
-                                                <b class="cityzmletter">I</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'G'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
+                                                <b class="cityzmletter">H</b>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'H'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
+                                            </div>
+                                            <div class="letterbox">
                                                 <b class="cityzmletter">J</b>
-                                                <span>肇庆</span>
-                                                <span>中山</span>
-                                                <span>广州</span>
-                                                <span>佛山</span>
-                                                <span>大连</span>
-                                                <span>罗浮</span>
-                                                <span>东莞</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'J'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">K</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'K'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
+                                        </li>
+                                        <li>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">L</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'L'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">M</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'M'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">N</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'N'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
-                                                <b class="cityzmletter">O</b>
-                                                <span>肇庆</span>
-                                                <span>中山</span>
-                                                <span>广州</span>
-                                                <span>佛山</span>
-                                                <span>大连</span>
-                                                <span>罗浮</span>
-                                                <span>东莞</span>
-                                            </div>
-                                            <div class="letterbox">
                                                 <b class="cityzmletter">P</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'P'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">Q</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'Q'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">R</b>
-                                                <span>肇庆</span>
-                                            </div>
-                                            <div class="letterbox">
-                                                <b class="cityzmletter">S</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'R'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
+                                                <b class="cityzmletter">S</b>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'S'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
+                                            </div>
+                                            <div class="letterbox">
                                                 <b class="cityzmletter">T</b>
-                                                <span>肇庆</span>
-                                                <span>中山</span>
-                                                <span>广州</span>
-                                                <span>佛山</span>
-                                                <span>大连</span>
-                                                <span>罗浮</span>
-                                                <span>东莞</span>
-                                            </div>
-                                            <div class="letterbox">
-                                                <b class="cityzmletter">U</b>
-                                                <span>肇庆</span>
-                                            </div>
-                                            <div class="letterbox">
-                                                <b class="cityzmletter">V</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'T'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">W</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'W'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">X</b>
-                                                <span>肇庆</span>
-                                                <span>中山</span>
-                                                <span>广州</span>
-                                                <span>佛山</span>
-                                                <span>大连</span>
-                                                <span>罗浮</span>
-                                                <span>东莞</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'X'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">Y</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'Y'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">Z</b>
-                                                <span>肇庆</span>
+                                                <span v-for="item in city" v-show="item.firstLetter == 'Z'" >
+                                                    <input :cid="item.id" style="display: none">
+                                                    {{item.name}}</span>
                                             </div>
                                         </li>
                                     </ul>

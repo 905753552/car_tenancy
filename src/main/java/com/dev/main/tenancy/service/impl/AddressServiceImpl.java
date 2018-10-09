@@ -20,8 +20,8 @@ public class AddressServiceImpl implements IAddressService {
     private TncStoreMapper tncStoreMapper;
 
     @Override
-    public List<TncAddress> findAllStoreCity() {
-        List<TncAddress> tncAddressList = tncAddressMapper.selectAllStoreCity();
+    public List<TncAddress> findAllCity() {
+        List<TncAddress> tncAddressList = tncAddressMapper.selectAllCity();
         return tncAddressList;
     }
 

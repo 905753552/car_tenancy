@@ -13,6 +13,17 @@
     <association column="city_id" property="city" select="com.dev.main.tenancy.dao.AddressRegionMapper.selectByPrimaryKey" javaType="com.dev.main.tenancy.domain.AddressRegion" />
     <association column="area_id" property="area" select="com.dev.main.tenancy.dao.AddressRegionMapper.selectByPrimaryKey" javaType="com.dev.main.tenancy.domain.AddressRegion" />
   </resultMap>
+
+  <!--全部地址对象映射-->
+  <resultMap id="BaseResultMap2" type="com.dev.main.tenancy.domain.AddressRegion" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="first_letter" property="firstLetter" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="TINYINT" />
+  </resultMap>
+
   <sql id="Base_Column_List" >
     id, province_id, city_id, area_id, detail, store_or_user, longitude, latitude, gmt_create,
     gmt_modified
@@ -150,11 +161,11 @@
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <!--查找门店市级-->
-  <select id="selectAllStoreCity" resultMap="BaseResultMap">
-    select distinct city_id
-    from tnc_address
-    where store_or_user = 0
+  <!--查找市级-->
+  <select id="selectAllCity" resultMap="BaseResultMap2">
+    select *
+    from address_region
+    where level = 1
   </select>
   <!--查找门店区-->
   <select id="selectAllStoreArea" resultMap="BaseResultMap">

@@ -244,7 +244,7 @@
     left: 83px;
     top: 54px;
     /*height: 200px;*/
-    width: 353px;
+    width: 423px;
     z-index: 100000;
     display: none;
     border: 1px solid #00c189;
@@ -262,14 +262,14 @@
     overflow: hidden;
     position: absolute;
     top: 0;
-    margin: 5px 10px 5px 10px;
+    margin: 5px 10px 5px 50px;
     z-index: 10;
 }
 .popup_title li {
     float: left;
     height: 30px;
     line-height: 30px;
-    padding: 0 7px;
+    padding: 0 9px;
     text-align: center;
     font-size: 14px;
     cursor: pointer;
@@ -297,7 +297,7 @@
     position: relative;
     overflow: hidden;
     zoom: 1;
-    padding-left: 40px;
+    padding-left: 30px;
 }
 #popup_content li b.cityzmletter {
     width: 30px;
@@ -389,7 +389,7 @@
     left: 83px;
     top: 102px;
     /*height: 200px;*/
-    width: 353px;
+    width: 423px;
     z-index: 100000;
     display: none;
     border: 1px solid #00c189;
@@ -420,7 +420,7 @@
     position: relative;
     overflow: hidden;
     zoom: 1;
-    padding-left: 40px;
+    padding-left: 30px;
 }
 #popup_content2 li b.cityzmletter {
     width: 30px;
