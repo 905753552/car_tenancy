@@ -92,12 +92,21 @@ public class FileUploadServiceImpl implements IFileUploadService {
      * @param imagePath 图片相对路径
      * @param defaultImg*/
     @Override
-    public File getImageFile(String imagePath) {
+    public File getImageFile(String imagePath) throws IOException {
         // 获取磁盘路径
         String diskDir = getDiskPath();
         //文件绝对路径
         String filePath = diskDir + imagePath;
-        File file = new File(filePath);
+        File file = null;
+        try {
+            file = new File(filePath);
+        } catch (SystemErrorException e) {
+            throw new SystemErrorException(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new SystemErrorException("服务器异常，获取图片失败");
+        }
+
         return file;
     }
 }

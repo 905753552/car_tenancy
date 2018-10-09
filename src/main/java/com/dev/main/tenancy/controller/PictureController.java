@@ -3,6 +3,7 @@ package com.dev.main.tenancy.controller;
 import com.dev.main.common.util.ResultMap;
 import com.dev.main.tenancy.controller.exception.SystemErrorException;
 import com.dev.main.tenancy.service.IFileUploadService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -50,12 +51,13 @@ public class PictureController {
      */
     @RequestMapping("/item")
     public void loadImage(String imagePath,  HttpServletResponse response) throws IOException {
-
-        File file = fileUploadService.getImageFile(imagePath);
-
+        File file = null;
+        if(!StringUtils.isBlank(imagePath)){
+             file = fileUploadService.getImageFile(imagePath);
+        }
         FileInputStream fis = null;
 
-        if (!file.exists()) { // 如果文件不存在,读取备选封面
+        if (file ==null ||!file.exists()) { // 如果文件不存在,读取备选封面
             String imgPath = "/static/img/defaultNull.jpg";
             String defaultImg = ResourceUtils.getURL("classpath:").getPath() +imgPath;
             file = new File(defaultImg);
