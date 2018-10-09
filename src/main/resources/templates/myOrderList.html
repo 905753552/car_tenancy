@@ -92,30 +92,31 @@
                         自驾订单
                     </font>
                 </h2>
-                <div class="zc_query-condition_bd">
-                    <div class="zc_box">
-                        <div class="fr" id="timeClear" >
-                            <font style="vertical-align: inherit;">
-                                <input type="button" value="清除" class="zc_blue_sub"/>
-                            </font>
-                        </div>
-                        <div class="fr pl15">
-                            <font style="vertical-align: inherit;">
-                                <input id="searchBtn" type="button" value="查询" class="zc_gray_sub" style="width:86px;min-width:auto;"/>
-                            </font>
-                        </div>
-                        <div class="fr">
-                            <input type="text"  value="" class="layui-input"  id="toDate" autocomplete="on" readonly="readonly" style="box-sizing:unset;width:130px"/>
-                        </div>
-                        <div class="fr">-</div>
-                        <div class="fr"><input type="text"  value="" class="layui-input" id="fromDate"   autocomplete="on" readonly="readonly" style="box-sizing:unset;width:130px"/></div>
-                        <div class="clear"></div>
-                    </div>
-                </div>
+                <!--日历-->
+                <!--<div class="zc_query-condition_bd">-->
+                    <!--<div class="zc_box">-->
+                        <!--<div class="fr" id="timeClear" >-->
+                            <!--<font style="vertical-align: inherit;">-->
+                                <!--<input type="button" value="清除" class="zc_blue_sub"/>-->
+                            <!--</font>-->
+                        <!--</div>-->
+                        <!--<div class="fr pl15">-->
+                            <!--<font style="vertical-align: inherit;">-->
+                                <!--<input id="searchBtn" type="button" value="查询" class="zc_gray_sub" style="width:86px;min-width:auto;"/>-->
+                            <!--</font>-->
+                        <!--</div>-->
+                        <!--<div class="fr">-->
+                            <!--<input type="text"  value="" class="layui-input"  id="toDate" autocomplete="on" readonly="readonly" style="box-sizing:unset;width:130px"/>-->
+                        <!--</div>-->
+                        <!--<div class="fr">-</div>-->
+                        <!--<div class="fr"><input type="text"  value="" class="layui-input" id="fromDate"   autocomplete="on" readonly="readonly" style="box-sizing:unset;width:130px"/></div>-->
+                        <!--<div class="clear"></div>-->
+                    <!--</div>-->
+                <!--</div>-->
                 <!--<div class="h20"></div>-->
                 <!--<div class="subbox_m"></div>-->
 
-                <div id="orderlist_app" class="layui-tab" lay-filter="docDemoTabBrief">
+                <div v-cloak id="orderlist_app" class="layui-tab" lay-filter="docDemoTabBrief">
                     <ul class="layui-tab-title" style="border-top:0px;height: 41px;">
                         <li class="layui-this">全部</li>
                         <li>处理中</li>
@@ -178,6 +179,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                <div style="text-align: center;margin-top: 50px" v-if="orders[0]==null"><img style="width:200px;height:60px;display: inline-block"  src="/img/NoData.png"></div>
                             </div>
                         <div class="layui-tab-item zc_myorder_info">
                             <table class="zc_table_order" cellpadding="0" cellspacing="0" border="0">
@@ -192,6 +194,7 @@
                                 </thead>
                                 <tbody>
                                 <tr v-for="(item, index) in order_5">
+
                                     <td>
                                         {{ggg(index)}}
                                         <img  :src="item.carVo.path"  width="166" height="97">
@@ -230,7 +233,9 @@
                                     </td>
                                 </tr>
                                 </tbody>
-                            </table></div>
+                            </table>
+                            <div style="text-align: center;margin-top: 50px" v-if="order_5[0]==null"><img style="width:200px;height:60px;display: inline-block"  src="/img/NoData.png"></div>
+                        </div>
                         <div class="layui-tab-item zc_myorder_info">
                             <table class="zc_table_order" cellpadding="0" cellspacing="0" border="0">
                                 <thead>
@@ -283,6 +288,8 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            <div style="text-align: center;margin-top: 50px" v-if="order_0[0]==null"><img style="width:200px;height:60px;display: inline-block"  src="/img/NoData.png"></div>
+
                         </div>
                         <div class="layui-tab-item zc_myorder_info">
                             <table class="zc_table_order" cellpadding="0" cellspacing="0" border="0">
@@ -336,6 +343,7 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            <div style="text-align: center;margin-top: 50px" v-if="order_2[0]==null"><img style="width:200px;height:60px;display: inline-block"  src="/img/NoData.png"></div>
                         </div>
                         <div class="layui-tab-item zc_myorder_info">
                             <table class="zc_table_order" cellpadding="0" cellspacing="0" border="0">
@@ -388,7 +396,9 @@
                                     </td>
                                 </tr>
                                 </tbody>
-                            </table></div>
+                            </table>
+                            <div style="text-align: center;margin-top: 50px" v-if="order_1[0]==null"><img style="width:200px;height:60px;display: inline-block"  src="/img/NoData.png"></div>
+                        </div>
                         <div class="layui-tab-item zc_myorder_info">
                             <table class="zc_table_order" cellpadding="0" cellspacing="0" border="0">
                                 <thead>
@@ -441,6 +451,7 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            <div style="text-align: center;margin-top: 50px" v-if="order_4[0]==null"><img style="width:200px;height:60px;display: inline-block"  src="/img/NoData.png"></div>
                         </div>
                         <div class="layui-tab-item zc_myorder_info">
                             <table class="zc_table_order" cellpadding="0" cellspacing="0" border="0">
@@ -494,6 +505,7 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            <div style="text-align: center;margin-top: 50px" v-if="order_3[0]==null"><img style="width:200px;height:60px;display: inline-block"  src="/img/NoData.png"></div>
                         </div>
                     </div>
                 </div>
@@ -640,22 +652,23 @@
     $(document).ready(function () {
         $("#coupon_a_all").addClass('coupon_a_stop');
         $("#left_myOrder").addClass('infoleft_a');
+        couponAndPoint();
     });
-    // function couponAndPoint() {
-    //     $.ajax({
-    //         type:"get",
-    //         url: "/api/customer/countCouponAndPoint",
-    //         success:function (res) {
-    //             if(res.code==0) {
-    //                 console.log(res);
-    //                 document.getElementById("pointNum").innerText="("+res.point+"分)";
-    //                 document.getElementById("couponCount").innerText="("+res.count+"张)";
-    //             } else {
-    //                 handleAjax(res);
-    //             }
-    //         }
-    //     })
-    // }
+    function couponAndPoint() {
+        $.ajax({
+            type:"get",
+            url: "/api/customer/countCouponAndPoint",
+            success:function (res) {
+                if(res.code==0) {
+                    console.log(res);
+                    document.getElementById("pointNum").innerText="("+res.point+"分)";
+                    document.getElementById("couponCount").innerText="("+res.count+"张)";
+                } else {
+                    handleAjax(res);
+                }
+            }
+        })
+    }
 </script>
 </body>
 </html>
