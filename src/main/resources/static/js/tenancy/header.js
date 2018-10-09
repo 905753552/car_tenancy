@@ -6,7 +6,7 @@ $(document).ready(function () {
 
 function getCustomer() {
     $.ajax({
-        url: '/api/shiro/token',
+        url: '/api/shiro/token?_t=' + new Date().getTime(),
         success: (data) => {
             if (data.code == 0) {
                 if(data.token) {
