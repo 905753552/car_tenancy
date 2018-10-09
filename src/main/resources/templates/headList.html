@@ -1046,6 +1046,14 @@
         if(getCookie("还车城市name")!=null){
         $("#toCity").val(getCookie("还车城市name"))
         }
+        let fid = getCookie("取车门店id")
+        let tid = getCookie("还车门店id")
+        if(fid!=null){
+            carInfoTab_app.idClick=fid
+        }
+        if(tid!=null){
+            carInfoTab_app.idClick2=tid
+        }
 
         stickUp()
     })

@@ -122,6 +122,7 @@ var orderDetail = new Vue({
             var data = JSON.parse(id);
             param.base_info.order_detail.id = data;
         }
+        console.log(param.order)
         self.getCarInfo();
         self.getCarItemInfo();
         self.getPSchemeAndPName();

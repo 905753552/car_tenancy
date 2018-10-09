@@ -83,9 +83,18 @@ function initialize(self){
         success: function(res) {
             if(res.code == 0){
                 self.order_detail.order_detail = res.order;
-                console.log("----------------------");
-                console.log(self.order_detail.order_detail);
-                console.log("----------------------");
+                if (self.order_detail.order_detail.status == 0) {
+                    var create = new Date(self.order_detail.order_detail.gmtCreate),
+                        now = new Date();
+                     create.setHours(create.getHours() + 1);
+                    //create.setMinutes(create.getMinutes() + 1);
+                    var hours = accAdd(create.getTime(), (-1) * now.getTime());
+                    hours = accDiv(hours, 3600000);
+                    if (hours <= 0) {
+                        // 自动取消订单
+                        autoCancel(self);
+                    }
+                }
                 console.log("获取订单成功");
             }else{
                 handleAjax(res);
@@ -145,5 +154,46 @@ function updateOrder(){
     // 将订单id存放在cookie中
     $.cookie('id', JSON.stringify(orderDetail.order_detail.order_detail.id));
     window.location.href = '/tenancy/p/headList';
+}
+function autoCancel(self){
+    $.ajax({
+        type: "GET",
+        url: "/api/order/cancel/"+orderDetail.order_detail.order_detail.id,
+        dataType:'json',
+        async:false,
+        success: function(res) {
+            if(res.code == 0){
+                //取消订单要删除id的cookie
+                self.order_detail.order_detail.status = 3;
+                $.cookie("id","",{expires:-1});
+            }
+            else{
+                handleAjax(res);
+            }
+        }
+    })
+}
+// 加法运算
+function accAdd(arg1,arg2){
+    var r1,r2,m;
+    try{
+        r1=arg1.toString().split(".")[1].length
+    }catch(e){
+        r1=0} try{
+        r2=arg2.toString().split(".")[1].length}catch(e){r2=0} m=Math.pow(10,Math.max(r1,r2))
+    return (arg1*m+arg2*m)/m
+}
+// 除法运算
+function accDiv(arg1,arg2){
+    var t1=0,t2=0,r1,r2;
+    try{
+        t1=arg1.toString().split(".")[1].length}catch(e){
+    }try{
+        t2=arg2.toString().split(".")[1].length}catch(e){}
+    with(Math){
+        r1=Number(arg1.toString().replace(".",""))
+        r2=Number(arg2.toString().replace(".",""))
+        return (r1/r2)*pow(10,t2-t1);
+    }
 }
 

@@ -223,9 +223,10 @@ function doSearchByAllType(app) {
      */
 
     let carPlaceId = 1
-    var sid = getCookie("取车门店id")
-    if(sid!=null){
-        carPlaceId = sid
+    let fid = getCookie("取车门店id")
+    let tid = getCookie("还车门店id")
+    if(fid!=null){
+        carPlaceId = fid
     }
     if(app.idClick > 0){
         carPlaceId = app.idClick

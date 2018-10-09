@@ -221,12 +221,12 @@ public class OrderService implements IOrderService {
 
     @Override
     public ResultMap updateOrder(TncOrder tncOrder) {
+        tncOrder.setGmtModified(new Date());
         int res = tncOrderMapper.updateByPrimaryKeySelective(tncOrder);
         if(res>0){
-            TncOrder tncOrder1 = tncOrderMapper.selectByPrimaryKey(tncOrder.getId());
-            return ResultMap.success("获取订单成功").put("order",tncOrder1);
+            return ResultMap.success("修改订单成功").put("order",tncOrder);
         }else{
-            throw new CommonException("获取订单失败");
+            throw new CommonException("修改订单失败");
         }
     }
 
