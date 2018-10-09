@@ -121,7 +121,7 @@ public class OrderService implements IOrderService {
         String str = phone + date + ran;
         Long uid = Long.valueOf(str);
         tncOrder.setId(uid);
-        int num = tncOrderMapper.insert(tncOrder);
+        int num = tncOrderMapper.insertSelective(tncOrder);
         if(num>0){
             ResultMap resultMap = ResultMap.success("添加订单成功");
             resultMap.put("order",tncOrder);

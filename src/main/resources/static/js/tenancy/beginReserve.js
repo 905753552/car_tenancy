@@ -74,7 +74,7 @@ const param = {
             // 应还时间
             returnDate:'',
             // 实际归还时间
-            realReturnDate:'',
+            //realReturnDate:"",
             // 支付时间
             payTime:new Date(),
             // 状态：0-提交订单 1-失效 2-已支付 3-用户取消（退款） 4-完成
@@ -395,7 +395,7 @@ function setOrderDetails(){
         // 应还时间
         param.base_info.order_detail.returnDate = new Date((param.base_info.returnDate + ' ' + param.base_info.returnTime).replace(/-/g,"/"));
         // 实际还车时间
-        param.base_info.order_detail.realReturnDate = param.base_info.order_detail.returnDate;
+        //param.base_info.order_detail.realReturnDate = param.base_info.order_detail.returnDate;
         // 状态：0-提交订单 1-失效 2-已支付 3-用户取消（退款） 4-完成
         param.base_info.order_detail.status = 0;
         // 是否删除 1-删除
