@@ -54,6 +54,17 @@ public class TncCustomerVo {
     // 密码
     private String password;
 
+    public String getXcode() {
+        return xcode;
+    }
+
+    public void setXcode(String xcode) {
+        this.xcode = xcode;
+    }
+
+    //验证码
+    private String xcode;
+
     public String getPassword() {
         return password;
     }

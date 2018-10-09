@@ -1,5 +1,6 @@
 package com.dev.main.tenancy.service.impl;
 
+import com.dev.main.aliyun_sms.service.ISMSService;
 import com.dev.main.common.exception.CommonException;
 import com.dev.main.common.util.CryptographyUtil;
 import com.dev.main.common.util.RandomUtil;
@@ -13,6 +14,8 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.crypto.Data;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -34,6 +37,8 @@ public class CustomerServiceImpl implements ICustomerService {
     private TncPointMapper tncPointMapper;
     @Autowired
     private TncPointLogMapper tncPointLogMapper;
+    @Autowired
+    private ISMSService smsService;
 
     @Override
     public TncCustomer findByPhone(String phone) {
@@ -70,7 +75,7 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public void changeInfo(TncCustomerVo tncCustomerVo) {
+    public void changeInfo(TncCustomerVo tncCustomerVo,String keyInCookie, HttpServletRequest request, HttpServletResponse response) {
         TncAddress tncAddress = tncCustomerVo.getTncAddress();
         TncCustomer tncCustomer = new TncCustomer();
         tncCustomer.setId(tncCustomerVo.getId());
@@ -83,6 +88,15 @@ public class CustomerServiceImpl implements ICustomerService {
         tncCustomer.setEmergencyPhone(tncCustomerVo.getEmergencyPhone());
         tncCustomer.setGmtModified(new Date());
         String password = tncCustomerVo.getPassword();
+        String code = tncCustomerVo.getXcode();
+        if(!StringUtils.isEmpty(code)) {
+            // 验证验证码
+            boolean match = smsService.verifyCode(keyInCookie, tncCustomer.getPhone(),code, request, response);
+            //boolean match = true;
+            if (!match) {
+                throw new CommonException("验证码错误");
+            }
+        }
         if(!StringUtils.isEmpty(password)) {
             // 产随机产生6位数作为盐值
             String salt = RandomUtil.getRandomNumString(6);

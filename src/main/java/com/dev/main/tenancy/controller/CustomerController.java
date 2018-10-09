@@ -1,5 +1,6 @@
 package com.dev.main.tenancy.controller;
 
+import com.dev.main.aliyun_sms.statics.SmsConstant;
 import com.dev.main.common.controller.exception.GlobalExceptionResolver;
 import com.dev.main.common.util.ResultMap;
 import com.dev.main.shiro.util.ShiroUtils;
@@ -15,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -43,8 +46,11 @@ public class CustomerController {
     }
 
     @PostMapping("/change")
-    public ResultMap change(@RequestBody TncCustomerVo tncCustomerVo) {
-        customerService.changeInfo(tncCustomerVo);
+    public ResultMap change(@RequestBody TncCustomerVo tncCustomerVo,
+                            @CookieValue(value = SmsConstant.COOKIE_NAME, required = false) String keyInCookie,
+                            HttpServletRequest request,
+                            HttpServletResponse response) {
+        customerService.changeInfo(tncCustomerVo,keyInCookie,request,response);
         return ResultMap.success();
     }
 

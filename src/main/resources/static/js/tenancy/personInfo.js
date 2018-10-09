@@ -21,6 +21,7 @@ function saveInfo() {
     }
     vData.customer.phone = tempphone;
     vData.customer.gender = $("input[type='radio']:checked").val();
+    vData.customer.xcode = $("#xcode").val();
     var data = JSON.stringify(vData.customer);
     console.log(data);
     $.ajax({
@@ -37,6 +38,7 @@ function saveInfo() {
                     window.location.href='/tenancy/p/personInfo';
                 });
             }else {
+                tempphone = vData.currentPhone;
                 handleAjax(res);
             }
         }
@@ -61,10 +63,12 @@ var vData = {
         emergencyName:"",
         emergencyPhone:"",
         password:"",
+        xcode:""
     },
     provinces:[],
     citys:[],
-    areas:[]
+    areas:[],
+    currentPhone:"",
 }
 /**显示用户信息*/
 var findInfo = function() {
@@ -80,6 +84,7 @@ var findInfo = function() {
                     $("#lady").attr("checked", true);
                 }
                 tempphone = vData.customer.phone;
+                vData.currentPhone = vData.customer.phone;
                 vData.customer.phone = tempphone.substring(0,3)+"****"+tempphone.substring(7);
                 if(res.data.tncAddress!=null) {
                     var detailAddress = res.data.tncAddress.detail;
@@ -157,6 +162,7 @@ function send_VerifyCode(code,phone) {
                 // alert("验证通过，请输入短信验证码");
                 $("#getYzmBtn").attr("disabled","true");
                 //超时重发时间，先默认60秒
+                doSendPhoneCode();
                 countdown(60);
                 $('#myModal').modal('hide');
 
@@ -169,6 +175,18 @@ function send_VerifyCode(code,phone) {
             console.log("fail"+res.toString());
             // alert("网络问题未获取到，请稍后重试");
             $(".modal-title").text("网络问题未获取到，请稍后重试");
+        }
+    })
+}
+/**
+ * 发送短信验证码
+ * */
+function doSendPhoneCode() {
+    var phone = $("#newPhone").val();
+    $.ajax({
+        url:'/api/alisms/'+phone,
+        success:function (res) {
+            console.log(res);
         }
     })
 }
@@ -210,6 +228,7 @@ function doShowTips(tip) {
             return false;
         }
         var new_phone = $("#newPhone").val();
+        console.log("ffssaaafddfggg "+new_phone);
         if(new_phone=="") {
             doShowTips("请填写新手机号");
             $("#newPhone").focus();
@@ -220,6 +239,12 @@ function doShowTips(tip) {
                 $("#newPhone").focus();
                 return false;
             }
+        }
+        var phoneCode = $("#xcode").val().trim();
+        if(phoneCode=="") {
+            $("#xcode").focus();
+            doShowTips("请输入新手机验证码");
+            return false;
         }
         tempphone = new_phone;
     }
@@ -260,6 +285,7 @@ function doShowTips(tip) {
              return false;
          }
      }
+
     return true;
 }
 /*验证手机*/

@@ -3,6 +3,8 @@ package com.dev.main.tenancy.service;
 import com.dev.main.tenancy.domain.*;
 import com.dev.main.tenancy.vo.TncCustomerVo;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +19,7 @@ public interface ICustomerService {
     TncCustomerVo findCustomerVo(Long uid);
 
     /**更改信息*/
-    void changeInfo(TncCustomerVo tncCustomerVo);
+    void changeInfo(TncCustomerVo tncCustomerVo, String keyInCookie, HttpServletRequest request, HttpServletResponse response);
 
     /**根据父级id和等级查找地区*/
     List<AddressRegion> findAddress(Long aid, byte level);
