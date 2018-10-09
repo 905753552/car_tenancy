@@ -1032,6 +1032,21 @@
        window.scrollTo(0,0)
     };
     $(document).ready(function(){
+        if(getCookie("取车门店name")!=null){
+            $("#fromStoreName").val(getCookie("取车门店name"))
+            console.log(getCookie("取车门店name"))
+        }
+        if(getCookie("还车门店name")!=null){
+            $("#toStoreName").val(getCookie("还车门店name"))
+            console.log(getCookie("取车门店name"))
+        }
+        if(getCookie("取车城市name")!=null){
+            $("#fromCity2").val(getCookie("取车城市name"))
+        }
+        if(getCookie("还车城市name")!=null){
+        $("#toCity").val(getCookie("还车城市name"))
+        }
+
         stickUp()
     })
 

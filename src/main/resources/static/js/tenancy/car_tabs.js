@@ -221,7 +221,12 @@ function doSearchByAllType(app) {
      * @param place 地点
      * @param currentPackageId 套餐id
      */
+
     let carPlaceId = 1
+    var sid = getCookie("取车门店id")
+    if(sid!=null){
+        carPlaceId = sid
+    }
     if(app.idClick > 0){
         carPlaceId = app.idClick
     }else{
@@ -512,7 +517,8 @@ function addCarHot(cid) {
 
 function fromStoreDetail(id) {
     carInfoTab_app.idClick = id;
-    console.log(id)
+    console.log(getCookie("取车门店id"));
+   // console.log(id)
     $(this).siblings("span").removeClass("cur-city");
     $(this).addClass("cur-city");
     $("#fromStore_Detail").css("display","block");
@@ -531,8 +537,12 @@ function fromStoreDetail(id) {
             $("#fromStore_Detail").css("display","none");
             $("#fromStore_Name").css("display","none");
             $("#fromStore").css("display","none");
+            setCookie("取车门店id",id);
+            setCookie("取车门店name",$("#fromStoreName").val())
+            setCookie("取车城市name",$("#fromCity2").val())
         }
     });
+
 }
 
 function toStoreDetail(id) {
@@ -555,7 +565,22 @@ function toStoreDetail(id) {
             $("#toStore_Detail").css("display","none");
             $("#toStore_Name").css("display","none");
             $("#toStore").css("display","none");
+            setCookie("还车门店id",id);
+            setCookie("还车门店name",$("#toStoreName").val())
+            setCookie("还车城市name",$("#toCity").val())
         }
     });
+
 }
+//setCookie
+function setCookie(name,value){
+    document.cookie = name +"="+value
+}
+//getCookie
+function getCookie(name){
+    var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+    return arr != null ? unescape(arr[2]) : null;
+}
+
+
 /*-------------------------------------function end-------------------------------------*/
