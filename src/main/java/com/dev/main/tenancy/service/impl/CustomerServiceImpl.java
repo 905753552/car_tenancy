@@ -90,11 +90,15 @@ public class CustomerServiceImpl implements ICustomerService {
         String password = tncCustomerVo.getPassword();
         String code = tncCustomerVo.getXcode();
         if(!StringUtils.isEmpty(code)) {
-            // 验证验证码
-            boolean match = smsService.verifyCode(keyInCookie, tncCustomer.getPhone(),code, request, response);
-            //boolean match = true;
-            if (!match) {
-                throw new CommonException("验证码错误");
+            if(findByPhone(tncCustomerVo.getPhone())!=null) {
+                throw new CommonException("新手机号码已注册");
+            }else {
+                // 验证验证码
+                boolean match = smsService.verifyCode(keyInCookie, tncCustomer.getPhone(), code, request, response);
+                //boolean match = true;
+                if (!match) {
+                    throw new CommonException("验证码错误");
+                }
             }
         }
         if(!StringUtils.isEmpty(password)) {
