@@ -228,7 +228,6 @@ function doShowTips(tip) {
             return false;
         }
         var new_phone = $("#newPhone").val();
-        console.log("ffssaaafddfggg "+new_phone);
         if(new_phone=="") {
             doShowTips("请填写新手机号");
             $("#newPhone").focus();
@@ -303,7 +302,6 @@ function couponAndPoint() {
         url: "/api/customer/countCouponAndPoint",
         success:function (res) {
             if(res.code==0) {
-                console.log(res);
                 document.getElementById("pointNum").innerText="("+res.point+"分)";
                 document.getElementById("couponCount").innerText="("+res.count+"张)";
             } else {

@@ -534,6 +534,7 @@ function fromStoreDetail(id) {
         },
         click: function () {
             $("#fromStoreName").val($(this).text().trim());
+            $("#toStoreName").val($(this).text().trim());
             $("#fromStore_panel span").removeClass("cur-city");
             $("#fromStore_Detail").css("display","none");
             $("#fromStore_Name").css("display","none");

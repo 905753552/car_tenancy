@@ -79,10 +79,10 @@
                     <div class="menu-input-group">
                         <div class="row top-menu">
                             <label class="tnc_c_car">&emsp;取车&emsp;</label>
-                            <input type="text" home-flag value="肇庆" maxlength="10"
+                            <input type="text" home-flag value="肇庆市" maxlength="10"
                                    default-value="选择城市" link-input="fromCityId"
-                                   class="tnc_inpcity tnc_input_citySD tnc_input_text" @click="choose()"
-                                   name="fromCity" id="fromCity2" t_popup="0">
+                                   class="tnc_inpcity tnc_input_citySD tnc_input_text"
+                                   name="fromCity" id="fromCity2" t_popup="0" readonly="readonly">
                             <input type="hidden" value="" name="fromCityId" id="fromCityId">
                             <div id="city" class="ch_city">
                                 <div id="popup_pane_head">
@@ -99,146 +99,124 @@
                                         <li class="cur">
                                             <div class="letterbox">
                                                 <b class="cityzmletter">A</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'A'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'A'" @click="fromChooseCity(item.id,item.name)">
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">B</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'B'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'B'" @click="fromChooseCity(item.id,item.name)">
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">C</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'C'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'C'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">D</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'D'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'D'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">E</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'E'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'E'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">F</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'F'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'F'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">G</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'G'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'G'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">H</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'H'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'H'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">J</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'J'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'J'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">K</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'K'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'K'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">L</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'L'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'L'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">M</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'M'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'M'" @click="fromChooseCity(item.id,item.name)">
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">N</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'N'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'N'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">P</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'P'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'P'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">Q</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'Q'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'Q'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">R</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'R'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'R'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">S</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'S'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'S'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">T</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'T'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'T'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">W</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'W'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'W'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">X</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'X'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'X'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">Y</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'Y'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'Y'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">Z</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'Z'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'Z'" @click="fromChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                         </li>
@@ -247,15 +225,14 @@
                             </div>
                             <input type="text" home-flag value="天宁北店" maxlength="30"
                                    default-value="请选择取车门店" link-input="fromStoreId"
-                                   class="tnc_inpstore tnc_input_citySD tnc_input_text" @click="choose()"
+                                   class="tnc_inpstore tnc_input_citySD tnc_input_text" readonly="readonly"
                                    name="fromStoreName" id="fromStoreName" t_popup="0" ischain="1">
                             <input type="hidden" value="" name="fromStoreId" id="fromStoreId">
                             <div id="fromStore" class="ch_store1" >
                                 <div style="margin: 0px 5px 0px 10px">
                                     <div class="store_mes">请选择取车门店</div>
                                     <div id="fromStore_panel" class="store_panel">
-                                        <span v-for="item in area">
-                                            <input :aid="item.area.id" style="display: none">
+                                         <span v-for="item in area" @mouseenter="fromChooseStore(item.area.id)" >
                                             {{item.area.name}}
                                         </span>
                                     </div>
@@ -281,10 +258,10 @@
                         </div>
                         <div class="row top-menu">
                             <label class="tnc_c_car">&emsp;还车&emsp;</label>
-                            <input type="text" home-flag value="肇庆" maxlength="10"
+                            <input type="text" home-flag value="肇庆市" maxlength="10"
                                    default-value="选择城市" link-input="toCityId"
-                                   class="tnc_inpcity tnc_input_citySD tnc_input_text"  @click="choose()"
-                                   name="toCity" id="toCity" t_popup="0">
+                                   class="tnc_inpcity tnc_input_citySD tnc_input_text"
+                                   name="toCity" id="toCity" t_popup="0" readonly="readonly">
                             <input type="hidden" id="toCityId" name="toCityId" value="">
                             <div id="city2" class="ch_city2">
                                 <div id="popup_pane_head2">
@@ -301,146 +278,124 @@
                                         <li class="cur">
                                             <div class="letterbox">
                                                 <b class="cityzmletter">A</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'A'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'A'" @click="toChooseCity(item.id,item.name)">
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">B</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'B'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'B'" @click="toChooseCity(item.id,item.name)">
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">C</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'C'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'C'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">D</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'D'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'D'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">E</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'E'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'E'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">F</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'F'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'F'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">G</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'G'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'G'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">H</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'H'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'H'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">J</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'J'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'J'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">K</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'K'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'K'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">L</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'L'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'L'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">M</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'M'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'M'" @click="toChooseCity(item.id,item.name)">
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">N</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'N'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'N'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">P</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'P'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'P'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">Q</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'Q'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'Q'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">R</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'R'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'R'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">S</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'S'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'S'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">T</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'T'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'T'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">W</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'W'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'W'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">X</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'X'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'X'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">Y</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'Y'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'Y'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                             <div class="letterbox">
                                                 <b class="cityzmletter">Z</b>
-                                                <span v-for="item in city" v-show="item.firstLetter == 'Z'" >
-                                                    <input :cid="item.id" style="display: none">
+                                                <span v-for="item in city" v-show="item.firstLetter == 'Z'" @click="toChooseCity(item.id,item.name)" >
                                                     {{item.name}}</span>
                                             </div>
                                         </li>
@@ -449,15 +404,14 @@
                             </div>
                             <input type="text" home-flag value="天宁北店" maxlength="30"
                                    default-value="请选择取车门店" link-input="toStoreId"
-                                   class="tnc_inpstore tnc_input_citySD tnc_input_text"  @click="choose()"
+                                   class="tnc_inpstore tnc_input_citySD tnc_input_text" readonly="readonly"
                                    name="toStoreName" id="toStoreName" t_popup="0" ischain="1">
                             <input type="hidden" value="" name="toStoreId" id="toStoreId">
                             <div id="toStore" class="ch_store2" >
                                 <div style="margin: 0px 5px 0px 10px">
                                     <div class="store_mes">请选择取车门店</div>
                                     <div id="toStore_panel" class="store_panel">
-                                        <span v-for="item in area">
-                                            <input :aid="item.area.id" style="display: none">
+                                        <span v-for="item in area" @mouseenter="toChooseStore(item.area.id)">
                                             {{item.area.name}}
                                         </span>
                                     </div>
@@ -469,7 +423,7 @@
                                     </span>
                                 </div>
                                 <div id="toStore_Detail" style="display:none;margin: 0px 5px 0px 10px;padding-top: 5px;border-top: 1px solid #00c189;" >
-                                    <label v-for="item in storeName" v-show="item.id == idClick">
+                                    <label v-for="item in storeName" v-show="item.id == idClick2">
                                         <div>门店地址：{{item.tncAddress.province.name}}{{item.tncAddress.city.name}}{{item.tncAddress.area.name}}{{item.tncAddress.detail}}</div>
                                         <div>门店电话：{{item.managerPhone}}</div>
                                         <div>营业时间：8:30-21:30</div>
