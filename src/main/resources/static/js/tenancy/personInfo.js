@@ -55,9 +55,9 @@ var vData = {
         email:"",
         tncAddress:{
             id:"",
-            province:{id:"",name:""},
-            city:{id:"",name:""},
-            area:{id:"",name:""},
+            province:{id:0,name:""},
+            city:{id:0,name:""},
+            area:{id:0,name:""},
             detail:"",
         },
         emergencyName:"",
@@ -86,13 +86,21 @@ var findInfo = function() {
                 tempphone = vData.customer.phone;
                 vData.currentPhone = vData.customer.phone;
                 vData.customer.phone = tempphone.substring(0,3)+"****"+tempphone.substring(7);
-                if(res.data.tncAddress!=null) {
+                if(res.data.tncAddress) {
                     var detailAddress = res.data.tncAddress.detail;
                     var addressProvinceId = res.data.tncAddress.province.id;
                     var addressCityId = res.data.tncAddress.city.id;
                     loadAddress(addressProvinceId, 1);
                     loadAddress(addressCityId, 2);
-                    $("#detail").attr('value', detailAddress);
+                    vData.customer.tncAddress.detail = detailAddress;
+                } else {
+                    vData.customer.tncAddress = {
+                        id:"",
+                            province:{id:0,name:""},
+                        city:{id:0,name:""},
+                        area:{id:0,name:""},
+                        detail:"",
+                    }
                 }
             } else {
                 handleAjax(res);

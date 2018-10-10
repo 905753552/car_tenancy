@@ -51,6 +51,7 @@ public class CustomerController {
                             HttpServletRequest request,
                             HttpServletResponse response) {
         customerService.changeInfo(tncCustomerVo,keyInCookie,request,response);
+
         return ResultMap.success();
     }
 
