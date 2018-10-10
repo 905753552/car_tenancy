@@ -10,11 +10,12 @@
 //         }
 //     })
 // })
+var pack = JSON.parse(decodeURIComponent(window.location.search.slice(1)));
 function init() {
-    var id = window.location.search.slice(7);
-    console.log(id);
+
+    console.log(pack);
     $.ajax({
-        url:"/api/Car/detail?cid="+id,
+        url:"/api/Car/detail?cid="+pack.carId,
         type:"get",
         success:function(data){
             console.log(data);
@@ -31,6 +32,10 @@ function init() {
             console.log("no");
         }
     })
+}
+function addorder() {
+    let url = "/tenancy/p/beginReserve?"+window.location.search.slice(1);
+    window.location.href = url
 }
 const car_data = {
     car: {
