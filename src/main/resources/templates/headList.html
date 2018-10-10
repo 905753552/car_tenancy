@@ -19,7 +19,7 @@
     <style>
         body {
             background-color: #f2f3f5;
-            padding: 0px 0px !important;
+            padding: 0; !important;
         }
     </style>
 </head>
@@ -31,10 +31,10 @@
             <div class="tnc_head_menu" >
                 <ul class="">
                     <li class="tnc_head_menu_item">
-                        <a class="tnc_head_menu_active" href="/">首页 <span class="sr-only">(current)</span></a>
+                        <a class="" href="/">首页 <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="tnc_head_menu_item">
-                        <a class="" href="/headList">选车</a>
+                        <a class="tnc_head_menu_active" href="/headList">选车</a>
                     </li>
                     <li class="tnc_head_menu_item">
                         <a class="" href="/storesMap">门店</a>
@@ -568,7 +568,7 @@
             <!--row start-->
             <div class="row clearfix">
                 <!--col start-->
-                <div class="col-md-12 column"  >
+                <div class="col-md-12 column" style="padding-left: 0;padding-right: 0;"  >
 
                     <!--tabHeader  ul start-->
                     <ul class="nav nav-tabs  bg-define" id="mycarInfoListTab">
@@ -988,11 +988,11 @@
     $(document).ready(function(){
         if(getCookie("取车门店name")!=null){
             $("#fromStoreName").val(getCookie("取车门店name"))
-            console.log(getCookie("取车门店name"))
+            // console.log(getCookie("取车门店name"))
         }
         if(getCookie("还车门店name")!=null){
             $("#toStoreName").val(getCookie("还车门店name"))
-            console.log(getCookie("取车门店name"))
+            // console.log(getCookie("取车门店name"))
         }
         if(getCookie("取车城市name")!=null){
             $("#fromCity2").val(getCookie("取车城市name"))

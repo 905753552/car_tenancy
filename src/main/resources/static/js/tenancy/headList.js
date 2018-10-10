@@ -116,7 +116,7 @@ function fromChooseCity(cid,cname) {
     $("#fromStore_panel span").removeClass("cur-city");
     $("#toStore_panel span").removeClass("cur-city");
     $("#fromCityId").val(cid);
-    areaLoad(cid);
+    fromAreaLoad(cid);
 }
 
 //门店区级取车地址样式
@@ -149,7 +149,7 @@ function toChooseCity(cid,cname) {
     $("#toStore_Detail").css("display","none");
     $("#toStore_panel span").removeClass("cur-city");
     $("#toCityId").val(cid);
-    areaLoad(cid);
+    toAreaLoad(cid);
 }
 
 // 门店区级还车地址样式
@@ -185,8 +185,8 @@ function addrLoad () {
     })
 }
 
-//加载区级地址
-var areaLoad = function (cid) {
+//加载取车区级地址
+var fromAreaLoad = function (cid) {
     $.ajax({
         type: "get",
         url: "/api/storeAddress/list2",
@@ -195,8 +195,49 @@ var areaLoad = function (cid) {
         },
         success: function (res) {
             carInfoTab_app.area = res.data;
+            if(res.data.length === 0){
+                layer.msg("该市暂无门店，以总部门店为取车门店和还车门店");
+                $("#fromCity2").val("肇庆市");
+                $("#fromStoreName").val("天宁北店");
+                $("#toCity").val($("#fromCity2").val());
+                $("#toStoreName").val($("#fromStoreName").val());
+                carInfoTab_app.idClick = 1;
+                carInfoTab_app.idClick2 = 1;
+                setCookie("取车门店id",carInfoTab_app.idClick);
+                setCookie("取车门店name",$("#fromStoreName").val());
+                setCookie("取车城市name",$("#fromCity2").val());
+                setCookie("还车门店id",carInfoTab_app.idClick2);
+                setCookie("还车门店name",$("#toStoreName").val());
+                setCookie("还车城市name",$("#toCity").val());
+            }
         }
-    })
+    });
+};
+
+//加载还车区级地址
+var toAreaLoad = function (cid) {
+    $.ajax({
+        type: "get",
+        url: "/api/storeAddress/list2",
+        data:{
+            id:cid
+        },
+        success: function (res) {
+            carInfoTab_app.area = res.data;
+            if (res.data.length === 0) {
+                layer.msg("该市暂无门店，以取车门店作还车门店");
+                $("#toCity").val($("#fromCity2").val());
+                $("#toStoreName").val($("#fromStoreName").val());
+                setCookie("还车门店id",carInfoTab_app.idClick);
+                setCookie("还车门店name",$("#toStoreName").val());
+                setCookie("还车城市name",$("#toCity").val());
+            } else {
+                if ($("#fromCity2").val() !== $("#toCity").val()) {
+                    layer.msg("温馨提示: 选择异地还车将收取一定费用");
+                }
+            }
+        }
+    });
 };
 
 //加载门店
@@ -212,23 +253,3 @@ var storeLoad = function (sid) {
         }
     })
 };
-
-// $(function () {
-//     //选择时间时图标切换
-//     $("#fromHourMinute").focus(function () {
-//         $(this).removeClass("tnc_input_citySD");
-//         $(this).addClass("tnc_input_citySD2");
-//         $(this).blur(function () {
-//             $(this).removeClass("tnc_input_citySD2");
-//             $(this).addClass("tnc_input_citySD");
-//         });
-//     });
-//     $("#toHourMinute").focus(function () {
-//         $(this).removeClass("tnc_input_citySD");
-//         $(this).addClass("tnc_input_citySD2");
-//         $(this).blur(function () {
-//             $(this).removeClass("tnc_input_citySD2");
-//             $(this).addClass("tnc_input_citySD");
-//         });
-//     });
-// });

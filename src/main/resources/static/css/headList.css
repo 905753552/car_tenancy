@@ -154,9 +154,6 @@
     display: inline;
 }
 
-.tnc_cartime {
-}
-
 .tnc_inpdate {
     height: 40px;
     padding: 10px;
@@ -175,10 +172,6 @@
 }
 .tnc_p-re {
     position: relative;
-}
-
-.tnc_choose_div{
-
 }
 
 .tnc_bred {
@@ -497,4 +490,9 @@
 #toStore span.cur-city{
     color:#fff;
     background-color: #00c189;
+}
+
+/*异地提示*/
+.tnc_iknow{
+
 }

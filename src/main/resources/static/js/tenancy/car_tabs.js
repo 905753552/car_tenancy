@@ -100,7 +100,7 @@ function loadCarMenuData() {
         contentType: "application/json",
         success: function (data) {
             if (data.code == 0) {
-                console.log(data.TncPackageScheme)
+                // console.log(data.TncPackageScheme)
                 carMenuData = data.TncPackageScheme
                 carInfoTab_app.menu = data.TncPackageScheme
                 doHandelCarBrand(data.TncBrand)
@@ -199,7 +199,7 @@ function doSearchByPackage(pid) {
     carMinPrice =0;
     carMaxPrice =9999;
     carBrand = allCarBrand
-    console.log(pid)
+    // console.log(pid)
     if(pid!= ""){
         currentPackageId = pid
     }
@@ -235,7 +235,7 @@ function doSearchByAllType(app) {
         carPlace:carPlaceId,
         carPID:currentPackageId
     }
-    console.log(app.idClick)
+    // console.log(app.idClick)
    // console.log(JSON.stringify(data))
     $.ajax({
         type:"POST",
@@ -245,14 +245,14 @@ function doSearchByAllType(app) {
         //async:false,
         success: function (data) {
             if (data.code == 0) {
-                console.log(data.carData)
+                // console.log(data.carData)
                 if(data.carData.length>0){
                     carInfoTab_app.isEmpty = false;
-                    console.log(carInfoTab_app.isEmpty)
+                    // console.log(carInfoTab_app.isEmpty)
 
                 }else{
                     carInfoTab_app.isEmpty = true;
-                    console.log(carInfoTab_app.isEmpty)
+                    // console.log(carInfoTab_app.isEmpty)
                 }
                 doHandelCarInfo(data.carData)
             } else {
@@ -332,7 +332,7 @@ function doChangeType(type) {
             carType = carBaseType
             break
     }
-    console.log(carType)
+    // console.log(carType)
     doCheckByType(carType)
 }
 
@@ -379,7 +379,7 @@ function doCheckByType(type) {
     if(type ==null || type==""){
         cart = "手动紧凑型,商务型,经济型,豪华型,SUV,6至15座商务,个性车,电动车"
         carType = ""
-        console.log(carMinPrice+'---------------'+carMaxPrice)
+        // console.log(carMinPrice+'---------------'+carMaxPrice)
     }else{
          cart = type
     }
@@ -513,9 +513,10 @@ function addCarHot(cid) {
     // })
 }
 
+//获得取车门店名称
 function fromStoreDetail(id) {
     carInfoTab_app.idClick = id;
-    console.log(getCookie("取车门店id"));
+    // console.log(getCookie("取车门店id"));
    // console.log(id)
     $(this).siblings("span").removeClass("cur-city");
     $(this).addClass("cur-city");
@@ -537,13 +538,16 @@ function fromStoreDetail(id) {
             $("#fromStore_Name").css("display","none");
             $("#fromStore").css("display","none");
             setCookie("取车门店id",id);
-            setCookie("取车门店name",$("#fromStoreName").val())
-            setCookie("取车城市name",$("#fromCity2").val())
+            setCookie("取车门店name",$("#fromStoreName").val());
+            setCookie("取车城市name",$("#fromCity2").val());
+            setCookie("还车门店id",id);
+            setCookie("还车门店name",$("#toStoreName").val());
+            setCookie("还车城市name",$("#toCity").val());
         }
     });
 
 }
-
+//获得还车门店名称
 function toStoreDetail(id) {
     carInfoTab_app.idClick2 = id;
     $(this).siblings("span").removeClass("cur-city");
@@ -565,8 +569,11 @@ function toStoreDetail(id) {
             $("#toStore_Name").css("display","none");
             $("#toStore").css("display","none");
             setCookie("还车门店id",id);
-            setCookie("还车门店name",$("#toStoreName").val())
-            setCookie("还车城市name",$("#toCity").val())
+            setCookie("还车门店name",$("#toStoreName").val());
+            setCookie("还车城市name",$("#toCity").val());
+            if($("#fromCity2").val() === $("#toCity").val() && $("#fromStoreName").val() !== $("#toStoreName").val()) {
+                layer.msg("温馨提示: 选择异店还车将收取服务费");
+            }
         }
     });
 
