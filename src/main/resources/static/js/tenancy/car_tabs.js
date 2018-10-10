@@ -43,7 +43,7 @@ const carInfoTab_methods = {
     doCheckByType:doCheckByType,
     doSearchByAllType:doSearchByAllType,
     addCarHot:addCarHot,
-
+    carDetail:carDetail,
     fromStoreDetail:fromStoreDetail,
     toStoreDetail:toStoreDetail
 }
@@ -158,12 +158,9 @@ function doCarOrder(index) {
     let url = "/tenancy/p/beginReserve?"+cData;
     carInfoTab_app.menu.forEach(function (item) {
         if(item.name.indexOf("年租套餐")>=0 && item.id==currentPackageId){
-            //console.log(item.name)
             url = "/tenancy/p/annualRentOrder?"+cData;
         }
-        //console.log(item.name)
     })
-    //console.log(url)
     window.location.href = url
 }
 //处理汽车品牌
@@ -584,5 +581,30 @@ function getCookie(name){
     return arr != null ? unescape(arr[2]) : null;
 }
 
+
+function carDetail(index){
+    let orderData = {
+        getCarPlace:$("#fromStoreName").val(),
+        getCarPlaceId:carInfoTab_app.idClick,
+        returnCarPlace:$("#toStoreName").val(),
+        returnCarPlaceId:carInfoTab_app.idClick2,
+        getCarDate:$("#fromDate").val(),
+        getCarTime:$("#fromHourMinute").val(),
+        returnCarDate:$("#toDate").val(),
+        returnCarTime:$("#toHourMinute").val(),
+        days:carInfoTab_app.days,
+        packageId:currentPackageId,
+        carId:carInfoTab_app.items[index].carId,
+        priceId:carInfoTab_app.items[index].priceId
+    }
+    let cData = encodeURIComponent(JSON.stringify(orderData))
+    let url = "./cardetail?"+cData;
+    // carInfoTab_app.menu.forEach(function (item) {
+    //     if(item.name.indexOf("年租套餐")>=0 && item.id==currentPackageId){
+    //         url = "/tenancy/p/annualRentOrder?"+cData;
+    //     }
+    // })
+    window.location.href = url
+}
 
 /*-------------------------------------function end-------------------------------------*/

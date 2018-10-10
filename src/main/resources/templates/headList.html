@@ -611,7 +611,7 @@
                                     <div class="col-md-12 column">
                                         <div class="row clearfix dev_underline">
                                             <div class="col-md-4 column pic">
-                                                <a :href="'./cardetail?carId='+item.carId" @click="addCarHot(item.carId)" target="_blank"><img :src="'/api/pic/item?imagePath='+item.carImg" alt="图片" width="230px" height="130px"></a>
+                                                <a @click="carDetail(index)" target="_blank"><img :src="'/api/pic/item?imagePath='+item.carImg" alt="图片" width="230px" height="130px"></a>
                                             </div>
                                             <div class="col-md-3 column info">
                                                 <div class="info_block">
@@ -661,7 +661,7 @@
                                     <div class="col-md-12 column">
                                         <div class="row clearfix dev_underline">
                                             <div class="col-md-4 column pic">
-                                                <a :href="'./cardetail?carId='+item.carId" @click="addCarHot(item.id)" target="_blank"><img :src="'/api/pic/item?imagePath='+item.carImg" alt="图片" width="230px" height="130px"></a>
+                                                <a  @click="carDetail(index)" target="_blank"><img :src="'/api/pic/item?imagePath='+item.carImg" alt="图片" width="230px" height="130px"></a>
                                             </div>
                                             <div class="col-md-3 column info">
                                                 <div class="info_block">
