@@ -26,6 +26,7 @@ function logout() {
             success: (data) => {
                 if (data.code == 0) {
                     header_app.customer = {};
+                    window.location.href='/index';
                 } else {
                     handleAjax(data.logout);
                 }
