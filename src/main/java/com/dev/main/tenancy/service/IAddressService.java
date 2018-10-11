@@ -26,4 +26,5 @@ public interface IAddressService {
      * @return
      */
     List<TncStore> findStoreByAreaId(Long id);
+
 }

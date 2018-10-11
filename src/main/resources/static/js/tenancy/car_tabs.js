@@ -23,8 +23,10 @@ const carInfoTab_data ={
     menu: [],
     items: [],
     city: [],
-    area:[],
-    storeName:[],
+    fromArea:[],
+    toArea:[],
+    fromStoreName:[],
+    toStoreName:[],
     carBrands:[],
     days:1,
     isEmpty:false,
@@ -54,6 +56,7 @@ const init_carInfoTab = function() {
     doSearchByAllType(this)//加载车数据
    // loadCarBrandData()//加载汽车品牌
     addrLoad();  // 加载市级地址
+    storeLoadByAreaId();    //初次加载门店信息
 }
 
 //Vue app
@@ -537,12 +540,18 @@ function fromStoreDetail(id) {
             $("#fromStore_Detail").css("display","none");
             $("#fromStore_Name").css("display","none");
             $("#fromStore").css("display","none");
+            doSearchByAllType(carInfoTab_app)
+            carInfoTab_app.toArea = carInfoTab_app.fromArea;
+            carInfoTab_app.toStoreName = carInfoTab_app.fromStoreName;
+            carInfoTab_app.idClick2 = id;
             setCookie("取车门店id",id);
             setCookie("取车门店name",$("#fromStoreName").val());
             setCookie("取车城市name",$("#fromCity2").val());
+            setCookie("取车区级Id",$("#fromCityId").val());
             setCookie("还车门店id",id);
             setCookie("还车门店name",$("#toStoreName").val());
             setCookie("还车城市name",$("#toCity").val());
+            setCookie("还车区级Id",$("#toCityId").val());
         }
     });
 
@@ -571,6 +580,7 @@ function toStoreDetail(id) {
             setCookie("还车门店id",id);
             setCookie("还车门店name",$("#toStoreName").val());
             setCookie("还车城市name",$("#toCity").val());
+            setCookie("还车区级Id",$("#toCityId").val());
             if($("#fromCity2").val() === $("#toCity").val() && $("#fromStoreName").val() !== $("#toStoreName").val()) {
                 layer.msg("温馨提示: 选择异店还车将收取服务费");
             }

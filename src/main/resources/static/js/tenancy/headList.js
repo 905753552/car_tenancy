@@ -11,6 +11,8 @@ $(function() {
         $("#toCity").removeClass("tnc_border");
         $("#fromStoreName").removeClass("tnc_border");
         $("#toStoreName").removeClass("tnc_border");
+        $("#fromHourMinute").removeClass("tnc_border");
+        $("#toHourMinute").removeClass("tnc_border");
         if( $("#fromCity2").hasClass("tnc_input_citySD2") && !($("#fromCity2").hasClass("tnc_input_citySD")) ){
             $("#fromCity2").removeClass("tnc_input_citySD2");
             $("#fromCity2").addClass("tnc_input_citySD");
@@ -26,6 +28,14 @@ $(function() {
         if( $("#toStoreName").hasClass("tnc_input_citySD2") && !($("#toStoreName").hasClass("tnc_input_citySD")) ){
             $("#toStoreName").removeClass("tnc_input_citySD2");
             $("#toStoreName").addClass("tnc_input_citySD");
+        }
+        if( $("#fromHourMinute").hasClass("tnc_input_citySD2") && !($("#fromHourMinute").hasClass("tnc_input_citySD")) ){
+            $("#fromHourMinute").removeClass("tnc_input_citySD2");
+            $("#fromHourMinute").addClass("tnc_input_citySD");
+        }
+        if( $("#toHourMinute").hasClass("tnc_input_citySD2") && !($("#toHourMinute").hasClass("tnc_input_citySD")) ){
+            $("#toHourMinute").removeClass("tnc_input_citySD2");
+            $("#toHourMinute").addClass("tnc_input_citySD");
         }
         if( target.is('#fromCity2') || target.is('#city *') && !(target.is("#city span")) ){
             $("#fromCity2").addClass("tnc_border");
@@ -50,6 +60,16 @@ $(function() {
             $("#toStoreName").removeClass("tnc_input_citySD");
             $("#toStoreName").addClass("tnc_input_citySD2");
             $("#toStore").css("display", "block");
+        }
+        if( target.is('#fromHourMinute') || target.is('#layui-laydate3 *')) {
+            $("#fromHourMinute").addClass("tnc_border");
+            $("#fromHourMinute").removeClass("tnc_input_citySD");
+            $("#fromHourMinute").addClass("tnc_input_citySD2");
+        }
+        if( target.is('#toHourMinute') || target.is('#layui-laydate4 *')) {
+            $("#toHourMinute").addClass("tnc_border");
+            $("#toHourMinute").removeClass("tnc_input_citySD");
+            $("#toHourMinute").addClass("tnc_input_citySD2");
         }
     });
 });
@@ -116,12 +136,14 @@ function fromChooseCity(cid,cname) {
     $("#fromStore_panel span").removeClass("cur-city");
     $("#toStore_panel span").removeClass("cur-city");
     $("#fromCityId").val(cid);
+    $("#toCityId").val(cid);
     fromAreaLoad(cid);
+    toAreaLoad(cid);
 }
 
 //门店区级取车地址样式
 function fromChooseStore(aid) {
-    storeLoad(aid);
+    fromStoreLoad(aid);
     $("#fromStore_Name span").removeClass("cur-city");
     $("#fromStore_Name").css("display","block");
     $("#fromStore_panel span").on({
@@ -154,7 +176,7 @@ function toChooseCity(cid,cname) {
 
 // 门店区级还车地址样式
 function toChooseStore(aid) {
-    storeLoad(aid);
+    toStoreLoad(aid);
     $("#toStore_Name span").removeClass("cur-city");
     $("#toStore_Name").css("display","block");
     $("#toStore_panel span").on({
@@ -178,23 +200,57 @@ function toChooseStore(aid) {
 function addrLoad () {
     $.ajax({
         type: "get",
-        url: "/api/storeAddress/list",
+        url: "/api/storeAddress/listCity",
         success: function (res) {
             carInfoTab_app.city = res.data;
         }
     })
 }
 
+//初次加载门店区级信息
+function storeLoadByAreaId() {
+    if(getCookie("取车区级Id")!=null){
+        $("#fromCityId").val(getCookie("取车区级Id"))
+    }
+    if(getCookie("还车区级Id")!=null){
+        $("#toCityId").val(getCookie("还车区级Id"))
+    }
+    var fromCid = $("#fromCityId").val();
+    var toCid = $("#toCityId").val();
+    // console.log(fromCid);
+    // console.log(toCid);
+    $.ajax({
+        type: "get",
+        url: "/api/storeAddress/listArea",
+        data:{
+            id:fromCid
+        },
+        success: function (res) {
+            carInfoTab_app.fromArea = res.data;
+        }
+    });
+    $.ajax({
+        type: "get",
+        url: "/api/storeAddress/listArea",
+        data:{
+            id:toCid
+        },
+        success: function (res) {
+            carInfoTab_app.toArea = res.data;
+        }
+    });
+}
+
 //加载取车区级地址
 var fromAreaLoad = function (cid) {
     $.ajax({
         type: "get",
-        url: "/api/storeAddress/list2",
+        url: "/api/storeAddress/listArea",
         data:{
             id:cid
         },
         success: function (res) {
-            carInfoTab_app.area = res.data;
+            carInfoTab_app.fromArea = res.data;
             if(res.data.length === 0){
                 layer.msg("该市暂无门店，以总部门店为取车门店和还车门店");
                 $("#fromCity2").val("肇庆市");
@@ -218,12 +274,12 @@ var fromAreaLoad = function (cid) {
 var toAreaLoad = function (cid) {
     $.ajax({
         type: "get",
-        url: "/api/storeAddress/list2",
+        url: "/api/storeAddress/listArea",
         data:{
             id:cid
         },
         success: function (res) {
-            carInfoTab_app.area = res.data;
+            carInfoTab_app.toArea = res.data;
             if (res.data.length === 0) {
                 layer.msg("该市暂无门店，以取车门店作还车门店");
                 $("#toCity").val($("#fromCity2").val());
@@ -240,16 +296,33 @@ var toAreaLoad = function (cid) {
     });
 };
 
-//加载门店
-var storeLoad = function (sid) {
+//加载取车门店
+var fromStoreLoad = function (sid) {
     $.ajax({
         type: "get",
-        url: "/api/storeAddress/list3",
+        url: "/api/storeAddress/listStore",
         data:{
             id:sid
         },
         success: function (res) {
-            carInfoTab_app.storeName = res.data;
+            carInfoTab_app.fromStoreName = res.data;
         }
     })
 };
+
+//加载还车门店
+var toStoreLoad = function (sid) {
+    $.ajax({
+        type: "get",
+        url: "/api/storeAddress/listStore",
+        data:{
+            id:sid
+        },
+        success: function (res) {
+            carInfoTab_app.toStoreName = res.data;
+        }
+    })
+};
+
+
+

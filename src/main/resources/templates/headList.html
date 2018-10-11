@@ -83,7 +83,7 @@
                                    default-value="选择城市" link-input="fromCityId"
                                    class="tnc_inpcity tnc_input_citySD tnc_input_text"
                                    name="fromCity" id="fromCity2" t_popup="0" readonly="readonly">
-                            <input type="hidden" value="" name="fromCityId" id="fromCityId">
+                            <input type="hidden" value="243" name="fromCityId" id="fromCityId">
                             <div id="city" class="ch_city">
                                 <div id="popup_pane_head">
                                     <ul id="popup_title" class="popup_title">
@@ -227,24 +227,24 @@
                                    default-value="请选择取车门店" link-input="fromStoreId"
                                    class="tnc_inpstore tnc_input_citySD tnc_input_text" readonly="readonly"
                                    name="fromStoreName" id="fromStoreName" t_popup="0" ischain="1">
-                            <input type="hidden" value="" name="fromStoreId" id="fromStoreId">
+                            <input type="hidden" value="1" name="fromStoreId" id="fromStoreId">
                             <div id="fromStore" class="ch_store1" >
                                 <div style="margin: 0px 5px 0px 10px">
                                     <div class="store_mes">请选择取车门店</div>
                                     <div id="fromStore_panel" class="store_panel">
-                                         <span v-for="item in area" @mouseenter="fromChooseStore(item.area.id)" >
+                                         <span v-for="item in fromArea" @mouseenter="fromChooseStore(item.area.id)" >
                                             {{item.area.name}}
                                         </span>
                                     </div>
                                 </div>
                                 <div id="fromStore_Name" style="display:none;margin: 0px 5px 0px 10px;padding-top: 5px;border-top: 1px solid #00c189;" >
-                                    <span v-for="item in storeName" @mouseenter="fromStoreDetail(item.id)">
+                                    <span v-for="item in fromStoreName" @mouseenter="fromStoreDetail(item.id)">
                                         <input style="display: none">
                                         {{item.name}}
                                     </span>
                                 </div>
                                 <div id="fromStore_Detail" style="display:none;margin: 0px 5px 0px 10px;padding-top: 5px;border-top: 1px solid #00c189;" >
-                                    <label v-for="item in storeName" v-show="item.id == idClick">
+                                    <label v-for="item in fromStoreName" v-show="item.id == idClick">
                                         <div>门店地址：{{item.tncAddress.province.name}}{{item.tncAddress.city.name}}{{item.tncAddress.area.name}}{{item.tncAddress.detail}}</div>
                                         <div>门店电话：{{item.managerPhone}}</div>
                                         <div>营业时间：8:30-21:30</div>
@@ -262,7 +262,7 @@
                                    default-value="选择城市" link-input="toCityId"
                                    class="tnc_inpcity tnc_input_citySD tnc_input_text"
                                    name="toCity" id="toCity" t_popup="0" readonly="readonly">
-                            <input type="hidden" id="toCityId" name="toCityId" value="">
+                            <input type="hidden" value="243" id="toCityId" name="toCityId">
                             <div id="city2" class="ch_city2">
                                 <div id="popup_pane_head2">
                                     <ul id="popup_title2" class="popup_title">
@@ -406,24 +406,24 @@
                                    default-value="请选择取车门店" link-input="toStoreId"
                                    class="tnc_inpstore tnc_input_citySD tnc_input_text" readonly="readonly"
                                    name="toStoreName" id="toStoreName" t_popup="0" ischain="1">
-                            <input type="hidden" value="" name="toStoreId" id="toStoreId">
+                            <input type="hidden" value="1" name="toStoreId" id="toStoreId">
                             <div id="toStore" class="ch_store2" >
                                 <div style="margin: 0px 5px 0px 10px">
                                     <div class="store_mes">请选择取车门店</div>
                                     <div id="toStore_panel" class="store_panel">
-                                        <span v-for="item in area" @mouseenter="toChooseStore(item.area.id)">
+                                        <span v-for="item in toArea" @mouseenter="toChooseStore(item.area.id)">
                                             {{item.area.name}}
                                         </span>
                                     </div>
                                 </div>
                                 <div id="toStore_Name" style="display:none;margin: 0px 5px 0px 10px;padding-top: 5px;border-top: 1px solid #00c189;" >
-                                    <span v-for="item in storeName" @mouseenter="toStoreDetail(item.id)">
+                                    <span v-for="item in toStoreName" @mouseenter="toStoreDetail(item.id)">
                                         <input style="display: none">
                                         {{item.name}}
                                     </span>
                                 </div>
                                 <div id="toStore_Detail" style="display:none;margin: 0px 5px 0px 10px;padding-top: 5px;border-top: 1px solid #00c189;" >
-                                    <label v-for="item in storeName" v-show="item.id == idClick2">
+                                    <label v-for="item in toStoreName" v-show="item.id == idClick2">
                                         <div>门店地址：{{item.tncAddress.province.name}}{{item.tncAddress.city.name}}{{item.tncAddress.area.name}}{{item.tncAddress.detail}}</div>
                                         <div>门店电话：{{item.managerPhone}}</div>
                                         <div>营业时间：8:30-21:30</div>
@@ -881,6 +881,11 @@
             , done: function (value, date, endDate) {
                 $("#toHourMinute").val(value);
                 f = true;
+                $("#fromHourMinute").removeClass("tnc_border");
+                if( $("#fromHourMinute").hasClass("tnc_input_citySD2") && !($("#fromHourMinute").hasClass("tnc_input_citySD")) ){
+                    $("#fromHourMinute").removeClass("tnc_input_citySD2");
+                    $("#fromHourMinute").addClass("tnc_input_citySD");
+                }
             }
         });
         //还车时间
@@ -894,7 +899,11 @@
             , max: '21:30:00'
             , done: function (value, date, endDate) {
                 $("#toHourMinute").val(value);
-
+                $("#toHourMinute").removeClass("tnc_border");
+                if( $("#toHourMinute").hasClass("tnc_input_citySD2") && !($("#toHourMinute").hasClass("tnc_input_citySD")) ){
+                    $("#toHourMinute").removeClass("tnc_input_citySD2");
+                    $("#toHourMinute").addClass("tnc_input_citySD");
+                }
                 //判断时间是否超时
                 OutToTime();
             }
@@ -971,7 +980,7 @@
                 if ($(document).scrollTop() + 100 >= $(document).height() - $(window).height()) {
 
                     y = $(this).height()-footHeight - 430
-                    console.log(y)
+                    // console.log(y)
                 }
 
                 $(".tnc_lchoose_box").css("top", y)
@@ -998,7 +1007,13 @@
             $("#fromCity2").val(getCookie("取车城市name"))
         }
         if(getCookie("还车城市name")!=null){
-        $("#toCity").val(getCookie("还车城市name"))
+            $("#toCity").val(getCookie("还车城市name"))
+        }
+        if ($("#fromCity2").val() !== $("#toCity").val()) {
+            layer.msg("温馨提示: 选择异地还车将收取一定费用");
+        }
+        if($("#fromCity2").val() === $("#toCity").val() && $("#fromStoreName").val() !== $("#toStoreName").val()) {
+            layer.msg("温馨提示: 选择异店还车将收取服务费");
         }
         let fid = getCookie("取车门店id")
         let tid = getCookie("还车门店id")
@@ -1008,7 +1023,6 @@
         if(tid!=null){
             carInfoTab_app.idClick2=tid
         }
-
         stickUp()
     })
 

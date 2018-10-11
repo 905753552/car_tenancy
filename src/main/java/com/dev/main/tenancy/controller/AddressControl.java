@@ -20,27 +20,42 @@ public class AddressControl {
     @Autowired
     private IAddressService iAddressService;
 
-    @GetMapping("list")
-    public ResultMap list(){
-        ResultMap result = new ResultMap();
+    /**
+     * 加载门店市级列表
+     * @return
+     */
+    @GetMapping("listCity")
+    public ResultMap listCity(){
+        ResultMap resultMap = new ResultMap();
         List<TncAddress> tncAddressList = iAddressService.findAllCity();
-        result.put("data",tncAddressList);
-        return  result;
+        resultMap.put("data",tncAddressList);
+        return  resultMap;
     }
 
-    @GetMapping("list2")
-    public ResultMap list2(Long id){
-        ResultMap result = new ResultMap();
+    /**
+     * 根据市级Id获得门店区级信息
+     * @param id
+     * @return
+     */
+    @GetMapping("listArea")
+    public ResultMap listArea(Long id){
+        ResultMap resultMap = new ResultMap();
         List<TncAddress> tncAddressList = iAddressService.findAllStoreArea(id);
-        result.put("data",tncAddressList);
-        return  result;
+        resultMap.put("data",tncAddressList);
+        return  resultMap;
     }
 
-    @GetMapping("list3")
-    public ResultMap list3(Long id){
-        ResultMap result = new ResultMap();
+    /**
+     * 根据区级id获得门店信息列表
+     * @param id
+     * @return
+     */
+    @GetMapping("listStore")
+    public ResultMap listStore(Long id){
+        ResultMap resultMap = new ResultMap();
         List<TncStore> tncStoreList = iAddressService.findStoreByAreaId(id);
-        result.put("data",tncStoreList);
-        return  result;
+        resultMap.put("data",tncStoreList);
+        return  resultMap;
     }
+
 }

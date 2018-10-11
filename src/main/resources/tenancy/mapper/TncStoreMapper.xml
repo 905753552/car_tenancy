@@ -162,6 +162,7 @@
     name = #{xxoo}
     and is_deleted = 0
   </select>
+  <!--查找门店详情-->
   <select id="selectStoreByAreaId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List2"/>

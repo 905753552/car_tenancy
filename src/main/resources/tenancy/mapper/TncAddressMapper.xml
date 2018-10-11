@@ -170,7 +170,8 @@
   <!--查找门店区-->
   <select id="selectAllStoreArea" resultMap="BaseResultMap">
     select distinct area_id
-    from tnc_address
-    where store_or_user = 0 and city_id = #{id}
+    from tnc_address,tnc_store
+    where status = 1 and is_deleted = 0 and tnc_address.id = tnc_store.addr_id and city_id = #{id}
   </select>
+
 </mapper>

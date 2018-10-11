@@ -33,8 +33,8 @@ public class AddressServiceImpl implements IAddressService {
 
     @Override
     public List<TncStore> findStoreByAreaId(Long id) {
-        List<TncStore> TncStoreList = tncStoreMapper.selectStoreByAreaId(id);
-        return TncStoreList;
+        List<TncStore> tncStoreList = tncStoreMapper.selectStoreByAreaId(id);
+        return tncStoreList;
     }
 
 }
