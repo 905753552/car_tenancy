@@ -40,5 +40,7 @@ public interface ICustomerService {
     void pointExchangCoupon(BigDecimal amount, Long pid, int usablePoint, int pointExchange, Long uid);
 
     List<TncPointLog> getPointLogByPid(Long pid);
+
+    List<TncCouponPoint> findMallCoupon();
 }
 

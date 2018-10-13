@@ -38,6 +38,8 @@ public class CustomerServiceImpl implements ICustomerService {
     @Autowired
     private TncPointLogMapper tncPointLogMapper;
     @Autowired
+    private TncCouponPointMapper tncCouponPointMapper;
+    @Autowired
     private ISMSService smsService;
 
     @Override
@@ -219,6 +221,12 @@ public class CustomerServiceImpl implements ICustomerService {
         tncPointLog.setGmtCreate(new Date());
         tncPointLog.setIsDeleted((byte)0);
         return tncPointLog;
+    }
+
+    @Override
+    public List<TncCouponPoint> findMallCoupon() {
+        List<TncCouponPoint> tncCouponPoints = tncCouponPointMapper.findMallCoupon();
+       return tncCouponPoints;
     }
 
     public void setTncCustomerMapper(TncCustomerMapper tncCustomerMapper) {

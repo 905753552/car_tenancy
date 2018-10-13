@@ -17,6 +17,21 @@ function couponAndPoint() {
         }
     })
 }
+/**获取优惠券*/
+function findMallCoupon() {
+    $.ajax({
+        type:"get",
+        url: "/api/customer/findMallCoupon",
+        success:function (res) {
+            if(res.code==0) {
+                console.log(res.coupons);
+                couponData.coupons = res.coupons;
+            } else {
+                handleAjax(res);
+            }
+        }
+    })
+}
 
 var couponData = {
     coupons:[
@@ -60,6 +75,7 @@ var couponInfo_app = new Vue({
     },
     created: ()=>{
         couponAndPoint();
+        findMallCoupon();
     },
 });
 

@@ -4,10 +4,7 @@ import com.dev.main.aliyun_sms.statics.SmsConstant;
 import com.dev.main.common.controller.exception.GlobalExceptionResolver;
 import com.dev.main.common.util.ResultMap;
 import com.dev.main.shiro.util.ShiroUtils;
-import com.dev.main.tenancy.domain.TncCoupon;
-import com.dev.main.tenancy.domain.TncCustomer;
-import com.dev.main.tenancy.domain.TncPoint;
-import com.dev.main.tenancy.domain.TncPointLog;
+import com.dev.main.tenancy.domain.*;
 import com.dev.main.tenancy.service.ICustomerService;
 import com.dev.main.tenancy.vo.TncCustomerVo;
 import org.apache.shiro.subject.Subject;
@@ -69,6 +66,14 @@ public class CustomerController {
         List<TncCoupon> tncCouponList = customerService.findCouponByUid(tncCustomer.getId());
         ResultMap result = new ResultMap();
         result.put("coupons", tncCouponList);
+        return result;
+    }
+
+    @GetMapping("/findMallCoupon")
+    public ResultMap findMallCoupon() {
+        List<TncCouponPoint> tncCouponPointList = customerService.findMallCoupon();
+        ResultMap result = new ResultMap();
+        result.put("coupons", tncCouponPointList);
         return result;
     }
 
