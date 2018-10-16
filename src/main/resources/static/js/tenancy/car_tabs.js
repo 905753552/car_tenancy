@@ -621,7 +621,7 @@ function carDetail(index){
     //         url = "/tenancy/p/annualRentOrder?"+cData;
     //     }
     // })
-    window.location.href = url
+    window.open(url)
 }
 
 /*-------------------------------------function end-------------------------------------*/
