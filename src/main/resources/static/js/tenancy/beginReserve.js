@@ -343,7 +343,7 @@ function accMul(arg1,arg2){
 //-------------页面初始化--------------end
 // 订单页面基本参数设置
 function setOrderDetails(){
-    if(orderDetail.customerInfo.email==''||orderDetail.customerInfo.idCard==''){
+    // if(orderDetail.customerInfo.email==''||orderDetail.customerInfo.idCard==''){
         param.base_info.order_detail.name = $("#xname").val();
         // 证件类型 1-身份证 2-台湾居民来往大陆通行证 3-港澳居民来往内地通行
         param.base_info.order_detail.credentialsType = $('#xcardtype').val();
@@ -351,15 +351,15 @@ function setOrderDetails(){
         param.base_info.order_detail.credentialsNumber = $('#xidentitycard').val();
         // 邮箱
         param.base_info.order_detail.email = $('#memberEmail').val();
-    }
+    // }
 
-        param.base_info.order_detail.name = orderDetail.customerInfo.name;
-        // 证件号码
-        param.base_info.order_detail.credentialsNumber = orderDetail.customerInfo.idCard;
-        // 证件类型 1-身份证 2-台湾居民来往大陆通行证 3-港澳居民来往内地通行
-        param.base_info.order_detail.credentialsType = 1;
-        // 邮箱
-        param.base_info.order_detail.email = orderDetail.customerInfo.email;
+        // param.base_info.order_detail.name = orderDetail.customerInfo.name;
+        // // 证件号码
+        // param.base_info.order_detail.credentialsNumber = orderDetail.customerInfo.idCard;
+        // // 证件类型 1-身份证 2-台湾居民来往大陆通行证 3-港澳居民来往内地通行
+        // param.base_info.order_detail.credentialsType = 1;
+        // // 邮箱
+        // param.base_info.order_detail.email = orderDetail.customerInfo.email;
         // 手机号
         param.base_info.order_detail.phone = orderDetail.customerInfo.phone;
         // (下单时)订单价格=天数*(基础价 + 服务费)*折扣-优惠券面值
@@ -943,17 +943,17 @@ function send_VerifyCode(code){
 }
 // 提交订单
 function submitOrder(){
-    var hasForm = $('.memberInfo').css('display');
-    if(typeof hasForm != 'undefined'){
+    // var hasForm = $('.memberInfo').css('display');
+    // if(typeof hasForm != 'undefined'){
         checkMemberFormName();
         if ($("#nameInfo").parents(".order-errorbox").css('display') == 'none') {
             checkMemberIdentitycard();
             if ($("#identitycardInfo").parents(".order-errorbox1").css('display') == 'none') {
                 checkMemberEmail();
                 if ($("#emailInfo").parents(".order-errorbox2").css('display') == 'none') {
-                    if(orderDetail.customerInfo.email==''||orderDetail.customerInfo.idCard==''){
-                        updateCustomerInfo();
-                    }
+                    // if(orderDetail.customerInfo.email==''||orderDetail.customerInfo.idCard==''){
+                    //     updateCustomerInfo();
+                    // }
                     setOrderDetails();
                     console.log(param.base_info.order_detail)
                     $.ajax({
@@ -988,31 +988,31 @@ function submitOrder(){
         } else {
             scrollUp();
         }
-    }else{
-        setOrderDetails();
-        console.log(param.base_info.order_detail);
-        $.ajax({
-            type: "GET",
-            url: "/api/order/submitOrder",
-            data:param.base_info.order_detail,
-            contentType:'application/json',
-            dataType:'json',
-            async:false,
-            success: function(res) {
-                if(res.code == 0){
-                    param.base_info.order_detail = res.order.id;
-                    var data = {
-                        order_detail:param.base_info,
-                        index:'beginReserve'
-                    }
-                    var order = encodeURIComponent(JSON.stringify(data));
-                    window.location.href = '/tenancy/p/myOrder?'+order;
-                }else{
-                    handleAjax(res);
-                }
-            }
-        })
-    }
+    // }else{
+    //     setOrderDetails();
+    //     console.log(param.base_info.order_detail);
+    //     $.ajax({
+    //         type: "GET",
+    //         url: "/api/order/submitOrder",
+    //         data:param.base_info.order_detail,
+    //         contentType:'application/json',
+    //         dataType:'json',
+    //         async:false,
+    //         success: function(res) {
+    //             if(res.code == 0){
+    //                 param.base_info.order_detail = res.order.id;
+    //                 var data = {
+    //                     order_detail:param.base_info,
+    //                     index:'beginReserve'
+    //                 }
+    //                 var order = encodeURIComponent(JSON.stringify(data));
+    //                 window.location.href = '/tenancy/p/myOrder?'+order;
+    //             }else{
+    //                 handleAjax(res);
+    //             }
+    //         }
+    //     })
+    // }
 }
 // 页面滚动到个人信息位置
 function scrollUp(){

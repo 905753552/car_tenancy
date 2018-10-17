@@ -248,7 +248,8 @@
 		</div>
 		<div class="newpg-conf">
 			<div class="newpg-con" id="orderInfo">
-				<div class="memberInfo" v-if="customerInfo.email==''||customerInfo.idCard==''">
+				<!--v-if="customerInfo.email==''||customerInfo.idCard==''"-->
+				<div class="memberInfo" >
 					<h3>租车人信息<span class="ifred">请认真填写一下信息，取车时需要现场核对！</span></h3>
 					<div class="partInfo">
 						<form class="form-info">
@@ -284,7 +285,7 @@
 								</div>
 							</div>
 							<div class="formGrop" style="position:relative;">
-								<div class="name-label">&nbsp&nbsp&nbsp&nbsp邮&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp箱</div>
+								<div class="name-label"><i style="color:red;">*&nbsp&nbsp</i>&nbsp&nbsp&nbsp&nbsp邮&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp箱</div>
 								<input default-value="请输入邮箱" style="margin-left:15px;" placeholder=请输入邮箱 class="tnc_input" value="" id="memberEmail" name="xemail" @blur="checkMemberEmail" maxlength="50" type="text">
 								<div class="order-errorbox2 order-erpos2" style="display: none;">
 									<span class="arout">◆<span class="arin">◆</span></span>
