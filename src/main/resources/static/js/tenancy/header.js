@@ -11,6 +11,7 @@ function getCustomer() {
             if (data.code == 0) {
                 if(data.token) {
                     header_app.customer = data.token;
+                    header_app.customer.name = data.token.name.substring(0, 1)+'**';
                 }
             } else {
                 handleAjax(data.customer);
@@ -43,6 +44,9 @@ const header_methods = {
     logout: logout // 退出登录
 };
 
+const header_computed =  {
+};
+
 const init_header = () => {
     getCustomer(); // 获取用户信息，用于判断用户是否已登录
 }
@@ -51,5 +55,6 @@ const header_app = new Vue({
     el: '#header-app',
     data: header_data,
     methods: header_methods,
+    computed: header_computed,
     created: init_header()
 });
