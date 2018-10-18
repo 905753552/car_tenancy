@@ -8,10 +8,7 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 @Service
 public class FileUploadServiceImpl implements IFileUploadService {
@@ -20,6 +17,7 @@ public class FileUploadServiceImpl implements IFileUploadService {
     private String dir = ""; // 存储路径
     private String LINUX_PATH = "/opt/zuche/images";
     private String WIN_PATH = "D:/zuche/images";
+    private String DefaultImgPath = "/d/b/db0506094e3e4260b75cd967d72b4609.jpg";
 
     @Override
     public String uploadCover(MultipartFile multipartFile) {
@@ -89,24 +87,31 @@ public class FileUploadServiceImpl implements IFileUploadService {
 
     /**
      * 获取图片文件
-     * @param imagePath 图片相对路径
-     * @param defaultImg*/
+     * @param defaultImg
+     * @param imagePath 图片相对路径 */
     @Override
-    public File getImageFile(String imagePath) throws IOException {
+    public FileInputStream getImageFile(String imagePath) throws IOException {
+        // 如果文件不存在,读取备选封面
+        if(StringUtils.isBlank(imagePath)){
+            imagePath = this.DefaultImgPath;
+        }
+
+
         // 获取磁盘路径
         String diskDir = getDiskPath();
         //文件绝对路径
         String filePath = diskDir + imagePath;
-        File file = null;
-        try {
-            file = new File(filePath);
-        } catch (SystemErrorException e) {
-            throw new SystemErrorException(e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new SystemErrorException("服务器异常，获取图片失败");
-        }
 
-        return file;
+        File file  = new File(filePath);
+
+        if (file == null ||!file.exists()) { // 如果文件不存在,读取备选封面
+
+            String imgPath = this.DefaultImgPath;
+            filePath = diskDir + imgPath;
+//            String defaultImg = ResourceUtils.getURL("classpath:").getPath() +imgPath;
+            file = new File(filePath);
+        }
+        FileInputStream fis = new FileInputStream(file);
+        return fis;
     }
 }
