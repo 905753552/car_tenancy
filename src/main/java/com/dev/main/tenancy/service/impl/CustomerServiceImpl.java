@@ -213,7 +213,6 @@ public class CustomerServiceImpl implements ICustomerService {
     }
     public TncPointLog getTncPointLog(Long pid, int pointExchange, BigDecimal amount) {
         TncPointLog tncPointLog = new TncPointLog();
-
         tncPointLog.setChange(pointExchange);
         tncPointLog.setPid(pid);
         tncPointLog.setResource("兑换"+amount+"元租车券");

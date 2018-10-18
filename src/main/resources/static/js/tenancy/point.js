@@ -46,25 +46,34 @@ var couponData = {
 }
 /**兑换优惠券*/
 function exchange(pointValue, amountValue) {
-    $.ajax({
-        type:"get",
-        url:"/api/customer/exchange",
-        data:{
-            usablePoint: couponData.usablePoint,
-            pid: couponData.pid,
-            pointValue: pointValue,
-            amount: amountValue,
-        },
-        success:function(res){
-            if(res.code==0) {
-                layer.msg("兑换成功",function () {
-                    window.location.href = "/tenancy/p/pointMall";
-                })
-            }  else {
-                handleAjax(res);
+    couponData.usablePoint = couponData.usablePoint - pointValue;
+
+    if(couponData.usablePoint<0) {
+        couponData.usablePoint += pointValue;
+        layer.msg("积分不足!");
+        return false;
+    }else {
+        $.ajax({
+            type: "get",
+            url: "/api/customer/exchange",
+            data: {
+                usablePoint: couponData.usablePoint,
+                pid: couponData.pid,
+                pointValue: pointValue,
+                amount: amountValue,
+            },
+            success: function (res) {
+                if (res.code == 0) {
+                    layer.msg("兑换成功",
+                        function () {
+                            window.location.href = "/tenancy/p/pointMall";
+                        })
+                } else {
+                    handleAjax(res);
+                }
             }
-        }
-    })
+        })
+    }
 }
 
 var couponInfo_app = new Vue({

@@ -104,7 +104,6 @@ public class CustomerController {
     public ResultMap exchange(int usablePoint, Long pid, int pointValue, BigDecimal amount) {
         TncCustomer tncCustomer = ShiroUtils.getUserEntity();
         Long uid = tncCustomer.getId();
-        usablePoint = usablePoint - pointValue;
         pointValue = 0 - pointValue;
         customerService.pointExchangCoupon(amount, pid, usablePoint, pointValue, uid);
         return ResultMap.success();
