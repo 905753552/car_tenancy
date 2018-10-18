@@ -17,7 +17,7 @@
     select
     <include refid="Base_Column_List" />
     from tnc_point_log
-    where pid = #{pid,jdbcType=BIGINT} and is_deleted = 0
+    where pid = #{pid,jdbcType=BIGINT} and is_deleted = 0 order by gmt_create desc
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
