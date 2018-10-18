@@ -26,7 +26,25 @@ public class RegisterController {
                                 HttpServletRequest request,
                                 HttpServletResponse response){
         int n =registerService.doRegister(keyInCookie,data,request,response);
-        return ResultMap.success();
+        if(n==0){
+            return ResultMap.success();
+        }else if(n==1){
+            return ResultMap.fail("账号已存在");
+        }else{
+            return ResultMap.fail("注册失败，请重试");
+        }
+
+    }
+
+    @GetMapping("/checkRepeat")
+    public ResultMap checkRepeatPhone(String phone){
+        System.out.println(phone);
+        TncCustomer customer =registerService.checkRepeatPhone(phone);
+        if (customer == null){
+            return ResultMap.success();
+        }else{
+            return ResultMap.fail("账号已存在");
+        }
     }
 
 }

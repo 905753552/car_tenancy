@@ -53,7 +53,6 @@ public class PictureController {
     public void loadImage(String imagePath,  HttpServletResponse response) throws IOException {
 
         FileInputStream fis = fileUploadService.getImageFile(imagePath);
-
         response.setContentType("image/jpg"); // 设置返回的文件类型
         response.setHeader("Access-Control-Allow-Origin", "*");// 设置该图片允许跨域访问
         IOUtils.copy(fis, response.getOutputStream());

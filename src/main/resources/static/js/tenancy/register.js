@@ -28,7 +28,7 @@
             layer.msg('手机号码格式错误',() => {});
             return ;
         }else{
-            console.log("success");
+            // console.log("success");
             $('#myModal').modal('show');
             // 变换验证码
             changeImageVerifyCode();
@@ -50,7 +50,7 @@
         var code = $("#verifyCode").val();
         if (code == ""){
             // showTips();
-            console.log("code is null");
+            // console.log("code is null");
             $(".modal-title").text("验证码不能为空！");
         }else{
             send_VerifyCode(code,phone);
@@ -72,15 +72,10 @@
             },
             success: function(res) {
                 if(res.code == 0){
-                    console.log(res);
-                    // alert("验证通过，请输入短信验证码");
                     $("#getYzmBtn").attr("disabled","true");
-                    doSendPhoneCode();
-                    //超时重发时间，先默认60秒
-                    countdown(60);
+                    doCheckPhoneRepeat();
                     $('#myModal').modal('hide');
                 }else{
-                    console.log(res);
                     $(".modal-title").text("验证码错误，请重新输入");
                     changeImageVerifyCode();
                 }
@@ -92,7 +87,27 @@
             }
         })
     }
-
+    /*
+    * 查重手机
+    * */
+    function doCheckPhoneRepeat() {
+        var phone = $("#xphone").val();
+        $.ajax({
+            type: "GET",
+            data:{phone:phone},
+            url: "/api/user/checkRepeat",
+            success: function(res) {
+                if(res.code == 0){
+                    doSendPhoneCode();
+                    // console.log("发送验证");
+                    //超时重发时间，先默认60秒
+                    countdown(60);
+                }else {
+                    layer.msg(res.msg);
+                }
+            }
+        })
+    }
     /**
      * 发送短信验证码
      * */
@@ -101,7 +116,11 @@
         $.ajax({
             url:'/api/alisms/'+phone,
             success:function (res) {
-                console.log(res);
+                if(res.code==0){
+                    layer.msg("发送成功！");
+                }else{
+                    layer.msg("发送失败，请一分钟后再试！");
+                }
             }
         })
 
@@ -178,8 +197,8 @@
         var name = $("#xname").val(),
             phone = $("#xphone").val(),
             code = $("#xcode").val(),
-            psw =  $("#xpsw").val(),
-            coupon = $("#xcoupon").val();
+            psw =  $("#xpsw").val();
+            // coupon = $("#xcoupon").val();
 
         var data = {
             tnc:{
@@ -188,9 +207,9 @@
                 password:psw
             },
             code:code,
-            coupon:coupon
+            // coupon:coupon
         }
-        console.log(data);
+        // console.log(data);
         $.ajax({
             type:"POST",
             url: "/api/user/register",
@@ -199,8 +218,10 @@
             contentType:"application/text",
             success:function (res) {
                 if(res.code == 0){
-                    alert("success");
+                    // alert("success");
                     window.location.href = "/index";
+                }else {
+                    layer.msg(res.msg);
                 }
             }
         });

@@ -28,8 +28,13 @@ public class RegisterServiceImpl implements IRegisterService {
         TncCustomer tncCustomer =JsonUtils.toObject(jsonObject.get("tnc").toString(),TncCustomer.class);
 
         String code = (String) jsonObject.get("code");
-        String coupon = (String) jsonObject.get("coupon");
+//        String coupon = (String) jsonObject.get("coupon");
 
+        TncCustomer customer = customerService.findByPhone(tncCustomer.getPhone());
+
+        if(customer !=null){
+            return 1;
+        }
         // 验证验证码
         boolean match = smsService.verifyCode(keyInCookie, tncCustomer.getPhone(),code, request, response);
 
@@ -38,7 +43,12 @@ public class RegisterServiceImpl implements IRegisterService {
         }
 
         customerService.createCustomer(tncCustomer);
-
         return 0;
+    }
+
+    @Override
+    public TncCustomer checkRepeatPhone(String phone) {
+
+        return customerService.findByPhone(phone);
     }
 }
