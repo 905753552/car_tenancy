@@ -74,7 +74,7 @@
 	                        <p class="lp1">{{carInfo.tncBrand.name}}{{carInfo.series}}</p>
 							<p class="lp2" v-if="carInfo.transmissionType=='MT'">{{carInfo.boxQuantity}}厢/{{carInfo.displacement/1000}}手动 | 乘坐{{carInfo.seatQuantity}}人</p>
 							<p class="lp2" v-else>{{carInfo.boxQuantity}}厢/{{carInfo.displacement/1000}}手动 | 乘坐{{carInfo.seatQuantity}}人</p>
-	                        <p class="lp3"><i class="year-zq"></i>租期：<span class="or-co">365</span>天，不限里程</p>
+	                        <p class="lp3"><i class="year-zq"></i>租期：<span class="or-co">{{baseInfo.days}}</span>天，不限里程</p>
 	                        <div class="base-btn">
 								<input class="tnc_btn tnc_btn_green look-config" value="查看配置信息" type="button" data-toggle="modal" data-target="#car-details">
 
@@ -346,7 +346,7 @@
 									<span class="f14">约¥
 										{{baseInfo.base_price*priceSchemeInfo.discount+baseInfo.service_price*priceSchemeInfo.discount}}
 										<span style="color:#9F9F9F;text-decoration:line-through;" v-if="priceSchemeInfo.discount<1">{{baseInfo.base_price+baseInfo.service_price}}</span>
-										/天*365天 </span>
+										/天*{{baseInfo.days}}天 </span>
 									<span class="f14"> + ¥{{baseInfo.prepare_cost}}</span>
 									<span class="f14" v-if="baseInfo.coupon>0"> - ¥	{{baseInfo.coupon}}</span>
 									<span class="yell-col f18"> = ¥{{baseInfo.order_price_sum}}</span>
