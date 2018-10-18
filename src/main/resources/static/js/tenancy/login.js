@@ -303,7 +303,11 @@ var ob =new Vue({
         $.ajax({
             url:'/api/alisms/'+phone,
             success:function (res) {
-                console.log(res);
+                if(res.code == 0){
+                    layer.msg("发送成功");
+                }else {
+                    layer.msg(res.msg);
+                }
             }
         })
 
