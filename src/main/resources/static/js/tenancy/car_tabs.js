@@ -157,14 +157,25 @@ function doCarOrder(index) {
          carId:carInfoTab_app.items[index].carId,
          priceId:carInfoTab_app.items[index].priceId
     }
-    let cData = encodeURIComponent(JSON.stringify(orderData))
-    let url = "/tenancy/p/beginReserve?"+cData;
-    carInfoTab_app.menu.forEach(function (item) {
-        if(item.name.indexOf("年租套餐")>=0 && item.id==currentPackageId){
-            url = "/tenancy/p/annualRentOrder?"+cData;
-        }
-    })
-    window.location.href = url
+    if(orderData.getCarPlaceId < 0 ){
+        layer.msg("请选择取车门店");
+    }
+    else if(orderData.returnCarPlaceId < 0){
+        layer.msg("请选择还车门店");
+    }
+    else if(orderData.getCarPlaceId < 0 && orderData.returnCarPlaceId < 0){
+        layer.msg("请选择取车门店和还车门店");
+    }
+    if(orderData.getCarPlaceId > 0 && orderData.returnCarPlaceId > 0) {
+        let cData = encodeURIComponent(JSON.stringify(orderData))
+        let url = "/tenancy/p/beginReserve?" + cData;
+        carInfoTab_app.menu.forEach(function (item) {
+            if (item.name.indexOf("年租套餐") >= 0 && item.id == currentPackageId) {
+                url = "/tenancy/p/annualRentOrder?" + cData;
+            }
+        })
+        window.location.href = url
+    }
 }
 //处理汽车品牌
 function doHandelCarBrand(data) {

@@ -126,8 +126,10 @@ $(function () {
 function fromChooseCity(cid,cname) {
     $("#fromCity2").val(cname);
     $("#fromStoreName").val("请选择取车门店");
+    carInfoTab_app.idClick=-1;
     $("#toCity").val(cname);
     $("#toStoreName").val("请选择取车门店");
+    carInfoTab_app.idClick2=-1;
     $("#city").css("display", "none");
     $("#fromStore_Name").css("display","none");
     $("#fromStore_Detail").css("display","none");
@@ -167,6 +169,7 @@ function toChooseCity(cid,cname) {
     $("#toCity").val(cname);
     $("#city2").css("display", "none");
     $("#toStoreName").val("请选择取车门店");
+    carInfoTab_app.idClick2=-1;
     $("#toStore_Name").css("display","none");
     $("#toStore_Detail").css("display","none");
     $("#toStore_panel span").removeClass("cur-city");
