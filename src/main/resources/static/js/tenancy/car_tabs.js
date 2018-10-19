@@ -409,9 +409,9 @@ function doCheckByType(type) {
     carInfoTab_app.items = carHandleData
     var ad =  carInfoTab_app.items.filter(function (item) {
        if(currentPackageId != basePackageId){
-           return (cart.indexOf(item.carType) >= 0 && item.carPackagePrice > carMinPrice && item.carPackagePrice < carMaxPrice && carn.indexOf(item.carName)>=0 )
+           return (cart.indexOf(item.carType) >= 0 && item.carPackagePrice > carMinPrice && item.carPackagePrice <= carMaxPrice && carn.indexOf(item.carName)>=0 )
        }
-        return (cart.indexOf(item.carType) >= 0 &&  item.carPrice > carMinPrice && item.carPrice < carMaxPrice && carn.indexOf(item.carName)>=0 )
+        return (cart.indexOf(item.carType) >= 0 &&  item.carPackagePrice > carMinPrice && item.carPackagePrice <= carMaxPrice && carn.indexOf(item.carName)>=0 )
 
     })
     if(ad.length!=0) {
