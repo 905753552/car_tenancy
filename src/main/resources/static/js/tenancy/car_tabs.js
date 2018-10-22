@@ -72,26 +72,24 @@ const carInfoTab_app = new Vue({
 /*-------------------------function start------------------------------*/
 //排序
 function doSort() {
-
     if ($("#dev_sort_button").text().indexOf("↓") >= 0) {
 
         $("#dev_sort_button").html('<span class="dev_od_btn_a">↑</span> 租金由低到高')
         var sortData = carInfoTab_app.items
-
-        function sortprice(a, b) {
-            return a.carPrice > b.carPrice
+        function sortPrice(a, b) {
+            return Number(a.carTotalPackagePrice) - Number(b.carTotalPackagePrice)
         }
 
-        sortData.sort(sortprice)
+        sortData.sort(sortPrice)
+        console.log(sortData)
 
-    } else {
+    }else {
         $("#dev_sort_button").html('<span class="dev_od_btn_a">↓</span> 租金由高到低')
         var sortData = carInfoTab_app.items
-
-        function sortprice(a, b) {
-            return a.carPrice < b.carPrice
+        function sortPrice(a, b) {
+            return Number(b.carTotalPackagePrice) - Number(a.carTotalPackagePrice)
         }
-        sortData.sort(sortprice)
+        sortData.sort(sortPrice)
     }
 }
 //初始化套餐数据
