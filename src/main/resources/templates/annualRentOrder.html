@@ -249,7 +249,7 @@
 							
 								<div class="formGrop" style="position:relative;">
 									<div class="name-label"><i style="color:red;">*&nbsp&nbsp</i>姓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp名</div>
-									<input name="xname" id="xname" style="margin-left:15px;" class="tnc_input" type="text" placeholder=请输入您的姓名 default-value="请输入您的姓名" value="" maxlength="50" @blur="checkMemberFormName">
+									<input name="xname" id="xname" style="margin-left:15px;" class="tnc_input" type="text" placeholder=请输入您的姓名 default-value="请输入真实姓名" :value="customerInfo.name" value="" maxlength="50" @blur="checkMemberFormName">
 									<div class="order-errorbox order-erpos" style="display: none;">
 										<span class="arout">◆<span class="arin">◆</span></span>
 										<span class="zc-retan"></span>
@@ -269,7 +269,7 @@
 								</div>
 								<div class="formGrop" style="position:relative;">
 									<div class="name-label"><i style="color:red;">*&nbsp&nbsp</i>证件号码</div>
-									<input value="" class="tnc_input" style="margin-left:15px;" @blur="checkMemberIdentitycard" name="xidentitycard" placeholder=请输入证件号码 default-value="请输入证件号码" id="xidentitycard" maxlength="20" type="text">
+									<input value="" class="tnc_input" style="margin-left:15px;" @blur="checkMemberIdentitycard" name="xidentitycard" placeholder=请输入证件号码 :value="customerInfo.idCard" id="xidentitycard" maxlength="20" type="text">
 									<div class="order-errorbox1 order-erpos1" style="display: none;">
 										<span class="arout">◆<span class="arin">◆</span></span>
 										<span class="zc-retan"></span>
@@ -279,7 +279,7 @@
 								</div>
 								<div class="formGrop" style="position:relative;">
 									<div class="name-label">&nbsp&nbsp&nbsp&nbsp邮&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp箱</div>
-									<input default-value="请输入邮箱" style="margin-left:15px;" placeholder=请输入邮箱 class="tnc_input" value="" id="memberEmail" name="xemail" @blur="checkMemberEmail" maxlength="50" type="text">
+									<input default-value="请输入邮箱" :value="customerInfo.email" style="margin-left:15px;" placeholder=请输入邮箱 class="tnc_input" value="" id="memberEmail" name="xemail" @blur="checkMemberEmail" maxlength="50" type="text">
 									<div class="order-errorbox2 order-erpos2" style="display: none;">
 										<span class="arout">◆<span class="arin">◆</span></span>
 										<span class="zc-retan"></span>
